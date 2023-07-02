@@ -791,6 +791,49 @@ $(document).ready( function() {
 			}
 		});
 	}
-//]]>
 
-				
+
+	// --------------carousel------------------
+
+	const galleryItems = Array.from(document.querySelectorAll('.our-gallery-item'));
+	const itemsPerPage = 9;
+	const pagination = document.getElementById('pagination');
+	
+	function displayItems(pageNumber) {
+	  const startIndex = (pageNumber - 1) * itemsPerPage;
+	  const endIndex = startIndex + itemsPerPage;
+	  const visibleItems = galleryItems.slice(startIndex, endIndex);
+	
+	  galleryItems.forEach(item => {
+		item.style.display = 'none';
+	  });
+	
+	  visibleItems.forEach(item => {
+		item.style.display = 'block';
+	  });
+	}
+	
+	function createPagination() {
+	  const pageCount = Math.ceil(galleryItems.length / itemsPerPage);
+	
+	  for (let i = 1; i <= pageCount; i++) {
+		const pageLink = document.createElement('a');
+		pageLink.href = '#';
+		pageLink.classList.add('page-link');
+		pageLink.textContent = i;
+	
+		pageLink.addEventListener('click', () => {
+		  displayItems(i);
+		});
+	
+		pagination.appendChild(pageLink);
+	  }
+	}
+	
+	displayItems(1);
+	createPagination();
+	
+
+
+
+	
