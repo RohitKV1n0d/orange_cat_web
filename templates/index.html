@@ -1,268 +1,215 @@
-<!DOCTYPE html>
-<html lang="zxx">
-	<head>
-		<meta charset="UTF-8">
-		<title>Orange Cat</title>
-		<!-- =================== META =================== -->
-		<meta name="keywords" content="">
-		<meta name="description" content="">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
-		<!-- =================== BOOTSTRAP =================== -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-		<!-- =================== STYLE =================== -->
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/slick.min.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-grid.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.fancybox.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-	</head>
-	
-<body id="home" class="inner-scroll">
-	<!--================ PRELOADER ================-->
-	<div class="preloader-cover">
-		<div class="preloader">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
+{% extends "base.html" %}
+
+
+{% block content %}
+<!-- =============== main-slider =============== -->
+<section class="s-main-slider">
+	<div class="main-slide-navigation"></div>
+	<ul class="main-soc-list">
+		<li><a href="#"><i class="fa fa-facebook-f icon-top"></i></a></li>
+		<li><a href="#"><i class="fa fa-instagram icon-top"></i></a></li>
+		<li><a href="#"><i class="fa fa-twitter icon-top"></i></a></li>
+		<li><a href="#"><i class="fa fa-pinterest icon-top"></i></a></li>
+	</ul>
+	<div class="main-slider">
+		<div class="main-slide">
+			<div class="main-slide-bg"></div>
+			<div class="container">
+				<div class="main-slide-info">
+					<h2 class="title">Get Ready to Conquer the Roads with <br> <b>Orange cat</b></h2>
+					<p>Ride with Confidence, Ride with Orange Cat Bicycles. Discover our collection of meticulously
+						crafted bicycles that prioritize safety, durability, and comfort. </p>
+					<a href="single-shop.html" class="btn"><span>Explore More</span></a>
+				</div>
+				<div class="slide-img-cover">
+					<img src="{{ url_for('static', filename='img/home.png') }}" alt="img" class="slide-img">
+				</div>
+			</div>
+		</div>
+		<div class="main-slide">
+			<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider-2.svg);"></div>
+			<div class="container">
+				<div class="main-slide-info">
+					<h2 class="title">best bikes for you</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore consectetur sint iure id
+						expedita saepe.</p>
+					<a href="single-shop.html" class="btn"><span>buy now</span></a>
+				</div>
+				<div class="slide-img-cover">
+					<a href="single-shop.html" class="lable-bike">
+						<div class="lable-bike-img"><img
+								src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
+						<div class="lable-bike-item">
+							<div class="model">model M-300</div>
+							<div class="price">$1199</div>
+						</div>
+					</a>
+					<img src="{{ url_for('static', filename='img/img-slider-2.png') }}" alt="img" class="slide-img">
+				</div>
+			</div>
+		</div>
+		<div class="main-slide">
+			<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider-3.svg);"></div>
+			<div class="container">
+				<div class="main-slide-info">
+					<h2 class="title">best bikes for you</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis distinctio tenetur ab ut!
+						Qui, facilis.</p>
+					<a href="single-shop.html" class="btn"><span>buy now</span></a>
+				</div>
+				<div class="slide-img-cover">
+					<a href="single-shop.html" class="lable-bike">
+						<div class="lable-bike-img"><img
+								src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
+						<div class="lable-bike-item">
+							<div class="model">model X-230</div>
+							<div class="price">$1099</div>
+						</div>
+					</a>
+					<img src="{{ url_for('static', filename='img/img-slider-3.png') }}" alt="img" class="slide-img">
+				</div>
+			</div>
+		</div>
+		<div class="main-slide">
+			<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider.svg);"></div>
+			<div class="container">
+				<div class="main-slide-info">
+					<h2 class="title">best bikes for you</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+						labore et dolore.</p>
+					<a href="single-shop.html" class="btn"><span>buy now</span></a>
+				</div>
+				<div class="slide-img-cover">
+					<a href="single-shop.html" class="lable-bike">
+						<div class="lable-bike-img"><img
+								src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
+						<div class="lable-bike-item">
+							<div class="model">model SX-200</div>
+							<div class="price">$1399</div>
+						</div>
+					</a>
+					<img src="{{ url_for('static', filename='img/img-slider.png') }}" alt="img" class="slide-img">
+				</div>
+			</div>
+		</div>
+		<div class="main-slide">
+			<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider-2.svg);"></div>
+			<div class="container">
+				<div class="main-slide-info">
+					<h2 class="title">best bikes for you</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore consectetur sint iure id
+						expedita saepe.</p>
+					<a href="single-shop.html" class="btn"><span>buy now</span></a>
+				</div>
+				<div class="slide-img-cover">
+					<a href="single-shop.html" class="lable-bike">
+						<div class="lable-bike-img"><img
+								src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
+						<div class="lable-bike-item">
+							<div class="model">model M-300</div>
+							<div class="price">$1199</div>
+						</div>
+					</a>
+					<img src="{{ url_for('static', filename='img/img-slider-2.png') }}" alt="img" class="slide-img">
+				</div>
+			</div>
 		</div>
 	</div>
-	<!--============== PRELOADER END ==============-->
-	<!-- ================= HEADER ================= -->
-	<header class="header">
-		<a href="#" class="nav-btn">
-			<span></span>
-			<span></span>
-			<span></span>
-		</a>
-		<div class="top-panel">
-			<div class="container">
-				<div class="top-panel-cover">
-					<ul class="header-cont">
-						<li><a href="tel:+912345687"><i class="fa fa-phone"></i>+9123 456 87</a></li>
-						<li><a href="mailto:info@orangecat.com"><i class="fa fa-envelope" aria-hidden="true"></i>info@orangecat.com</a></li>
-					</ul>
-					<ul class="icon-right-list">
-						<li><a href="#"><i class="fa fa-facebook-f icon-top"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram icon-top"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter icon-top"></i></a></li>
-						<li><a href="#"><i class="fa fa-pinterest icon-top"></i></i></a></li>
-					</ul>
+</section>
+<!-- ============= main-slider end ============= -->
+
+<!-- ============= banner-bar start ============= -->
+<section class="banner-bar mt-3 mt-md-0">
+	<p class="text-center">20% Discount for kids bikes | lorem ipsum dolor sit amet</p>
+</section>
+<!-- ============= banner-bar end ============= -->
+
+<!--============== quality-cards start ==============-->
+<section class="quality-cards">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 mb-2 mb-md-0">
+				<div class="card">
+					<img src="{{ url_for('static', filename='img/quality-icons/best-price.png') }}"
+						class="card-img-top img-fluid" alt="card image">
+					<p class="text-center mt-2">Best Price</p>
+				</div>
+			</div>
+			<div class="col-lg-4 mb-2 mb-md-0">
+				<div class="card">
+					<img src="{{ url_for('static', filename='img/quality-icons/premium.png') }}"
+						class="card-img-top img-fluid" alt="card image">
+					<p class="text-center mt-2">Premium Quality</p>
+				</div>
+			</div>
+			<div class="col-lg-4 mb-2 mb-md-0">
+				<div class="card">
+					<img src="{{ url_for('static', filename='img/quality-icons/satisfaction.png') }}"
+						class="card-img-top img-fluid" alt="card image">
+					<p class="text-center mt-2">Satisfaction Guaranteed</p>
 				</div>
 			</div>
 		</div>
-		<div class="header-menu">
-			<div class="container">
-				<a href="index.html" class="logo"><img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-img" alt="logo"></a>
-				<nav class="nav-menu">
-					<ul class="nav-list">
-						<li><a href="index.html" class="active">Home</a></li>
-						<li><a href="about-us.html">About</a></li>
-						<li><a href="bikes.html">Bikes</a></li>
-						<li><a href="photo-gallery.html">Photo Gallery</a></li>
-						<li><a href="video-gallery.html">Video Gallery</a></li>
-						<li><a href="contacts.html">Contacts</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	<!-- =============== HEADER END =============== -->
+	</div>
+</section>
 
-	<!-- =============== main-slider =============== -->
-	<section class="s-main-slider">
-		<div class="main-slide-navigation"></div>
-		<ul class="main-soc-list">
-			<li><a href="#"><i class="fa fa-facebook-f icon-top"></i></a></li>
-			<li><a href="#"><i class="fa fa-instagram icon-top"></i></a></li>
-			<li><a href="#"><i class="fa fa-twitter icon-top"></i></a></li>
-			<li><a href="#"><i class="fa fa-pinterest icon-top"></i></a></li>
-		</ul>
-		<div class="main-slider">
-			<div class="main-slide">
-				<div class="main-slide-bg"></div>
-				<div class="container">
-					<div class="main-slide-info">
-						<h2 class="title">Get Ready to Conquer the Roads with <br> <b>Orange cat</b></h2>
-						<p>Ride with Confidence, Ride with Orange Cat Bicycles. Discover our collection of meticulously crafted bicycles that prioritize safety, durability, and comfort. </p>
-						<a href="single-shop.html" class="btn"><span>Explore More</span></a>
-					</div>
-					<div class="slide-img-cover">
-						<img src="{{ url_for('static', filename='img/home.png') }}" alt="img" class="slide-img">
-					</div>
-				</div>
-			</div>
-			<div class="main-slide">
-				<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider-2.svg);"></div>
-				<div class="container">
-					<div class="main-slide-info">
-						<h2 class="title">best bikes for you</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore consectetur sint iure id expedita saepe.</p>
-						<a href="single-shop.html" class="btn"><span>buy now</span></a>
-					</div>
-					<div class="slide-img-cover">
-						<a href="single-shop.html" class="lable-bike">
-							<div class="lable-bike-img"><img src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
-							<div class="lable-bike-item">
-								<div class="model">model M-300</div>
-								<div class="price">$1199</div>
-							</div>
-						</a>
-						<img src="{{ url_for('static', filename='img/img-slider-2.png') }}" alt="img" class="slide-img">
-					</div>
-				</div>
-			</div>
-			<div class="main-slide">
-				<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider-3.svg);"></div>
-				<div class="container">
-					<div class="main-slide-info">
-						<h2 class="title">best bikes for you</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis distinctio tenetur ab ut! Qui, facilis.</p>
-						<a href="single-shop.html" class="btn"><span>buy now</span></a>
-					</div>
-					<div class="slide-img-cover">
-						<a href="single-shop.html" class="lable-bike">
-							<div class="lable-bike-img"><img src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
-							<div class="lable-bike-item">
-								<div class="model">model X-230</div>
-								<div class="price">$1099</div>
-							</div>
-						</a>
-						<img src="{{ url_for('static', filename='img/img-slider-3.png') }}" alt="img" class="slide-img">
-					</div>
-				</div>
-			</div>
-			<div class="main-slide">
-				<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider.svg);"></div>
-				<div class="container">
-					<div class="main-slide-info">
-						<h2 class="title">best bikes for you</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-						<a href="single-shop.html" class="btn"><span>buy now</span></a>
-					</div>
-					<div class="slide-img-cover">
-						<a href="single-shop.html" class="lable-bike">
-							<div class="lable-bike-img"><img src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
-							<div class="lable-bike-item">
-								<div class="model">model SX-200</div>
-								<div class="price">$1399</div>
-							</div>
-						</a>
-						<img src="{{ url_for('static', filename='img/img-slider.png') }}" alt="img" class="slide-img">
-					</div>
-				</div>
-			</div>
-			<div class="main-slide">
-				<div class="main-slide-bg" style="background-image: url(assets/img/bg-slider-2.svg);"></div>
-				<div class="container">
-					<div class="main-slide-info">
-						<h2 class="title">best bikes for you</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore consectetur sint iure id expedita saepe.</p>
-						<a href="single-shop.html" class="btn"><span>buy now</span></a>
-					</div>
-					<div class="slide-img-cover">
-						<a href="single-shop.html" class="lable-bike">
-							<div class="lable-bike-img"><img src="{{ url_for('static', filename='img/bike-info-slide.jpg') }}" alt="img"></div>
-							<div class="lable-bike-item">
-								<div class="model">model M-300</div>
-								<div class="price">$1199</div>
-							</div>
-						</a>
-						<img src="{{ url_for('static', filename='img/img-slider-2.png') }}" alt="img" class="slide-img">
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- ============= main-slider end ============= -->
+<!--============ quality-cards end ============-->
 
-	<!-- ============= banner-bar start ============= -->
-	<section class="banner-bar mt-3 mt-md-0">
-		<p class="text-center">20% Discount for kids bikes | lorem ipsum dolor sit amet</p>
-	</section>
-	<!-- ============= banner-bar end ============= -->
-
-	<!--============== quality-cards start ==============-->
-	<section class="quality-cards">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 mb-2 mb-md-0">
-					<div class="card">
-						<img src="{{ url_for('static', filename='img/quality-icons/best-price.png') }}" class="card-img-top img-fluid" alt="card image">
-						<p class="text-center mt-2">Best Price</p>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-2 mb-md-0">
-					<div class="card">
-						<img src="{{ url_for('static', filename='img/quality-icons/premium.png') }}" class="card-img-top img-fluid" alt="card image">
-						<p class="text-center mt-2">Premium Quality</p>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-2 mb-md-0">
-					<div class="card">
-						<img src="{{ url_for('static', filename='img/quality-icons/satisfaction.png') }}" class="card-img-top img-fluid" alt="card image">
-						<p class="text-center mt-2">Satisfaction Guaranteed</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!--============ quality-cards end ============-->
-
-	<!--================== S-PRODUCTS ==================-->
-	<section class="our-products">
-		<div class="container">
-			<h2 class="title text-uppercase text-center">our products&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
-			<div class="produc-cards">
-				<div class="card card-1">
-					<div class="row justify-content-center align-items-center">
-						<div class="col-lg-6 h-100 left-part">
-							<div class="left-part">
-								<img src="{{ url_for('static', filename='img/home.png') }}" class="img-fluid" alt="">
-							</div>
+<!--================== S-PRODUCTS ==================-->
+<section class="our-products">
+	<div class="container">
+		<h2 class="title text-uppercase text-center">our products&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		</h2>
+		<div class="produc-cards">
+			<div class="card card-1">
+				<div class="row justify-content-center align-items-center">
+					<div class="col-lg-6 h-100 left-part">
+						<div class="left-part">
+							<img src="{{ url_for('static', filename='img/home.png') }}" class="img-fluid" alt="">
 						</div>
-						<div class="col-lg-6 h-100">
-							<div class="right-part">
-								<h5 class="main-color">Corinto Deluxe Donna</h5>
-								<p class="mt-2 sub-head">Running collection</p>
-								<p class="text-justify mt-3">The Corinto Deluxe Donna bicycle is a true embodiment of refined beauty and exceptional performance. Crafted with meticulous attention to detail, this exquisite bicycle is designed specifically for women seeking a luxurious and comfortable riding experience.</p>
-								<div class="d-flex align-items-center mt-3">
-									<h5>$800</h5>
-									<a href="single-shop.html" class="btn ms-3"><span>Shop Now</span></a>
-								</div>
-								<div class="mt-4"><a href="" class="view-more">View Details</a></div>
+					</div>
+					<div class="col-lg-6 h-100">
+						<div class="right-part">
+							<h5 class="main-color">Corinto Deluxe Donna</h5>
+							<p class="mt-2 sub-head">Running collection</p>
+							<p class="text-justify mt-3">The Corinto Deluxe Donna bicycle is a true embodiment of
+								refined beauty and exceptional performance. Crafted with meticulous attention to detail,
+								this exquisite bicycle is designed specifically for women seeking a luxurious and
+								comfortable riding experience.</p>
+							<div class="d-flex align-items-center mt-3">
+								<h5>$800</h5>
+								<a href="single-shop.html" class="btn ms-3"><span>Shop Now</span></a>
 							</div>
+							<div class="mt-4"><a href="" class="view-more">View Details</a></div>
 						</div>
 					</div>
 				</div>
-				<div class="card mt-3 card-1">
-					<div class="row justify-content-center align-items-center">
-						<div class="col-lg-6 h-100 left-part">
-							<div class="left-part">
-								<img src="{{ url_for('static', filename='img/home.png') }}" class="img-fluid" alt="">
-							</div>
+			</div>
+			<div class="card mt-3 card-1">
+				<div class="row justify-content-center align-items-center">
+					<div class="col-lg-6 h-100 left-part">
+						<div class="left-part">
+							<img src="{{ url_for('static', filename='img/home.png') }}" class="img-fluid" alt="">
 						</div>
-						<div class="col-lg-6 h-100">
-							<div class="right-part">
-								<h5 class="main-color">Corinto Deluxe Donna</h5>
-								<p class="mt-2 sub-head">Running collection</p>
-								<p class="text-justify mt-3">The Corinto Deluxe Donna bicycle is a true embodiment of refined beauty and exceptional performance. Crafted with meticulous attention to detail, this exquisite bicycle is designed specifically for women seeking a luxurious and comfortable riding experience.</p>
-								<div class="d-flex align-items-center mt-3">
-									<h5>$800</h5>
-									<a href="single-shop.html" class="btn ms-3"><span>Shop Now</span></a>
-								</div>
-								<div class="mt-4"><a href="" class="view-more">View Details</a></div>
+					</div>
+					<div class="col-lg-6 h-100">
+						<div class="right-part">
+							<h5 class="main-color">Corinto Deluxe Donna</h5>
+							<p class="mt-2 sub-head">Running collection</p>
+							<p class="text-justify mt-3">The Corinto Deluxe Donna bicycle is a true embodiment of
+								refined beauty and exceptional performance. Crafted with meticulous attention to detail,
+								this exquisite bicycle is designed specifically for women seeking a luxurious and
+								comfortable riding experience.</p>
+							<div class="d-flex align-items-center mt-3">
+								<h5>$800</h5>
+								<a href="single-shop.html" class="btn ms-3"><span>Shop Now</span></a>
 							</div>
+							<div class="mt-4"><a href="" class="view-more">View Details</a></div>
 						</div>
 					</div>
 				</div>
-				<!-- <div class="card mt-4 card-2">
+			</div>
+			<!-- <div class="card mt-4 card-2">
 					<div class="row justify-content-center align-items-center ">
 						<div class="col-lg-6 padding-0 h-100">
 							<div class="left-part">
@@ -283,128 +230,139 @@
 						</div>
 					</div>
 				</div> -->
+		</div>
+	</div>
+</section>
+
+<!--================ S-PRODUCTS END ================-->
+
+<!--================== S-SUBSCRIBE ==================-->
+<section class="s-subscribe" style="background-image: url('assets/img/offer.jpg');">
+	<span class="mask"></span>
+	<span class="subscribe-effect wow fadeIn" data-wow-duration="1s"></span>
+	<div class="container">
+		<div class="subscribe-left">
+			<h2 class="title text-capitalize small-title"><span>Let’s Start your <br><b class="mt-2">cycle journey
+						here</b></span></h2>
+			<p class="text-capitalize">Let's embark on this thrilling ride together and find your ideal bicycle today!
+			</p>
+			<button type="submit" class="btn btn-form"><span>send</span></button>
+		</div>
+		<img class="wow fadeInRightBlur lazy img-fluid" data-wow-duration=".8s" data-wow-delay=".3s"
+			src="{{ url_for('static', filename='img/home.png') }}"
+			data-src="{{ url_for('static', filename='img/home.png') }}" alt="img" style="width: 80%;">
+	</div>
+</section>
+<!--================ S-SUBSCRIBE END ================-->
+
+<!--================ gallery start ================-->
+<section class="about-orangecat">
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-6">
+				<h2 class="title text-capitalize small-title main-color text-center text-md-end">about our <br> orange
+					cat </h2>
+				<p class="mt-3 text-center text-md-end">Taurus still retains the main distinctive values ​today who have
+					built the identity and charm of its bicycles in over 100 years of history: craftsmanship, tradition,
+					luxury and sobriety.
+					<br><br> Bicycles still today Taurus I am assembled and painted by hand, keeping the style unchanged
+					and the quality. The result is perfection even in the latest models, a uniqueness and nobility that
+					makes it special every piece.
+				</p>
+				<div class=" text-center text-md-end mb-5 mb-md-0">
+					<button type="submit" class="btn btn-form mt-3"><span>send</span></button>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="about-contents">
+					<div class="row justify-content-center align-items-center">
+						<div class="col-lg-12 mb-3">
+							<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+						</div>
+						<div class="col-lg-6 mb-3">
+							<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+						</div>
+						<div class="col-lg-6 mb-3">
+							<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</section>
-	
-	<!--================ S-PRODUCTS END ================-->
+	</div>
+</section>
 
-		<!--================== S-SUBSCRIBE ==================-->
-		<section class="s-subscribe" style="background-image: url('assets/img/offer.jpg');">
-			<span class="mask"></span>
-			<span class="subscribe-effect wow fadeIn" data-wow-duration="1s"></span>
-			<div class="container">
-				<div class="subscribe-left">
-					<h2 class="title text-capitalize small-title"><span>Let’s Start your <br><b class="mt-2">cycle journey here</b></span></h2>
-					<p class="text-capitalize">Let's embark on this thrilling ride together and find your ideal bicycle today!</p>
-					<button type="submit" class="btn btn-form"><span>send</span></button>
-				</div>
-				<img class="wow fadeInRightBlur lazy img-fluid" data-wow-duration=".8s" data-wow-delay=".3s" src="{{ url_for('static', filename='img/home.png') }}" data-src="{{ url_for('static', filename='img/home.png') }}" alt="img" style="width: 80%;">
-			</div>
-		</section>
-		<!--================ S-SUBSCRIBE END ================-->
+<!--================ gallery end ================-->
 
-		<!--================ gallery start ================-->
-		<section class="about-orangecat">
-			<div class="container">
-				<div class="row justify-content-center align-items-center">
-					<div class="col-lg-6">
-						<h2 class="title text-capitalize small-title main-color text-center text-md-end">about our <br> orange cat  </h2>
-						<p class="mt-3 text-center text-md-end">Taurus still retains the main distinctive values ​today who have built the identity and charm of its bicycles in over 100 years of history: craftsmanship, tradition, luxury and sobriety.
-							<br><br>	Bicycles still today Taurus I am assembled and painted by hand, keeping the style unchanged and the quality. The result is perfection even in the latest models, a uniqueness and nobility that makes it special every piece.</p>
-						<div class=" text-center text-md-end mb-5 mb-md-0">
-							<button type="submit" class="btn btn-form mt-3"><span>send</span></button>
+<section class="s-gallery">
+	<div class="container">
+		<h2 class="title text-uppercase text-center">our photo gallery&nbsp;&nbsp;<i
+				class="bi bi-bicycle cycle-icon "></i></h2>
+		<div class="row-gallery home-gallery">
+			<div class="grid-gallery">
+				<div class="grid-sizer"></div>
+				<div class="our-gallery-item our-gallery-item-big">
+					<a href="{{ url_for('static', filename='img/gal-1.jpg') }}" data-fancybox="gallery1">
+						<img src="{{ url_for('static', filename='img/gal-1.jpg') }}" alt="img">
+						<div class="gal-item">
+							<h3 class="title">photo #1</h3>
+							<p>Satisfied Customers</p>
 						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="about-contents">
-							<div class="row justify-content-center align-items-center">
-								<div class="col-lg-12 mb-3">
-									<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
-								</div>
-								<div class="col-lg-6 mb-3">
-									<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
-								</div>
-								<div class="col-lg-6 mb-3">
-									<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
-								</div>
-							</div>
-						</div>
-					</div>
+					</a>
 				</div>
-			</div>
-		</section>
-		
-		<!--================ gallery end ================-->
-
-		<section class="s-gallery">
-			<div class="container">
-				<h2 class="title text-uppercase text-center">our photo gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
-				<div class="row-gallery home-gallery">
-					<div class="grid-gallery">
-						<div class="grid-sizer"></div>
-						<div class="our-gallery-item our-gallery-item-big">
-							<a href="{{ url_for('static', filename='img/gal-1.jpg') }}" data-fancybox="gallery1">
-								<img src="{{ url_for('static', filename='img/gal-1.jpg') }}" alt="img">
-								<div class="gal-item">
-									<h3 class="title">photo #1</h3>
-									<p>Satisfied Customers</p>
-								</div>
-							</a>
+				<div class="our-gallery-item">
+					<a href="{{ url_for('static', filename='img/gal-2.jpg') }}" data-fancybox="gallery1">
+						<img src="{{ url_for('static', filename='img/gal-2.jpg') }}" alt="img">
+						<div class="gal-item">
+							<h3 class="title">photo #2</h3>
+							<p>Satisfied Customers</p>
 						</div>
-						<div class="our-gallery-item">
-							<a href="{{ url_for('static', filename='img/gal-2.jpg') }}" data-fancybox="gallery1">
-								<img src="{{ url_for('static', filename='img/gal-2.jpg') }}" alt="img">
-								<div class="gal-item">
-									<h3 class="title">photo #2</h3>
-									<p>Satisfied Customers</p>
-								</div>
-							</a>
-						</div>
-						<div class="our-gallery-item">
-							<a href="{{ url_for('static', filename='img/gal-3.jpg') }}" data-fancybox="gallery1">
-								<img src="{{ url_for('static', filename='img/gal-3.jpg') }}" alt="img">
-								<div class="gal-item">
-									<h3 class="title">photo #3</h3>
-									<p>Satisfied Customers</p>
-								</div>
-							</a>
-						</div>
-						<div class="our-gallery-item">
-							<a href="{{ url_for('static', filename='img/gal-7.jpg') }}" data-fancybox="gallery1">
-								<img src="{{ url_for('static', filename='img/gal-7.jpg') }}" alt="img">
-								<div class="gal-item">
-									<h3 class="title">photo #7</h3>
-									<p>Satisfied Customers</p>
-								</div>
-							</a>
-						</div>
-						<div class="our-gallery-item">
-							<a href="{{ url_for('static', filename='img/gal-8.jpg') }}" data-fancybox="gallery1">
-								<img src="{{ url_for('static', filename='img/gal-8.jpg') }}" alt="img">
-								<div class="gal-item">
-									<h3 class="title">photo #8</h3>
-									<p>Satisfied Customers</p>
-								</div>
-							</a>
-						</div>
-						<div class="our-gallery-item">
-							<a href="{{ url_for('static', filename='img/gal-9.jpg') }}" data-fancybox="gallery1">
-								<img src="{{ url_for('static', filename='img/gal-9.jpg') }}" alt="img">
-								<div class="gal-item">
-									<h3 class="title">photo #9</h3>
-									<p>Satisfied Customers</p>
-								</div>
-							</a>
-						</div>
-					</div>
+					</a>
 				</div>
-				<div class="text-center">
-					<a href="single-shop.html" class="btn mt-4"><span>View More</span></a>
+				<div class="our-gallery-item">
+					<a href="{{ url_for('static', filename='img/gal-3.jpg') }}" data-fancybox="gallery1">
+						<img src="{{ url_for('static', filename='img/gal-3.jpg') }}" alt="img">
+						<div class="gal-item">
+							<h3 class="title">photo #3</h3>
+							<p>Satisfied Customers</p>
+						</div>
+					</a>
+				</div>
+				<div class="our-gallery-item">
+					<a href="{{ url_for('static', filename='img/gal-7.jpg') }}" data-fancybox="gallery1">
+						<img src="{{ url_for('static', filename='img/gal-7.jpg') }}" alt="img">
+						<div class="gal-item">
+							<h3 class="title">photo #7</h3>
+							<p>Satisfied Customers</p>
+						</div>
+					</a>
+				</div>
+				<div class="our-gallery-item">
+					<a href="{{ url_for('static', filename='img/gal-8.jpg') }}" data-fancybox="gallery1">
+						<img src="{{ url_for('static', filename='img/gal-8.jpg') }}" alt="img">
+						<div class="gal-item">
+							<h3 class="title">photo #8</h3>
+							<p>Satisfied Customers</p>
+						</div>
+					</a>
+				</div>
+				<div class="our-gallery-item">
+					<a href="{{ url_for('static', filename='img/gal-9.jpg') }}" data-fancybox="gallery1">
+						<img src="{{ url_for('static', filename='img/gal-9.jpg') }}" alt="img">
+						<div class="gal-item">
+							<h3 class="title">photo #9</h3>
+							<p>Satisfied Customers</p>
+						</div>
+					</a>
 				</div>
 			</div>
-		</section>
-		
+		</div>
+		<div class="text-center">
+			<a href="single-shop.html" class="btn mt-4"><span>View More</span></a>
+		</div>
+	</div>
+</section>
+
 <!--============= s-galleryb  end  =============-->
 
 <!--============= video-gallery start =============-->
@@ -413,257 +371,221 @@
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-6 mb-3">
 				<h2 class="black-color text-center text-md-start">Experience the Video Gallery</h2>
-				<p class="mt-3 text-justify text-justify text-md-start">Step into a captivating world of vintage bicycles with the Orange Cat Video Gallery. Immerse yourself in the enchanting beauty of our meticulously restored Orange Cat bicycles through a visual journey. From elegant cruisers to charming roadsters, each video showcases the timeless allure and exquisite craftsmanship of these vintage treasures.</p>
+				<p class="mt-3 text-justify text-justify text-md-start">Step into a captivating world of vintage
+					bicycles with the Orange Cat Video Gallery. Immerse yourself in the enchanting beauty of our
+					meticulously restored Orange Cat bicycles through a visual journey. From elegant cruisers to
+					charming roadsters, each video showcases the timeless allure and exquisite craftsmanship of these
+					vintage treasures.</p>
 				<div class="text-center text-md-start">
 					<a href="single-shop.html" class="btn mt-4"><span>View All</span></a>
 				</div>
 			</div>
 			<div class="col-lg-6 mb-3">
-				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
 			</div>
 			<div class="col-lg-6 mb-3">
-				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
 			</div>
 			<div class="col-lg-6 mb-3">
-				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
 			</div>
 		</div>
 	</div>
 </section>
 <!--============= video-gallery end =============-->
 
-	<!--============= follow-us start =============-->
-	<section class="follow-us">
-		<div class="container">
+<!--============= follow-us start =============-->
+<section class="follow-us">
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-4 icon-img">
+				<h2 class="title text-center text-capitalize small-title main-color">about our <br> orange cat </h2>
+				<div class="social-media">
+					<div class="d-flex justify-content-center">
+						<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid">
+						<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt=""
+							class="img-fluid ms-5">
+					</div>
+					<div class="d-flex mt-5 justify-content-center">
+						<img src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid">
+						<img src="{{ url_for('static', filename='img/icons/twitter.png') }}" alt=""
+							class="img-fluid ms-5">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div class="border-left">
+					<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--============= follow-us end =============-->
+
+
+<!--================== S-FEEDBACK ==================-->
+<section class="s-feedback" style="background-image: url('assets/img/feedback-bg');">
+	<span class="effwct-bg-feedback" style="background-image: url('assets/img/effect-bg-fack.svg');"></span>
+	<span class="mask"></span>
+	<div class="container">
+		<h2 class="title text-center text-md-start">feedback</h2>
+		<div class="feedback-slider">
+			<div class="feedback-slide">
+				<div class="feedback-item justify-content-center align-items-center">
+					<div class="feedback-item-top">
+						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<div class="feedback-title mb-4">
+							<h5 class="title"><span>Li piters</span></h5>
+							<p>Lorem Ipsum</p>
+						</div>
+					</div>
+					<div class="feedback-content">
+						<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit
+							magna”</p>
+					</div>
+				</div>
+			</div>
+			<div class="feedback-slide">
+				<div class="feedback-item justify-content-center align-items-center">
+					<div class="feedback-item-top">
+						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<div class="feedback-title mb-4">
+							<h5 class="title"><span>Li piters</span></h5>
+							<p>Lorem Ipsum</p>
+						</div>
+					</div>
+					<div class="feedback-content">
+						<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit
+							magna”</p>
+					</div>
+				</div>
+			</div>
+			<div class="feedback-slide">
+				<div class="feedback-item justify-content-center align-items-center">
+					<div class="feedback-item-top">
+						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<div class="feedback-title mb-4">
+							<h5 class="title"><span>Li piters</span></h5>
+							<p>Lorem Ipsum</p>
+						</div>
+					</div>
+					<div class="feedback-content">
+						<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit
+							magna”</p>
+					</div>
+				</div>
+			</div>
+			<div class="feedback-slide">
+				<div class="feedback-item justify-content-center align-items-center">
+					<div class="feedback-item-top">
+						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<div class="feedback-title mb-4">
+							<h5 class="title"><span>Li piters</span></h5>
+							<p>Lorem Ipsum</p>
+						</div>
+					</div>
+					<div class="feedback-content">
+						<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit
+							magna”</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--================ S-FEEDBACK END ================-->
+
+
+<!--================ contact-us start ================-->
+<section class="contact-orangecat" style="padding: 149px 0;">
+	<div class="container">
+		<h2 class="title text-uppercase text-center">Get in touch&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		</h2>
+		<p class="mt-4 text-center text-md-start">We're here to assist you every step of the way. Don't hesitate to get
+			in touch with our dedicated team for any inquiries, questions, or support you may need. We value your input
+			and are committed to providing prompt and helpful responses. We look forward to connecting with you and
+			ensuring your experience with us is exceptional.</p>
+		<div class="contact-contents">
 			<div class="row justify-content-center align-items-center">
-				<div class="col-lg-4 icon-img">
-					<h2 class="title text-center text-capitalize small-title main-color">about our <br> orange cat  </h2>
-					<div class="social-media">
-						<div class="d-flex justify-content-center">
-							<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid">
-							<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid ms-5">
-						</div>
-						<div class="d-flex mt-5 justify-content-center">
-							<img src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid">
-							<img src="{{ url_for('static', filename='img/icons/twitter.png') }}" alt="" class="img-fluid ms-5">
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-8">
-					<div class="border-left">
-						<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!--============= follow-us end =============-->
-
-	
-	<!--================== S-FEEDBACK ==================-->
-	<section class="s-feedback" style="background-image: url('assets/img/feedback-bg');">
-		<span class="effwct-bg-feedback" style="background-image: url('assets/img/effect-bg-fack.svg');"></span>
-		<span class="mask"></span>
-		<div class="container">
-			<h2 class="title text-center text-md-start">feedback</h2>
-			<div class="feedback-slider">
-				<div class="feedback-slide">
-					<div class="feedback-item justify-content-center align-items-center">
-						<div class="feedback-item-top">
-							<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
-							<div class="feedback-title mb-4">
-								<h5 class="title"><span>Li piters</span></h5>
-								<p>Lorem Ipsum</p>
-							</div>
-						</div>
-						<div class="feedback-content">
-							<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit magna”</p>
-						</div>
-					</div>
-				</div>
-				<div class="feedback-slide">
-					<div class="feedback-item justify-content-center align-items-center">
-						<div class="feedback-item-top">
-							<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
-							<div class="feedback-title mb-4">
-								<h5 class="title"><span>Li piters</span></h5>
-								<p>Lorem Ipsum</p>
-							</div>
-						</div>
-						<div class="feedback-content">
-							<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit magna”</p>
-						</div>
-					</div>
-				</div>
-				<div class="feedback-slide">
-					<div class="feedback-item justify-content-center align-items-center">
-						<div class="feedback-item-top">
-							<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
-							<div class="feedback-title mb-4">
-								<h5 class="title"><span>Li piters</span></h5>
-								<p>Lorem Ipsum</p>
-							</div>
-						</div>
-						<div class="feedback-content">
-							<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit magna”</p>
-						</div>
-					</div>
-				</div>
-				<div class="feedback-slide">
-					<div class="feedback-item justify-content-center align-items-center">
-						<div class="feedback-item-top">
-							<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
-							<div class="feedback-title mb-4">
-								<h5 class="title"><span>Li piters</span></h5>
-								<p>Lorem Ipsum</p>
-							</div>
-						</div>
-						<div class="feedback-content">
-							<p class="feedback-text text-justify">“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempoinc ididunt ut magna aliqua dolor sit amet, consectetur adipiscing elit magna”</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!--================ S-FEEDBACK END ================-->
-
-
-	<!--================ contact-us start ================-->
-	<section class="contact-orangecat" style="padding: 149px 0;">
-		<div class="container">
-			<h2 class="title text-uppercase text-center">Get in touch&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
-			<p class="mt-4 text-center text-md-start">We're here to assist you every step of the way. Don't hesitate to get in touch with our dedicated team for any inquiries, questions, or support you may need. We value your input and are committed to providing prompt and helpful responses. We look forward to connecting with you and ensuring your experience with us is exceptional.</p>
-			<div class="contact-contents">
-				<div class="row justify-content-center align-items-center">
-					<div class="col-lg-6">
-						<h5 class="main-color text-capitalize text-center">Locate us</h5>
-						<img src="{{ url_for('static', filename='img/contact/contact-img.jpg') }}" class="img-fluid mt-5">
-						<p class="mt-3 text-center text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham, CR6 9PX</p>
-						<h6 class="text-capitalize mt-3">contact us</h6>
-						<div class="d-flex reach-out-us mt-3">
-							<div class="call-us">
-								<div class="d-flex justify-content-center align-items-center">
-									<div class="contac-icon">
-										<img src="{{ url_for('static', filename='img/contact/call.png') }}" alt="call" class="img-fluid">
-									</div>
-									<div class="contact-numbers ms-3">
-										<a href="tel: (+33)7 35 55 31 15">(+33)7 35 55 31 15</a><br>
-										<a href="tel: (+33)7 35 55 31 15">(+33)7 35 55 31 15</a>
-									</div>
+				<div class="col-lg-6">
+					<h5 class="main-color text-capitalize text-center">Locate us</h5>
+					<img src="{{ url_for('static', filename='img/contact/contact-img.jpg') }}" class="img-fluid mt-5">
+					<p class="mt-3 text-center text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham, CR6 9PX
+					</p>
+					<h6 class="text-capitalize mt-3">contact us</h6>
+					<div class="d-flex reach-out-us mt-3">
+						<div class="call-us">
+							<div class="d-flex justify-content-center align-items-center">
+								<div class="contac-icon">
+									<img src="{{ url_for('static', filename='img/contact/call.png') }}" alt="call"
+										class="img-fluid">
 								</div>
-							</div>
-							<div class="mail-us ms-md-5 ms-4">
-								<div class="d-flex">
-									<div class="contact-icon">
-										<img src="{{ url_for('static', filename='img/contact/mail.png') }}" alt="mail" class="img-fluid">
-									</div>
-									<a href="mailto:info@example.com" class="ms-md-3 ms-2 mt-md-1 mt-2">info@example.com</a>
+								<div class="contact-numbers ms-3">
+									<a href="tel: (+33)7 35 55 31 15">(+33)7 35 55 31 15</a><br>
+									<a href="tel: (+33)7 35 55 31 15">(+33)7 35 55 31 15</a>
 								</div>
 							</div>
 						</div>
-						<div class="follow-us-on">
-							<h6 class="text-capitalize mt-5 text-center text-md-start">contact us</h6>
-							<div class="d-flex mt-3 justify-content-center justify-content-md-start">
-								<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top"></i></a>
-								<a href="#" class="me-3"><i class="fa fa-instagram icon-top"></i></a>
-								<a href="#" class="me-3"><i class="fa fa-twitter icon-top"></i></a>
-								<a href="#" class="me-3"><i class="fa fa-pinterest icon-top"></i></a>
+						<div class="mail-us ms-md-5 ms-4">
+							<div class="d-flex">
+								<div class="contact-icon">
+									<img src="{{ url_for('static', filename='img/contact/mail.png') }}" alt="mail"
+										class="img-fluid">
+								</div>
+								<a href="mailto:info@example.com" class="ms-md-3 ms-2 mt-md-1 mt-2">info@example.com</a>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<form action="" class="mt-4 mt-md-0">
-							<h6 class="text-center text-capitalize mb-3">Reach Out to Us</h6>
-							<div class="mb-3">
-								<input type="text" class="form-control" id="name" placeholder="Name" required>
-							</div>
-							<div class="mb-3">
-								<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
-							</div>
-							<div class="mb-3">
-								<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
-							</div>
-							<div class="mb-4">
-								<textarea class="form-control bg-transparent" id="type-message" rows="3" placeholder="Type your message" required></textarea>
-							</div>
-							<div class="text-center">
-								<button type="submit" class="btn"><span>Send</span></button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!--================ contact-us end ================-->
-
-	<!--==================== FOOTER ====================-->
-	<section class="footer-links">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="img-fluid">
-					<p class="text-capitalize white-color"> Explore our collection and start your unforgettable journey with Orange Cat bicycles.</p>
-					<div class="d-flex mt-3">
-						<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top"></i></a>
-						<a href="#" class="me-3"><i class="fa fa-instagram icon-top"></i></a>
-						<a href="#" class="me-3"><i class="fa fa-twitter icon-top"></i></a>
-						<a href="#" class="me-3"><i class="fa fa-pinterest icon-top"></i></i></a>
-					</div>
-				</div>
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<h6 class="text-capitalize white-color">important links</h6>
-					<ul class="mt-3 footer-items">
-						<li><a href="">Home</a></li>
-						<li><a href="">About</a></li>
-						<li><a href="">Bike</a></li>
-						<li><a href="">Photo Gallery</a></li>
-						<li><a href="">Video Gallery</a></li>
-						<li><a href="">Contact Us</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<h6 class="text-capitalize white-color">contact info</h6>
-					<ul class="mt-3 footer-items">
-						<li><a href=""><i class="bi bi-geo-alt"></i>&nbsp;&nbsp;demo store United States</a></li>
-						<li><a href=""><i class="bi bi-telephone"></i>&nbsp;&nbsp;(+33)7 35 55 31 15</a></li>
-						<li><a href=""><i class="bi bi-envelope"></i>&nbsp;&nbsp;demo@demo.com</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<h6 class="text-capitalize white-color">New letter</h6>
-					<p class="white-color mt-3">Stay up to date with the latest news, updates, and exclusive offers by subscribing to our newsletter</p>
-					<form action="" class="mt-3"> 
-						<div class="mb-2">
-							<input type="email" class="form-control" id="email-address" placeholder="Enter Your Email Address">
+					<div class="follow-us-on">
+						<h6 class="text-capitalize mt-5 text-center text-md-start">contact us</h6>
+						<div class="d-flex mt-3 justify-content-center justify-content-md-start">
+							<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top"></i></a>
+							<a href="#" class="me-3"><i class="fa fa-instagram icon-top"></i></a>
+							<a href="#" class="me-3"><i class="fa fa-twitter icon-top"></i></a>
+							<a href="#" class="me-3"><i class="fa fa-pinterest icon-top"></i></a>
 						</div>
-						<button type="submit" class="btn"><span>Subscribe</span></button>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<form action="" class="mt-4 mt-md-0">
+						<h6 class="text-center text-capitalize mb-3">Reach Out to Us</h6>
+						<div class="mb-3">
+							<input type="text" class="form-control" id="name" placeholder="Name" required>
+						</div>
+						<div class="mb-3">
+							<input type="email" class="form-control" id="exampleFormControlInput1"
+								placeholder="Email address" required>
+						</div>
+						<div class="mb-3">
+							<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
+						</div>
+						<div class="mb-4">
+							<textarea class="form-control bg-transparent" id="type-message" rows="3"
+								placeholder="Type your message" required></textarea>
+						</div>
+						<div class="text-center">
+							<button type="submit" class="btn"><span>Send</span></button>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-	</section>
-	<!--================== FOOTER END ==================-->
+	</div>
+</section>
 
-	<!--===================== TO TOP =====================-->
-	<a class="to-top" href="#home">
-		<i class="fa fa-angle-double-up" aria-hidden="true"></i>
-	</a>
-	<!--=================== TO TOP END ===================-->
-	<!--==================== SCRIPT	====================-->
-	<script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=your_api_key"></script>
-	<script src="{{ url_for('static', filename='js/isotope.pkgd.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/jquery.nice-select.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/wow.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/lazyload.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+<!--================ contact-us end ================-->
 
-</body>
-</html>
+{% endblock %}
