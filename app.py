@@ -200,7 +200,7 @@ def about():
 @app.route('/products')
 def view_products():
     products = Products.query.all()
-    return render_template('products.html', products=products)
+    return render_template('bikes.html', products=products)
 
 @app.route('/products/<int:id>')
 def view_product(id):

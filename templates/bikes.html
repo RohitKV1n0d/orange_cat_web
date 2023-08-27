@@ -1,220 +1,78 @@
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-	<meta charset="UTF-8">
-	<title>Creto - About Us</title>
-	<!-- =================== META =================== -->
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" href="assets/img/favicon.png">
-	<!-- =================== BOOTSTRAP =================== -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-	<!-- =================== STYLE =================== -->
-	<link rel="stylesheet" href="assets/css/bootstrap-grid.css">
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-</head>
+{% extends "base.html" %}
 
-<body id="home">
-	<!--================ PRELOADER ================-->
-	<div class="preloader-cover">
-		<div class="preloader">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</div>
-	<!--============== PRELOADER END ==============-->
-	<!-- =================== HEADER =================== -->
-	<header class="header">
-		<a href="#" class="nav-btn">
-			<span></span>
-			<span></span>
-			<span></span>
-		</a>
-		<div class="top-panel">
-			<div class="container">
-				<div class="top-panel-cover">
-					<ul class="header-cont">
-						<li><a href="tel:+912345687"><i class="fa fa-phone"></i>+9123 456 87</a></li>
-						<li><a href="mailto:creto@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i>creto@gmail.com</a></li>
-					</ul>
-					<ul class="icon-right-list">
-						<li><a href="#"><i class="fa fa-facebook-f icon-top"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram icon-top"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter icon-top"></i></a></li>
-						<li><a href="#"><i class="fa fa-pinterest icon-top"></i></i></a></li>
-					</ul>
-				</div>
+
+{% block content %}
+<!-- Your code here -->
+<section class="product-details">
+
+	<!--================= our-strategy start =================-->
+<section class="product-landing">
+	<div class="container">
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+			  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active button-1" aria-current="true" aria-label="Slide 1"></button>
+			  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" class="button-2"></button>
 			</div>
-		</div>
-		<div class="header-menu">
-			<div class="container">
-				<a href="index.html" class="logo"><img src="assets/img/logo.png" class="logo-img" alt="logo"></a>
-				<nav class="nav-menu">
-					<ul class="nav-list">
-						<li><a href="index.html" class="active">Home</a></li>
-						<li><a href="about-us.html">About</a></li>
-						<li><a href="bikes.html">Bikes</a></li>
-						<li><a href="photo-gallery.html">Photo Gallery</a></li>
-						<li><a href="video-gallery.html">Video Gallery</a></li>
-						<li><a href="contacts.html">Contacts</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	<!-- ================= HEADER END ================= -->
-
-	<!-- ================ HEADER-TITLE ================ -->
-	<section class="s-header-title">
-		<div class="container">
-			<h4 class="main-color line-gap text-uppercase">Discover Your Perfect Ride</b></h4>
-		</div>
-	</section>
-	<div class="contact-texts">
-		<div class="container">
-			<p class="mt-3 text-justify mt-3">Taurus still retains the main distinctive values ​today who have built the identity and charm of its bicycles in over 100 years of history: craftsmanship, tradition, luxury and sobriety. Bicycles still today Taurus I am assembled and painted by hand, keeping the style unchanged and the quality. The result is perfection even in the latest models, a uniqueness and nobility that makes it special every piece.</p>
-		</div>
-	</div>
-	<!-- ============== HEADER-TITLE END ============== -->
-
-	<section class="product-details">
-
-		<!--================= our-strategy start =================-->
-	<section class="product-landing">
-		<div class="container">
-			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-				<div class="carousel-indicators">
-				  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active button-1" aria-current="true" aria-label="Slide 1"></button>
-				  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" class="button-2"></button>
-				</div>
-				<div class="carousel-inner">
-				  <div class="carousel-item active">
-					<div class="row justify-content-center align-items-center product-info">
-						<div class="col-lg-4">
-							<div class="product-description">
-								<h4 class="text-uppercase black-color text-center text-md-start">Corinto Deluxe Donna</h4>
-								<p class="text-justify mt-3">The Corinto Deluxe Donna boasts a striking design that captivates with its sleek lines and graceful curves. Every aspect of this bicycle is thoughtfully considered, from its lightweight frame to its premium components, ensuring an exceptional riding experience.</p>
-								<h4 class="text-uppercase black-color mt-3 text-center text-md-start">$1200</h4>
-								<div class="d-flex mt-3  align-items-center justify-content-center justify-content-md-start">
-									<a href="#" class="btn mt-4"><span>Shop Now</span></a>
-									<a href="#" class=" mt-4 ms-3">Buy Now</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-8 mt-5 mt-md-0">
-							<div class="product-image">
-								<img src="assets/img/home.png" alt="about image" class="img-fluid about-img">
+			<div class="carousel-inner">
+			  <div class="carousel-item active">
+				<div class="row justify-content-center align-items-center product-info">
+					<div class="col-lg-4">
+						<div class="product-description">
+							<h4 class="text-uppercase black-color text-center text-md-start">Corinto Deluxe Donna</h4>
+							<p class="text-justify mt-3">The Corinto Deluxe Donna boasts a striking design that captivates with its sleek lines and graceful curves. Every aspect of this bicycle is thoughtfully considered, from its lightweight frame to its premium components, ensuring an exceptional riding experience.</p>
+							<h4 class="text-uppercase black-color mt-3 text-center text-md-start">$1200</h4>
+							<div class="d-flex mt-3  align-items-center justify-content-center justify-content-md-start">
+								<a href="#" class="btn mt-4"><span>Shop Now</span></a>
+								<a href="#" class=" mt-4 ms-3">Buy Now</a>
 							</div>
 						</div>
 					</div>
-				  </div>
-				  <div class="carousel-item">
-					<div class="row justify-content-center align-items-center product-info">
-						<div class="col-lg-4">
-							<div class="product-description">
-								<h4 class="text-uppercase black-color text-center text-md-start">Corinto Deluxe Donna</h4>
-								<p class="text-justify mt-3">The Corinto Deluxe Donna boasts a striking design that captivates with its sleek lines and graceful curves. Every aspect of this bicycle is thoughtfully considered, from its lightweight frame to its premium components, ensuring an exceptional riding experience.</p>
-								<h4 class="text-uppercase black-color mt-3 text-center text-md-start">$1200</h4>
-								<div class="d-flex mt-3 align-items-center  justify-content-center justify-content-md-start">
-									<a href="#" class="btn mt-4"><span>Shop Now</span></a>
-									<a href="#" class=" mt-4 ms-3">Buy Now</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-8 mt-5 mt-md-0">
-							<div class="product-image">
-								<img src="assets/img/home.png" alt="about image" class="img-fluid about-img">
-							</div>
+					<div class="col-lg-8 mt-5 mt-md-0">
+						<div class="product-image">
+							<img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img">
 						</div>
 					</div>
-				  </div>
 				</div>
-				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-				  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				  <span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-				  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				  <span class="visually-hidden">Next</span>
-				</button>
 			  </div>
-		</div>
-	</section>
-	<!--================ our-strategy end ================-->
-
-	
-
-	</section>
-
-	<!--==================== FOOTER ====================-->
-	<section class="footer-links">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<img src="assets/img/logo.png" alt="logo" class="img-fluid">
-					<p class="text-capitalize white-color"> Explore our collection and start your unforgettable journey with Orange Cat bicycles.</p>
-					<div class="d-flex mt-3">
-						<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top"></i></a>
-						<a href="#" class="me-3"><i class="fa fa-instagram icon-top"></i></a>
-						<a href="#" class="me-3"><i class="fa fa-twitter icon-top"></i></a>
-						<a href="#" class="me-3"><i class="fa fa-pinterest icon-top"></i></i></a>
+			  <div class="carousel-item">
+				<div class="row justify-content-center align-items-center product-info">
+					<div class="col-lg-4">
+						<div class="product-description">
+							<h4 class="text-uppercase black-color text-center text-md-start">Corinto Deluxe Donna</h4>
+							<p class="text-justify mt-3">The Corinto Deluxe Donna boasts a striking design that captivates with its sleek lines and graceful curves. Every aspect of this bicycle is thoughtfully considered, from its lightweight frame to its premium components, ensuring an exceptional riding experience.</p>
+							<h4 class="text-uppercase black-color mt-3 text-center text-md-start">$1200</h4>
+							<div class="d-flex mt-3 align-items-center  justify-content-center justify-content-md-start">
+								<a href="#" class="btn mt-4"><span>Shop Now</span></a>
+								<a href="#" class=" mt-4 ms-3">Buy Now</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8 mt-5 mt-md-0">
+						<div class="product-image">
+							<img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img">
+						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<h6 class="text-capitalize white-color">important links</h6>
-					<ul class="mt-3 footer-items">
-						<li><a href="">Home</a></li>
-						<li><a href="">About</a></li>
-						<li><a href="">Bike</a></li>
-						<li><a href="">Photo Gallery</a></li>
-						<li><a href="">Video Gallery</a></li>
-						<li><a href="">Contact Us</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<h6 class="text-capitalize white-color">contact info</h6>
-					<ul class="mt-3 footer-items">
-						<li><a href=""><i class="bi bi-geo-alt"></i>&nbsp;&nbsp;demo store United States</a></li>
-						<li><a href=""><i class="bi bi-telephone"></i>&nbsp;&nbsp;(+33)7 35 55 31 15</a></li>
-						<li><a href=""><i class="bi bi-envelope"></i>&nbsp;&nbsp;demo@demo.com</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 mt-5 mt-md-0">
-					<h6 class="text-capitalize white-color">New letter</h6>
-					<p class="white-color mt-3">Stay up to date with the latest news, updates, and exclusive offers by subscribing to our newsletter</p>
-					<form action="" class="mt-3"> 
-						<div class="mb-2">
-							<input type="email" class="form-control" id="email-address" placeholder="Enter Your Email Address">
-						</div>
-						<button type="submit" class="btn"><span>Subscribe</span></button>
-					</form>
-				</div>
+			  </div>
 			</div>
-		</div>
-	</section>
-	<!--================== FOOTER END ==================-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			  <span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			  <span class="visually-hidden">Next</span>
+			</button>
+		  </div>
+	</div>
+</section>
+<!--================ our-strategy end ================-->
 
-	<!--===================== TO TOP =====================-->
-	<a class="to-top" href="#home">
-		<i class="fa fa-angle-double-up" aria-hidden="true"></i>
-	</a>
-	<!--=================== TO TOP END ===================-->
-	<!--=================== SCRIPT	===================-->
-	<script src="assets/js/jquery-2.2.4.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=your_api_key"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
+
+
+</section>
+
+{% endblock %}
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.min.js"></script>
-	<script src="assets/js/history.js"></script>
-	<script src="assets/js/scripts.js"></script>
-</body>
-</html>
+
+	
