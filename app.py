@@ -117,6 +117,7 @@ class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return '<Product %r>' % self.id
@@ -213,9 +214,9 @@ def get_products():
     return jsonify(products), 200
 
 # photo gallery
-@app.route('/gallery')
-def gallery():
-    return render_template('gallery.html')
+@app.route('/gallery/photo')
+def photo_gallery():
+    return render_template('photo-gallery.html')
 
 
 @app.route('/fetch/gallery/')
@@ -240,6 +241,10 @@ def fetch_video():
 def contact():
     return render_template('contact.html')
 
+@app.route('/example')
+def example():
+    return render_template('example.html')
+ 
 
 with app.app_context():
     init_db()
