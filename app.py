@@ -237,9 +237,9 @@ def fetch_video():
     return jsonify(videos), 200
 
 # contact us
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+@app.route('/contacts')
+def contacts():
+    return render_template('contacts.html')
 
 @app.route('/example')
 def example():
