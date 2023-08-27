@@ -79,7 +79,7 @@
                         <li><a href="{{ url_for('about') }}" {% if request.path == url_for('about') %} class="active" {% endif %}>About</a></li>
                         <li><a href="{{ url_for('view_products') }}" {% if request.path == url_for('view_products') %} class="active" {% endif %}>Bikes</a></li>
                         <li><a href="{{ url_for('photo_gallery') }}" {% if request.path == url_for('photo_gallery') %} class="active" {% endif %}>Photo Gallery</a></li>
-                        <li><a href="{{ url_for('video') }}" {% if request.path == url_for('video') %} class="active" {% endif %}>Video Gallery</a></li>
+                        <li><a href="{{ url_for('video_gallery') }}" {% if request.path == url_for('video_gallery') %} class="active" {% endif %}>Video Gallery</a></li>
                         <li><a href="{{ url_for('contact') }}" {% if request.path == url_for('contact') %} class="active" {% endif %}>Contacts</a></li>
                     </ul>
                 </nav>

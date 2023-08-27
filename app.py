@@ -226,9 +226,9 @@ def fetch_gallery_photos():
     return jsonify(photos), 200
 
 # video gallery
-@app.route('/video')
-def video():
-    return render_template('video.html')
+@app.route('/gallery/video')
+def video_gallery():
+    return render_template('video-gallery.html')
 
 @app.route('/fetch/video/')
 def fetch_video():
