@@ -138,6 +138,9 @@ class Products(db.Model):
         }
 
 
+
+
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -146,6 +149,13 @@ def admin_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
+
+@app.context_processor
+def inject_user():
+    if current_user.is_authenticated:
+        return dict(current_user=current_user)
+    return dict(current_user=None)
+
 
 @app.route('/admin')
 @admin_required

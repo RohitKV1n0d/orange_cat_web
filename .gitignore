@@ -2,3 +2,5 @@
 .vscode
 __pycache__/*.pyc
 *.pyc
+app.cpython-310.pyc
+
