@@ -614,14 +614,15 @@ $(document).ready( function() {
 					var itemSelector_1 = '.gallery-item'; 
 
 					var $container1 = $('.gallery-row');
-					$container1.imagesLoaded(function() {
+					if ($container1.length > 0){
+						$container1.imagesLoaded(function() {
 						$container1.isotope({
 							itemSelector : itemSelector_1,
 							masonry : {
 								horizontalOrder : true
 							}
 						});
-					});
+					});}
 
 					//Ascending order
 					var responsiveIsotope = [
@@ -825,8 +826,11 @@ $(document).ready( function() {
 		pageLink.addEventListener('click', () => {
 		  displayItems(i);
 		});
-	
-		pagination.appendChild(pageLink);
+		
+		if (pagination != null) {
+			pagination.appendChild(pageLink);
+		}
+
 	  }
 	}
 	

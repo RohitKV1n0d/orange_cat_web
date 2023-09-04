@@ -117,6 +117,7 @@ class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return '<Product %r>' % self.id
@@ -137,6 +138,9 @@ class Products(db.Model):
         }
 
 
+
+
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -145,6 +149,13 @@ def admin_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
+
+@app.context_processor
+def inject_user():
+    if current_user.is_authenticated:
+        return dict(current_user=current_user)
+    return dict(current_user=None)
+
 
 @app.route('/admin')
 @admin_required
@@ -194,12 +205,12 @@ def base():
 # about
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about-us.html')
 
 @app.route('/products')
 def view_products():
     products = Products.query.all()
-    return render_template('products.html', products=products)
+    return render_template('bikes.html', products=products)
 
 @app.route('/products/<int:id>')
 def view_product(id):
@@ -213,9 +224,9 @@ def get_products():
     return jsonify(products), 200
 
 # photo gallery
-@app.route('/gallery')
-def gallery():
-    return render_template('gallery.html')
+@app.route('/gallery/photo')
+def photo_gallery():
+    return render_template('photo-gallery.html')
 
 
 @app.route('/fetch/gallery/')
@@ -225,9 +236,9 @@ def fetch_gallery_photos():
     return jsonify(photos), 200
 
 # video gallery
-@app.route('/video')
-def video():
-    return render_template('video.html')
+@app.route('/gallery/video')
+def video_gallery():
+    return render_template('video-gallery.html')
 
 @app.route('/fetch/video/')
 def fetch_video():
@@ -236,10 +247,14 @@ def fetch_video():
     return jsonify(videos), 200
 
 # contact us
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+@app.route('/contacts')
+def contacts():
+    return render_template('contacts.html')
 
+@app.route('/example')
+def example():
+    return render_template('example.html')
+ 
 
 with app.app_context():
     init_db()
