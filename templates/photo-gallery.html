@@ -2,8 +2,56 @@
 
 
 {% block content %}
+<script src="js-image-zoom.js"></script>
+<!-- Or from a CDN -->
+<script src="https://unpkg.com/js-image-zoom/js-image-zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-image-zoom/js-image-zoom.min.js"></script>
 <!-- Your code here -->
 <!--==================== S-GALLERY ====================-->
+<script>
+	// Base Configuration
+var options = {
+  width: 400
+};
+
+// Setting Height of the Original Image
+options.height = 400;
+
+// Setting Width of the Zoomed Image
+options.zoomWidth = 500;
+
+// Set Image Path in JavaScript
+options.img = '/path/to/1.jpg';
+
+// Set X/Y Offsets for Zoomed Image
+options.offset = {
+  vertical: 0,
+  horizontal: 10
+};
+
+// Customize Zoom Scale
+options.scale = 2.5;
+
+// Specify the Container for Zoomed Image (Assuming domNode is a DOM element you've defined elsewhere)
+options.zoomContainer = domNode;
+
+// Apply CSS Styles to Zoomed Image
+options.zoomStyle = {
+  // ... your CSS styles here
+};
+
+// Apply CSS Styles to the Zoom Lens
+options.zoomLensStyle = {
+  // ... your CSS styles here
+};
+
+// Set Position of the Zoomed Image
+options.zoomPosition = 'left';
+
+// Now initialize the zoom effect
+new ImageZoom(document.getElementById("img-container"), options);
+
+</script>
 <section class="s-gallery">
 	<div class="container">
 		<div class="row-gallery">
