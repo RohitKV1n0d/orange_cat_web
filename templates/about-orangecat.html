@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<!-- Your code here -->
+<section class="about-us">
+
+	<!--================= about-banner-page start =================-->
+<section class="about-us-banner">
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-6">
+				<img src="{{ url_for('static', filename='img/about-orangecat-1.jpg') }}" alt="about image" class="img-fluid about-oragecat-img-1">
+			</div>
+			<div class="col-lg-6">
+				<div class="text-content-box">
+                    <h5 class="about-main-head letter-spacing">The Fusion: Orange Cat & Taurus Unite</h5>
+                    <p class="mt-3">In 2022, Orange Cat established a partnership with Taurus, a century-old bicycle manufacturer.</p>
+                    <p>Taurus manufactures bicycles following a tradition that has been passed down through generations. Throughout more than 100 years of business, Taurus has maintained its core distinctive values upon which the identity and appeal of its bikes are based: craftsmanship, tradition, luxury, and performance. Taurus bicycles are still handcrafted, upholding the standard of quality and style from its inception.</p>
+                </div>
+			</div>
+            <div class="col-lg-12">
+                <p class="text-justify mt-4">In 2022, Orange Cat established a partnership with Taurus, a century-old bicycle manufacturer.
+                    Taurus manufactures bicycles following a tradition that has been passed down through generations. Throughout more than 100 years of business, Taurus has maintained its core distinctive values upon which the identity and appeal of its bikes are based: craftsmanship, tradition, luxury, and performance. Taurus bicycles are still handcrafted, upholding the standard of quality and style from its inception.</p>
+            </div>
+            <div class="col-lg-12">
+                <div class="once-upon-a-time">
+                    <h5 class="black-color letter-spacing">Once upon a time, there was a king who loved riding his <b class="main-color">bicycle</b>…</h5>
+                    <p class="text-justify mt-3">What might seem like the beginning of a fable is, instead, part of the history of our manufacturer. It originated in Milan in 1908 in a small workshop where bicycles were handcrafted with time-honed special attention to detail. This dedication to achieving perfection in all aspects of craftsmanship, elegance, and performance was key in earning Taurus love and appreciation from an attentive and demanding public. It is not surprising that this bicycle was the preferred bicycle of King Vittorio Emanuele III. A bicycle for royals that throughout the decades has continued to respect tradition without losing its iconic style. Taurus continues its innovative practice of sustainable innovation with current sustainable solutions.</p>
+                    <br><p class="fw-bold black-color">“A bicycle is not just a combination of details. Its details are everything.”</p>
+                    <p class="text-justify">Taurus’ bicycles are timeless; leveraging a style that remains unchanged since its first prototypes. Its unparalleled standards of quality ensures durability that can withstand the rest of time.</p>
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+<!--================ about-banner-page end ================-->
+
+<!--================ about-tradition start ================-->
+<section class="about-tradition">
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-6 d-none d-md-block">
+				<h5 class="black-color about-main-head letter-spacing">The Taurus Tradition: German Influence and Origins</h5>
+                <p class="text-justify mt-3">In 1908, engineers Vittorio and Umberto Fabbri founded Taurus. From its establishment until the First World War, Taurus imported components from Germany and completed the assembly process in its workshop in Italy. Traces of this German trade are still present nowadays in historical records of the Taurus crest which displays a harpy with extended wings. This mythological animal with the body of a bird of prey and a human head is found in one of the crests belonging to the city of Nuremberg.</p>
+                <p class="text-justify mt-2 mt-md-3">During the 40s and 50s, Taurus’ success allowed them to open a second retail shop in Via Maiocchi in Milan, in addition to the original one in Piazza della Repubblica. In those years, model no.25 (naming bicycle models after numbers is an old Taurus custom) became the most popular style with its draw-rod break system inside the frame.</p>
+                <p class="text-justify mt-2 mt-md-3">In the mid-50s, the Fabbri brothers sold the business to Mr. Fassi who then dedicated years of his life to the manufacture of bicycles. Production was moved to the Vanzaghello factory, and the company expanded its portfolio with the added manufacture of motorbikes. Later, Taurus also produced racing bicycles for athletes.</p>
+			</div>
+			<div class="col-lg-6">
+                <img src="{{ url_for('static', filename='img/about-orangecat-2.jpg') }}" alt="about image" class="img-fluid about-oragecat-img-2">
+            </div>
+		</div>
+	</div>
+</section>
+<!--============== about-tradition end ==============-->
+
+<!--===================== orangecat-history start =====================-->
+<section class="orangecat-history">
+	<div class="container">
+		<h4 class="black-color about-main-head text-center letter-spacing">Embracing the <b class="main-color">Future</b>: Taurus's Vision of <b class="main-color">Progress</b></h4>
+		<div class="row mt-5 justify-content-center future-cards">
+			<div class="col-lg-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/september-img.png') }}" alt="about image" class="img-fluid about-oragecat-img-2">
+                    <h6 class="black-color mt-3">September <b class="main-color">2018</b></h6>
+                    <p class="text-justify mt-3">September 2018 marked Taurus’ 110th anniversary, and for its celebrations, Taurus hosted the show “People Beyond Design.” This event provided the company the incentive for the relaunch of model no.27, Taurus’s most recognizable design from the 1940s.</p>
+                </div>
+            </div>
+			<div class="col-lg-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/december-img.png') }}" alt="about image" class="img-fluid about-oragecat-img-2">
+                    <h6 class="black-color mt-3">December <b class="main-color">2018</b></h6>
+                    <p class="text-justify mt-3">In December 2018, Taurus partnered with SeHus and developed an e-bike line called “Linea È.” This product line included three new models of Taurus bicycles equipped with an assisted pedalling feature: “it’s a woman,” “it’s a man,” and the model “limited è.”</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/today-img.png') }}" alt="about image" class="img-fluid about-oragecat-img-2">
+                    <h6 class="main-color mt-3">Today</h6>
+                    <p class="text-justify mt-3">Today is an unrivalled market leader through the 1900s, Taurus is in continuous development without leaving behind the tradition that has decreed its success. A new team of innovators are continuing the tradition with the same original passion for elegant and long-lasting bicycles.</p>
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+<!--=================== orangecat-history end ===================-->
+
+<!--=================== our-range-simplicity start ===================-->
+<section class="our-range-simplicity">
+	<div class="container">
+		<div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="simplicity-text-box">
+                    <h5 class="black-color letter-spacing">Crafting Distinction from Simplicity</h5>
+                    <p class="text-justify mt-3">Taurus is recognized for its ability to convert simple details into distinctive and recognizable design while simultaneously satisfying the demands of an urban setting, such as Milan and Toronto.  It combines Italian craft tradition and the vanguard of international design.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='img/simplicity-img.jpg') }}" alt="about image" class="img-fluid about-oragecat-img-2">
+            </div>
+        </div>
+	</div>
+</section>
+<!--=================== our-range-simplicity end ===================-->
+
+<!--=================== uniqueness start ===================-->
+<!-- <section class="uniqueness">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-7 red">
+				<div class="container ">
+					<h4 class="text-uppercase black-color mb-5">our values</h4>
+					<p class="text-justify">Taurus is recognized for its design culture. For the capacity to make every detail unique in response to the needs of life a dynamic city like Milan. The symbolic city of Taurus par excellence: a direct connection between the tradition of Italian art of making and the avant-garde of international design.</p>
+				</div>
+			</div>
+			<div class="col-lg-5 green">
+				<div class="container">
+					<img src="{{ url_for('static', filename='img/home.png') }}" alt="uniqueness" class="img-fluid">
+				</div>
+			</div>
+		</div>
+</section> -->
+  
+
+<!--=================== faq start ===================-->
+<section class="faq">
+	<div class="container">
+		<h4 class="black-color mb-5 text-center about-main-head letter-spacing">Find the <b class="main-color">Answers</b> to all Our Frequently Asked <b class="Questions"></b></h4>
+		<div class="boxaccordion">
+			<div class="containerwidth">
+				<div class="wrapper">
+					<button class="toggle">How can I place an order for a bicycle?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p>FAQs accordion is a great way to help you build authority and trust, and at the same time bestow a bit of personality on the website. It also helps you answer frequently asked questions, produce additional content quickly, and reduce bounce rates.</p>
+					</div>
+				</div>
+				<div class="wrapper">
+					<button class="toggle">Can I modify or cancel my order after it's placed?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p>Benefit of FAQs accordion  for blogger is that it helps your blog visitors to find what they are looking for in less time.</p>
+					</div>
+				</div>
+				<div class="wrapper">
+					<button class="toggle">Do you ship internationally?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p> Yes, Frequently Asked Questions scheme will make your website more popular and increase your search engine ranking position.</p>
+					</div>
+				</div>
+				<div class="wrapper">
+					<button class="toggle">What types of terrain are the bicycles suitable for?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p> Yes, Frequently Asked Questions scheme will make your website more popular and increase your search engine ranking position.</p>
+					</div>
+				</div>
+				<div class="wrapper">
+					<button class="toggle">Are there different frame sizes available?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p> Yes, Frequently Asked Questions scheme will make your website more popular and increase your search engine ranking position.</p>
+					</div>
+				</div>
+				<div class="wrapper">
+					<button class="toggle">What warranty comes with the bicycles?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p> Yes, Frequently Asked Questions scheme will make your website more popular and increase your search engine ranking position.</p>
+					</div>
+				</div>
+                <div class="wrapper">
+					<button class="toggle">What maintenance is required for the bicycles?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p> Yes, Frequently Asked Questions scheme will make your website more popular and increase your search engine ranking position.</p>
+					</div>
+				</div><div class="wrapper">
+					<button class="toggle">How often should I bring my bike for servicing?<i class="fas fa-plus icon"></i></button>
+					<div class="content-faq">
+						<p> Yes, Frequently Asked Questions scheme will make your website more popular and increase your search engine ranking position.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="container">
+		<h4 class="text-uppercase black-color mb-5 text-center">faq's</h4>
+		<div class="faq-main">
+			<div class="faq-items">
+				<div class="faq-label">Ut inventore dolorem hic tenetur accusamus<i></i></div>
+				<div class="faq-cont">
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat. Ut culpa doloremque vel corporis consequatur non voluptas sapiente. Ab quae laudantium in voluptate commodi et nisi delectus et ipsum atque.</p>
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat.</p>
+				</div>
+			</div>
+			<div class="faq-items">
+				<div class="faq-label">Ut inventore dolorem hic tenetur accusamus<i></i></div>
+				<div class="faq-cont">
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat. Ut culpa doloremque vel corporis consequatur non voluptas sapiente. Ab quae laudantium in voluptate commodi et nisi delectus et ipsum atque.</p>
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat.</p>
+				</div>
+			</div>
+			<div class="faq-items">
+				<div class="faq-label">The most used version of Lorem Ipsum<i></i></div>
+				<div class="faq-cont">
+					<p>Quo natus nisi ea nostrum reiciendis non dolorum rerum est recusandae reiciendis. Qui sunt consectetur eos quisquam voluptate aut esse vitae aut veniam optio ut ducimus tenetur. Hic consequuntur modi eum enim beatae ut officia molestiae. Hic nostrum iusto 33 vero libero sit reiciendis culpa.</p>
+					<p>The Lorem ipum filling text is used by graphic designers, programmers and printers with the aim of occupying the spaces of a website, an advertising product or an editorial production whose final text is not yet ready.
+					This expedient serves to get an idea of the finished product that will soon be printed or disseminated via digital channels.</p>
+					<p>
+					In order to have a result that is more in keeping with the final result, the graphic designers, designers or typographers report the Lorem ipsum text in respect of two fundamental aspects, namely readability and editorial requirements.</p>
+					<p>The choice of font and font size with which Lorem ipsum is reproduced answers to specific needs that go beyond the simple and simple filling of spaces dedicated to accepting real texts and allowing to have hands an advertising/publishing product, both web and paper, true to reality.</p>
+				</div>
+			</div>
+			<div class="faq-items">
+				<div class="faq-label">Why do you use<i></i></div>
+				<div class="faq-cont">
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat. Ut culpa doloremque vel corporis consequatur non voluptas sapiente. Ab quae laudantium in voluptate commodi et nisi delectus et ipsum atque.</p>
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat.</p>
+				</div>
+			</div>
+			<div class="faq-items">
+				<div class="faq-label">Ut inventore dolorem hic tenetur accusamus<i></i></div>
+				<div class="faq-cont">
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat. Ut culpa doloremque vel corporis consequatur non voluptas sapiente. Ab quae laudantium in voluptate commodi et nisi delectus et ipsum atque.</p>
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat.</p>
+				</div>
+			</div>
+			<div class="faq-items">
+				<div class="faq-label">Ut aliquid adipisci et placeat labore et tenetur voluptate<i></i></div>
+				<div class="faq-cont">
+					<p>Quo natus nisi ea nostrum reiciendis non dolorum rerum est recusandae reiciendis. Qui sunt consectetur eos quisquam voluptate aut esse vitae aut veniam optio ut ducimus tenetur. Hic consequuntur modi eum enim beatae ut officia molestiae. Hic nostrum iusto 33 vero libero sit reiciendis culpa.</p>
+					<p>Lorem ipsum dolor sit amet. Sit dignissimos officia et beatae quia qui veritatis consequatur et eaque eius non sequi accusamus sed quasi voluptatem est dolor laborum. Sit quos explicabo qui aliquid natus ut laborum placeat.</p>
+				</div>
+			</div>
+		</div>
+	</div> -->
+</section>
+<!--=================== faq end ===================-->
+
+
+</section>
+
+{% endblock %}
+

@@ -205,7 +205,7 @@ def base():
 # about
 @app.route('/about')
 def about():
-    return render_template('about-us.html')
+    return render_template('about-orangecat.html')
 
 @app.route('/products')
 def view_products():
