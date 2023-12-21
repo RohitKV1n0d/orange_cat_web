@@ -232,14 +232,14 @@
 					</div>
 					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }">
 						<figure class="gallery__thumb">
-							<img :src="imgUrl" alt="Portrait by Dima DallAcqua" class="gallery__image">
+							<img :src="imgUrl" alt="" class="gallery__image">
 							<figcaption class="gallery__caption">
 								<!-- replace image btn with icon -->
 								<button v-if="isEdit" class="btn-edit"  data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="imageToChange = imgUrl; colToEdit = col; replaceImage(col, imgUrl)">
 									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
 								<!-- del -->
-								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl))"
-								><i  style="color: aliceblue;" class="fa fa-trash"></i></button>
+								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl))">
+																				<i  style="color: aliceblue;" class="fa fa-trash"></i></button>
 							</figcaption>
 						</figure>
 					</div>
