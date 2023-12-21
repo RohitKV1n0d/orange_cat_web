@@ -4,3 +4,5 @@ __pycache__/*.pyc
 *.pyc
 app.cpython-310.pyc
 
+static/img/.DS_Store
+.DS_Store
