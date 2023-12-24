@@ -33,7 +33,7 @@ def upload_file_to_s3(file, bucket, object_name=None, public=True):
         s3.upload_file(file, bucket, s3_path + object_name)
         url = f'https://{BUCKET_NAME}.s3.amazonaws.com/{s3_path}{object_name}'
     except Exception as e:
-        print(e)
+        print("Error in upload_file_to_s3: ", e)
         return False
     
     return url

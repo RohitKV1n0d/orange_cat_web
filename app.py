@@ -51,7 +51,7 @@ def init_db():
         db.session.add(admin_user)
         db.session.commit()
 
-if ENV == 'dev' :
+if ENV == 'prod' :
     HOST_URL = os.environ.get('HOST_URL', 'http://localhost:5000/')
     app.debug = True
     ACCESS_KEY_ID = os.environ.get('ACCESS_KEY_ID', '')
@@ -78,8 +78,8 @@ else:
     app.debug = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    ACCESS_KEY_ID = os.environ.get('ACCESS_KEY_ID', '')
-    SECRET_ACCESS_KEY = os.environ.get('SECRET_ACCESS_KEY', '')
+    ACCESS_KEY_ID = os.environ.get('CLOUDCUBE_ACCESS_KEY_ID', '')
+    SECRET_ACCESS_KEY = os.environ.get('CLOUDCUBE_SECRET_ACCESS_KEY', '')
 
     if SQLALCHEMY_DATABASE_URI.startswith("postgres://"): 
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
@@ -514,11 +514,16 @@ def upload_gallery_image_url():
 def get_image_url(image_file):
     img_filename = secure_filename(image_file.filename)
     basedir = os.path.abspath(os.path.dirname(__file__))
+    print("basedir", basedir)
     image_file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename))
+    print(f"image saved at: {os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename)}")
     bucket = os.environ.get('BUCKET_NAME')
+    print("preparing to upload to s3")
     url = upload_file_to_s3(file=os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename), bucket=bucket, public=True)
+    print("uploaded to s3")
     # upload_image = im.upload_image(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename), title=img_filename)
     os.remove(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename))
+    print("image removed from local")
     return url
 
 
