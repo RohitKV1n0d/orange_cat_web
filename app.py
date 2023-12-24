@@ -1,15 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.utils import secure_filename
 from functools import wraps
 import os
 import json
 import requests
 import datetime
+import boto3
+
+
+from AWS_Modules import upload_file_to_s3, delete_file_from_s3
 
 app = Flask(__name__)
 CORS(app)
+
+UPLOAD_FOLDER = 'static/img/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 ENV = os.environ.get('ENV', 'prod')
 LIVE_DB = os.environ.get('LIVE_DB', 'True')
@@ -45,6 +54,8 @@ def init_db():
 if ENV == 'dev' :
     HOST_URL = os.environ.get('HOST_URL', 'http://localhost:5000/')
     app.debug = True
+    ACCESS_KEY_ID = os.environ.get('ACCESS_KEY_ID', '')
+    SECRET_ACCESS_KEY = os.environ.get('SECRET_ACCESS_KEY', '')
     if LIVE_DB == 'True':
         SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
         SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -57,8 +68,8 @@ if ENV == 'dev' :
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
         app.config['SECRET_KEY'] = 'asdasdasdasdasdasdasdaveqvq34c'
-        CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
-        app.config['CELERY_RESULT_BACKEND'] = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+        # CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+        # app.config['CELERY_RESULT_BACKEND'] = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
 
 
 
@@ -67,6 +78,8 @@ else:
     app.debug = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    ACCESS_KEY_ID = os.environ.get('ACCESS_KEY_ID', '')
+    SECRET_ACCESS_KEY = os.environ.get('SECRET_ACCESS_KEY', '')
 
     if SQLALCHEMY_DATABASE_URI.startswith("postgres://"): 
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
@@ -79,6 +92,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
 
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class Users(UserMixin,db.Model):
     table_name = 'users'
@@ -111,8 +125,6 @@ class Users(UserMixin,db.Model):
 
 
 
-
-
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -138,6 +150,24 @@ class Products(db.Model):
         }
 
 
+class ImageGallery(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=True)
+    image_dict = db.Column(db.Text, nullable=True)  
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def __repr__(self):
+        return '<ImageGallery %r>' % self.id
+
+    def serialize(self):
+        image_data = json.loads(self.image_dict)
+        return {
+            "id": self.id,
+            "name": self.name,
+            "image_json_data":  image_data
+        }
+    
+    
 
 
 
@@ -234,6 +264,185 @@ def fetch_gallery_photos():
     photos = os.listdir('static/images/gallery')
     photos = list(map(lambda photo: 'static/images/gallery/' + photo, photos))
     return jsonify(photos), 200
+
+@app.route('/fetch/gallery/images/urls', methods=['GET'])
+def fetch_gallery_photos_urls():
+    try:
+        SAMPLE_GALLERY_IMAGES_DICT = {
+					1 : [
+						 url_for('static', filename='img/image-gallery/DSC_9039.jpeg'),
+						url_for('static', filename='img/image-gallery/DSC_9047.jpeg'),
+						url_for('static', filename='img/image-gallery/DSC_9051.jpeg'),
+					],
+					2 : [
+						url_for('static', filename='img/image-gallery/DSC_9069.jpeg'),
+						url_for('static', filename='img/image-gallery/DSC_9072.jpeg'),
+						url_for('static', filename='img/image-gallery/DSC_9075.jpeg'),
+					],
+					3 : [
+						url_for('static', filename='img/image-gallery/DSC_9077.jpeg'),
+						url_for('static', filename='img/image-gallery/DSC_9039.jpeg'),
+						url_for('static', filename='img/image-gallery/DSC_9078.jpeg'),
+					],
+					4 : [
+						url_for('static', filename='img/image-gallery/DSC_9080.jpeg'),
+						url_for('static', filename='img/image-gallery/DSC_9137.jpeg'),
+						"https://i.imgur.com/iip2T3h.jpg",
+					],
+				}
+        EMPTY_GALLERY_IMAGES_DICT = {
+                    1 : [],
+                    2 : [],
+                    3 : [],
+                    4 : [],
+                }
+        
+
+
+        gallery_images = ImageGallery.query.first()
+        # gallery_images.image_dict = json.dumps(SAMPLE_GALLERY_IMAGES_DICT)
+        # db.session.commit()
+        if gallery_images:
+            gallery_images = gallery_images.serialize()
+        else:
+            gallery_images = EMPTY_GALLERY_IMAGES_DICT
+        context = {
+            'gallery_image_urls': gallery_images['image_json_data']
+        }
+        return jsonify(context), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+@app.route('/upload/gallery/image/url', methods=['POST'])
+def upload_gallery_image_url():
+    try:
+        if request.method == 'POST':
+            file = request.files['file']
+            colToEdit = request.form['colToEdit']
+            if file:
+                upload_image_url = get_image_url(file)
+                response = save_new_image_url_to_db(upload_image_url, colToEdit)
+                context = {
+                    'image_url': upload_image_url
+                }
+                return jsonify(context), 200
+            else:
+                return jsonify({'message': 'No file selected'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
+def get_image_url(image_file):
+    img_filename = secure_filename(image_file.filename)
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    image_file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename))
+    bucket = os.environ.get('BUCKET_NAME')
+    url = upload_file_to_s3(file=os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename), bucket=bucket, public=True)
+    # upload_image = im.upload_image(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename), title=img_filename)
+    os.remove(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename))
+    return url
+
+
+def save_new_image_url_to_db(image_url, col):
+    '''
+    image_url: str
+    col: str
+
+    return: bool
+    '''
+    try:
+        image_gallery = ImageGallery.query.first()
+        if image_gallery:
+            image_dict = json.loads(image_gallery.image_dict)
+            image_dict[col].append(image_url)
+            image_gallery.image_dict = json.dumps(image_dict)
+            db.session.commit()
+            return True
+        else:
+            print("image gallery not found")
+            return False
+    except Exception as e:
+        print(e)
+        return False
+
+
+
+def replace_save_image_url_to_db(image_url, image_to_replace_url):
+    '''
+    image_url: str
+    image_to_replace_url: str
+
+    return: bool
+    '''
+    try:
+        image_gallery = ImageGallery.query.first()
+        if image_gallery:
+            # find and replace the image url in the image_dict make sure replace in same index of the image url
+            image_dict = json.loads(image_gallery.image_dict)
+            for key, value in image_dict.items():
+                if  image_to_replace_url in value:
+                    image_dict[key] = image_url
+                    print("image url replaced")
+                    break
+            image_gallery.image_dict = json.dumps(image_dict)
+            db.session.commit()
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+
+@app.route('/replace/gallery/image/url', methods=['POST'])
+def replace_gallery_image_url():
+    try:
+        if request.method == 'POST':
+            file = request.files['file']
+            image_to_replace_url = request.form['image_to_replace_url']
+            if file:
+                upload_image_url = get_image_url(file)
+                response = replace_save_image_url_to_db(upload_image_url, image_to_replace_url)
+                context = {
+                    'image_url': upload_image_url
+                }
+                return jsonify(context), 200
+            else:
+                return jsonify({'message': 'No file selected'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+
+def delete_image_url_from_db(image_url):
+    '''
+    image_url: str
+
+    return: bool
+    '''
+    try:
+        image_gallery = ImageGallery.query.first()
+        if image_gallery:
+            # find and replace the image url in the image_dict make sure replace in same index of the image url
+            image_dict = json.loads(image_gallery.image_dict)
+            for key, value in image_dict.items():
+                if  image_url in value:
+                    image_dict[key].remove(image_url)
+                    print("image url removed")
+                    break
+            image_gallery.image_dict = json.dumps(image_dict)
+            db.session.commit()
+            return True
+        else:
+            print("image gallery not found")
+            return False
+    except Exception as e:
+        print(e)
+        return False
+
+
+            
 
 # video gallery
 @app.route('/gallery/video')
