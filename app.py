@@ -51,11 +51,11 @@ def init_db():
         db.session.add(admin_user)
         db.session.commit()
 
-if ENV == 'prod' :
+if ENV == 'dev' :
     HOST_URL = os.environ.get('HOST_URL', 'http://localhost:5000/')
     app.debug = True
-    ACCESS_KEY_ID = os.environ.get('ACCESS_KEY_ID', '')
-    SECRET_ACCESS_KEY = os.environ.get('SECRET_ACCESS_KEY', '')
+    ACCESS_KEY_ID = os.environ.get('CLOUDCUBE_ACCESS_KEY_ID', '')
+    SECRET_ACCESS_KEY = os.environ.get('CLOUDCUBE_SECRET_ACCESS_KEY', '')
     if LIVE_DB == 'True':
         SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
         SECRET_KEY = os.environ.get('SECRET_KEY')
