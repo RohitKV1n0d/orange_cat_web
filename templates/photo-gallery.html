@@ -125,7 +125,38 @@
 		90% { transform: translateX(-.2px) rotate(-.2deg); }
 		100% { transform: translateX(0); }
 	}
+.header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #f8f9fa;
+}
 
+.header-left {
+	font-size: 24px;
+	color: #333;
+}
+
+.header-right {
+	display: flex;
+	gap: 10px;
+}
+
+.btn-main-edit {
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #fff;
+	background-color: #007bff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.btn-main-edit:hover {
+	background-color: #0056b3 !important;
+}
 	
 
 </style>
@@ -195,7 +226,8 @@
 			
 
 			<span class="d-inline-block" tabindex="0" data-bs-toggle="addImgBtnTooltip" title="Crop Image to Add" id="addImageTooltip">
-				<button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.galleryImageUrls[app.colToEdit].push($('#ic-result-wrap .theresult img').attr('src')); $('#imageCropperModal').modal('hide');">
+				<!-- <button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.galleryImageUrls[app.colToEdit].push($('#ic-result-wrap .theresult img').attr('src')); $('#imageCropperModal').modal('hide');"> -->
+					<button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.addNewImage()">
 					Add Image</button>
 			</span>
 			
@@ -211,11 +243,19 @@
 <div id="vue-app">
 	<section class="s-gallery">
 		<div class="container">
-			<h1> [[ message ]] </h1>
-			<!-- edit button -->
-			<div v-if="isAdmin">
-				<button v-if="!isEdit" class="btn btn-primary" @click="isEdit = true">Edit</button>
-				<button v-if="isEdit" class="btn btn-primary" @click="isEdit = false">Done</button>
+			<div class="header-container">
+				<h1 class="header-left">[[ message ]]</h1>
+				<!-- edit button -->
+				<div v-if="isAdmin" class="header-right">
+					<button v-if="!isEdit" class="btn-main-edit" @click="isEdit = true">Edit</button>
+					<button v-if="isEdit" class="btn-main-edit" @click="isEdit = false">Done</button>
+					<select class="form-select" aria-label="Default select example">
+						<option selected>Open this select menu</option>
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+					  </select>
+				</div>
 			</div>
 			
 
@@ -225,7 +265,7 @@
 				<div class="gallery__column" v-for="col in galleryCols">
 					<!-- button to add image and delete col with icon only when edit mode-->
 					<div v-if="isEdit">
-						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="colToEdit = col; addNewImage()">
+						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="colToEdit = col; addNewImageMode()">
 							<i style="color: aliceblue;" class="fa fa-plus"></i>
 						</button>
 						<button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button>
@@ -235,7 +275,7 @@
 							<img :src="imgUrl" alt="" class="gallery__image">
 							<figcaption class="gallery__caption">
 								<!-- replace image btn with icon -->
-								<button v-if="isEdit" class="btn-edit"  data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="imageToChange = imgUrl; colToEdit = col; replaceImage(col, imgUrl)">
+								<button v-if="isEdit" class="btn-edit"  data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
 									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
 								<!-- del -->
 								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl))">
@@ -290,19 +330,36 @@
 		el: '#vue-app',
 		delimiters: ['[[', ']]'],
 		data: {
-			message: 'Hello Vue!',
+			message: 'Test Vue!',
 			galleryCols : 4,
-			galleryImageUrls:  SAMPLE_GALLERY_IMAGES_DICT,
+			galleryImageUrls:  {},
 			isEdit : false,
 			isAdmin : true,
 			colToEdit : 0,
 			imageToChange : '',
+			galleryNames : [],
 			},
 		methods: {
+			fetechGalleryNames(){
+				axios.get('')
+				.then(function (response) {
+					console.log(response);
+					app.galleryNames = response.data.gallery_names
+				})
+			},
+			getGalleryImageUrls(){
+				axios.get('{{url_for("fetch_gallery_photos_urls")}}')
+				.then(function (response) {
+					console.log(response);
+					app.galleryImageUrls = response.data.gallery_image_urls
+					
+					
+				})
+			},
 			deleteImage(col, index){
 				this.galleryImageUrls[col].splice(index, 1)
 			},
-			replaceImage(col, imgUrl){
+			replaceImageMode(col, imgUrl){
 				
 				$('#imageCropperModalLabel').text('Change Image')
 				$('#addImageBtn').text('Change Image')
@@ -317,15 +374,53 @@
 				$('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit][app.galleryImageUrls[app.colToEdit].indexOf(app.imageToChange)] = $("#ic-result-wrap .theresult img").attr("src"); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
 
 			},
-			addNewImage(){
+			addNewImageMode(){
 				$('#imageCropperModalLabel').text('Add Image')
 				$('#addImageBtn').text('Add Image')
 				$('#addImageTooltip').attr('title', 'Crop Image to Add')
 
 				// change btn  onclick function
-				$('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit].push($("#ic-result-wrap .theresult img").attr("src")); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
-			}
+				// $('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit].push($("#ic-result-wrap .theresult img").attr("src")); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
+				$('#addImageBtn').attr('onclick', 'app.addNewImage()')
+			},
+			addNewImage(){
+				let newImg = $("#ic-result-wrap .theresult img").attr("src")
+				// use axios to send the image to the server and get response with the image url
+				// add the image url to the galleryImageUrls
+				file = this.dataURLtoFile(newImg, 'image.png')
+				const formData = new FormData();
+				formData.append('file', file, file.name);
+				formData.append('colToEdit', this.colToEdit)
+
+				axios.post('{{url_for("upload_gallery_image_url")}}', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+					// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
+					$("#imageCropperModal").modal("hide")
+					app.getGalleryImageUrls()
+				})
+			},
+			dataURLtoFile(dataurl, filename) {
+				var arr = dataurl.split(','),
+					mime = arr[0].match(/:(.*?);/)[1],
+					bstr = atob(arr[1]),
+					n = bstr.length,
+					u8arr = new Uint8Array(n);
+				while (n--) {
+					u8arr[n] = bstr.charCodeAt(n);
+				}
+				return new File([u8arr], filename, { type: mime });
+			},
 			
+
+			
+		},
+		mounted() {
+			this.getGalleryImageUrls()
 		}
 
 		
