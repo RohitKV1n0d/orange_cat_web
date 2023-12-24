@@ -498,11 +498,20 @@ def upload_gallery_image_url():
             gallery_name = request.form['galleryName']
             if file:
                 upload_image_url = get_image_url(file)
-                response = save_new_image_url_to_db(upload_image_url, colToEdit, gallery_name)
-                context = {
-                    'image_url': upload_image_url
-                }
-                return jsonify(context), 200
+                if upload_image_url:
+                    response = save_new_image_url_to_db(upload_image_url, colToEdit, gallery_name)
+                    if response:
+                        context = {
+                            'image_url': upload_image_url
+                        }
+
+                        return jsonify(context), 200
+                    else:
+                        print("upload_gallery_image_url : Error while saving image url")
+                        return jsonify({'message': 'Error while saving image url'}), 500
+                else:
+                    print("upload_gallery_image_url : No URL returned from s3")
+                    return jsonify({'message': 'Error while uploading image'}), 500
             else:
                 return jsonify({'message': 'No file selected'}), 400
         else:
