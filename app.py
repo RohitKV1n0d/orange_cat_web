@@ -512,18 +512,13 @@ def upload_gallery_image_url():
         return jsonify({'message': str(e)}), 500
     
 def get_image_url(image_file):
+    # type: (FileStorage) -> str
     img_filename = secure_filename(image_file.filename)
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    print("basedir", basedir)
-    image_file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename))
-    print(f"image saved at: {os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename)}")
+
     bucket = os.environ.get('BUCKET_NAME')
     print("preparing to upload to s3")
-    url = upload_file_to_s3(file=os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename), bucket=bucket, public=True)
+    url = upload_file_to_s3(file=image_file, bucket=bucket, public=True)
     print("uploaded to s3")
-    # upload_image = im.upload_image(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename), title=img_filename)
-    os.remove(os.path.join(basedir, app.config['UPLOAD_FOLDER'], img_filename))
-    print("image removed from local")
     return url
 
 
