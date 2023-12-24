@@ -508,6 +508,7 @@ def upload_gallery_image_url():
         else:
             return jsonify({'message': 'Method not allowed'}), 405
     except Exception as e:
+        print("Error While Uploading Image :"+str(e))
         return jsonify({'message': str(e)}), 500
     
 def get_image_url(image_file):
@@ -540,7 +541,7 @@ def save_new_image_url_to_db(image_url, col, gallery_name):
             print("image gallery not found")
             return False
     except Exception as e:
-        print(e)
+        print("Error While Saving Image URL :"+str(e))
         return False
 
 
