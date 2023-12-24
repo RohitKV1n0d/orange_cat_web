@@ -4,351 +4,509 @@
 {% block content %}
 <!-- Your code here -->
 <!--==================== S-GALLERY ====================-->
-<section class="s-gallery">
-	<div class="container">
-		<div class="row-gallery">
-			<div class="grid-gallery">
-				<div class="grid-sizer"></div>
-				<div id="gallery-container">
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-1.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-1.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #1</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
+
+<link rel="stylesheet" href="/static/css/imageCrop.css">
+
+<style>
+	.gallery {
+		display: flex;
+		padding: 2px;
+		transition: 0.3s;
+	}
+
+	.gallery:hover .gallery__image {
+		filter: grayscale(1);
+	}
+
+	.gallery__column {
+		display: flex;
+		flex-direction: column;
+		width: 25%;
+	}
+
+	.gallery__link {
+		margin: 2px;
+		overflow: hidden;
+	}
+
+	.gallery__link:hover .gallery__image {
+		filter: grayscale(0);
+	}
+
+	.gallery__link:hover .gallery__caption {
+		opacity: 1;
+	}
+
+	.gallery__thumb {
+		position: relative;
+	}
+
+	.gallery__image {
+		display: block;
+		width: 100%;
+		transition: 0.3s;
+	}
+
+	.gallery__image:hover {
+		transform: scale(1.1);
+	}
+
+	.gallery__caption {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		padding: 25px 15px 15px;
+		width: 100%;
+		font-family: "Raleway", sans-serif;
+		font-size: 16px;
+		color: white;
+		opacity: 0;
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+		transition: 0.3s;
+	}
+	.btn-edit{
+		background-color: #d6bf3e; /* Green */
+		border: none;
+		color: white;
+		padding: 5px 18px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 9px;
+	}
+	.btn-edit:hover{
+		background-color: #d6bf3ea8;
+	}
+	.btn-delete{
+		background-color: #d63e3e; /* Green */
+		border: none;
+		color: white;
+		padding: 5px 18px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 5px;
+	
+	}
+	.btn-delete:hover{
+		background-color: #d63e3ea8;
+	}
+	.btn-add{
+		background-color: #3e9dd6; /* Green */
+		border: none;
+		color: white;
+		padding: 5px 18px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 5px;
+	}
+	.btn-add:hover{
+		background-color: #3e9dd6a8;
+	}
+	
+	.edit-mode {
+		animation: shake 1.3s ease-in-out infinite;
+	}
+
+	@keyframes shake {
+		0% { transform: translateX(0); }
+		10% { transform: translateX(-.2px) rotate(-.2deg); }
+		20% { transform: translateX(.2px) rotate(.2deg); }
+		30% { transform: translateX(-.2px) rotate(-.2deg); }
+		40% { transform: translateX(.2px) rotate(.2deg); }
+		50% { transform: translateX(-.2px) rotate(-.2deg); }
+		60% { transform: translateX(.2px) rotate(.2deg); }
+		70% { transform: translateX(-.2px) rotate(-.2deg); }
+		80% { transform: translateX(.2px) rotate(.2deg); }
+		90% { transform: translateX(-.2px) rotate(-.2deg); }
+		100% { transform: translateX(0); }
+	}
+.header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #f8f9fa;
+}
+
+.header-left {
+	font-size: 24px;
+	color: #333;
+}
+
+.header-right {
+	display: flex;
+	gap: 10px;
+}
+
+.btn-main-edit {
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #fff;
+	background-color: #007bff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.btn-main-edit:hover {
+	background-color: #0056b3 !important;
+}
+
+.btn-secondary-cancel {
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #dc3545;
+	background-color: #ffffff00;
+	border-color: #dc3545 !important;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.btn-secondary-cancel:hover {
+	background-color: #dc3545 !important;
+	color: #000;
+}
+
+
+
+</style>
+
+
+<!-- Image Upload Modal -->
+<div class="modal fade" id="imageCropperModal" tabindex="-1" aria-labelledby="imageCropperModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		<h5 class="modal-title" id="imageCropperModalLabel">Image Cropper</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		<div class="w3-modal-content">
+			<div class="w3-container w3-white">
+				<p>Press the button below to upload and crop an image.</p>
+				<div id="ic-main" class="ibox">
+					<div class="ic-btns clearfix">
+						<div id="ic-upload-btn" class="l but lrg file-button w3-button w3-blue">
+							<span id="ic-upload-btn-label" style="font-family: inherit;font-size: inherit;">Upload
+								Image</span>
+							<input class="file-input" type="file" />
+						</div>
 					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-2.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-2.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #2</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
+					<div id="ic-cropper-wrap"></div>
+					<div class="ic-hidden ic-crop-btn-wrap"><br />
+						<div id="ic-rotate-btn" class="l but lrg w3-button w3-grey">
+							<svg x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50"
+								enable-background="new 0 0 50 50" xml:space="preserve">
+								<path
+									d="M41.038,24.1l-7.152,9.342L26.734,24.1H31.4c-0.452-4.397-4.179-7.842-8.696-7.842c-4.82,0-8.742,3.922-8.742,8.742 s3.922,8.742,8.742,8.742c1.381,0,2.5,1.119,2.5,2.5s-1.119,2.5-2.5,2.5c-7.576,0-13.742-6.165-13.742-13.742 s6.166-13.742,13.742-13.742c7.274,0,13.23,5.686,13.697,12.842H41.038z" />
+							</svg>
+							Rotate
+						</div>
+						<div id="ic-flip-btn" class="l but lrg w3-button w3-grey">Flip</div> <a id="ic-crop-btn"
+							class="l but lrg w3-button w3-grey">Crop</a>
 					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-3.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-3.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #3</h3>
-								<p>Satisfied Customers</p>
+					<div id="ic-result-wrap" class="ic-hidden ic-result-wrap" style="margin-top: 20px;">
+						<div class="result-container"
+							style="position: relative;width: fit-content;block-size: fit-content;padding: 0px;z-index: 1;">
+							<div class="theresult"
+								style="position: relative;width: fit-content;block-size: block;padding: 0px;margin: 0px;">
 							</div>
-						</a>
+						</div>
 					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-4.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-4.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #4</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-5.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-5.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #5</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-6.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-6.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #6</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-7.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-7.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #7</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-8.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-8.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #8</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-9.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-9.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #9</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-1.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-1.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #1</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-2.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-2.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #2</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-3.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-3.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #3</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-4.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-4.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #4</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-5.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-5.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #5</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-6.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-6.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #6</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-7.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-7.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #7</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-8.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-8.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #8</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-9.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-9.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #9</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-1.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-1.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #1</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-2.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-2.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #2</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-3.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-3.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #3</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-4.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-4.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #4</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-5.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-5.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #5</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-6.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-6.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #6</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-7.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-7.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #7</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-8.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-8.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #8</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-9.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-9.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #9</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-1.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-1.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #1</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-2.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-2.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #2</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-3.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-3.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #3</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-4.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-4.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #4</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-5.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-5.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #5</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item our-gallery-item-big">
-						<a href="{{ url_for('static', filename='img/gal-6.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-6.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #6</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-7.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-7.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #7</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-8.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-8.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #8</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
-					<div class="our-gallery-item">
-						<a href="{{ url_for('static', filename='img/gal-9.jpg') }}" data-fancybox="gallery1">
-							<img src="{{ url_for('static', filename='img/gal-9.jpg') }}" alt="img">
-							<div class="gal-item">
-								<h3 class="title">photo #9</h3>
-								<p>Satisfied Customers</p>
-							</div>
-						</a>
-					</div>
+					
+					<!-- <div id="ic-download-wrap" class="ic-hidden ic-download-wrap">
+						<div class="select">
+							<select class="w3-select" id="ic-download-type" style="width: 100px; display:inline-block;">
+								<option value="image/jpeg">jpeg</option>
+								<option value="image/png">png</option>
+							</select> <a id="ic-download-btn" class="l but lrg w3-button w3-grey">Download</a>
+						</div>
+						<hr />
+						Size: <span id="ic-info"></span>
+					</div> -->
 				</div>
-				<!-- <div id="pagination-container">
-					<ul id="pagination"></ul>
-				  </div> -->
+				<br /><br />
 			</div>
 		</div>
+		</div>
+		<div class="modal-footer">
+			
+			  
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span>Close</span></button>
+			
+
+			<span class="d-inline-block" tabindex="0" data-bs-toggle="addImgBtnTooltip" title="Crop Image to Add" id="addImageTooltip">
+				<!-- <button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.galleryImageUrls[app.colToEdit].push($('#ic-result-wrap .theresult img').attr('src')); $('#imageCropperModal').modal('hide');"> -->
+					<button type="button" class="btn btn-primary" style="background-color: #0056b3;" id="addImageBtn" disabled onclick="app.addNewImage()">
+					<span>Add Image</span></button>
+			</span>
+			
+		</div>
+
 	</div>
-	<!-- <div class="pagination">
-		<a href="#" class="prev">Previous</a>
-		<span class="page-numbers"></span>
-		<a href="#" class="next">Next</a>
-	  </div> -->
-</section>
+	</div>
+</div>
+
+
+
+
+<div id="vue-app">
+	<section class="s-gallery">
+		<div class="container">
+			<div class="header-container">
+				<h1 class="header-left">[[ message ]]</h1>
+				<!-- edit button -->
+				<div v-if="isAdmin" class="header-right">
+						
+						<!-- default switch -->
+						<div class="form-check form-switch" v-if="!isNewNameMode & !isNewNameMode">
+							<label class="form-check-label" for="flexSwitchCheckDefault">Default</label>
+							<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" style="margin-left: 2px;" v-model="galleryDefaultStatus" @change="setGalleryDefaultStatus()">
+						</div>
+
+
+						<!-- New Gallery Name Input -->
+						<select class="form-select" aria-label="Default select example" v-model="selectedGalleryName" @change="getGalleryImageUrls()" v-if="!isNewNameMode">
+							<option selected disabled>Select Gallery</option>
+							<option v-for="name in galleryNames" :value="name" :key="name">[[ name ]]</option>
+						</select>
+						<div class="input-group"  v-if="isNewNameMode">
+							<input type="text" class="form-control" placeholder="Gallery Name" aria-label="Gallery Name with two button addons" aria-describedby="button-addon3" v-model="newGalleryNameInput">
+							<button class="btn-secondary-cancel" type="button" @click="isNewNameMode = false">Cancel</button>
+							<button class="btn-main-edit" type="button" @click="saveNewGalleryName()">Save</button>
+						</div>
+						<button class="btn-add" v-if="!isNewNameMode" @click="isNewNameMode = true">New</button>
+
+
+						<!-- edit button -->
+						<button v-if="!isEdit & !isNewNameMode" class="btn1 btn-main-edit" @click="isEdit = true">Edit</button>
+						<button v-if="isEdit & !isNewNameMode" class="btn-main-edit" @click="isEdit = false">Done</button>
+
+				</div>
+			</div>
+			
+
+
+			<div class="gallery">
+				
+				<div class="gallery__column" v-for="col in galleryCols">
+					<!-- button to add image and delete col with icon only when edit mode-->
+					<div v-if="isEdit">
+						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="colToEdit = col; addNewImageMode()">
+							<i style="color: aliceblue;" class="fa fa-plus"></i>
+						</button>
+						<!-- <button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button> -->
+					</div>
+					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }">
+						<figure class="gallery__thumb">
+							<img :src="imgUrl" alt="" class="gallery__image">
+							<figcaption class="gallery__caption">
+								<!-- replace image btn with icon -->
+								<button v-if="isEdit" class="btn-edit"  data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
+									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
+								<!-- del -->
+								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl))">
+																				<i  style="color: aliceblue;" class="fa fa-trash"></i></button>
+							</figcaption>
+						</figure>
+					</div>
+			
+			</div>
+
+
+		</div>
+		<!-- <div class="pagination">
+			<a href="#" class="prev">Previous</a>
+			<span class="page-numbers"></span>
+			<a href="#" class="next">Next</a>
+		</div> -->
+	</section>
+</div>
+<script src="/static/js/imageCorp.js"></script>
+
+<script>
+	$(function () {
+		$('[data-bs-toggle="addImgBtnTooltip"]').tooltip()
+	})
+	
+	SAMPLE_GALLERY_IMAGES_DICT = {
+					1 : [
+						"{{ url_for('static', filename='img/image-gallery/DSC_9039.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9047.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9051.jpeg') }}",
+					],
+					2 : [
+						"{{ url_for('static', filename='img/image-gallery/DSC_9069.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9072.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9075.jpeg') }}",
+					],
+					3 : [
+						"{{ url_for('static', filename='img/image-gallery/DSC_9077.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9039.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9078.jpeg') }}",
+					],
+					4 : [
+						"{{ url_for('static', filename='img/image-gallery/DSC_9080.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9137.jpeg') }}",
+						"{{ url_for('static', filename='img/image-gallery/DSC_9148.jpeg') }}",
+					],
+				}
+
+
+	var app = new Vue({
+		el: '#vue-app',
+		delimiters: ['[[', ']]'],
+		data: {
+			message: 'Test Vue!',
+			galleryCols : 4,
+			galleryImageUrls:  {},
+			isEdit : false,
+			isNewNameMode : false,
+			isAdmin : true,
+			colToEdit : 0,
+			imageToChange : '',
+			galleryNames : [],
+			selectedGalleryName : '',
+			newGalleryNameInput : '',
+			galleryDefaultStatus : false,
+			},
+		methods: {
+			fetechGalleryNames(){
+				axios.get('{{url_for("fetch_gallery_names")}}')
+				.then(function (response) {
+					console.log(response);
+					app.galleryNames = response.data.gallery_names
+				})
+			},
+			saveNewGalleryName(){
+				url = '{{url_for("add_gallery_name")}}'
+				payload = {
+					'new_gallery_name' : this.newGalleryNameInput
+				}
+				axios.post(url, payload)
+				.then(function (response) {
+					console.log(response);
+					app.fetechGalleryNames()
+					app.selectedGalleryName = app.newGalleryNameInput
+					app.newGalleryNameInput = ''
+					app.isNewNameMode = false
+					app.getGalleryImageUrls()
+				})
+			},
+			setGalleryDefaultStatus(){
+				url = '{{url_for("update_gallery_status_api")}}'
+				payload = {
+					'gallery_name' : this.selectedGalleryName,
+					'is_default' : this.galleryDefaultStatus
+				}
+				axios.post(url, payload)
+				.then(function (response) {
+					console.log(response);
+					app.fetechGalleryNames()
+				})
+
+			},
+			getGalleryImageUrls(){
+				payload = {
+					'gallery_name' : this.selectedGalleryName
+				}
+				url = '{{url_for("fetch_gallery_photos_urls")}}'
+				axios.post(url, payload)
+				.then(function (response) {
+					console.log(response);
+					app.galleryImageUrls = response.data.gallery_image_urls
+					app.galleryDefaultStatus = response.data.gallery_status
+					app.selectedGalleryName = response.data.gallery_name
+				})
+			},
+			deleteImage(col, index){
+				this.galleryImageUrls[col].splice(index, 1)
+			},
+			replaceImageMode(col, imgUrl){
+				
+				$('#imageCropperModalLabel').text('Change Image')
+				$('#addImageBtn').text('Change Image')
+				$('#addImageTooltip').attr('title', 'Crop Image to Change')
+
+				// set the image to change
+				this.imageToChange = imgUrl
+				// set the col to edit
+				this.colToEdit = col	
+				
+				// change btn  onclick function
+				$('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit][app.galleryImageUrls[app.colToEdit].indexOf(app.imageToChange)] = $("#ic-result-wrap .theresult img").attr("src"); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
+
+			},
+			addNewImageMode(){
+				$('#imageCropperModalLabel').html('<span>Add Image</span>')
+				$('#addImageBtn').html('<span>Add Image</span>')
+				$('#addImageTooltip').attr('title', 'Crop Image to Add')
+
+				// change btn  onclick function
+				// $('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit].push($("#ic-result-wrap .theresult img").attr("src")); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
+				$('#addImageBtn').attr('onclick', 'app.addNewImage()')
+			},
+			addNewImage(){
+				let newImg = $("#ic-result-wrap .theresult img").attr("src")
+				// use axios to send the image to the server and get response with the image url
+				// add the image url to the galleryImageUrls
+				file = this.dataURLtoFile(newImg, 'image.png')
+				const formData = new FormData();
+				formData.append('file', file, file.name);
+				formData.append('colToEdit', this.colToEdit)
+				formData.append('galleryName', this.selectedGalleryName)
+
+
+
+				axios.post('{{url_for("upload_gallery_image_url")}}', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+					// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
+					$("#imageCropperModal").modal("hide")
+					app.getGalleryImageUrls()
+				})
+			},
+			dataURLtoFile(dataurl, filename) {
+				var arr = dataurl.split(','),
+					mime = arr[0].match(/:(.*?);/)[1],
+					bstr = atob(arr[1]),
+					n = bstr.length,
+					u8arr = new Uint8Array(n);
+				while (n--) {
+					u8arr[n] = bstr.charCodeAt(n);
+				}
+				return new File([u8arr], filename, { type: mime });
+			},
+			
+
+			
+		},
+		mounted() {
+			this.fetechGalleryNames()
+			this.getGalleryImageUrls()
+		}
+
+		
+	})
+
+</script>
+
+
+
+
 <!--================== S-GALLERY END ==================-->
 
- 
+
 {% endblock %}
-	

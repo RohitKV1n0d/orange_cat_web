@@ -4,3 +4,10 @@ __pycache__/*.pyc
 *.pyc
 app.cpython-310.pyc
 
+static/img/.DS_Store
+.DS_Store
+migrations
+static/img/image-gallery/*
+__pycache__/app.cpython-310.pyc
+templates/magnify.html
+templates/test.html
