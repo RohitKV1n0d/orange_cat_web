@@ -303,7 +303,7 @@
 						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="colToEdit = col; addNewImageMode()">
 							<i style="color: aliceblue;" class="fa fa-plus"></i>
 						</button>
-						<button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button>
+						<!-- <button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button> -->
 					</div>
 					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }">
 						<figure class="gallery__thumb">
