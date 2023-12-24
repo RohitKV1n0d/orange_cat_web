@@ -568,7 +568,8 @@ def replace_save_image_url_to_db(image_url, image_to_replace_url, gallery_name):
             image_dict = json.loads(image_gallery.image_dict)
             for key, value in image_dict.items():
                 if  image_to_replace_url in value:
-                    image_dict[key] = image_url
+                    index = value.index(image_to_replace_url)
+                    image_dict[key][index] = image_url
                     print("image url replaced")
                     break
             image_gallery.image_dict = json.dumps(image_dict)
@@ -584,16 +585,23 @@ def replace_save_image_url_to_db(image_url, image_to_replace_url, gallery_name):
 def replace_gallery_image_url():
     try:
         if request.method == 'POST':
-            file = request.files['file']
-            image_to_replace_url = request.form['image_to_replace_url']
-            gallery_name = request.form['gallery_name']
+            file = request.files['newFile']
+            image_to_replace_url = request.form['imgUrl']
+            gallery_name = request.form['galleryName']
             if file:
                 upload_image_url = get_image_url(file)
-                response = replace_save_image_url_to_db(upload_image_url, image_to_replace_url, gallery_name)
-                context = {
-                    'image_url': upload_image_url
-                }
-                return jsonify(context), 200
+                if upload_image_url:
+                    response = replace_save_image_url_to_db(upload_image_url, image_to_replace_url, gallery_name)
+                    if response:
+                        s3_response = delete_image_url_from_s3(image_to_replace_url)
+                        if s3_response:
+                            print("image deleted successfully")
+                            return jsonify({'message': 'Image replaced successfully'}), 200
+                        else:
+                            return jsonify({'message': 'Error while deleting image'}), 500
+                    else:
+                        print("replace_gallery_image_url : Error while saving image url")
+                        return jsonify({'message': 'Error while saving image url'}), 500
             else:
                 return jsonify({'message': 'No file selected'}), 400
         else:
@@ -611,7 +619,6 @@ def delete_image_url_from_db(image_url, col, gallery_name):
     try:
         image_gallery = ImageGallery.query.filter_by(name=gallery_name).first()
         if image_gallery:
-            # find and replace the image url in the image_dict make sure replace in same index of the image url
             image_dict = json.loads(image_gallery.image_dict)
             for key, value in image_dict.items():
                 if  image_url in value:
