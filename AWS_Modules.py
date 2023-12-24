@@ -2,8 +2,8 @@ import boto3
 import os
 import uuid
 
-AWS_ACCESS_KEY_ID=os.environ.get('ACCESS_KEY_ID') #os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRECT_ACCESS_KEY=os.environ.get('SECRET_ACCESS_KEY') # os.environ.get('AWS_SECRECT_ACCESS_KEY')
+AWS_ACCESS_KEY_ID=os.environ.get('CLOUDCUBE_ACCESS_KEY_ID') #os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRECT_ACCESS_KEY=os.environ.get('CLOUDCUBE_SECRET_ACCESS_KEY') # os.environ.get('AWS_SECRECT_ACCESS_KEY')
 BUCKET_NAME=os.environ.get('BUCKET_NAME')
 S3_ENDPOINT=os.environ.get('BUCKET_URL')
 REGION_NAME=os.environ.get('REGION_NAME')
