@@ -222,13 +222,13 @@
 		<div class="modal-footer">
 			
 			  
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span>Close</span></button>
 			
 
 			<span class="d-inline-block" tabindex="0" data-bs-toggle="addImgBtnTooltip" title="Crop Image to Add" id="addImageTooltip">
 				<!-- <button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.galleryImageUrls[app.colToEdit].push($('#ic-result-wrap .theresult img').attr('src')); $('#imageCropperModal').modal('hide');"> -->
-					<button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.addNewImage()">
-					Add Image</button>
+					<button type="button" class="btn btn-primary" style="background-color: #0056b3;" id="addImageBtn" disabled onclick="app.addNewImage()">
+					<span>Add Image</span></button>
 			</span>
 			
 		</div>
@@ -375,8 +375,8 @@
 
 			},
 			addNewImageMode(){
-				$('#imageCropperModalLabel').text('Add Image')
-				$('#addImageBtn').text('Add Image')
+				$('#imageCropperModalLabel').html('<span>Add Image</span>')
+				$('#addImageBtn').html('<span>Add Image</span>')
 				$('#addImageTooltip').attr('title', 'Crop Image to Add')
 
 				// change btn  onclick function
