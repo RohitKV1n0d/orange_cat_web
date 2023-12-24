@@ -87,7 +87,7 @@
 		text-decoration: none;
 		display: inline-block;
 		font-size: 16px;
-		border-radius: 9px;
+		border-radius: 5px;
 	
 	}
 	.btn-delete:hover{
@@ -102,7 +102,7 @@
 		text-decoration: none;
 		display: inline-block;
 		font-size: 16px;
-		border-radius: 9px;
+		border-radius: 5px;
 	}
 	.btn-add:hover{
 		background-color: #3e9dd6a8;
@@ -157,7 +157,25 @@
 .btn-main-edit:hover {
 	background-color: #0056b3 !important;
 }
-	
+
+.btn-secondary-cancel {
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #dc3545;
+	background-color: #ffffff00;
+	border-color: #dc3545 !important;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.btn-secondary-cancel:hover {
+	background-color: #dc3545 !important;
+	color: #000;
+}
+
+
 
 </style>
 
@@ -247,14 +265,31 @@
 				<h1 class="header-left">[[ message ]]</h1>
 				<!-- edit button -->
 				<div v-if="isAdmin" class="header-right">
-					<button v-if="!isEdit" class="btn-main-edit" @click="isEdit = true">Edit</button>
-					<button v-if="isEdit" class="btn-main-edit" @click="isEdit = false">Done</button>
-					<select class="form-select" aria-label="Default select example">
-						<option selected>Open this select menu</option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
-					  </select>
+						
+						<!-- default switch -->
+						<div class="form-check form-switch" v-if="!isNewNameMode & !isNewNameMode">
+							<label class="form-check-label" for="flexSwitchCheckDefault">Default</label>
+							<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" style="margin-left: 2px;" v-model="galleryDefaultStatus" @change="setGalleryDefaultStatus()">
+						</div>
+
+
+						<!-- New Gallery Name Input -->
+						<select class="form-select" aria-label="Default select example" v-model="selectedGalleryName" @change="getGalleryImageUrls()" v-if="!isNewNameMode">
+							<option selected disabled>Select Gallery</option>
+							<option v-for="name in galleryNames" :value="name" :key="name">[[ name ]]</option>
+						</select>
+						<div class="input-group"  v-if="isNewNameMode">
+							<input type="text" class="form-control" placeholder="Gallery Name" aria-label="Gallery Name with two button addons" aria-describedby="button-addon3" v-model="newGalleryNameInput">
+							<button class="btn-secondary-cancel" type="button" @click="isNewNameMode = false">Cancel</button>
+							<button class="btn-main-edit" type="button" @click="saveNewGalleryName()">Save</button>
+						</div>
+						<button class="btn-add" v-if="!isNewNameMode" @click="isNewNameMode = true">New</button>
+
+
+						<!-- edit button -->
+						<button v-if="!isEdit & !isNewNameMode" class="btn1 btn-main-edit" @click="isEdit = true">Edit</button>
+						<button v-if="isEdit & !isNewNameMode" class="btn-main-edit" @click="isEdit = false">Done</button>
+
 				</div>
 			</div>
 			
@@ -334,26 +369,62 @@
 			galleryCols : 4,
 			galleryImageUrls:  {},
 			isEdit : false,
+			isNewNameMode : false,
 			isAdmin : true,
 			colToEdit : 0,
 			imageToChange : '',
 			galleryNames : [],
+			selectedGalleryName : '',
+			newGalleryNameInput : '',
+			galleryDefaultStatus : false,
 			},
 		methods: {
 			fetechGalleryNames(){
-				axios.get('')
+				axios.get('{{url_for("fetch_gallery_names")}}')
 				.then(function (response) {
 					console.log(response);
 					app.galleryNames = response.data.gallery_names
 				})
 			},
+			saveNewGalleryName(){
+				url = '{{url_for("add_gallery_name")}}'
+				payload = {
+					'new_gallery_name' : this.newGalleryNameInput
+				}
+				axios.post(url, payload)
+				.then(function (response) {
+					console.log(response);
+					app.fetechGalleryNames()
+					app.selectedGalleryName = app.newGalleryNameInput
+					app.newGalleryNameInput = ''
+					app.isNewNameMode = false
+					app.getGalleryImageUrls()
+				})
+			},
+			setGalleryDefaultStatus(){
+				url = '{{url_for("update_gallery_status_api")}}'
+				payload = {
+					'gallery_name' : this.selectedGalleryName,
+					'is_default' : this.galleryDefaultStatus
+				}
+				axios.post(url, payload)
+				.then(function (response) {
+					console.log(response);
+					app.fetechGalleryNames()
+				})
+
+			},
 			getGalleryImageUrls(){
-				axios.get('{{url_for("fetch_gallery_photos_urls")}}')
+				payload = {
+					'gallery_name' : this.selectedGalleryName
+				}
+				url = '{{url_for("fetch_gallery_photos_urls")}}'
+				axios.post(url, payload)
 				.then(function (response) {
 					console.log(response);
 					app.galleryImageUrls = response.data.gallery_image_urls
-					
-					
+					app.galleryDefaultStatus = response.data.gallery_status
+					app.selectedGalleryName = response.data.gallery_name
 				})
 			},
 			deleteImage(col, index){
@@ -391,6 +462,9 @@
 				const formData = new FormData();
 				formData.append('file', file, file.name);
 				formData.append('colToEdit', this.colToEdit)
+				formData.append('galleryName', this.selectedGalleryName)
+
+
 
 				axios.post('{{url_for("upload_gallery_image_url")}}', formData, {
 					headers: {
@@ -420,6 +494,7 @@
 			
 		},
 		mounted() {
+			this.fetechGalleryNames()
 			this.getGalleryImageUrls()
 		}
 

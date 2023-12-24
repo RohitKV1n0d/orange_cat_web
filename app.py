@@ -154,6 +154,7 @@ class ImageGallery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=True)
     image_dict = db.Column(db.Text, nullable=True)  
+    default = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
@@ -164,7 +165,8 @@ class ImageGallery(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "image_json_data":  image_data
+            "image_json_data":  image_data,
+            "default": self.default,
         }
     
     
@@ -265,53 +267,227 @@ def fetch_gallery_photos():
     photos = list(map(lambda photo: 'static/images/gallery/' + photo, photos))
     return jsonify(photos), 200
 
-@app.route('/fetch/gallery/images/urls', methods=['GET'])
-def fetch_gallery_photos_urls():
+def fetch_gallery_status(gallery_name):
+    '''
+    gallery_name: str
+
+    return: bool
+    '''
     try:
-        SAMPLE_GALLERY_IMAGES_DICT = {
-					1 : [
-						 url_for('static', filename='img/image-gallery/DSC_9039.jpeg'),
-						url_for('static', filename='img/image-gallery/DSC_9047.jpeg'),
-						url_for('static', filename='img/image-gallery/DSC_9051.jpeg'),
-					],
-					2 : [
-						url_for('static', filename='img/image-gallery/DSC_9069.jpeg'),
-						url_for('static', filename='img/image-gallery/DSC_9072.jpeg'),
-						url_for('static', filename='img/image-gallery/DSC_9075.jpeg'),
-					],
-					3 : [
-						url_for('static', filename='img/image-gallery/DSC_9077.jpeg'),
-						url_for('static', filename='img/image-gallery/DSC_9039.jpeg'),
-						url_for('static', filename='img/image-gallery/DSC_9078.jpeg'),
-					],
-					4 : [
-						url_for('static', filename='img/image-gallery/DSC_9080.jpeg'),
-						url_for('static', filename='img/image-gallery/DSC_9137.jpeg'),
-						"https://i.imgur.com/iip2T3h.jpg",
-					],
-				}
-        EMPTY_GALLERY_IMAGES_DICT = {
-                    1 : [],
-                    2 : [],
-                    3 : [],
-                    4 : [],
-                }
-        
-
-
-        gallery_images = ImageGallery.query.first()
-        # gallery_images.image_dict = json.dumps(SAMPLE_GALLERY_IMAGES_DICT)
-        # db.session.commit()
+        gallery_images = ImageGallery.query.filter_by(name=gallery_name).first()
         if gallery_images:
-            gallery_images = gallery_images.serialize()
+            gallery_status = gallery_images.default
+            return gallery_status
         else:
-            gallery_images = EMPTY_GALLERY_IMAGES_DICT
-        context = {
-            'gallery_image_urls': gallery_images['image_json_data']
-        }
-        return jsonify(context), 200
+            return False
+    except Exception as e:
+        print(e)
+        return False
+    
+def reset_all_gallery_status():
+    '''
+    gallery_name: str
+
+    return: bool
+    '''
+    try:
+        gallery_images = ImageGallery.query.all()
+        for gallery in gallery_images:
+            gallery.default = False
+        db.session.commit()
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
+def update_gallery_status(gallery_name, status):
+    '''
+    gallery_name: str
+    status: bool
+
+    return: bool
+    '''
+    try:
+        reset_all_gallery_status()
+        gallery_images = ImageGallery.query.filter_by(name=gallery_name).first()
+        if gallery_images:
+            gallery_images.default = status
+            db.session.commit()
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+    
+@app.route('/fetch/gallery/status', methods=['POST'])
+def fetch_gallery_status_api():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            gallery_name = request_data.get('gallery_name', None)
+            if gallery_name:
+                response = fetch_gallery_status(gallery_name)
+                if response:
+                    return jsonify({'message': 'Gallery status fetched successfully', 'status': response}), 200
+                else:
+                    return jsonify({'message': 'Gallery not found'}), 400
+            else:
+                return jsonify({'message': 'Gallery name not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
     except Exception as e:
         return jsonify({'message': str(e)}), 500
+    
+@app.route('/update/gallery/status', methods=['POST'])
+def update_gallery_status_api():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            gallery_name = request_data.get('gallery_name', None)
+            status = request_data.get('is_default', None)
+            if gallery_name and status is not None:
+                response = update_gallery_status(gallery_name, status)
+                if response:
+                    return jsonify({'message': 'Gallery status updated successfully'}), 200
+                else:
+                    return jsonify({'message': 'Gallery not found'}), 400
+            else:
+                return jsonify({'message': 'Gallery name or status not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+
+def fetch_all_gallery_names_list():
+    # type: () -> list
+    try:
+        gallery_images = ImageGallery.query.all()
+        gallery_names = list(map(lambda gallery: gallery.name, gallery_images))
+        return gallery_names
+    except Exception as e:
+        print(e)
+        return []
+
+def save_new_gallery_name_to_db(gallery_name):
+    '''
+    gallery_name: str
+
+    return: bool
+    '''
+    try:
+        EMPTY_GALLERY_IMAGES_DICT = {
+                        1 : [],
+                        2 : [],
+                        3 : [],
+                        4 : [],
+                    }
+        gallery_images = ImageGallery.query.filter_by(name=gallery_name).first()
+        if not gallery_images:
+            gallery_images = ImageGallery(name=gallery_name, image_dict=json.dumps(EMPTY_GALLERY_IMAGES_DICT))
+            db.session.add(gallery_images)
+            db.session.commit()
+            return True
+        else:
+            print("gallery name already exists")
+            return False
+    except Exception as e:
+        print(e)
+        return False
+    
+@app.route('/fetch/gallery/names', methods=['GET'])
+def fetch_gallery_names():
+    try:
+        if request.method == 'GET':
+            gallery_names = fetch_all_gallery_names_list()
+            context = {
+                'gallery_names': gallery_names
+            }
+            return jsonify(context), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
+@app.route('/add/gallery/name', methods=['POST'])
+def add_gallery_name():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            gallery_name = request_data.get('new_gallery_name', None)
+            if gallery_name:
+                response = save_new_gallery_name_to_db(gallery_name)
+                if response:
+                    return jsonify({'message': 'Gallery name added successfully'}), 200
+                else:
+                    return jsonify({'message': 'Gallery name already exists'}), 400
+            else:
+                return jsonify({'message': 'Gallery name not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+@app.route('/fetch/gallery/images/urls', methods=['POST'])
+def fetch_gallery_photos_urls():
+    if request.method == 'POST':
+        try:
+            SAMPLE_GALLERY_IMAGES_DICT = {
+                        1 : [
+                            url_for('static', filename='img/image-gallery/DSC_9039.jpeg'),
+                            url_for('static', filename='img/image-gallery/DSC_9047.jpeg'),
+                            url_for('static', filename='img/image-gallery/DSC_9051.jpeg'),
+                        ],
+                        2 : [
+                            url_for('static', filename='img/image-gallery/DSC_9069.jpeg'),
+                            url_for('static', filename='img/image-gallery/DSC_9072.jpeg'),
+                            url_for('static', filename='img/image-gallery/DSC_9075.jpeg'),
+                        ],
+                        3 : [
+                            url_for('static', filename='img/image-gallery/DSC_9077.jpeg'),
+                            url_for('static', filename='img/image-gallery/DSC_9039.jpeg'),
+                            url_for('static', filename='img/image-gallery/DSC_9078.jpeg'),
+                        ],
+                        4 : [
+                            url_for('static', filename='img/image-gallery/DSC_9080.jpeg'),
+                            url_for('static', filename='img/image-gallery/DSC_9137.jpeg'),
+                            "https://i.imgur.com/iip2T3h.jpg",
+                        ],
+                    }
+            EMPTY_GALLERY_IMAGES_DICT = {
+                        1 : [],
+                        2 : [],
+                        3 : [],
+                        4 : [],
+                    }
+            request_data = request.get_json()
+            gallery_name = request_data.get('gallery_name', None)
+            if gallery_name:
+                gallery_images = ImageGallery.query.filter_by(name=gallery_name).first()
+            else:
+                gallery_images = ImageGallery.query.filter_by(default=True).first()
+                gallery_name = gallery_images.name
+
+            # gallery_images.image_dict = json.dumps(SAMPLE_GALLERY_IMAGES_DICT)
+            # db.session.commit()
+            if gallery_images:
+                gallery_images = gallery_images.serialize()
+                image_json_data = gallery_images['image_json_data']
+                gallery_status  = gallery_images['default']
+            else:
+                image_json_data = EMPTY_GALLERY_IMAGES_DICT
+                gallery_status = False
+                
+            context = {
+                'gallery_image_urls': image_json_data,
+                'gallery_status': gallery_status,
+                'gallery_name': gallery_name
+            }
+            return jsonify(context), 200
+        except Exception as e:
+            return jsonify({'message': str(e)}), 500
 
 @app.route('/upload/gallery/image/url', methods=['POST'])
 def upload_gallery_image_url():
@@ -319,9 +495,10 @@ def upload_gallery_image_url():
         if request.method == 'POST':
             file = request.files['file']
             colToEdit = request.form['colToEdit']
+            gallery_name = request.form['galleryName']
             if file:
                 upload_image_url = get_image_url(file)
-                response = save_new_image_url_to_db(upload_image_url, colToEdit)
+                response = save_new_image_url_to_db(upload_image_url, colToEdit, gallery_name)
                 context = {
                     'image_url': upload_image_url
                 }
@@ -344,7 +521,7 @@ def get_image_url(image_file):
     return url
 
 
-def save_new_image_url_to_db(image_url, col):
+def save_new_image_url_to_db(image_url, col, gallery_name):
     '''
     image_url: str
     col: str
@@ -352,7 +529,7 @@ def save_new_image_url_to_db(image_url, col):
     return: bool
     '''
     try:
-        image_gallery = ImageGallery.query.first()
+        image_gallery = ImageGallery.query.filter_by(name=gallery_name).first()
         if image_gallery:
             image_dict = json.loads(image_gallery.image_dict)
             image_dict[col].append(image_url)
@@ -368,7 +545,7 @@ def save_new_image_url_to_db(image_url, col):
 
 
 
-def replace_save_image_url_to_db(image_url, image_to_replace_url):
+def replace_save_image_url_to_db(image_url, image_to_replace_url, gallery_name):
     '''
     image_url: str
     image_to_replace_url: str
@@ -376,7 +553,7 @@ def replace_save_image_url_to_db(image_url, image_to_replace_url):
     return: bool
     '''
     try:
-        image_gallery = ImageGallery.query.first()
+        image_gallery = ImageGallery.query.filter_by(name=gallery_name).first()
         if image_gallery:
             # find and replace the image url in the image_dict make sure replace in same index of the image url
             image_dict = json.loads(image_gallery.image_dict)
@@ -400,9 +577,10 @@ def replace_gallery_image_url():
         if request.method == 'POST':
             file = request.files['file']
             image_to_replace_url = request.form['image_to_replace_url']
+            gallery_name = request.form['gallery_name']
             if file:
                 upload_image_url = get_image_url(file)
-                response = replace_save_image_url_to_db(upload_image_url, image_to_replace_url)
+                response = replace_save_image_url_to_db(upload_image_url, image_to_replace_url, gallery_name)
                 context = {
                     'image_url': upload_image_url
                 }
