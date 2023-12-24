@@ -265,6 +265,12 @@
 				<h1 class="header-left">[[ message ]]</h1>
 				<!-- edit button -->
 				<div v-if="isAdmin" class="header-right">
+
+						<!-- loading icon -->
+						<div v-if="loading" class="spinner-border text-primary" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+
 						
 						<!-- default switch -->
 						<div class="form-check form-switch" v-if="!isNewNameMode & !isNewNameMode">
@@ -377,16 +383,20 @@
 			selectedGalleryName : '',
 			newGalleryNameInput : '',
 			galleryDefaultStatus : false,
+			loading : false,
 			},
 		methods: {
 			fetechGalleryNames(){
+				this.loading = true
 				axios.get('{{url_for("fetch_gallery_names")}}')
 				.then(function (response) {
 					console.log(response);
 					app.galleryNames = response.data.gallery_names
+					app.loading = false
 				})
 			},
 			saveNewGalleryName(){
+				this.loading = true
 				url = '{{url_for("add_gallery_name")}}'
 				payload = {
 					'new_gallery_name' : this.newGalleryNameInput
@@ -399,9 +409,11 @@
 					app.newGalleryNameInput = ''
 					app.isNewNameMode = false
 					app.getGalleryImageUrls()
+					app.loading = false
 				})
 			},
 			setGalleryDefaultStatus(){
+				this.loading = true
 				url = '{{url_for("update_gallery_status_api")}}'
 				payload = {
 					'gallery_name' : this.selectedGalleryName,
@@ -411,10 +423,12 @@
 				.then(function (response) {
 					console.log(response);
 					app.fetechGalleryNames()
+					app.loading = false
 				})
 
 			},
 			getGalleryImageUrls(){
+				this.loading = true
 				payload = {
 					'gallery_name' : this.selectedGalleryName
 				}
@@ -425,9 +439,11 @@
 					app.galleryImageUrls = response.data.gallery_image_urls
 					app.galleryDefaultStatus = response.data.gallery_status
 					app.selectedGalleryName = response.data.gallery_name
+					app.loading = false
 				})
 			},
 			deleteImage(col, index, imgUrl){
+				this.loading = true
 				// this.galleryImageUrls[col].splice(index, 1)
 				url = '{{url_for("delete_gallery_image_url")}}'
 				payload = {
@@ -440,6 +456,7 @@
 				.then(function (response) {
 					console.log(response);
 					app.getGalleryImageUrls()
+					this.loading = true
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -471,6 +488,7 @@
 				formData.append('colToEdit', this.colToEdit)
 				formData.append('galleryName', this.selectedGalleryName)
 				formData.append('imgUrl', this.imageToChange)
+				this.loadingBtn('addImageBtn')
 
 				url = '{{url_for("replace_gallery_image_url")}}'
 
@@ -484,6 +502,8 @@
 					// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
 					$("#imageCropperModal").modal("hide")
 					app.getGalleryImageUrls()
+					app.loading = false
+					app.stopLoadingBtn('addImageBtn', 'Change Image')
 				})
 			},
 
@@ -505,6 +525,8 @@
 				formData.append('file', file, file.name);
 				formData.append('colToEdit', this.colToEdit)
 				formData.append('galleryName', this.selectedGalleryName)
+				// loading btn 
+				this.loadingBtn('addImageBtn')
 
 
 
@@ -518,6 +540,8 @@
 					// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
 					$("#imageCropperModal").modal("hide")
 					app.getGalleryImageUrls()
+					app.loading = false
+					app.stopLoadingBtn('addImageBtn', 'Add Image')
 				})
 			},
 			dataURLtoFile(dataurl, filename) {
@@ -531,6 +555,29 @@
 				}
 				return new File([u8arr], filename, { type: mime });
 			},
+			loadingBtn(btnId){
+				$('#'+btnId).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...')
+				$('#'+btnId).attr('disabled', true)
+				// disable upload image, crop, canecl, rotate, flip btns
+				$('#ic-upload-btn').attr('disabled', true)
+				$('#ic-crop-btn').attr('disabled', true)
+				$('#ic-rotate-btn').attr('disabled', true)
+				$('#ic-flip-btn').attr('disabled', true)
+				$('#ic-download-btn').attr('disabled', true)
+
+				this.loading = true
+			},
+			stopLoadingBtn(btnId, btnText){
+				$('#'+btnId).html(btnText)
+				$('#'+btnId).attr('disabled', false)
+				$('#ic-upload-btn').attr('disabled', false)
+				$('#ic-crop-btn').attr('disabled', false)
+				$('#ic-rotate-btn').attr('disabled', false)
+				$('#ic-flip-btn').attr('disabled', false)
+				$('#ic-download-btn').attr('disabled', false)
+
+				this.loading = false
+			}
 			
 
 			
