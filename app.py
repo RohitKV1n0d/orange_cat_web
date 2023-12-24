@@ -527,7 +527,6 @@ def get_image_url(image_file):
     bucket = os.environ.get('BUCKET_NAME')
     print("preparing to upload to s3")
     url = upload_file_to_s3(file=image_file, bucket=bucket, public=True)
-    print("uploaded to s3")
     return url
 
 
