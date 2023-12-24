@@ -313,7 +313,7 @@
 								<button v-if="isEdit" class="btn-edit"  data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
 									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
 								<!-- del -->
-								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl))">
+								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl), imgUrl)">
 																				<i  style="color: aliceblue;" class="fa fa-trash"></i></button>
 							</figcaption>
 						</figure>
@@ -427,8 +427,22 @@
 					app.selectedGalleryName = response.data.gallery_name
 				})
 			},
-			deleteImage(col, index){
-				this.galleryImageUrls[col].splice(index, 1)
+			deleteImage(col, index, imgUrl){
+				url = '{{url_for("delete_gallery_image_url")}}'
+				payload = {
+					'gallery_name' : this.selectedGalleryName,
+					'col' : col,
+					'index' : index,
+					'img_url' : imgUrl
+				}
+				axios.post(url, payload)
+				.then(function (response) {
+					console.log(response);
+					app.getGalleryImageUrls()
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 			},
 			replaceImageMode(col, imgUrl){
 				

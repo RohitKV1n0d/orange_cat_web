@@ -602,14 +602,14 @@ def replace_gallery_image_url():
         return jsonify({'message': str(e)}), 500
 
 
-def delete_image_url_from_db(image_url):
+def delete_image_url_from_db(image_url, col, gallery_name):
     '''
     image_url: str
 
     return: bool
     '''
     try:
-        image_gallery = ImageGallery.query.first()
+        image_gallery = ImageGallery.query.filter_by(name=gallery_name).first()
         if image_gallery:
             # find and replace the image url in the image_dict make sure replace in same index of the image url
             image_dict = json.loads(image_gallery.image_dict)
@@ -627,6 +627,49 @@ def delete_image_url_from_db(image_url):
     except Exception as e:
         print(e)
         return False
+    
+def delete_image_url_from_s3(image_url):
+    '''
+    image_url: str
+
+    return: bool
+    '''
+    try:
+        image_url = image_url.split('/')[-1]
+        bucket = os.environ.get('BUCKET_NAME')
+        response = delete_file_from_s3(image_url, bucket, public=True)
+        return response
+    except Exception as e:
+        print(e)
+        return False
+    
+@app.route('/delete/gallery/image/url', methods=['POST'])
+def delete_gallery_image_url():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            col = request_data.get('col', None)
+            imageUrl = request_data.get('img_url', None)
+            gallery_name = request_data.get('gallery_name', None)
+            index = request_data.get('index', None)
+            db_response = delete_image_url_from_db(imageUrl, col, gallery_name)
+            if db_response:
+                s3_response = delete_image_url_from_s3(imageUrl)
+                if s3_response:
+                    print("image deleted successfully")
+                    return jsonify({'message': 'Image deleted successfully'}), 200
+                else:
+                    return jsonify({'message': 'Error while deleting image'}), 500
+            else:
+                return jsonify({'message': 'Error while deleting image'}), 500
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        print("Error While Deleting Image URL :"+str(e))
+        return jsonify({'message': str(e)}), 500
+    
+
+
 
 
             
