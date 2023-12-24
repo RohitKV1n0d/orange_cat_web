@@ -428,6 +428,7 @@
 				})
 			},
 			deleteImage(col, index, imgUrl){
+				// this.galleryImageUrls[col].splice(index, 1)
 				url = '{{url_for("delete_gallery_image_url")}}'
 				payload = {
 					'gallery_name' : this.selectedGalleryName,
@@ -456,9 +457,36 @@
 				this.colToEdit = col	
 				
 				// change btn  onclick function
-				$('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit][app.galleryImageUrls[app.colToEdit].indexOf(app.imageToChange)] = $("#ic-result-wrap .theresult img").attr("src"); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
-
+				// $('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit][app.galleryImageUrls[app.colToEdit].indexOf(app.imageToChange)] = $("#ic-result-wrap .theresult img").attr("src"); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
+				$('#addImageBtn').attr('onclick', 'app.replaceImage(app.colToEdit, app.imageToChange)')
 			},
+
+			replaceImage(col, imgUrl){
+				let newImg = $("#ic-result-wrap .theresult img").attr("src")
+				// use axios to send the image to the server and get response with the image url
+				// add the image url to the galleryImageUrls
+				file = this.dataURLtoFile(newImg, 'image.png')
+				const formData = new FormData();
+				formData.append('newFile', file, file.name);
+				formData.append('colToEdit', this.colToEdit)
+				formData.append('galleryName', this.selectedGalleryName)
+				formData.append('imgUrl', this.imageToChange)
+
+				url = '{{url_for("replace_gallery_image_url")}}'
+
+				axios.post(url, formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+					// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
+					$("#imageCropperModal").modal("hide")
+					app.getGalleryImageUrls()
+				})
+			},
+
 			addNewImageMode(){
 				$('#imageCropperModalLabel').html('<span>Add Image</span>')
 				$('#addImageBtn').html('<span>Add Image</span>')
