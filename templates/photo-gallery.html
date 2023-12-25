@@ -176,7 +176,6 @@
 }
 
 
-
 </style>
 
 
@@ -255,10 +254,53 @@
 	</div>
 </div>
 
+<style>
+	.imgmodal {
+		display: none; 
+		position: fixed; 
+		z-index: 1; 
+		padding-top: 100px; 
+		left: 0;
+		top: 0;
+		width: 100%; 
+		height: 100%; 
+		overflow: auto; 
+		background-color: rgb(0,0,0); 
+		background-color: rgba(0,0,0,0.9); 
+		}
 
+		.imgmodal-content {
+			margin: auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 80%;
+			max-width: 700px;
+		}
+
+		.close {
+		position: absolute;
+		top: 15px;
+		right: 35px;
+		color: #f1f1f1;
+		font-size: 40px;
+		font-weight: bold;
+		transition: 0.3s;
+		}
+
+		.close:hover,
+		.close:focus {
+		color: #bbb;
+		text-decoration: none;
+		cursor: pointer;
+		}
+
+</style>
 
 
 <div id="vue-app">
+	
+	
 	<section class="s-gallery">
 		<div class="container">
 
@@ -301,6 +343,8 @@
 
 				</div>
 			</div>
+
+			
 			
 
 
@@ -315,9 +359,9 @@
 						</button>
 						<!-- <button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button> -->
 					</div>
-					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }">
+					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }" @click="openModal(imgUrl)">
 						<figure class="gallery__thumb">
-							<img :src="imgUrl" alt="" class="gallery__image">
+							<img :src="imgUrl" alt="" class="gallery__image" >
 							<figcaption class="gallery__caption">
 								<!-- replace image btn with icon -->
 								<button v-if="isEdit" class="btn-edit" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
@@ -341,6 +385,11 @@
 			<a href="#" class="next">Next</a>
 		</div> -->
 	</section>
+	<div id="imageModal" class="imgmodal" style="z-index: 10;"  @click.stop="closeModal()">
+		<span class="close" @click="closeModal()">&times;</span>
+		<img class="imgmodal-content" :src="modalImage" @click.stop>
+		<div id="caption"></div>
+	</div>
 </div>
 <script src="/static/js/imageCorp.js"></script>
 
@@ -390,8 +439,22 @@
 			newGalleryNameInput : '',
 			galleryDefaultStatus : false,
 			loading : false,
+ 			modalImage: '',
 			},
 		methods: {
+			openModal(imageUrl) {
+				this.modalImage = imageUrl;
+				$('#imageModal').show();
+			},
+			closeModal() {
+				this.modalImage = '';
+				$('#imageModal').hide();
+			},
+			closeOnEscape(e) {
+				if (e.key === 'Escape' && this.modalImage) {
+					this.closeModal();
+				}
+			},
 			fetechGalleryNames(){
 				this.loading = true
 				axios.get('{{url_for("fetch_gallery_names")}}')
@@ -591,7 +654,12 @@
 		mounted() {
 			this.fetechGalleryNames()
 			this.getGalleryImageUrls()
-		}
+			document.addEventListener('keyup', this.closeOnEscape);
+		},
+		beforeDestroy() {
+			document.removeEventListener('keyup', this.closeOnEscape);
+		},
+
 
 		
 	})
