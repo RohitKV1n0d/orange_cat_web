@@ -261,6 +261,9 @@
 <div id="vue-app">
 	<section class="s-gallery">
 		<div class="container">
+
+
+
 			<div class="header-container">
 				<h1 class="header-left">[[ message ]]</h1>
 				<!-- edit button -->
@@ -306,7 +309,8 @@
 				<div class="gallery__column" v-for="col in galleryCols">
 					<!-- button to add image and delete col with icon only when edit mode-->
 					<div v-if="isEdit">
-						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="colToEdit = col; addNewImageMode()">
+						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
+							@click="colToEdit = col; addNewImageMode()">
 							<i style="color: aliceblue;" class="fa fa-plus"></i>
 						</button>
 						<!-- <button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button> -->
@@ -316,16 +320,18 @@
 							<img :src="imgUrl" alt="" class="gallery__image">
 							<figcaption class="gallery__caption">
 								<!-- replace image btn with icon -->
-								<button v-if="isEdit" class="btn-edit"  data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
+								<button v-if="isEdit" class="btn-edit" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
+									@click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
 									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
 								<!-- del -->
-								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl), imgUrl)">
-																				<i  style="color: aliceblue;" class="fa fa-trash"></i></button>
+								<button v-if="isEdit" class="btn-delete"
+									@click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl), imgUrl)">
+									<i style="color: aliceblue;" class="fa fa-trash"></i></button>
 							</figcaption>
 						</figure>
 					</div>
-			
-			</div>
+				
+				</div>
 
 
 		</div>
