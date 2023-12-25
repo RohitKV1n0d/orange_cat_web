@@ -106,6 +106,3 @@ Vue.component('vue-magnifier', {
     }
 });
 
-var app = new Vue({
-  el: '#app'
-});
