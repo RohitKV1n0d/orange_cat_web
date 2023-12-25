@@ -1,0 +1,58 @@
+.vue-magnifier-container {
+    position: relative;
+  }
+  .vue-magnifier-container .preview {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
+    display: block;
+    clear: both;
+    margin: 0 auto;
+    cursor: none;
+  }
+  .vue-magnifier-container .preview .magnifying-glass {
+    position: absolute;
+    border: 5px solid #666666;
+    border-radius: 50%;
+    cursor: none;
+    width: 180px;
+    height: 180px;
+    transform: translate(-75px, -75px);
+    background: #fff no-repeat;
+    display: none;
+    pointer-events: none;
+  }
+  .vue-magnifier-container .preview:hover .magnifying-glass {
+    display: block;
+  }
+  @media only screen and (max-width: 320px) {
+    .vue-magnifier-container .preview {
+      width: 250px;
+      height: 250px;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .vue-magnifier-container .preview {
+      width: 350px;
+      height: 350px;
+    }
+  }
+  @media only screen and (min-width: 481px) {
+    .vue-magnifier-container .preview {
+      width: 450px;
+      height: 450px;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    .vue-magnifier-container .preview {
+      width: 550px;
+      height: 550px;
+    }
+  }
+  @media only screen and (min-width: 1280px) {
+    .vue-magnifier-container .preview {
+      width: 600px;
+      height: 600px;
+    }
+  }
