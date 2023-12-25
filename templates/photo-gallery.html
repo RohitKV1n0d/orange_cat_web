@@ -64,8 +64,10 @@
 		background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
 		transition: 0.3s;
 	}
-	.btn-edit{
-		background-color: #d6bf3e; /* Green */
+
+	.btn-edit {
+		background-color: #d6bf3e;
+		/* Green */
 		border: none;
 		color: white;
 		padding: 5px 18px;
@@ -75,11 +77,14 @@
 		font-size: 16px;
 		border-radius: 9px;
 	}
-	.btn-edit:hover{
+
+	.btn-edit:hover {
 		background-color: #d6bf3ea8;
 	}
-	.btn-delete{
-		background-color: #d63e3e; /* Green */
+
+	.btn-delete {
+		background-color: #d63e3e;
+		/* Green */
 		border: none;
 		color: white;
 		padding: 5px 18px;
@@ -88,13 +93,16 @@
 		display: inline-block;
 		font-size: 16px;
 		border-radius: 5px;
-	
+
 	}
-	.btn-delete:hover{
+
+	.btn-delete:hover {
 		background-color: #d63e3ea8;
 	}
-	.btn-add{
-		background-color: #3e9dd6; /* Green */
+
+	.btn-add {
+		background-color: #3e9dd6;
+		/* Green */
 		border: none;
 		color: white;
 		padding: 5px 18px;
@@ -104,103 +112,137 @@
 		font-size: 16px;
 		border-radius: 5px;
 	}
-	.btn-add:hover{
+
+	.btn-add:hover {
 		background-color: #3e9dd6a8;
 	}
-	
+
 	.edit-mode {
 		animation: shake 1.3s ease-in-out infinite;
 	}
 
 	@keyframes shake {
-		0% { transform: translateX(0); }
-		10% { transform: translateX(-.2px) rotate(-.2deg); }
-		20% { transform: translateX(.2px) rotate(.2deg); }
-		30% { transform: translateX(-.2px) rotate(-.2deg); }
-		40% { transform: translateX(.2px) rotate(.2deg); }
-		50% { transform: translateX(-.2px) rotate(-.2deg); }
-		60% { transform: translateX(.2px) rotate(.2deg); }
-		70% { transform: translateX(-.2px) rotate(-.2deg); }
-		80% { transform: translateX(.2px) rotate(.2deg); }
-		90% { transform: translateX(-.2px) rotate(-.2deg); }
-		100% { transform: translateX(0); }
+		0% {
+			transform: translateX(0);
+		}
+
+		10% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		20% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		30% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		40% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		50% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		60% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		70% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		80% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		90% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		100% {
+			transform: translateX(0);
+		}
 	}
-.header-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 20px;
-	background-color: #f8f9fa;
-}
 
-.header-left {
-	font-size: 34px;
-	color: #333;
-}
+	.header-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20px;
+		background-color: #f8f9fa;
+	}
 
-.header-right {
-	display: flex;
-	gap: 10px;
-}
+	.header-left {
+		font-size: 34px;
+		color: #333;
+	}
 
-.btn-main-edit {
-	padding: 10px 20px;
-	font-size: 16px;
-	color: #fff;
-	background-color: #007bff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-}
+	.header-right {
+		display: flex;
+		gap: 10px;
+	}
 
-.btn-main-edit:hover {
-	background-color: #0056b3 !important;
-}
+	.btn-main-edit {
+		padding: 10px 20px;
+		font-size: 16px;
+		color: #fff;
+		background-color: #007bff;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
 
-.btn-secondary-cancel {
-	padding: 10px 20px;
-	font-size: 16px;
-	color: #dc3545;
-	background-color: #ffffff00;
-	border-color: #dc3545 !important;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-}
+	.btn-main-edit:hover {
+		background-color: #0056b3 !important;
+	}
 
-.btn-secondary-cancel:hover {
-	background-color: #dc3545 !important;
-	color: #000;
-}
+	.btn-secondary-cancel {
+		padding: 10px 20px;
+		font-size: 16px;
+		color: #dc3545;
+		background-color: #ffffff00;
+		border-color: #dc3545 !important;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+
+	.btn-secondary-cancel:hover {
+		background-color: #dc3545 !important;
+		color: #000;
+	}
 
 
-/* image modal */
-.imgmodal {
-		display: none; 
-		position: fixed; 
-		z-index: 1; 
-		padding-top: 100px; 
+	/* image modal */
+	.imgmodal {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
 		left: 0;
 		top: 0;
-		width: 100%; 
-		height: 100%; 
-		overflow: auto; 
-		background-color: rgb(0,0,0); 
-		background-color: rgba(0,0,0,0.9); 
-		}
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.9);
+	}
 
-		.imgmodal-content {
-			margin: auto;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 80%;
-			max-width: 600px;
-		}
+	.imgmodal-content {
+		margin: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 80%;
+		max-width: 600px;
+	}
 
-		.close {
+	.close {
 		position: absolute;
 		top: 15px;
 		right: 35px;
@@ -208,65 +250,64 @@
 		font-size: 40px;
 		font-weight: bold;
 		transition: 0.3s;
-		}
+	}
 
-		.close:hover,
-		.close:focus {
+	.close:hover,
+	.close:focus {
 		color: #bbb;
 		text-decoration: none;
 		cursor: pointer;
-		}
+	}
 
-/* image modal */
-
-
-
+	/* image modal */
 </style>
 
 
 <!-- Image Upload Modal -->
-<div class="modal fade" id="imageCropperModal" tabindex="-1" aria-labelledby="imageCropperModalLabel" aria-hidden="true">
+<div class="modal fade" id="imageCropperModal" tabindex="-1" aria-labelledby="imageCropperModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-header">
-		<h5 class="modal-title" id="imageCropperModalLabel">Image Cropper</h5>
-		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body">
-		<div class="w3-modal-content">
-			<div class="w3-container w3-white">
-				<p>Press the button below to upload and crop an image.</p>
-				<div id="ic-main" class="ibox">
-					<div class="ic-btns clearfix">
-						<div id="ic-upload-btn" class="l but lrg file-button w3-button w3-blue">
-							<span id="ic-upload-btn-label" style="font-family: inherit;font-size: inherit;">Upload
-								Image</span>
-							<input class="file-input" type="file" />
-						</div>
-					</div>
-					<div id="ic-cropper-wrap"></div>
-					<div class="ic-hidden ic-crop-btn-wrap"><br />
-						<div id="ic-rotate-btn" class="l but lrg w3-button w3-grey">
-							<svg x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50"
-								enable-background="new 0 0 50 50" xml:space="preserve">
-								<path
-									d="M41.038,24.1l-7.152,9.342L26.734,24.1H31.4c-0.452-4.397-4.179-7.842-8.696-7.842c-4.82,0-8.742,3.922-8.742,8.742 s3.922,8.742,8.742,8.742c1.381,0,2.5,1.119,2.5,2.5s-1.119,2.5-2.5,2.5c-7.576,0-13.742-6.165-13.742-13.742 s6.166-13.742,13.742-13.742c7.274,0,13.23,5.686,13.697,12.842H41.038z" />
-							</svg>
-							Rotate
-						</div>
-						<div id="ic-flip-btn" class="l but lrg w3-button w3-grey">Flip</div> <a id="ic-crop-btn"
-							class="l but lrg w3-button w3-grey">Crop</a>
-					</div>
-					<div id="ic-result-wrap" class="ic-hidden ic-result-wrap" style="margin-top: 20px;">
-						<div class="result-container"
-							style="position: relative;width: fit-content;block-size: fit-content;padding: 0px;z-index: 1;">
-							<div class="theresult"
-								style="position: relative;width: fit-content;block-size: block;padding: 0px;margin: 0px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imageCropperModalLabel">Image Cropper</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="w3-modal-content">
+					<div class="w3-container w3-white">
+						<p>Press the button below to upload and crop an image.</p>
+						<div id="ic-main" class="ibox">
+							<div class="ic-btns clearfix">
+								<div id="ic-upload-btn" class="l but lrg file-button w3-button w3-blue">
+									<span id="ic-upload-btn-label"
+										style="font-family: inherit;font-size: inherit;">Upload
+										Image</span>
+									<input class="file-input" type="file" />
+								</div>
 							</div>
-						</div>
-					</div>
-					
-					<!-- <div id="ic-download-wrap" class="ic-hidden ic-download-wrap">
+							<div id="ic-cropper-wrap"></div>
+							<div class="ic-hidden ic-crop-btn-wrap"><br />
+								<div id="ic-rotate-btn" class="l but lrg w3-button w3-grey">
+									<svg x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50"
+										enable-background="new 0 0 50 50" xml:space="preserve">
+										<path
+											d="M41.038,24.1l-7.152,9.342L26.734,24.1H31.4c-0.452-4.397-4.179-7.842-8.696-7.842c-4.82,0-8.742,3.922-8.742,8.742 s3.922,8.742,8.742,8.742c1.381,0,2.5,1.119,2.5,2.5s-1.119,2.5-2.5,2.5c-7.576,0-13.742-6.165-13.742-13.742 s6.166-13.742,13.742-13.742c7.274,0,13.23,5.686,13.697,12.842H41.038z" />
+									</svg>
+									Rotate
+								</div>
+								<div id="ic-flip-btn" class="l but lrg w3-button w3-grey">Flip</div> <a id="ic-crop-btn"
+									class="l but lrg w3-button w3-grey">Crop</a>
+							</div>
+							<div id="ic-result-wrap" class="ic-hidden ic-result-wrap" style="margin-top: 20px;">
+								<div class="result-container"
+									style="position: relative;width: fit-content;block-size: fit-content;padding: 0px;z-index: 1;">
+									<div class="theresult"
+										style="position: relative;width: fit-content;block-size: block;padding: 0px;margin: 0px;">
+									</div>
+								</div>
+							</div>
+
+							<!-- <div id="ic-download-wrap" class="ic-hidden ic-download-wrap">
 						<div class="select">
 							<select class="w3-select" id="ic-download-type" style="width: 100px; display:inline-block;">
 								<option value="image/jpeg">jpeg</option>
@@ -276,26 +317,28 @@
 						<hr />
 						Size: <span id="ic-info"></span>
 					</div> -->
+						</div>
+						<br /><br />
+					</div>
 				</div>
-				<br /><br />
 			</div>
-		</div>
-		</div>
-		<div class="modal-footer">
-			
-			  
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span>Close</span></button>
-			
+			<div class="modal-footer">
 
-			<span class="d-inline-block" tabindex="0" data-bs-toggle="addImgBtnTooltip" title="Crop Image to Add" id="addImageTooltip">
-				<!-- <button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.galleryImageUrls[app.colToEdit].push($('#ic-result-wrap .theresult img').attr('src')); $('#imageCropperModal').modal('hide');"> -->
-					<button type="button" class="btn btn-primary" style="background-color: #0056b3;" id="addImageBtn" disabled onclick="app.addNewImage()">
-					<span>Add Image</span></button>
-			</span>
-			
-		</div>
 
-	</div>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span>Close</span></button>
+
+
+				<span class="d-inline-block" tabindex="0" data-bs-toggle="addImgBtnTooltip" title="Crop Image to Add"
+					id="addImageTooltip">
+					<!-- <button type="button" class="btn btn-primary" id="addImageBtn" disabled onclick="app.galleryImageUrls[app.colToEdit].push($('#ic-result-wrap .theresult img').attr('src')); $('#imageCropperModal').modal('hide');"> -->
+					<button type="button" class="btn btn-primary" style="background-color: #0056b3;" id="addImageBtn"
+						disabled onclick="app.addNewImage()">
+						<span>Add Image</span></button>
+				</span>
+
+			</div>
+
+		</div>
 	</div>
 </div>
 
@@ -303,8 +346,8 @@
 
 
 <div id="app">
-	
-	
+
+
 	<section class="s-gallery">
 		<div class="container">
 
@@ -315,45 +358,52 @@
 				<!-- edit button -->
 				<div v-if="isAdmin" class="header-right">
 
-						<!-- loading icon -->
-						<div v-if="loading" class="spinner-border text-primary" role="status">
-							<span class="visually-hidden">Loading...</span>
-						</div>
-
-						
-						<!-- default switch -->
-						<div class="form-check form-switch" v-if="!isNewNameMode & !isNewNameMode">
-							<label class="form-check-label" for="flexSwitchCheckDefault">Default</label>
-							<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" style="margin-left: 2px;" v-model="galleryDefaultStatus" @change="setGalleryDefaultStatus()">
-						</div>
+					<!-- loading icon -->
+					<div v-if="loading" class="spinner-border text-primary" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
 
 
-						<!-- New Gallery Name Input -->
-						<select class="form-select" aria-label="Default select example" v-model="selectedGalleryName" @change="getGalleryImageUrls()" v-if="!isNewNameMode">
-							<option selected disabled>Select Gallery</option>
-							<option v-for="name in galleryNames" :value="name" :key="name">[[ name ]]</option>
-						</select>
-						<div class="input-group"  v-if="isNewNameMode">
-							<input type="text" class="form-control" placeholder="Gallery Name" aria-label="Gallery Name with two button addons" aria-describedby="button-addon3" v-model="newGalleryNameInput">
-							<button class="btn-secondary-cancel" type="button" @click="isNewNameMode = false">Cancel</button>
-							<button class="btn-main-edit" type="button" @click="saveNewGalleryName()">Save</button>
-						</div>
-						<button class="btn-add" v-if="!isNewNameMode" @click="isNewNameMode = true">New</button>
+					<!-- default switch -->
+					<div class="form-check form-switch" v-if="!isNewNameMode & !isNewNameMode">
+						<label class="form-check-label" for="flexSwitchCheckDefault">Default</label>
+						<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+							style="margin-left: 2px;" v-model="galleryDefaultStatus"
+							@change="setGalleryDefaultStatus()">
+					</div>
 
 
-						<!-- edit button -->
-						<button v-if="!isEdit & !isNewNameMode" class="btn1 btn-main-edit" @click="isEdit = true">Edit</button>
-						<button v-if="isEdit & !isNewNameMode" class="btn-main-edit" @click="isEdit = false">Done</button>
+					<!-- New Gallery Name Input -->
+					<select class="form-select" aria-label="Default select example" v-model="selectedGalleryName"
+						@change="getGalleryImageUrls()" v-if="!isNewNameMode">
+						<option selected disabled>Select Gallery</option>
+						<option v-for="name in galleryNames" :value="name" :key="name">[[ name ]]</option>
+					</select>
+					<div class="input-group" v-if="isNewNameMode">
+						<input type="text" class="form-control" placeholder="Gallery Name"
+							aria-label="Gallery Name with two button addons" aria-describedby="button-addon3"
+							v-model="newGalleryNameInput">
+						<button class="btn-secondary-cancel" type="button"
+							@click="isNewNameMode = false">Cancel</button>
+						<button class="btn-main-edit" type="button" @click="saveNewGalleryName()">Save</button>
+					</div>
+					<button class="btn-add" v-if="!isNewNameMode" @click="isNewNameMode = true">New</button>
+
+
+					<!-- edit button -->
+					<button v-if="!isEdit & !isNewNameMode" class="btn1 btn-main-edit"
+						@click="isEdit = true">Edit</button>
+					<button v-if="isEdit & !isNewNameMode" class="btn-main-edit" @click="isEdit = false">Done</button>
 
 				</div>
 			</div>
 
-			
-			
+
+
 
 
 			<div class="gallery">
-				
+
 				<div class="gallery__column" v-for="col in galleryCols">
 					<!-- button to add image and delete col with icon only when edit mode-->
 					<div v-if="isEdit">
@@ -363,12 +413,14 @@
 						</button>
 						<!-- <button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button> -->
 					</div>
-					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }" @click.stop="openModal(imgUrl)">
+					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }"
+						@click.stop="openModal(imgUrl)">
 						<figure class="gallery__thumb">
-							<img :src="imgUrl" alt="" class="gallery__image" >
+							<img :src="imgUrl" alt="" class="gallery__image">
 							<figcaption class="gallery__caption">
 								<!-- replace image btn with icon -->
-								<button v-if="isEdit" class="btn-edit" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click.stop
+								<button v-if="isEdit" class="btn-edit" data-bs-toggle="modal"
+									data-bs-target="#imageCropperModal" @click.stop
 									@click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
 									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
 								<!-- del -->
@@ -378,25 +430,25 @@
 							</figcaption>
 						</figure>
 					</div>
-				
+
 				</div>
 
 
-		</div>
-		<!-- <div class="pagination">
+			</div>
+			<!-- <div class="pagination">
 			<a href="#" class="prev">Previous</a>
 			<span class="page-numbers"></span>
 			<a href="#" class="next">Next</a>
 		</div> -->
 	</section>
-	<div id="imageModal" class="imgmodal zoom-box" style="z-index: 10;"  @click.stop="closeModal()">
+	<div id="imageModal" class="imgmodal zoom-box" style="z-index: 10;" @click.stop="closeModal()">
 		<span class="close" @click="closeModal()">&times;</span>
 		<vue-magnifier class="imgmodal-content" :src="modalImage" :src-large="modalImage"></vue-magnifier>
 		<div id="caption"></div>
 	</div>
 </div>
 <style>
-	
+
 
 </style>
 
@@ -407,50 +459,50 @@
 	$(function () {
 		$('[data-bs-toggle="addImgBtnTooltip"]').tooltip()
 	})
-	
+
 	SAMPLE_GALLERY_IMAGES_DICT = {
-					1 : [
-						"{{ url_for('static', filename='img/image-gallery/DSC_9039.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9047.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9051.jpeg') }}",
-					],
-					2 : [
-						"{{ url_for('static', filename='img/image-gallery/DSC_9069.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9072.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9075.jpeg') }}",
-					],
-					3 : [
-						"{{ url_for('static', filename='img/image-gallery/DSC_9077.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9039.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9078.jpeg') }}",
-					],
-					4 : [
-						"{{ url_for('static', filename='img/image-gallery/DSC_9080.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9137.jpeg') }}",
-						"{{ url_for('static', filename='img/image-gallery/DSC_9148.jpeg') }}",
-					],
-				}
-	
+		1: [
+			"{{ url_for('static', filename='img/image-gallery/DSC_9039.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9047.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9051.jpeg') }}",
+		],
+		2: [
+			"{{ url_for('static', filename='img/image-gallery/DSC_9069.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9072.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9075.jpeg') }}",
+		],
+		3: [
+			"{{ url_for('static', filename='img/image-gallery/DSC_9077.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9039.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9078.jpeg') }}",
+		],
+		4: [
+			"{{ url_for('static', filename='img/image-gallery/DSC_9080.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9137.jpeg') }}",
+			"{{ url_for('static', filename='img/image-gallery/DSC_9148.jpeg') }}",
+		],
+	}
+
 
 	var app = new Vue({
 		el: '#app',
 		delimiters: ['[[', ']]'],
 		data: {
 			message: 'Image Gallery',
-			galleryCols : 4,
-			galleryImageUrls:  {},
-			isEdit : false,
-			isNewNameMode : false,
-			isAdmin : true,
-			colToEdit : 0,
-			imageToChange : '',
-			galleryNames : [],
-			selectedGalleryName : '',
-			newGalleryNameInput : '',
-			galleryDefaultStatus : false,
-			loading : false,
- 			modalImage: '',
-			},
+			galleryCols: 4,
+			galleryImageUrls: {},
+			isEdit: false,
+			isNewNameMode: false,
+			isAdmin: true,
+			colToEdit: 0,
+			imageToChange: '',
+			galleryNames: [],
+			selectedGalleryName: '',
+			newGalleryNameInput: '',
+			galleryDefaultStatus: false,
+			loading: false,
+			modalImage: '',
+		},
 		methods: {
 			openModal(imageUrl) {
 				this.modalImage = imageUrl;
@@ -465,105 +517,105 @@
 					this.closeModal();
 				}
 			},
-			fetechGalleryNames(){
+			fetechGalleryNames() {
 				this.loading = true
 				axios.get('{{url_for("fetch_gallery_names")}}')
-				.then(function (response) {
-					console.log(response);
-					app.galleryNames = response.data.gallery_names
-					app.loading = false
-				})
-				.catch(function (error) {
-					console.log(error);
-					app.loading = false
-					app.sendNotification('Error Fetching Gallery Names', 'red')
-				});
+					.then(function (response) {
+						console.log(response);
+						app.galleryNames = response.data.gallery_names
+						app.loading = false
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.loading = false
+						app.sendNotification('Error Fetching Gallery Names', 'red')
+					});
 			},
-			saveNewGalleryName(){
+			saveNewGalleryName() {
 				this.loading = true
 				url = '{{url_for("add_gallery_name")}}'
 				payload = {
-					'new_gallery_name' : this.newGalleryNameInput
+					'new_gallery_name': this.newGalleryNameInput
 				}
 				axios.post(url, payload)
-				.then(function (response) {
-					console.log(response);
-					app.fetechGalleryNames()
-					app.selectedGalleryName = app.newGalleryNameInput
-					app.newGalleryNameInput = ''
-					app.isNewNameMode = false
-					app.getGalleryImageUrls()
-					app.loading = false
-				})
-				.catch(function (error) {
-					console.log(error);
-					app.sendNotification('Error Adding Gallery Name', 'red')
-				});
+					.then(function (response) {
+						console.log(response);
+						app.fetechGalleryNames()
+						app.selectedGalleryName = app.newGalleryNameInput
+						app.newGalleryNameInput = ''
+						app.isNewNameMode = false
+						app.getGalleryImageUrls()
+						app.loading = false
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.sendNotification('Error Adding Gallery Name', 'red')
+					});
 			},
-			setGalleryDefaultStatus(){
+			setGalleryDefaultStatus() {
 				this.loading = true
 				url = '{{url_for("update_gallery_status_api")}}'
 				payload = {
-					'gallery_name' : this.selectedGalleryName,
-					'is_default' : this.galleryDefaultStatus
+					'gallery_name': this.selectedGalleryName,
+					'is_default': this.galleryDefaultStatus
 				}
 				axios.post(url, payload)
-				.then(function (response) {
-					console.log(response);
-					app.fetechGalleryNames()
-					app.loading = false
-					app.sendNotification('Gallery Default Status Updated Successfully', 'green')
-				})
-				.catch(function (error) {
-					console.log(error);
-					app.sendNotification('Error Updating Gallery Default Status', 'red')
-				});
+					.then(function (response) {
+						console.log(response);
+						app.fetechGalleryNames()
+						app.loading = false
+						app.sendNotification('Gallery Default Status Updated Successfully', 'green')
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.sendNotification('Error Updating Gallery Default Status', 'red')
+					});
 
 			},
-			getGalleryImageUrls(){
+			getGalleryImageUrls() {
 				this.loading = true
 				payload = {
-					'gallery_name' : this.selectedGalleryName
+					'gallery_name': this.selectedGalleryName
 				}
 				url = '{{url_for("fetch_gallery_photos_urls")}}'
 				axios.post(url, payload)
-				.then(function (response) {
-					console.log(response);
-					app.galleryImageUrls = response.data.gallery_image_urls
-					app.galleryDefaultStatus = response.data.gallery_status
-					app.selectedGalleryName = response.data.gallery_name
-					app.loading = false
-				})
-				.catch(function (error) {
-					console.log(error);
-					app.loading = false
-					app.sendNotification('Error Fetching Gallery Images', 'red')
-				});
+					.then(function (response) {
+						console.log(response);
+						app.galleryImageUrls = response.data.gallery_image_urls
+						app.galleryDefaultStatus = response.data.gallery_status
+						app.selectedGalleryName = response.data.gallery_name
+						app.loading = false
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.loading = false
+						app.sendNotification('Error Fetching Gallery Images', 'red')
+					});
 			},
-			deleteImage(col, index, imgUrl){
+			deleteImage(col, index, imgUrl) {
 				this.loading = true
 				// this.galleryImageUrls[col].splice(index, 1)
 				url = '{{url_for("delete_gallery_image_url")}}'
 				payload = {
-					'gallery_name' : this.selectedGalleryName,
-					'col' : col,
-					'index' : index,
-					'img_url' : imgUrl
+					'gallery_name': this.selectedGalleryName,
+					'col': col,
+					'index': index,
+					'img_url': imgUrl
 				}
 				axios.post(url, payload)
-				.then(function (response) {
-					console.log(response);
-					app.getGalleryImageUrls()
-					this.loading = true
-					app.sendNotification('Image Deleted Successfully', 'green')
-				})
-				.catch(function (error) {
-					console.log(error);
-					app.sendNotification('Error Deleting Image', 'red')
-				});
+					.then(function (response) {
+						console.log(response);
+						app.getGalleryImageUrls()
+						this.loading = true
+						app.sendNotification('Image Deleted Successfully', 'green')
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.sendNotification('Error Deleting Image', 'red')
+					});
 			},
-			replaceImageMode(col, imgUrl){
-				
+			replaceImageMode(col, imgUrl) {
+
 				$('#imageCropperModalLabel').text('Change Image')
 				$('#addImageBtn').text('Change Image')
 				$('#addImageTooltip').attr('title', 'Crop Image to Change')
@@ -571,14 +623,14 @@
 				// set the image to change
 				this.imageToChange = imgUrl
 				// set the col to edit
-				this.colToEdit = col	
-				
+				this.colToEdit = col
+
 				// change btn  onclick function
 				// $('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit][app.galleryImageUrls[app.colToEdit].indexOf(app.imageToChange)] = $("#ic-result-wrap .theresult img").attr("src"); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
 				$('#addImageBtn').attr('onclick', 'app.replaceImage(app.colToEdit, app.imageToChange)')
 			},
 
-			replaceImage(col, imgUrl){
+			replaceImage(col, imgUrl) {
 				let newImg = $("#ic-result-wrap .theresult img").attr("src")
 				// use axios to send the image to the server and get response with the image url
 				// add the image url to the galleryImageUrls
@@ -597,22 +649,22 @@
 						'Content-Type': 'multipart/form-data'
 					}
 				})
-				.then(function (response) {
-					console.log(response);
-					// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
-					$("#imageCropperModal").modal("hide")
-					app.getGalleryImageUrls()
-					app.loading = false
-					app.stopLoadingBtn('addImageBtn', 'Change Image')
-					app.sendNotification('Image Changed Successfully', 'green')
-				})
-				.catch(function (error) {
-					console.log(error);
-					app.sendNotification('Error Changing Image', 'red')
-				});
+					.then(function (response) {
+						console.log(response);
+						// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
+						$("#imageCropperModal").modal("hide")
+						app.getGalleryImageUrls()
+						app.loading = false
+						app.stopLoadingBtn('addImageBtn', 'Change Image')
+						app.sendNotification('Image Changed Successfully', 'green')
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.sendNotification('Error Changing Image', 'red')
+					});
 			},
 
-			addNewImageMode(){
+			addNewImageMode() {
 				$('#imageCropperModalLabel').html('<span>Add Image</span>')
 				$('#addImageBtn').html('<span>Add Image</span>')
 				$('#addImageTooltip').attr('title', 'Crop Image to Add')
@@ -621,7 +673,7 @@
 				// $('#addImageBtn').attr('onclick', 'app.galleryImageUrls[app.colToEdit].push($("#ic-result-wrap .theresult img").attr("src")); $("#imageCropperModal").modal("hide"); app.$forceUpdate();')
 				$('#addImageBtn').attr('onclick', 'app.addNewImage()')
 			},
-			addNewImage(){
+			addNewImage() {
 				let newImg = $("#ic-result-wrap .theresult img").attr("src")
 				// use axios to send the image to the server and get response with the image url
 				// add the image url to the galleryImageUrls
@@ -640,19 +692,19 @@
 						'Content-Type': 'multipart/form-data'
 					}
 				})
-				.then(function (response) {
-					console.log(response);
-					// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
-					$("#imageCropperModal").modal("hide")
-					app.getGalleryImageUrls()
-					app.loading = false
-					app.stopLoadingBtn('addImageBtn', 'Add Image')
-					app.sendNotification('Image Added Successfully', 'green')
-				})
-				.catch(function (error) {
-					console.log(error);
-					app.sendNotification('Error Adding Image', 'red')
-				});
+					.then(function (response) {
+						console.log(response);
+						// app.galleryImageUrls[app.colToEdit].push(response.data.image_url)
+						$("#imageCropperModal").modal("hide")
+						app.getGalleryImageUrls()
+						app.loading = false
+						app.stopLoadingBtn('addImageBtn', 'Add Image')
+						app.sendNotification('Image Added Successfully', 'green')
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.sendNotification('Error Adding Image', 'red')
+					});
 			},
 			dataURLtoFile(dataurl, filename) {
 				var arr = dataurl.split(','),
@@ -665,9 +717,9 @@
 				}
 				return new File([u8arr], filename, { type: mime });
 			},
-			loadingBtn(btnId){
-				$('#'+btnId).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...')
-				$('#'+btnId).attr('disabled', true)
+			loadingBtn(btnId) {
+				$('#' + btnId).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...')
+				$('#' + btnId).attr('disabled', true)
 				// disable upload image, crop, canecl, rotate, flip btns
 				$('#ic-upload-btn').attr('disabled', true)
 				$('#ic-crop-btn').attr('disabled', true)
@@ -677,9 +729,9 @@
 
 				this.loading = true
 			},
-			stopLoadingBtn(btnId, btnText){
-				$('#'+btnId).html(btnText)
-				$('#'+btnId).attr('disabled', false)
+			stopLoadingBtn(btnId, btnText) {
+				$('#' + btnId).html(btnText)
+				$('#' + btnId).attr('disabled', false)
 				$('#ic-upload-btn').attr('disabled', false)
 				$('#ic-crop-btn').attr('disabled', false)
 				$('#ic-rotate-btn').attr('disabled', false)
@@ -688,7 +740,7 @@
 
 				this.loading = false
 			},
-			sendNotification(message, type){
+			sendNotification(message, type) {
 				Toastify({
 					text: message,
 					duration: 3000,
@@ -696,13 +748,13 @@
 					position: 'right', // `left`, `center` or `right`
 					backgroundColor: type,
 					stopOnFocus: true, // Prevents dismissing of toast on hover
-					onClick: function(){} // Callback after click
+					onClick: function () { } // Callback after click
 				}).showToast();
 
 			}
-			
 
-			
+
+
 		},
 		mounted() {
 			this.fetechGalleryNames()
@@ -714,7 +766,7 @@
 		},
 
 
-		
+
 	})
 
 </script>
