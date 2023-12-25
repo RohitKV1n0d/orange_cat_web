@@ -363,16 +363,16 @@
 						</button>
 						<!-- <button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button> -->
 					</div>
-					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }" @click="openModal(imgUrl)">
+					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }" @click.stop="openModal(imgUrl)">
 						<figure class="gallery__thumb">
 							<img :src="imgUrl" alt="" class="gallery__image" >
 							<figcaption class="gallery__caption">
 								<!-- replace image btn with icon -->
-								<button v-if="isEdit" class="btn-edit" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
+								<button v-if="isEdit" class="btn-edit" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click.stop
 									@click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
 									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
 								<!-- del -->
-								<button v-if="isEdit" class="btn-delete"
+								<button v-if="isEdit" class="btn-delete" @click.stop
 									@click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl), imgUrl)">
 									<i style="color: aliceblue;" class="fa fa-trash"></i></button>
 							</figcaption>
@@ -473,6 +473,11 @@
 					app.galleryNames = response.data.gallery_names
 					app.loading = false
 				})
+				.catch(function (error) {
+					console.log(error);
+					app.loading = false
+					app.sendNotification('Error Fetching Gallery Names', 'red')
+				});
 			},
 			saveNewGalleryName(){
 				this.loading = true
@@ -490,6 +495,10 @@
 					app.getGalleryImageUrls()
 					app.loading = false
 				})
+				.catch(function (error) {
+					console.log(error);
+					app.sendNotification('Error Adding Gallery Name', 'red')
+				});
 			},
 			setGalleryDefaultStatus(){
 				this.loading = true
@@ -503,7 +512,12 @@
 					console.log(response);
 					app.fetechGalleryNames()
 					app.loading = false
+					app.sendNotification('Gallery Default Status Updated Successfully', 'green')
 				})
+				.catch(function (error) {
+					console.log(error);
+					app.sendNotification('Error Updating Gallery Default Status', 'red')
+				});
 
 			},
 			getGalleryImageUrls(){
@@ -520,6 +534,11 @@
 					app.selectedGalleryName = response.data.gallery_name
 					app.loading = false
 				})
+				.catch(function (error) {
+					console.log(error);
+					app.loading = false
+					app.sendNotification('Error Fetching Gallery Images', 'red')
+				});
 			},
 			deleteImage(col, index, imgUrl){
 				this.loading = true
@@ -536,9 +555,11 @@
 					console.log(response);
 					app.getGalleryImageUrls()
 					this.loading = true
+					app.sendNotification('Image Deleted Successfully', 'green')
 				})
 				.catch(function (error) {
 					console.log(error);
+					app.sendNotification('Error Deleting Image', 'red')
 				});
 			},
 			replaceImageMode(col, imgUrl){
@@ -583,7 +604,12 @@
 					app.getGalleryImageUrls()
 					app.loading = false
 					app.stopLoadingBtn('addImageBtn', 'Change Image')
+					app.sendNotification('Image Changed Successfully', 'green')
 				})
+				.catch(function (error) {
+					console.log(error);
+					app.sendNotification('Error Changing Image', 'red')
+				});
 			},
 
 			addNewImageMode(){
@@ -621,7 +647,12 @@
 					app.getGalleryImageUrls()
 					app.loading = false
 					app.stopLoadingBtn('addImageBtn', 'Add Image')
+					app.sendNotification('Image Added Successfully', 'green')
 				})
+				.catch(function (error) {
+					console.log(error);
+					app.sendNotification('Error Adding Image', 'red')
+				});
 			},
 			dataURLtoFile(dataurl, filename) {
 				var arr = dataurl.split(','),
@@ -656,6 +687,18 @@
 				$('#ic-download-btn').attr('disabled', false)
 
 				this.loading = false
+			},
+			sendNotification(message, type){
+				Toastify({
+					text: message,
+					duration: 3000,
+					gravity: "top", // `top` or `bottom`
+					position: 'right', // `left`, `center` or `right`
+					backgroundColor: type,
+					stopOnFocus: true, // Prevents dismissing of toast on hover
+					onClick: function(){} // Callback after click
+				}).showToast();
+
 			}
 			
 
