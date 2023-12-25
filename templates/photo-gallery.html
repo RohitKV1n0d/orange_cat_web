@@ -134,7 +134,7 @@
 }
 
 .header-left {
-	font-size: 24px;
+	font-size: 34px;
 	color: #333;
 }
 
@@ -174,6 +174,50 @@
 	background-color: #dc3545 !important;
 	color: #000;
 }
+
+
+/* image modal */
+.imgmodal {
+		display: none; 
+		position: fixed; 
+		z-index: 1; 
+		padding-top: 100px; 
+		left: 0;
+		top: 0;
+		width: 100%; 
+		height: 100%; 
+		overflow: auto; 
+		background-color: rgb(0,0,0); 
+		background-color: rgba(0,0,0,0.9); 
+		}
+
+		.imgmodal-content {
+			margin: auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 80%;
+			max-width: 700px;
+		}
+
+		.close {
+		position: absolute;
+		top: 15px;
+		right: 35px;
+		color: #f1f1f1;
+		font-size: 40px;
+		font-weight: bold;
+		transition: 0.3s;
+		}
+
+		.close:hover,
+		.close:focus {
+		color: #bbb;
+		text-decoration: none;
+		cursor: pointer;
+		}
+
+/* image modal */
 
 
 
@@ -258,9 +302,14 @@
 
 
 
-<div id="vue-app">
+<div id="app">
+	
+	
 	<section class="s-gallery">
 		<div class="container">
+
+
+
 			<div class="header-container">
 				<h1 class="header-left">[[ message ]]</h1>
 				<!-- edit button -->
@@ -298,6 +347,8 @@
 
 				</div>
 			</div>
+
+			
 			
 
 
@@ -306,26 +357,29 @@
 				<div class="gallery__column" v-for="col in galleryCols">
 					<!-- button to add image and delete col with icon only when edit mode-->
 					<div v-if="isEdit">
-						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="colToEdit = col; addNewImageMode()">
+						<button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
+							@click="colToEdit = col; addNewImageMode()">
 							<i style="color: aliceblue;" class="fa fa-plus"></i>
 						</button>
 						<!-- <button class="btn-delete" @click="galleryImageUrls.splice(col, 1)"><i style="color: aliceblue;" class="fa fa-trash"></i></button> -->
 					</div>
-					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }">
+					<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" :class="{ 'edit-mode' : isEdit }" @click="openModal(imgUrl)">
 						<figure class="gallery__thumb">
-							<img :src="imgUrl" alt="" class="gallery__image">
+							<img :src="imgUrl" alt="" class="gallery__image" >
 							<figcaption class="gallery__caption">
 								<!-- replace image btn with icon -->
-								<button v-if="isEdit" class="btn-edit"  data-bs-toggle="modal" data-bs-target="#imageCropperModal" @click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
+								<button v-if="isEdit" class="btn-edit" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
+									@click="imageToChange = imgUrl; colToEdit = col; replaceImageMode(col, imgUrl)">
 									<i style="color: aliceblue;" class="bi bi-shuffle"></i></button>
 								<!-- del -->
-								<button v-if="isEdit" class="btn-delete"  @click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl), imgUrl)">
-																				<i  style="color: aliceblue;" class="fa fa-trash"></i></button>
+								<button v-if="isEdit" class="btn-delete"
+									@click="deleteImage(col, galleryImageUrls[col].indexOf(imgUrl), imgUrl)">
+									<i style="color: aliceblue;" class="fa fa-trash"></i></button>
 							</figcaption>
 						</figure>
 					</div>
-			
-			</div>
+				
+				</div>
 
 
 		</div>
@@ -335,9 +389,20 @@
 			<a href="#" class="next">Next</a>
 		</div> -->
 	</section>
+	<div id="imageModal" class="imgmodal zoom-box" style="z-index: 10;"  @click.stop="closeModal()">
+		<span class="close" @click="closeModal()">&times;</span>
+		<vue-magnifier lass="imgmodal-content" :src="modalImage" :src-large="modalImage"></vue-magnifier>
+		<div id="caption"></div>
+	</div>
 </div>
-<script src="/static/js/imageCorp.js"></script>
+<style>
+	
 
+</style>
+
+
+
+<script src="/static/js/imageCorp.js"></script>
 <script>
 	$(function () {
 		$('[data-bs-toggle="addImgBtnTooltip"]').tooltip()
@@ -365,13 +430,13 @@
 						"{{ url_for('static', filename='img/image-gallery/DSC_9148.jpeg') }}",
 					],
 				}
-
+	
 
 	var app = new Vue({
-		el: '#vue-app',
+		el: '#app',
 		delimiters: ['[[', ']]'],
 		data: {
-			message: 'Test Vue!',
+			message: 'Image Gallery',
 			galleryCols : 4,
 			galleryImageUrls:  {},
 			isEdit : false,
@@ -384,8 +449,22 @@
 			newGalleryNameInput : '',
 			galleryDefaultStatus : false,
 			loading : false,
+ 			modalImage: '',
 			},
 		methods: {
+			openModal(imageUrl) {
+				this.modalImage = imageUrl;
+				$('#imageModal').show();
+			},
+			closeModal() {
+				this.modalImage = '';
+				$('#imageModal').hide();
+			},
+			closeOnEscape(e) {
+				if (e.key === 'Escape' && this.modalImage) {
+					this.closeModal();
+				}
+			},
 			fetechGalleryNames(){
 				this.loading = true
 				axios.get('{{url_for("fetch_gallery_names")}}')
@@ -585,7 +664,12 @@
 		mounted() {
 			this.fetechGalleryNames()
 			this.getGalleryImageUrls()
-		}
+			document.addEventListener('keyup', this.closeOnEscape);
+		},
+		beforeDestroy() {
+			document.removeEventListener('keyup', this.closeOnEscape);
+		},
+
 
 		
 	})
