@@ -751,12 +751,21 @@
 					onClick: function () { } // Callback after click
 				}).showToast();
 
-			}
+			},
+			checkIfAdmin() {
+				status = '{{current_user.role}}'
+				if (status == 'admin') {
+					this.isAdmin = true
+				} else {
+					this.isAdmin = false
+				}
+			},
 
 
 
 		},
 		mounted() {
+			this.checkIfAdmin()
 			this.fetechGalleryNames()
 			this.getGalleryImageUrls()
 			document.addEventListener('keyup', this.closeOnEscape);
