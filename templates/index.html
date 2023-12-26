@@ -265,76 +265,335 @@
 </section>
 
 <!--================ gallery end ================-->
+<style>
+	.gallery {
+		display: flex;
+		padding: 2px;
+		transition: 0.3s;
+	}
 
+	.gallery:hover .gallery__image {
+		filter: grayscale(1);
+	}
+
+	.gallery__column {
+		display: flex;
+		flex-direction: column;
+		width: 25%;
+	}
+
+	.gallery__link {
+		margin: 2px;
+		overflow: hidden;
+	}
+
+	.gallery__link:hover .gallery__image {
+		filter: grayscale(0);
+	}
+
+	.gallery__link:hover .gallery__caption {
+		opacity: 1;
+	}
+
+	.gallery__thumb {
+		position: relative;
+	}
+
+	.gallery__image {
+		display: block;
+		width: 100%;
+		transition: 0.3s;
+	}
+
+	.gallery__image:hover {
+		transform: scale(1.1);
+	}
+
+	.gallery__caption {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		padding: 25px 15px 15px;
+		width: 100%;
+		font-family: "Raleway", sans-serif;
+		font-size: 16px;
+		color: white;
+		opacity: 0;
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+		transition: 0.3s;
+	}
+
+	.btn-edit {
+		background-color: #d6bf3e;
+		/* Green */
+		border: none;
+		color: white;
+		padding: 5px 18px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 9px;
+	}
+
+	.btn-edit:hover {
+		background-color: #d6bf3ea8;
+	}
+
+	.btn-delete {
+		background-color: #d63e3e;
+		/* Green */
+		border: none;
+		color: white;
+		padding: 5px 18px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 5px;
+
+	}
+
+	.btn-delete:hover {
+		background-color: #d63e3ea8;
+	}
+
+	.btn-add {
+		background-color: #3e9dd6;
+		/* Green */
+		border: none;
+		color: white;
+		padding: 5px 18px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 5px;
+	}
+
+	.btn-add:hover {
+		background-color: #3e9dd6a8;
+	}
+
+	.edit-mode {
+		animation: shake 1.3s ease-in-out infinite;
+	}
+
+	@keyframes shake {
+		0% {
+			transform: translateX(0);
+		}
+
+		10% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		20% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		30% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		40% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		50% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		60% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		70% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		80% {
+			transform: translateX(.2px) rotate(.2deg);
+		}
+
+		90% {
+			transform: translateX(-.2px) rotate(-.2deg);
+		}
+
+		100% {
+			transform: translateX(0);
+		}
+	}
+	/* image modal */
+	.imgmodal {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.9);
+	}
+
+	.imgmodal-content {
+		margin: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 80%;
+		max-width: 600px;
+	}
+
+	.close {
+		position: absolute;
+		top: 15px;
+		right: 35px;
+		color: #f1f1f1;
+		font-size: 40px;
+		font-weight: bold;
+		transition: 0.3s;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: #bbb;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	/* image modal */
+
+	.btn-main-edit {
+		padding: 10px 20px;
+		font-size: 16px;
+		color: #fff;
+		background-color: #007bff;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+
+	.btn-main-edit:hover {
+		background-color: #0056b3 !important;
+	}
+	.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 <section class="s-gallery">
-	<div class="container">
-		<h2 class="title text-uppercase text-center">our photo gallery&nbsp;&nbsp;<i
-				class="bi bi-bicycle cycle-icon "></i></h2>
-		<div class="row-gallery home-gallery">
-			<div class="grid-gallery">
-				<div class="grid-sizer"></div>
-				<div class="our-gallery-item our-gallery-item-big">
-					<a href="{{ url_for('static', filename='img/gal-1.jpg') }}" data-fancybox="gallery1">
-						<img src="{{ url_for('static', filename='img/gal-1.jpg') }}" alt="img">
-						<div class="gal-item">
-							<h3 class="title">photo #1</h3>
-							<p>Satisfied Customers</p>
-						</div>
-					</a>
-				</div>
-				<div class="our-gallery-item">
-					<a href="{{ url_for('static', filename='img/gal-2.jpg') }}" data-fancybox="gallery1">
-						<img src="{{ url_for('static', filename='img/gal-2.jpg') }}" alt="img">
-						<div class="gal-item">
-							<h3 class="title">photo #2</h3>
-							<p>Satisfied Customers</p>
-						</div>
-					</a>
-				</div>
-				<div class="our-gallery-item">
-					<a href="{{ url_for('static', filename='img/gal-3.jpg') }}" data-fancybox="gallery1">
-						<img src="{{ url_for('static', filename='img/gal-3.jpg') }}" alt="img">
-						<div class="gal-item">
-							<h3 class="title">photo #3</h3>
-							<p>Satisfied Customers</p>
-						</div>
-					</a>
-				</div>
-				<div class="our-gallery-item">
-					<a href="{{ url_for('static', filename='img/gal-7.jpg') }}" data-fancybox="gallery1">
-						<img src="{{ url_for('static', filename='img/gal-7.jpg') }}" alt="img">
-						<div class="gal-item">
-							<h3 class="title">photo #7</h3>
-							<p>Satisfied Customers</p>
-						</div>
-					</a>
-				</div>
-				<div class="our-gallery-item">
-					<a href="{{ url_for('static', filename='img/gal-8.jpg') }}" data-fancybox="gallery1">
-						<img src="{{ url_for('static', filename='img/gal-8.jpg') }}" alt="img">
-						<div class="gal-item">
-							<h3 class="title">photo #8</h3>
-							<p>Satisfied Customers</p>
-						</div>
-					</a>
-				</div>
-				<div class="our-gallery-item">
-					<a href="{{ url_for('static', filename='img/gal-9.jpg') }}" data-fancybox="gallery1">
-						<img src="{{ url_for('static', filename='img/gal-9.jpg') }}" alt="img">
-						<div class="gal-item">
-							<h3 class="title">photo #9</h3>
-							<p>Satisfied Customers</p>
-						</div>
-					</a>
-				</div>
+	<div class="container" id="vue-gallery-app">
+		<div class="gallery-header">
+			
+			<div class="header-container">
+				<h2 class="title text-uppercase text-center">our photo gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
+				<a href="{{ url_for('photo_gallery')}}" v-if="isAdmin" class="btn-main-edit" style="margin-left: 100px;">Edit</a>
 			</div>
-		</div>
+				</div>
+				<div class="gallery">
+					<div class="gallery__column" v-for="col in galleryCols">
+						<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" 
+															@click.stop="openModal(imgUrl)">
+							<figure class="gallery__thumb">
+								<img :src="imgUrl" alt="" class="gallery__image" loading="lazy" />
+								<figcaption class="gallery__caption">
+									<!-- Caption  -->
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
 		<div class="text-center">
-			<a href="single-shop.html" class="btn mt-4"><span>View More</span></a>
+			<a href="{{ url_for('photo_gallery')}}" class="btn mt-4"><span>View More</span></a>
 		</div>
+		<div id="imageModal" class="imgmodal zoom-box" style="z-index: 10;" @click.stop="closeModal()">
+			<span class="close" @click="closeModal()">&times;</span>
+			<vue-magnifier class="imgmodal-content" :src="modalImage" :src-large="modalImage"></vue-magnifier>
+			<div id="caption"></div>
+		</div>
+		
 	</div>
 </section>
+<script>
 
+var app = new Vue({
+		el: '#vue-gallery-app',
+		delimiters: ['[[', ']]'],
+		data: {
+			isAdmin: false,
+			galleryCols: 4,
+			galleryImageUrls: {},
+			modalImage: '',
+		},
+		methods: {
+			openModal(imageUrl) {
+				this.modalImage = imageUrl;
+				$('#imageModal').show();
+			},
+			closeModal() {
+				this.modalImage = '';
+				$('#imageModal').hide();
+			},
+			closeOnEscape(e) {
+				if (e.key === 'Escape' && this.modalImage) {
+					this.closeModal();
+				}
+			},
+			getGalleryImageUrls() {
+				payload = {
+					'gallery_name': this.selectedGalleryName
+				}
+				url = '{{url_for("fetch_gallery_photos_urls")}}'
+				axios.post(url, payload)
+					.then(function (response) {
+						console.log(response);
+						app.galleryImageUrls = response.data.gallery_image_urls
+					})
+					.catch(function (error) {
+						console.log(error);
+						app.sendNotification('Error Fetching Gallery Images', 'red')
+					});
+			},
+			sendNotification(message, type) {
+				Toastify({
+					text: message,
+					duration: 3000,
+					gravity: "top", // `top` or `bottom`
+					position: 'right', // `left`, `center` or `right`
+					backgroundColor: type,
+					stopOnFocus: true, // Prevents dismissing of toast on hover
+					onClick: function () { } // Callback after click
+				}).showToast();
+
+			},
+			checkIfAdmin() {
+				status = '{{current_user.role}}'
+				if (status == 'admin') {
+					this.isAdmin = true
+				} else {
+					this.isAdmin = false
+				}
+			},
+			
+		},
+		mounted() {
+			this.checkIfAdmin();
+			this.getGalleryImageUrls();
+			document.addEventListener('keyup', this.closeOnEscape);
+		},
+		beforeDestroy() {
+			document.removeEventListener('keyup', this.closeOnEscape);
+		}
+
+	});
+	
+</script>
 <!--============= s-galleryb  end  =============-->
 
 <!--============= video-gallery start =============-->

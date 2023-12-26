@@ -256,7 +256,7 @@ def get_products():
     return jsonify(products), 200
 
 # photo gallery
-@app.route('/gallery/photo')
+@app.route('/gallery/images')
 def photo_gallery():
     return render_template('photo-gallery.html')
 
