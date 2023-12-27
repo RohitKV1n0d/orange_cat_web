@@ -468,8 +468,10 @@ def fetch_gallery_photos_urls():
                 gallery_images = ImageGallery.query.filter_by(name=gallery_name).first()
             else:
                 gallery_images = ImageGallery.query.filter_by(default=True).first()
-                gallery_name = gallery_images.name
-
+                if gallery_images:
+                    gallery_name = gallery_images.name
+                else:
+                   gallery_name = ''
             # gallery_images.image_dict = json.dumps(SAMPLE_GALLERY_IMAGES_DICT)
             # db.session.commit()
             if gallery_images:
