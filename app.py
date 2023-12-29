@@ -202,6 +202,14 @@ def index():
 
 
 
+# admin/socials
+@app.route('/admin/socials', methods=['GET', 'POST'])
+@admin_required
+def admin_socials():
+    return render_template('admin/socials.html')
+
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
