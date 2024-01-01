@@ -53,7 +53,10 @@
         color: rgb(255, 140, 0) !important;
         /* orange underline */
         border-bottom: 2px solid rgb(255, 140, 0) !important;
-        
+    }
+    @media (max-width: 991px){
+        .active{border-bottom: 0!important;}
+
     }
     </style>
 </head>
@@ -99,6 +102,9 @@
                     #dropdownMenuButton1 {
                         cursor: pointer;
                     }
+                    @media (max-width: 991px){
+                        #dropdownMenuButton1{margin-left: 15px;}
+                    }
                 </style>
                 <a href="{{ url_for('index') }}" class="logo"><img src="{{ url_for('static', filename='img/logo.png') }}"
                         class="logo-img" alt="logo"></a>
@@ -131,6 +137,62 @@
             </div>
         </div>
     </header>
+   <script>
+    	$( 'body' ).on('click', '.nav-btn',  function( event ){
+	$( event.currentTarget ).toggleClass('active');
+	$('.nav-menu').toggleClass('active');
+	$( 'body' ).toggleClass('no-scroll');
+	return false;
+	});
+
+	$( window ).on('resize.myTemplate', function(){
+	$('body')[ ( $(this).width() <= 767 ) ? 'addClass' : 'removeClass' ]('isMobile')
+	}).trigger( 'resize.myTemplate' );
+
+	$( 'body' ).on('click', '.dropdown>a', function( event){
+	if( ! $('body.isMobile')[0] ){
+		return;
+	}
+
+	var $thisLi = $( event.currentTarget ).parents( 'li' ),
+		$thisLiActive = $thisLi.hasClass( 'dropdown-active' );
+
+	$('.dropdown-active').removeClass('dropdown-active').children('ul').slideUp('slow');
+
+	if( ! $thisLiActive ){
+		$thisLi.addClass('dropdown-active');
+		$thisLi.children('ul').slideDown('slow');
+	}
+
+	return false;
+	});
+
+	$( 'body' ).on( 'mouseenter', '.dropdown', function(event){
+	if( $('body.isMobile')[0] ){
+		return;
+	}
+
+	var menuItem = $( event.currentTarget );
+
+	if( menuItem[0].timeOutMenu ){
+		clearTimeout( menuItem[0].timeOutMenu );
+	}
+
+	menuItem.addClass('active');
+	}).on( 'mouseleave', '.dropdown', function( event ){
+	if( $('body.isMobile')[0] ){
+		return;
+	}
+
+	var menuItem = $( event.currentTarget );
+
+	menuItem[0].timeOutMenu = setTimeout( function(){
+		menuItem.removeClass('active');
+	}, 500 );
+	});
+
+
+   </script>
     <!-- =============== HEADER END =============== -->
 
     {% block content %}
