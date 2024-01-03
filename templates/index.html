@@ -92,8 +92,8 @@
 <!-- ============= main-slider end ============= -->
 
 <!-- ============= banner-bar start ============= -->
-<section class="banner-bar mt-3 mt-md-0">
-	<p class="text-center">20% Discount for kids bikes | lorem ipsum dolor sit amet</p>
+<section class="banner-bar mt-0  mt-md-0">
+	<p class="text-md-center">20% Discount for kids bikes | lorem ipsum dolor sit amet</p>
 </section>
 <!-- ============= banner-bar end ============= -->
 
@@ -131,7 +131,7 @@
 <!--================== S-PRODUCTS ==================-->
 <section class="our-products">
 	<div class="container">
-		<h2 class="title text-uppercase text-center">our products&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text-center">our <b class="main-color">products</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
 		<p class="text-justify mt-3">Orange Cat is a one-product company, which ensures exceptionally high standards of quality control and outstanding customer support. Our catalogue encompasses two models of the Corinto Collection, a bicycle that embodies the mission, vision and values of its manufacturers. With its timeless and elegant lines, riding a Corinto bicycle will make you feel like gliding through royal courts.</p>
 		<div class="produc-cards">
@@ -232,9 +232,9 @@
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-6">
-				<h2 class="title text-capitalize small-title main-color text-center text-md-end">about our <br> orange
-					cat </h2>
-				<p class="mt-3 text-center text-md-end">It all started several years ago with a trip to Italy, during which time, our founder was gifted a beautifully handcrafted vintage bicycle by a close friend. Taken in by its features, he decided to bring it back to Canada and have a piece of Italy close to home. For years he rode this bicycle on the streets of downtown Toronto receiving compliments from passersby and drivers at stoplights. No one had ever seen such a unique bicycle. He rode his bicycle with his head held high, the wind in his hair and a smile on his face.
+				<h2 class="title text-capitalize small-title  text-left text-md-end">about our <br class="d-none "><b class="main-color">orange
+					cat</b>  </h2>
+				<p class="mt-3 text-justify text-md-end">It all started several years ago with a trip to Italy, during which time, our founder was gifted a beautifully handcrafted vintage bicycle by a close friend. Taken in by its features, he decided to bring it back to Canada and have a piece of Italy close to home. For years he rode this bicycle on the streets of downtown Toronto receiving compliments from passersby and drivers at stoplights. No one had ever seen such a unique bicycle. He rode his bicycle with his head held high, the wind in his hair and a smile on his face.
 					<br><br> And then, someone stole his bicycle.
 
  
@@ -492,7 +492,7 @@
 		<div class="gallery-header">
 			
 			<div class="header-container">
-				<h2 class="title text-uppercase text-center">our photo gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
+				<h2 class="title text-capitalize text-center">our <b class="main-color">photo</b> gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
 				<a href="{{ url_for('photo_gallery')}}" v-if="isAdmin" class="btn-main-edit" style="margin-left: 100px;">Edit</a>
 			</div>
 				</div>
@@ -601,7 +601,7 @@ var app = new Vue({
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-6 mb-3">
-				<h2 class="black-color text-center text-md-start">Experience the Video Gallery</h2>
+				<h2 class="black-color text-center text-md-start">Experience the <b class="main-color">Video</b> Gallery</h2>
 				<p class="mt-3 text-justify text-justify text-md-start">Step into the captivating world of vintage bicycles with the Orange Cat Video Gallery. Immerse yourself in the elegant and unique designs of our carefully handcrafted bicycles through a visual journey. Each video showcases the timeless allure and exquisite craftsmanship of these vintage treasures.</p>
 				<div class="text-center text-md-start">
 					<a href="single-shop.html" class="btn mt-4"><span>View All</span></a>
@@ -632,7 +632,7 @@ var app = new Vue({
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-4 icon-img">
-				<h2 class="title text-center text-capitalize small-title main-color">Follow us on <br> Social media </h2>
+				<h2 class="title text-center text-capitalize small-title"><b class="main-color">Follow</b> us on <br> Social media </h2>
 				<div class="social-media">
 					<div class="d-flex justify-content-center">
 						<a href="#">
@@ -669,7 +669,7 @@ var app = new Vue({
 	<span class="effwct-bg-feedback" style="background-image: url('assets/img/effect-bg-fack.svg');"></span>
 	<span class="mask"></span>
 	<div class="container">
-		<h2 class="title text-center text-md-start">feedback</h2>
+		<h2 class="title text-center text-md-start">Feedback</h2>
 		<div class="feedback-slider">
 			<div class="feedback-slide">
 				<div class="feedback-item justify-content-center align-items-center">
@@ -745,7 +745,7 @@ var app = new Vue({
 <!--================ contact-us start ================-->
 <section class="contact-orangecat" style="padding: 149px 0;">
 	<div class="container">
-		<h2 class="title text-uppercase text-center">Get in touch&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text-center">Get in <b class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
 		<p class="mt-4 text-center text-md-start">We're here to assist you every step of the way. Don't hesitate to get
 			in touch with our dedicated team for any inquiries, questions, or support you may need. We value your input
@@ -756,7 +756,7 @@ var app = new Vue({
 				<div class="col-lg-6">
 					<h5 class="main-color text-capitalize text-center">Locate us</h5>
 					<img src="{{ url_for('static', filename='img/contact/contact-img.jpg') }}" class="img-fluid mt-5">
-					<p class="mt-3 text-center text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham, CR6 9PX
+					<p class="mt-2 mt-md-3 text-start text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham, CR6 9PX
 					</p>
 					<h6 class="text-capitalize mt-3">contact us</h6>
 					<div class="d-flex reach-out-us mt-3">
@@ -772,18 +772,18 @@ var app = new Vue({
 								</div>
 							</div>
 						</div>
-						<div class="mail-us ms-md-5 ms-4">
+						<div class="mail-us ms-md-5 ms-md-4 ms-0">
 							<div class="d-flex">
 								<div class="contact-icon">
 									<img src="{{ url_for('static', filename='img/contact/mail.png') }}" alt="mail"
 										class="img-fluid">
 								</div>
-								<a href="mailto:info@example.com" class="ms-md-3 ms-2 mt-md-1 mt-2">info@example.com</a>
+								<a href="mailto:info@example.com" class="ms-md-3 ms-2 mt-md-1 mt-md-2 mt-0">info@example.com</a>
 							</div>
 						</div>
 					</div>
 					<div class="follow-us-on">
-						<h6 class="text-capitalize mt-5 text-center text-md-start">contact us</h6>
+						<h6 class="text-capitalize mt-5 text-center text-md-start">Follow us</h6>
 						<div class="d-flex mt-3 justify-content-center justify-content-md-start">
 							<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top"></i></a>
 							<a href="#" class="me-3"><i class="fa fa-instagram icon-top"></i></a>
@@ -794,7 +794,7 @@ var app = new Vue({
 				</div>
 				<div class="col-lg-6">
 					<form action="" class="mt-4 mt-md-0">
-						<h6 class="text-center text-capitalize mb-3">Reach Out to Us</h6>
+						<h6 class="text-center text-capitalize mb-3"><b class="main-color">Reach</b> Out to Us</h6>
 						<div class="mb-3">
 							<input type="text" class="form-control" id="name" placeholder="Name" required>
 						</div>
