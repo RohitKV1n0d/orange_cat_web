@@ -8,19 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
 
     <title id="title">Email Marketing</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+        type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -34,13 +36,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul id="vue-sidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul id="vue-sidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+            id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url_for('index')}}">
                 <div class="sidebar-brand-icon">
-                    <img class="img-profile rounded-circle company_profile_image"  style="width: 100%;"
-                                    src="https://i.ibb.co/NW0KWbt/logo.png">
+                    <img class="img-profile rounded-circle company_profile_image" style="width: 100%;"
+                        src="https://i.ibb.co/NW0KWbt/logo.png">
                 </div>
                 <!-- <div class="sidebar-brand-text mx-3">Orange Cat</div> -->
             </a>
@@ -55,7 +58,7 @@
                     <span>Dashboard</span></a>
             </li>
 
-           
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -65,8 +68,8 @@
                 Interface
             </div> -->
 
-          
-           
+
+
             <!-- Divider -->
             <!-- <hr class="sidebar-divider"> -->
 
@@ -84,7 +87,7 @@
 
 
             <!-- Nav Item - Pages Collapse Menu -->
-           
+
 
             <!-- Nav Item - Charts -->
             <!-- <li class="nav-item">
@@ -92,7 +95,7 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span></span></a>
             </li> -->
-           
+
 
 
 
@@ -106,7 +109,7 @@
             </div>
 
             <!-- Sidebar Message -->
-         
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -126,12 +129,12 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                       
+
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -171,7 +174,7 @@
 
                 <!-- Begin Page Content -->
                 {% block content %}
-                    {# instert here #}
+                {# instert here #}
                 {% endblock %}
                 <!-- /.container-fluid -->
 
