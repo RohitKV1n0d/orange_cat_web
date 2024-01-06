@@ -72,6 +72,22 @@
 
 </section>
 
+<script>
+	const sections = document.querySelectorAll('section');
+	document.addEventListener("scroll", function() {
+		sections.forEach(section => {
+			const sectionTop = section.getBoundingClientRect().top;
+			const windowHeight = window.innerHeight;
+
+			if (sectionTop < windowHeight * 0.75) {
+				section.classList.add('animate-on-scroll');
+			} else {
+				section.classList.remove('animate-on-scroll');
+			}
+		});
+	});
+</script>
+
 {% endblock %}
 	
 
