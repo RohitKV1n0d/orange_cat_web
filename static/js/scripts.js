@@ -292,8 +292,9 @@
 	}
 
 	/* -------------- SLIDER-CATEG-BICYKLE ------------- */
-	if( $('.feedback-slider')[0] ){
-		$( '.feedback-slider' ).slick({
+	$(document).ready(function() {
+		if ($('.feedback-slider').length) {
+			$('.feedback-slider').slick({
 			slidesToShow: 3,
 			slidesToScroll: 1,
 			arrows: true,
@@ -302,8 +303,6 @@
 			cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
 			nextArrow: '<span class="slick-arrow-next"><i class="fa fa-angle-right" aria-hidden="true"></i></span>',
 			prevArrow: '<span class="slick-arrow-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></span>',
-			// autoplay: true,
-			// autoplaySpeed: 4500,
 			responsive: [
 			{
 				breakpoint: 1200,
@@ -319,7 +318,8 @@
 			}
 			]
 		});
-	}
+    }
+});
 
 	/* -------------- SLIDER-CATEG-BICYKLE ------------- */
 	if( $('.clients-cover')[0] ){
@@ -764,6 +764,7 @@ $(document).ready( function() {
 
 // ------------------faq-------------------
   //<![CDATA[
+	document.addEventListener("DOMContentLoaded", function() {
 	let toggles = document.getElementsByClassName("toggle");
 	let contentDiv = document.getElementsByClassName("content-faq");
 	let icons = document.getElementsByClassName("icon");
@@ -792,7 +793,7 @@ $(document).ready( function() {
 			}
 		});
 	}
-
+});
 
 	// --------------carousel------------------
 
@@ -839,5 +840,3 @@ $(document).ready( function() {
 	
 
 
-
-	

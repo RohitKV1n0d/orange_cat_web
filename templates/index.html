@@ -115,7 +115,7 @@
 								comfortable riding experience.</p>
 							<div class="d-flex align-items-center mt-3">
 								<h5>$800</h5>
-								<a href="single-shop.html" class="btn ms-3"><span>Shop Now</span></a>
+								<a href="single-shop.html" class="btn ms-3"><span>Enquire Now</span></a>
 							</div>
 							<div class="mt-4"><a href="" class="view-more">View Details</a></div>
 						</div>
@@ -139,7 +139,7 @@
 								comfortable riding experience.</p>
 							<div class="d-flex align-items-center mt-3">
 								<h5>$800</h5>
-								<a href="single-shop.html" class="btn ms-3"><span>Shop Now</span></a>
+								<a href="single-shop.html" class="btn ms-3"><span>Enquire Now</span></a>
 							</div>
 							<div class="mt-4"><a href="" class="view-more">View Details</a></div>
 						</div>
@@ -153,7 +153,12 @@
 <!--================ S-PRODUCTS END ================-->
 
 <!--================== S-SUBSCRIBE ==================-->
-<section class="s-subscribe" style="background-image: url('assets/img/offer.jpg');">
+<section class="s-subscribe">
+	<video autoplay muted loop id="bg-video">
+        <source src="../static/img/discover-bg.mp4" type="video/mp4">
+        <!-- Add additional source elements for different video formats if needed -->
+        Your browser does not support HTML5 video.
+    </video>
 	<span class="mask"></span>
 	<span class="subscribe-effect wow fadeIn" data-wow-duration="1s"></span>
 	<div class="container">
@@ -167,6 +172,8 @@
 			data-src="{{ url_for('static', filename='img/home.png') }}" alt="img" style="width: 80%;">
 	</div>
 </section>
+
+
 <!--================ S-SUBSCRIBE END ================-->
 
 <!--================ gallery start ================-->
@@ -366,7 +373,6 @@
 			transform: translateX(0);
 		}
 	}
-	/* image modal */
 	.imgmodal {
 		display: none;
 		position: fixed;
@@ -380,7 +386,6 @@
 		background-color: rgb(0, 0, 0);
 		background-color: rgba(0, 0, 0, 0.9);
 	}
-
 	.imgmodal-content {
 		margin: auto;
 		display: flex;
@@ -389,7 +394,6 @@
 		width: 80%;
 		max-width: 600px;
 	}
-
 	.close {
 		position: absolute;
 		top: 15px;
@@ -399,16 +403,12 @@
 		font-weight: bold;
 		transition: 0.3s;
 	}
-
 	.close:hover,
 	.close:focus {
 		color: #bbb;
 		text-decoration: none;
 		cursor: pointer;
 	}
-
-	/* image modal */
-
 	.btn-main-edit {
 		padding: 10px 20px;
 		font-size: 16px;
@@ -445,7 +445,6 @@
 							<figure class="gallery__thumb">
 								<img :src="imgUrl" alt="" class="gallery__image" loading="lazy" />
 								<figcaption class="gallery__caption">
-									<!-- Caption  -->
 								</figcaption>
 							</figure>
 						</div>
@@ -578,18 +577,18 @@ var app = new Vue({
 				<div class="social-media">
 					<div class="d-flex justify-content-center">
 						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/facebook.png') }}" alt="" class="img-fluid">
+							<img src="{{ url_for('static', filename='img/icons/facebook.png') }}" alt="" class="img-fluid float-up">
 						</a>
 						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid ms-5">
+							<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid ms-5 float-up">
 						</a>
 					</div>
 					<div class="d-flex mt-5 justify-content-center">
 						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid">
+							<img src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid float-up">
 						</a>
 						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/twitter.png') }}" alt="" class="img-fluid ms-5">
+							<img src="{{ url_for('static', filename='img/icons/twitter.png') }}" alt="" class="img-fluid ms-5 float-up">
 						</a>
 					</div>
 				</div>
@@ -685,7 +684,7 @@ var app = new Vue({
 
 
 <!--================ contact-us start ================-->
-<section class="contact-orangecat" style="padding: 149px 0;">
+<section class="contact-orangecat" style="padding: 100px 0;">
 	<div class="container">
 		<h2 class="title text-capitalize text-center">Get in <b class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
@@ -727,10 +726,10 @@ var app = new Vue({
 					<div class="follow-us-on">
 						<h6 class="text-capitalize mt-5 text-center text-md-start">Follow us</h6>
 						<div class="d-flex mt-3 justify-content-center justify-content-md-start">
-							<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top"></i></a>
-							<a href="#" class="me-3"><i class="fa fa-instagram icon-top"></i></a>
-							<a href="#" class="me-3"><i class="fa fa-twitter icon-top"></i></a>
-							<a href="#" class="me-3"><i class="fa fa-pinterest icon-top"></i></a>
+							<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top float-up"></i></a>
+							<a href="#" class="me-3"><i class="fa fa-instagram icon-top float-up"></i></a>
+							<a href="#" class="me-3"><i class="fa fa-twitter icon-top float-up"></i></a>
+							<a href="#" class="me-3"><i class="fa fa-pinterest icon-top float-up"></i></a>
 						</div>
 					</div>
 				</div>
@@ -761,6 +760,22 @@ var app = new Vue({
 	</div>
 </section>
 
+
+<script>
+	const sections = document.querySelectorAll('section');
+	document.addEventListener("scroll", function() {
+		sections.forEach(section => {
+			const sectionTop = section.getBoundingClientRect().top;
+			const windowHeight = window.innerHeight;
+
+			if (sectionTop < windowHeight * 0.75) {
+				section.classList.add('animate-on-scroll');
+			} else {
+				section.classList.remove('animate-on-scroll');
+			}
+		});
+	});
+</script>
 <!--================ contact-us end ================-->
 
 {% endblock %}
