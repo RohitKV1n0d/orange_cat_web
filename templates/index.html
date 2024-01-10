@@ -4,6 +4,7 @@
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 {% block content %}
+
 <!-- =============== main-slider =============== -->
 
 <section class="landing-page-section">
@@ -164,8 +165,6 @@
 		</section>
 	</div>
 </section>
-	
-
 
 <!--================ gallery end ================-->
 <style>
@@ -503,9 +502,10 @@ var app = new Vue({
 				</div>
 			</div>
 			<div class="col-lg-6 mb-3">
-				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
+				<video id="my-video" class="video-js" controls preload="auto" poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" data-setup='' loop>
+					<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type='video/mp4'>
+					</video>
+				<!-- <video src="{{ url_for('static', filename='img/video-gallery-1.mp4') }}"  autoplay loop playsinline></video> -->
 			</div>
 			<div class="col-lg-6 mb-3">
 				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
@@ -520,6 +520,16 @@ var app = new Vue({
 		</div>
 	</div>
 </section>
+<script>
+	window.addEventListener('load', async () => {
+  let video = document.querySelector('video[muted][autoplay]');
+  try {
+    await video.play();
+  } catch (err) {
+    video.controls = true;
+  }
+});
+</script>
 <!--============= video-gallery end =============-->
 
 <!--============= follow-us start =============-->
@@ -527,29 +537,31 @@ var app = new Vue({
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-4 icon-img">
-				<h2 class="title text-center text-capitalize small-title letter-space-value"><b class="main-color">Follow</b> us on <br> Social media </h2>
-				<div class="social-media">
-					<div class="d-flex justify-content-center">
-						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/facebook.png') }}" alt="" class="img-fluid float-up">
-						</a>
-						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid ms-5 float-up">
-						</a>
-					</div>
-					<div class="d-flex mt-5 justify-content-center">
-						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid float-up">
-						</a>
-						<a href="#">
-							<img src="{{ url_for('static', filename='img/icons/twitter.png') }}" alt="" class="img-fluid ms-5 float-up">
-						</a>
+				<div class="follow-left-contents">
+					<h2 class="title text-center text-capitalize small-title letter-space-value"><b class="main-color">Follow</b> us on <br> Social media </h2>
+					<div class="social-media">
+						<div class="d-flex justify-content-center">
+							<a href="#">
+								<img src="{{ url_for('static', filename='img/icons/facebook.png') }}" alt="" class="img-fluid float-up">
+							</a>
+							<a href="#">
+								<img src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid ms-5 float-up">
+							</a>
+						</div>
+						<div class="d-flex mt-5 justify-content-center">
+							<a href="#">
+								<img src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid float-up">
+							</a>
+							<a href="#">
+								<img src="{{ url_for('static', filename='img/icons/twitter.png') }}" alt="" class="img-fluid ms-5 float-up">
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-8">
-				<div class="border-left">
-					<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+				<div>
+					<img src="{{ url_for('static', filename='img/follow-us-on.png') }}" alt="" class="img-fluid">
 				</div>
 			</div>
 		</div>
@@ -560,16 +572,20 @@ var app = new Vue({
 
 
 <!--================== S-FEEDBACK ==================-->
-<section class="s-feedback" style="background-image: url('assets/img/feedback-bg');">
-	<span class="effwct-bg-feedback" style="background-image: url('assets/img/effect-bg-fack.svg');"></span>
+<section class="s-feedback" style="background: url('../static/img/feedback-vdo-2.mp4');">
+	<video autoplay muted loop id="bg-video">
+        <source src="../static/img/feedback-vdo-2.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+	<span class="effwct-bg-feedback" ></span>
 	<span class="mask"></span>
 	<div class="container">
 		<h2 class="title text-center text-md-start letter-space-value">Feedback</h2>
 		<div class="feedback-slider">
-			<div class="feedback-slide">
+			<div class="feedback-slide float-up">
 				<div class="feedback-item justify-content-center align-items-center">
 					<div class="feedback-item-top">
-						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<img src="{{ url_for('static', filename='img/profile-img.jpg') }}" alt="photo">
 						<div class="feedback-title mb-4">
 							<h5 class="title"><span>Li piters</span></h5>
 							<p>Lorem Ipsum</p>
@@ -582,10 +598,10 @@ var app = new Vue({
 					</div>
 				</div>
 			</div>
-			<div class="feedback-slide">
+			<div class="feedback-slide float-up">
 				<div class="feedback-item justify-content-center align-items-center">
 					<div class="feedback-item-top">
-						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<img src="{{ url_for('static', filename='img/profile-img.jpg') }}" alt="photo">
 						<div class="feedback-title mb-4">
 							<h5 class="title"><span>Li piters</span></h5>
 							<p>Lorem Ipsum</p>
@@ -598,10 +614,10 @@ var app = new Vue({
 					</div>
 				</div>
 			</div>
-			<div class="feedback-slide">
+			<div class="feedback-slide float-up">
 				<div class="feedback-item justify-content-center align-items-center">
 					<div class="feedback-item-top">
-						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<img src="{{ url_for('static', filename='img/profile-img.jpg') }}" alt="photo">
 						<div class="feedback-title mb-4">
 							<h5 class="title"><span>Li piters</span></h5>
 							<p>Lorem Ipsum</p>
@@ -614,10 +630,10 @@ var app = new Vue({
 					</div>
 				</div>
 			</div>
-			<div class="feedback-slide">
+			<div class="feedback-slide float-up">
 				<div class="feedback-item justify-content-center align-items-center">
 					<div class="feedback-item-top">
-						<img src="{{ url_for('static', filename='img/feedback-photo-1.png') }}" alt="photo">
+						<img src="{{ url_for('static', filename='img/profile-img.jpg') }}" alt="photo">
 						<div class="feedback-title mb-4">
 							<h5 class="title"><span>Li piters</span></h5>
 							<p>Lorem Ipsum</p>
@@ -647,10 +663,12 @@ var app = new Vue({
 			and are committed to providing prompt and helpful responses. We look forward to connecting with you and
 			ensuring your experience with us is exceptional.</p>
 		<div class="contact-contents">
-			<div class="row justify-content-center align-items-center">
+			<div class="row justify-content-center">
+				<div class="col-lg-12">
+					<h5 class="black-color text-capitalize mb-3"><b class="main-color">Locate</b> us</h5>
+				</div>
 				<div class="col-lg-6">
-					<h5 class="main-color text-capitalize text-center">Locate us</h5>
-					<img src="{{ url_for('static', filename='img/contact/contact-img.jpg') }}" class="img-fluid mt-5">
+					<img src="{{ url_for('static', filename='img/contact-left-img.jpg') }}" class="img-fluid">
 					<p class="mt-2 mt-md-3 text-start text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham, CR6 9PX
 					</p>
 					<h6 class="text-capitalize mt-3">contact us</h6>
@@ -667,18 +685,18 @@ var app = new Vue({
 								</div>
 							</div>
 						</div>
-						<div class="mail-us ms-md-5 ms-md-4 ms-0">
-							<div class="d-flex">
+						<div class="mail-us ms-md-4 ms-2">
+							<div class="d-flex align-items-center">
 								<div class="contact-icon">
 									<img src="{{ url_for('static', filename='img/contact/mail.png') }}" alt="mail"
 										class="img-fluid">
 								</div>
-								<a href="mailto:info@example.com" class="ms-md-3 ms-2 mt-md-1 mt-md-2 mt-0">info@example.com</a>
+								<a href="mailto:info@example.com" class="ms-md-3 ms-2 mt-0">info@example.com</a>
 							</div>
 						</div>
 					</div>
 					<div class="follow-us-on">
-						<h6 class="text-capitalize mt-5 text-center text-md-start">Follow us</h6>
+						<h6 class="text-capitalize mt-3 text-center text-md-start">Follow us</h6>
 						<div class="d-flex mt-3 justify-content-center justify-content-md-start">
 							<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top float-up"></i></a>
 							<a href="#" class="me-3"><i class="fa fa-instagram icon-top float-up"></i></a>
@@ -689,7 +707,7 @@ var app = new Vue({
 				</div>
 				<div class="col-lg-6">
 					<form action="" class="mt-4 mt-md-0">
-						<h6 class="text-center text-capitalize mb-3"><b class="main-color">Reach</b> Out to Us</h6>
+						<h6 class="text-center text-capitalize mb-4"><b class="main-color">Reach</b> Out to Us</h6>
 						<div class="mb-3">
 							<input type="text" class="form-control" id="name" placeholder="Name" required>
 						</div>
@@ -730,6 +748,8 @@ var app = new Vue({
 		});
 	});
 </script>
+
+
 
 
 
