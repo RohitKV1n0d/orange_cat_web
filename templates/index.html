@@ -1,100 +1,44 @@
-{% extends "base.html" %}
 
+{% extends "base.html" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 {% block content %}
 <!-- =============== main-slider =============== -->
 
-<section class="s-main-slider">
-	<div class="main-slide-navigation"></div>
-	<ul class="main-soc-list">
-		<li><a href="#"><i class="fa fa-facebook-f icon-top"></i></a></li>
-		<li><a href="#"><i class="fa fa-instagram icon-top"></i></a></li>
-		<li><a href="#"><i class="fa fa-twitter icon-top"></i></a></li>
-		<li><a href="#"><i class="fa fa-pinterest icon-top"></i></a></li>
-	</ul>
-	<div class="main-slider">
-		<div class="main-slide">
-			<section class="showcase-banner">
-				<img src="{{ url_for('static', filename='img/home-banner/2.jpg') }}" alt="img" class="slide-img img-fluid" loading="lazy" style="height: 100vh;width: 100%;object-fit: cover;">
-				<div class="overlay-contents">
-					<div class="container">
-						<div class="main-slide-info">
-							<h2 class="title white-color-head"> Italian luxury and exquisite craftmanship <br> on wheels</h2>
-							<p>Embrace the charm of vintage inspired bicycles, uniquely handcrafted and carefully shipped by our Italian suppliers. Elevate and distinguish yourself in your everyday life with our handpicked selection of bicycles. Their high-quality material and elegant lines embody Italian craft tradition and are the vanguard of international design. The result is a product with a perfect balance of elegance and performance.</p>
-							<a href="single-shop.html" class="btn"><span>Explore More</span></a>
-						</div>
-					</div>
-				</div>
-			</section>
+<section class="landing-page-section">
+	<header class="video-header">
+		<video src="{{ url_for('static', filename='img/video.mp4') }}" autoplay loop playsinline muted></video>
+		<div class="header-icons">
+			<a href=""><i class="fa fa-facebook-f me- float-up"></i></a>
+			<a href=""><i class="fa fa-instagram float-up"></i></a>
+			<a href=""><i class="fa fa-twitter   float-up"></i></a>
+			<a href=""><i class="fa fa-pinterest  float-up"></i></a>
+		  </div>
+		<div class="viewport-header">
+		  <h1>
+			Explore
+			<span>Orangecat</span>
+		  </h1>
+		  
 		</div>
-		<div class="main-slide">
-			<section class="showcase-banner">
-				<img src="{{ url_for('static', filename='img/home-banner/1.jpg') }}" alt="img" class="slide-img img-fluid" style="height: 100vh;width: 100%;object-fit: cover;">
-				<div class="overlay-contents">
-					<div class="container">
-						<div class="main-slide-info">
-							<h2 class="title white-color-head">Get Ready to Conquer the Roads with <br>Orange cat</h2>
-							<p>Ride with Confidence, Ride with Orange Cat Bicycles. Discover our collection of meticulously
-								crafted bicycles that prioritize safety, durability, and comfort. </p>
-							<a href="single-shop.html" class="btn"><span>Explore More</span></a>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-		<div class="main-slide">
-			<section class="showcase-banner">
-				<img src="{{ url_for('static', filename='img/home-banner/3.jpg') }}" alt="img" class="slide-img img-fluid" style="height: 100vh;width: 100%;object-fit: cover;">
-				<div class="overlay-contents">
-					<div class="container">
-						<div class="main-slide-info">
-							<h2 class="title white-color-head">Get Ready to Conquer the Roads with <br>Orange cat</h2>
-							<p>Ride with Confidence, Ride with Orange Cat Bicycles. Discover our collection of meticulously
-								crafted bicycles that prioritize safety, durability, and comfort. </p>
-							<a href="single-shop.html" class="btn"><span>Explore More</span></a>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-		<div class="main-slide">
-			<section class="showcase-banner">
-				<img src="{{ url_for('static', filename='img/home-banner/4.jpg') }}" alt="img" class="slide-img img-fluid" style="height: 100vh;width: 100%;object-fit: cover;">
-				<div class="overlay-contents">
-					<div class="container">
-						<div class="main-slide-info">
-							<h2 class="title white-color-head">Get Ready to Conquer the Roads with <br>Orange cat</h2>
-							<p>Ride with Confidence, Ride with Orange Cat Bicycles. Discover our collection of meticulously
-								crafted bicycles that prioritize safety, durability, and comfort. </p>
-							<a href="single-shop.html" class="btn"><span>Explore More</span></a>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-		<div class="main-slide">
-			<section class="showcase-banner">
-				<img src="{{ url_for('static', filename='img/home-banner/5.jpg') }}" alt="img" class="slide-img img-fluid" style="height: 100vh;width: 100%;object-fit: cover;">
-				<div class="overlay-contents">
-					<div class="container">
-						<div class="main-slide-info">
-							<h2 class="title white-color-head">Get Ready to Conquer the Roads with <br> <b>Orange cat</b></h2>
-							<p>Ride with Confidence, Ride with Orange Cat Bicycles. Discover our collection of meticulously
-								crafted bicycles that prioritize safety, durability, and comfort. </p>
-							<a href="single-shop.html" class="btn banner-btn"><span>Explore More</span></a>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-	</div>
+	  </header>
 </section>
+  <script>
+	var viewportHeader = document.querySelector(".viewport-header");
+	document.body.addEventListener("scroll", function(event) {
+	var opacity = (document.body.offsetHeight - document.body.scrollTop) / document.body.offsetHeight;
+	var scale = (document.body.offsetHeight - document.body.scrollTop) / document.body.offsetHeight;
+	document.documentElement.style.setProperty('--headerOpacity', opacity);
+	document.documentElement.style.setProperty('--headerScale', scale);
+	});
+  </script>
 <!-- ============= main-slider end ============= -->
 
 <!--================== S-PRODUCTS ==================-->
-<section class="our-products">
+<main class="our-products">
 	<div class="container">
-		<h2 class="title text-capitalize text-center">our <b class="main-color">products</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text-center letter-space-value">our <b class="main-color">products</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
 		<p class="text-justify mt-3">Orange Cat is a one-product company, which ensures exceptionally high standards of quality control and outstanding customer support. Our catalogue encompasses two models of the Corinto Collection, a bicycle that embodies the mission, vision and values of its manufacturers. With its timeless and elegant lines, riding a Corinto bicycle will make you feel like gliding through royal courts.</p>
 		<div class="produc-cards">
@@ -148,28 +92,32 @@
 			</div>
 		</div>
 	</div>
-</section>
+</main>
 
 <!--================ S-PRODUCTS END ================-->
 
 <!--================== S-SUBSCRIBE ==================-->
-<section class="s-subscribe">
-	<video autoplay muted loop id="bg-video">
-        <source src="../static/img/discover-bg.mp4" type="video/mp4">
-        <!-- Add additional source elements for different video formats if needed -->
-        Your browser does not support HTML5 video.
-    </video>
-	<span class="mask"></span>
-	<span class="subscribe-effect wow fadeIn" data-wow-duration="1s"></span>
-	<div class="container">
-		<div class="subscribe-left">
-			<h3 class="title text-capitalize small-title ad-title"><span>Let’s Start your <br><b class="mt-2">Discover 100 years of tradition in bicycle manufacturing.</b></span></h3>
-			<p class="text-capitalize">Embark on a journey of craftmanship, luxury and design for a unique bicycle that will satisfy even the most demanding tastes.</p>
-			<button type="submit" class="btn btn-form"><span>Know More</span></button>
-		</div>
-		<img class="wow fadeInRightBlur lazy img-fluid" data-wow-duration=".8s" data-wow-delay=".3s"
-			src="{{ url_for('static', filename='img/home.png') }}"
-			data-src="{{ url_for('static', filename='img/home.png') }}" alt="img" style="width: 80%;">
+<section class="background">
+	<div class="content-wrapper">
+		<section class="s-subscribe">
+			<video autoplay muted loop id="bg-video">
+				<source src="../static/img/discover-bg.mp4" type="video/mp4">
+				<!-- Add additional source elements for different video formats if needed -->
+				Your browser does not support HTML5 video.
+			</video>
+			<span class="mask"></span>
+			<span class="subscribe-effect wow fadeIn" data-wow-duration="1s"></span>
+			<div class="container">
+				<div class="subscribe-left">
+					<h3 class="title  letter-space-value text-capitalize small-title ad-title"><span>Let’s Start your <br><b class="mt-2">Discover 100 years of tradition in bicycle manufacturing.</b></span></h3>
+					<p class="text-capitalize">Embark on a journey of craftmanship, luxury and design for a unique bicycle that will satisfy even the most demanding tastes.</p>
+					<button type="submit" class="btn btn-form"><span>Know More</span></button>
+				</div>
+				<img class="wow fadeInRightBlur lazy img-fluid" data-wow-duration=".8s" data-wow-delay=".3s"
+					src="{{ url_for('static', filename='img/home.png') }}"
+					data-src="{{ url_for('static', filename='img/home.png') }}" alt="img" style="width: 80%;">
+			</div>
+		</section>
 	</div>
 </section>
 
@@ -177,41 +125,47 @@
 <!--================ S-SUBSCRIBE END ================-->
 
 <!--================ gallery start ================-->
-<section class="about-orangecat">
-	<div class="container">
-		<div class="row justify-content-center align-items-center">
-			<div class="col-lg-6">
-				<h2 class="title text-capitalize small-title  text-left text-md-end">about our <br class="d-none "><b class="main-color">orange
-					cat</b>  </h2>
-				<p class="mt-3 text-justify text-md-end">It all started several years ago with a trip to Italy, during which time, our founder was gifted a beautifully handcrafted vintage bicycle by a close friend. Taken in by its features, he decided to bring it back to Canada and have a piece of Italy close to home. For years he rode this bicycle on the streets of downtown Toronto receiving compliments from passersby and drivers at stoplights. No one had ever seen such a unique bicycle. He rode his bicycle with his head held high, the wind in his hair and a smile on his face.
-					<br><br> And then, someone stole his bicycle.
-
- 
-
-					He searched far and wide but he noted that there were no retailers in the area that had similar products available, so he returned to Italy. In 2022 he established a partnership with Taurus, a vintage bicycle manufacturer, to bring their product to Canada and Orange Cat was born.
-				</p>
-				<div class=" text-center text-md-end mb-5 mb-md-0">
-					<button type="submit" class="btn btn-form mt-3"><span>Read More</span></button>
-				</div>
-			</div>
-			<div class="col-lg-6">
-				<div class="about-contents">
-					<div class="row justify-content-center align-items-center">
-						<div class="col-lg-12 mb-3">
-							<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+<section class="background">
+	<div class="content-wrapper">
+		<section class="about-orangecat">
+			<div class="container">
+				<div class="row justify-content-center align-items-center">
+					<div class="col-lg-6">
+						<h2 class="title text-capitalize small-title letter-space-value">about our <br class="d-none "><b class="main-color">orange
+							cat</b>  </h2>
+						<p class="mt-3 text-justify ">It all started several years ago with a trip to Italy, during which time, our founder was gifted a beautifully handcrafted vintage bicycle by a close friend. Taken in by its features, he decided to bring it back to Canada and have a piece of Italy close to home. For years he rode this bicycle on the streets of downtown Toronto receiving compliments from passersby and drivers at stoplights. No one had ever seen such a unique bicycle. He rode his bicycle with his head held high, the wind in his hair and a smile on his face.
+							<br><br> And then, someone stole his bicycle.
+		
+		 
+		
+							He searched far and wide but he noted that there were no retailers in the area that had similar products available, so he returned to Italy. In 2022 he established a partnership with Taurus, a vintage bicycle manufacturer, to bring their product to Canada and Orange Cat was born.
+						</p>
+						<div class=" mb-5 mb-md-0">
+							<button type="submit" class="btn btn-form mt-3"><span>Read More</span></button>
 						</div>
-						<div class="col-lg-6 mb-3">
-							<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
-						</div>
-						<div class="col-lg-6 mb-3">
-							<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+					</div>
+					<div class="col-lg-6">
+						<div class="about-contents">
+							<div class="row justify-content-center align-items-center">
+								<div class="col-lg-12 mb-3">
+									<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+								</div>
+								<div class="col-lg-6 mb-3">
+									<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+								</div>
+								<div class="col-lg-6 mb-3">
+									<img src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	</div>
 </section>
+	
+
 
 <!--================ gallery end ================-->
 <style>
@@ -434,7 +388,7 @@
 		<div class="gallery-header">
 			
 			<div class="header-container">
-				<h2 class="title text-capitalize text-center">our <b class="main-color">photo</b> gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
+				<h2 class="title text-capitalize text-center letter-space-value">our <b class="main-color">photo</b> gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
 				<a href="{{ url_for('photo_gallery')}}" v-if="isAdmin" class="btn-main-edit" style="margin-left: 100px;">Edit</a>
 			</div>
 				</div>
@@ -542,7 +496,7 @@ var app = new Vue({
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-6 mb-3">
-				<h2 class="black-color text-center text-md-start">Experience the <b class="main-color">Video</b> Gallery</h2>
+				<h2 class="black-color text-center text-md-start letter-space-value">Experience the <b class="main-color">Video</b> Gallery</h2>
 				<p class="mt-3 text-justify text-justify text-md-start">Step into the captivating world of vintage bicycles with the Orange Cat Video Gallery. Immerse yourself in the elegant and unique designs of our carefully handcrafted bicycles through a visual journey. Each video showcases the timeless allure and exquisite craftsmanship of these vintage treasures.</p>
 				<div class="text-center text-md-start">
 					<a href="single-shop.html" class="btn mt-4"><span>View All</span></a>
@@ -573,7 +527,7 @@ var app = new Vue({
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-4 icon-img">
-				<h2 class="title text-center text-capitalize small-title"><b class="main-color">Follow</b> us on <br> Social media </h2>
+				<h2 class="title text-center text-capitalize small-title letter-space-value"><b class="main-color">Follow</b> us on <br> Social media </h2>
 				<div class="social-media">
 					<div class="d-flex justify-content-center">
 						<a href="#">
@@ -610,7 +564,7 @@ var app = new Vue({
 	<span class="effwct-bg-feedback" style="background-image: url('assets/img/effect-bg-fack.svg');"></span>
 	<span class="mask"></span>
 	<div class="container">
-		<h2 class="title text-center text-md-start">Feedback</h2>
+		<h2 class="title text-center text-md-start letter-space-value">Feedback</h2>
 		<div class="feedback-slider">
 			<div class="feedback-slide">
 				<div class="feedback-item justify-content-center align-items-center">
@@ -686,7 +640,7 @@ var app = new Vue({
 <!--================ contact-us start ================-->
 <section class="contact-orangecat" style="padding: 100px 0;">
 	<div class="container">
-		<h2 class="title text-capitalize text-center">Get in <b class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text- letter-space-value">Get in <b class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
 		<p class="mt-4 text-center text-md-start">We're here to assist you every step of the way. Don't hesitate to get
 			in touch with our dedicated team for any inquiries, questions, or support you may need. We value your input
@@ -776,6 +730,9 @@ var app = new Vue({
 		});
 	});
 </script>
+
+
+
 <!--================ contact-us end ================-->
 
 {% endblock %}
