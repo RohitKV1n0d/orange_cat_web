@@ -3,7 +3,10 @@
 
 $(document).ready(function(){
 		/*--------------------- PRELOADER --------------------*/
-		$('body').addClass('animated-page page-loaded');
+		setTimeout(function() {
+			/*--------------------- PRELOADER --------------------*/
+			$('body').addClass('animated-page page-loaded');
+		}, 1000); 
 
 		/*----------------------- WOW ------------------------*/
 		if( $( '.wow' )[0] ){
