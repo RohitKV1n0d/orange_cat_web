@@ -1,7 +1,7 @@
 (function($){
 "use strict";
 
-	$(window).on( 'load', function(){
+$(document).ready(function(){
 		/*--------------------- PRELOADER --------------------*/
 		$('body').addClass('animated-page page-loaded');
 
