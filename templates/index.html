@@ -9,7 +9,54 @@
 
 <section class="landing-page-section">
 	<header class="video-header">
-		<video src="{{ url_for('static', filename='img/video.mp4') }}" autoplay loop playsinline muted></video>
+		<video 
+			width="320" 
+			height="240" 
+			autoplay 
+			loop 
+			playsinline 
+			muted 
+			poster="{{ url_for('static', filename='img/banner-placeholder-image.jpg') }}" 
+			controls>
+			<source data-src="{{ url_for('static', filename='img/video.mp4') }}" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+			var lazyVideos = [].slice.call(document.querySelectorAll("video"));
+
+			if ("IntersectionObserver" in window) {
+				var videoObserver = new IntersectionObserver(function(entries, observer) {
+				entries.forEach(function(video) {
+					if (video.isIntersecting) {
+					for (var source in video.target.children) {
+						var videoSource = video.target.children[source];
+						if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+						videoSource.src = videoSource.dataset.src;
+						}
+					}
+					video.target.load();
+					video.target.classList.remove("lazy");
+					videoObserver.unobserve(video.target);
+					}
+				});
+				});
+
+				lazyVideos.forEach(function(lazyVideo) {
+				videoObserver.observe(lazyVideo);
+				});
+			} else {
+				// Fallback for browsers that don't support IntersectionObserver
+				lazyVideos.forEach(function(lazyVideo) {
+				var source = lazyVideo.querySelector("source");
+				source.src = source.dataset.src;
+				lazyVideo.load();
+				});
+			}
+			});
+
+		</script>
+
 		<div class="header-icons">
 			<a href=""><i class="fa fa-facebook-f me- float-up"></i></a>
 			<a href=""><i class="fa fa-instagram float-up"></i></a>
