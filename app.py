@@ -254,8 +254,8 @@ def view_products():
 
 @app.route('/products/<int:id>')
 def view_product(id):
-    product = Products.query.get_or_404(id)
-    return render_template('product.html', product=product)
+    # product = Products.query.get_or_404(id)
+    return render_template('product-details.html')
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
