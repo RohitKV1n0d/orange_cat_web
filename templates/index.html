@@ -106,10 +106,9 @@
 								this exquisite bicycle is designed specifically for women seeking a luxurious and
 								comfortable riding experience.</p>
 							<div class="d-flex align-items-center mt-3">
-								<h5>$800</h5>
-								<a href="single-shop.html" class="btn ms-3"><span>Enquire Now</span></a>
+								<a href="#" class="btn me-3"  data-bs-toggle="modal" data-bs-target="#productContactModal"><span>Enquire Now</span></a>
+								<a href="{{ url_for('view_products') }}" class="view-more m-0 p-0">View Details</a>
 							</div>
-							<div class="mt-4"><a href="" class="view-more">View Details</a></div>
 						</div>
 					</div>
 				</div>
@@ -130,10 +129,9 @@
 								this exquisite bicycle is designed specifically for women seeking a luxurious and
 								comfortable riding experience.</p>
 							<div class="d-flex align-items-center mt-3">
-								<h5>$800</h5>
-								<a href="single-shop.html" class="btn ms-3"><span>Enquire Now</span></a>
+								<a href="#" class="btn me-3"  data-bs-toggle="modal" data-bs-target="#productContactModal"><span>Enquire Now</span></a>
+								<a href="{{ url_for('view_products') }}" class="view-more m-0 p-0">View Details</a>
 							</div>
-							<div class="mt-4"><a href="" class="view-more">View Details</a></div>
 						</div>
 					</div>
 				</div>
@@ -863,7 +861,35 @@ var app = new Vue({
 	});
 </script>
 
-
+<!-- Modal -->
+<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-body">
+			<form action="">
+				<h4 class="text-capitalize black-color">Corinto Deluxe Donna </h4>
+				<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
+				<div class="mb-3">
+					<input type="text" class="form-control" id="name" placeholder="Name" required>
+				  </div>
+				<div class="mb-3">
+					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
+				  </div>
+				  <div class="mb-3">
+					<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
+				  </div>
+				  <div class="mb-4">
+					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." required></textarea>
+				  </div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
+		  	<button type="submit" class="btn"><span>Send</span></button>
+		</div>
+	  </div>
+	</div>
+  </div>
 
 
 

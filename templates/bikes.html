@@ -18,12 +18,11 @@
 				<div class="row justify-content-center align-items-center product-info">
 					<div class="col-lg-4">
 						<div class="product-description">
-							<h4 class="text-uppercase black-color text-center text-md-start">Corinto Deluxe Donna</h4>
+							<h4 class="text-capitalize black-color text-center text-md-start letter-space-value">Corinto Deluxe Donna</h4>
 							<p class="text-justify mt-3">The Corinto Deluxe Donna boasts a striking design that captivates with its sleek lines and graceful curves. Every aspect of this bicycle is thoughtfully considered, from its lightweight frame to its premium components, ensuring an exceptional riding experience.</p>
-							<h4 class="text-uppercase black-color mt-3 text-center text-md-start">$1200</h4>
-							<div class="d-flex mt-3  align-items-center justify-content-center justify-content-md-start">
-								<a href="{{ url_for('view_product', id=1) }}" class="btn mt-4"><span>Shop Now</span></a>
-								<a href="{{ url_for('view_product', id=1) }}" class=" mt-4 ms-3">Buy Now</a>
+							<div class="d-flex mt-md-3  align-items-center justify-content-center justify-content-md-start">
+								<a href="{{ url_for('view_product', id=1) }}" class="btn mt-4"><span>Know More</span></a>
+								<a href="{{ url_for('view_product', id=1) }}" class=" mt-4 ms-3"  data-bs-toggle="modal" data-bs-target="#productContactModal">Enquire Now</a>
 							</div>
 						</div>
 					</div>
@@ -38,12 +37,11 @@
 				<div class="row justify-content-center align-items-center product-info">
 					<div class="col-lg-4">
 						<div class="product-description">
-							<h4 class="text-uppercase black-color text-center text-md-start">Corinto Deluxe Donna</h4>
+							<h4 class="text-capitalize black-color text-center text-md-start letter-space-value">Corinto Deluxe Donna</h4>
 							<p class="text-justify mt-3">The Corinto Deluxe Donna boasts a striking design that captivates with its sleek lines and graceful curves. Every aspect of this bicycle is thoughtfully considered, from its lightweight frame to its premium components, ensuring an exceptional riding experience.</p>
-							<h4 class="text-uppercase black-color mt-3 text-center text-md-start">$1200</h4>
-							<div class="d-flex mt-3 align-items-center  justify-content-center justify-content-md-start">
-								<a href="#" class="btn mt-4"><span>Shop Now</span></a>
-								<a href="#" class=" mt-4 ms-3">Buy Now</a>
+							<div class="d-flex mt-md-3 align-items-center  justify-content-center justify-content-md-start">
+								<a href="#" class="btn mt-4"><span>Know More</span></a>
+								<a href="#" class=" mt-4 ms-3"  data-bs-toggle="modal" data-bs-target="#productContactModal">Enquire Now</a>
 							</div>
 						</div>
 					</div>
@@ -87,6 +85,36 @@
 		});
 	});
 </script>
+
+<!-- Modal -->
+<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-body">
+			<form action="">
+				<h4 class="text-capitalize black-color">Corinto Deluxe Donna </h4>
+				<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
+				<div class="mb-3">
+					<input type="text" class="form-control" id="name" placeholder="Name" required>
+				  </div>
+				<div class="mb-3">
+					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
+				  </div>
+				  <div class="mb-3">
+					<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
+				  </div>
+				  <div class="mb-4">
+					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." required></textarea>
+				  </div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
+		  	<button type="submit" class="btn"><span>Send</span></button>
+		</div>
+	  </div>
+	</div>
+  </div>
 
 {% endblock %}
 	
