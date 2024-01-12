@@ -843,3 +843,6 @@ $(document).ready( function() {
 	
 
 
+// ----------video gallery---------------
+
+

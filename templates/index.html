@@ -1,7 +1,14 @@
 
 {% extends "base.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.4.8/plyr.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+
+<!-- ---------video------- -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 
 {% block content %}
 
@@ -51,7 +58,7 @@
 		</script>
 
 		<div class="header-icons">
-			<a href=""><i class="fa fa-facebook-f me- float-up"></i></a>
+			<a href="https://codepen.io/quicksilversel/pen/yLwOQee"><i class="fa fa-facebook-f me- float-up"></i></a>
 			<a href=""><i class="fa fa-instagram float-up"></i></a>
 			<a href=""><i class="fa fa-twitter   float-up"></i></a>
 			<a href=""><i class="fa fa-pinterest  float-up"></i></a>
@@ -533,43 +540,110 @@ var app = new Vue({
 <!--============= video-gallery start =============-->
 <section class="video-gallery">
 	<div class="container">
-		<div class="row justify-content-center align-items-center">
-			<div class="col-lg-6 mb-3">
-				<h2 class="black-color text-center text-md-start letter-space-value">Experience the <b class="main-color">Video</b> Gallery</h2>
-				<p class="mt-3 text-justify text-justify text-md-start">Step into the captivating world of vintage bicycles with the Orange Cat Video Gallery. Immerse yourself in the elegant and unique designs of our carefully handcrafted bicycles through a visual journey. Each video showcases the timeless allure and exquisite craftsmanship of these vintage treasures.</p>
-				<div class="text-center text-md-start">
-					<a href="single-shop.html" class="btn mt-4"><span>View All</span></a>
+		<h2 class="title text-capitalize text-center letter-space-value">our <b class="main-color">video</b> gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
+		<div class="swiper-container swiper-initialize">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="video-container">
+						<video class="gallery-video" loop>
+							<source src="../static/img/video-gal-1.mp4" type="video/mp4">
+							Your browser does not support HTML5 video.
+						</video>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="video-container">
+						<video class="gallery-video" loop>
+							<source src="../static/img/video-gal-2.mp4" type="video/mp4">
+							Your browser does not support HTML5 video.
+						</video>
+						
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="video-container">
+						<video class="gallery-video" loop>
+							<source src="../static/img/video-gal-3.mp4" type="video/mp4">
+							Your browser does not support HTML5 video.
+						</video>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="video-container">
+						<video class="gallery-video" loop>
+							<source src="../static/img/video-gal-1.mp4" type="video/mp4">
+							Your browser does not support HTML5 video.
+						</video>
+					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 mb-3">
-				<video id="my-video" class="video-js" controls preload="auto" poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" data-setup='' loop>
-					<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type='video/mp4'>
-					</video>
-				<!-- <video src="{{ url_for('static', filename='img/video-gallery-1.mp4') }}"  autoplay loop playsinline></video> -->
-			</div>
-			<div class="col-lg-6 mb-3">
-				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
-			</div>
-			<div class="col-lg-6 mb-3">
-				<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
-			</div>
+
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
 		</div>
 	</div>
 </section>
 <script>
-	window.addEventListener('load', async () => {
-  let video = document.querySelector('video[muted][autoplay]');
-  try {
-    await video.play();
-  } catch (err) {
-    video.controls = true;
-  }
+	document.addEventListener('DOMContentLoaded', function () {
+	var gallerySwiper = new Swiper('.swiper-initialize', {
+		slidesPerView: 5,
+		spaceBetween: 20,
+		breakpoints: {
+			1920: {
+				slidesPerView: 5
+			},
+			992: {
+				slidesPerView: 3
+			},
+			320: {
+				slidesPerView: 2
+			}
+		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev'
+		}
+	});
+	var currentPlayingVideo = null;
+	function playPauseVideo(video) {
+		if (video.paused) {
+			video.play();
+			video.muted = false; 
+		} else {
+			video.pause();
+		}
+	}
+	function muteAllVideos() {
+		document.querySelectorAll('.gallery-video').forEach(function (video) {
+			video.muted = true;
+		});
+	}
+	var videos = document.querySelectorAll('.gallery-video');
+	videos.forEach(function (video) {
+		video.addEventListener('click', function () {
+			if (currentPlayingVideo && currentPlayingVideo !== video) {
+				currentPlayingVideo.pause();
+				currentPlayingVideo.muted = true;
+			}
+
+			playPauseVideo(video);
+			currentPlayingVideo = video;
+		});
+	});
+	document.querySelectorAll('.play-pause-button').forEach(function (button) {
+		button.addEventListener('click', function (event) {
+			event.stopPropagation(); // Prevent video click event propagation
+			var videoContainer = button.closest('.video-container');
+			var video = videoContainer.querySelector('.gallery-video');
+
+			playPauseVideo(video);
+			currentPlayingVideo = video;
+		});
+	});
+	muteAllVideos();
 });
 </script>
+
 <!--============= video-gallery end =============-->
 
 <!--============= follow-us start =============-->
