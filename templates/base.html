@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/vue-magnify.css') }}" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
     
     <!--==================== SCRIPT	====================-->
@@ -51,7 +50,7 @@
         /* font color should be orange */
         color: rgb(255, 140, 0) !important;
         /* orange underline */
-        border-bottom: 2px solid rgb(255, 140, 0) !important;
+        border-bottom: 2px solid rgb(255, 140, 0);
         
     }
     </style>
@@ -122,6 +121,9 @@
                     #dropdownMenuButton1 {
                         cursor: pointer;
                     }
+                    .dropdown.active, .dropend.active, .dropstart.active, .dropup.active{border-bottom: 0!important;}
+                    .dropdown ul{border: 0;box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;}
+                    .dropdown-item:hover{background-color: transparent;}
                 </style>
                 <a href="{{ url_for('index') }}" class="logo"><img src="{{ url_for('static', filename='img/logo.png') }}"
                         class="logo-img" alt="logo"></a>
@@ -136,7 +138,7 @@
                         <li><a href="{{ url_for('contacts') }}" {% if request.path == url_for('contacts') %} class="active" {% endif %}>Contacts</a></li>
                         <li>
                             <div class="dropdown">
-                                <i class="fa fa-user-circle-o" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 25px; padding: 2px;" aria-hidden="true"></i>
+                                <i class="bi bi-person-fill main-color ms-2 ms-md-0" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 25px; padding: 2px;" aria-hidden="true"></i>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     {% if current_user.role == 'admin' %}
                                         <li><a class="dropdown-item" href="{{ url_for('admin_panel') }}">Admin Panel</a></li>

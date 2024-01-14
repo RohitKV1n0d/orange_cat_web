@@ -13,7 +13,6 @@
 {% block content %}
 
 <!-- =============== main-slider =============== -->
-
 <section class="landing-page-section">
 	<header class="video-header">
 		<video 
@@ -47,7 +46,6 @@
 
     videoObserver.observe(lazyVideo);
   } else if (lazyVideo) {
-    // Fallback for browsers that don't support IntersectionObserver
     var source = lazyVideo.querySelector("source");
     source.src = source.dataset.src;
     lazyVideo.load();
@@ -58,11 +56,15 @@
 		</script>
 
 		<div class="header-icons">
-			<a href="https://codepen.io/quicksilversel/pen/yLwOQee"><i class="fa fa-facebook-f me- float-up"></i></a>
-			<a href=""><i class="fa fa-instagram float-up"></i></a>
-			<a href=""><i class="fa fa-twitter   float-up"></i></a>
-			<a href=""><i class="fa fa-pinterest  float-up"></i></a>
-		  </div>
+			<a href="#"><i class="fa fa-facebook-f me- float-up"></i></a>
+			<a href="#"><i class="fa fa-instagram float-up"></i></a>
+			<a href="#"><i class="fa fa-twitter   float-up"></i></a>
+			<a href="#"><i class="fa fa-pinterest  float-up"></i></a>
+			<div class="down-arrow">
+				<a href="#our-products" class="js-anchor-link"><img  loading="lazy" src="{{ url_for('static', filename='img/dw-1.png') }}" alt="" class="img-fluid float-up d-none d-md-block"></a>
+			</div>
+		</div>
+		
 		<div class="viewport-header">
 		  <h1>
 			Explore
@@ -82,11 +84,11 @@
 	});
   </script>
 <!-- ============= main-slider end ============= -->
-
+<div id="scroll-container" class="scroll-container">
 <!--================== S-PRODUCTS ==================-->
-<main class="our-products">
+<main class="our-products" id="our-products">
 	<div class="container">
-		<h2 class="title text-capitalize text-center letter-space-value">our <b class="main-color">products</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text-left text-md-center letter-space-value">our <b class="main-color">products</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
 		<p class="text-justify mt-3">Orange Cat is a one-product company, which ensures exceptionally high standards of quality control and outstanding customer support. Our catalogue encompasses two models of the Corinto Collection, a bicycle that embodies the mission, vision and values of its manufacturers. With its timeless and elegant lines, riding a Corinto bicycle will make you feel like gliding through royal courts.</p>
 		<div class="produc-cards">
@@ -117,7 +119,7 @@
 				<div class="row justify-content-center align-items-center">
 					<div class="col-lg-6 h-100 left-part">
 						<div class="left-part">
-							<img loading="lazy" src="{{ url_for('static', filename='img/home.png') }}" class="img-fluid" alt="" loading="lazy">
+							<img loading="lazy" src="{{ url_for('static', filename='img/product2.jpg') }}" class="img-fluid" alt="" loading="lazy">
 						</div>
 					</div>
 					<div class="col-lg-6 h-100">
@@ -194,13 +196,19 @@
 						<div class="about-contents">
 							<div class="row justify-content-center align-items-center">
 								<div class="col-lg-12 mb-3">
-									<img loading="lazy" src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid" loading="lazy">
+									<div class="blur-load" style="background: url(../static/img/about-sec-1-small.jpg);background-repeat: no-repeat;">
+										<img loading="lazy" src="{{ url_for('static', filename='img/about-sec-1.jpg') }}" alt="" class="img-fluid" loading="lazy">
+									</div>
 								</div>
 								<div class="col-lg-6 mb-3">
-									<img loading="lazy" src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid" loading="lazy">
+									<div class="blur-load" style="background: url(../static/img/about-sec-2-small.jpg);background-repeat: no-repeat;">
+										<img loading="lazy" src="{{ url_for('static', filename='img/about-sec-2.jpg') }}" alt="" class="img-fluid" loading="lazy">
+									</div>
 								</div>
 								<div class="col-lg-6 mb-3">
-									<img loading="lazy" src="{{ url_for('static', filename='img/home.png') }}" alt="" class="img-fluid" loading="lazy">
+									<div class="blur-load" style="background: url(../static/img/about-sec-3-small.jpg);background-repeat: no-repeat;">
+										<img loading="lazy" src="{{ url_for('static', filename='img/about-sec-3.jpg') }}" alt="" class="img-fluid" loading="lazy">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -536,7 +544,7 @@ var app = new Vue({
 <!--============= s-galleryb  end  =============-->
 
 <!--============= video-gallery start =============-->
-<section class="video-gallery">
+<!-- <section class="video-gallery">
 	<div class="container">
 		<h2 class="title text-capitalize text-center letter-space-value">our <b class="main-color">video</b> gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
 		<div class="swiper-container swiper-initialize">
@@ -640,7 +648,7 @@ var app = new Vue({
 	});
 	muteAllVideos();
 });
-</script>
+</script> -->
 
 <!--============= video-gallery end =============-->
 
@@ -660,7 +668,7 @@ var app = new Vue({
 								<img loading="lazy" src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid ms-5 float-up">
 							</a>
 						</div>
-						<div class="d-flex mt-5 justify-content-center">
+						<div class="d-flex mt-3 mt-md-5 justify-content-center">
 							<a href="#">
 								<img loading="lazy" src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid float-up">
 							</a>
@@ -768,9 +776,9 @@ var app = new Vue({
 <!--================ contact-us start ================-->
 <section class="contact-orangecat" style="padding: 100px 0;">
 	<div class="container">
-		<h2 class="title text-capitalize text- letter-space-value">Get in <b class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text-left text-md-left letter-space-value">Get in <b class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
-		<p class="mt-4 text-center text-md-start">We're here to assist you every step of the way. Don't hesitate to get
+		<p class="mt-4 text-justify text-md-start">We're here to assist you every step of the way. Don't hesitate to get
 			in touch with our dedicated team for any inquiries, questions, or support you may need. We value your input
 			and are committed to providing prompt and helpful responses. We look forward to connecting with you and
 			ensuring your experience with us is exceptional.</p>
@@ -784,7 +792,7 @@ var app = new Vue({
 					<p class="mt-2 mt-md-3 text-start text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham, CR6 9PX
 					</p>
 					<h6 class="text-capitalize mt-3">contact us</h6>
-					<div class="d-flex reach-out-us mt-3">
+					<div class="d-flex align-items-center reach-out-us mt-3">
 						<div class="call-us">
 							<div class="d-flex justify-content-center align-items-center">
 								<div class="contac-icon">
@@ -797,7 +805,7 @@ var app = new Vue({
 								</div>
 							</div>
 						</div>
-						<div class="mail-us ms-md-4 ms-2">
+						<div class="mail-us ms-md-4 ms-md-2 ms-3">
 							<div class="d-flex align-items-center">
 								<div class="contact-icon">
 									<img loading="lazy" src="{{ url_for('static', filename='img/contact/mail.png') }}" alt="mail"
@@ -808,8 +816,8 @@ var app = new Vue({
 						</div>
 					</div>
 					<div class="follow-us-on">
-						<h6 class="text-capitalize mt-3 text-center text-md-start">Follow us</h6>
-						<div class="d-flex mt-3 justify-content-center justify-content-md-start">
+						<h6 class="text-capitalize mt-3 text-left text-md-start">Follow us</h6>
+						<div class="d-flex mt-3 justify-content-left justify-content-md-start">
 							<a href="#" class="me-3"><i class="fa fa-facebook-f icon-top float-up"></i></a>
 							<a href="#" class="me-3"><i class="fa fa-instagram icon-top float-up"></i></a>
 							<a href="#" class="me-3"><i class="fa fa-twitter icon-top float-up"></i></a>
@@ -844,6 +852,34 @@ var app = new Vue({
 	</div>
 </section>
 
+<style>
+	img{object-fit: cover;object-position: center;}
+	.blur-load{background-size: cover;background-position: center; border-radius: 5px;  }
+	.blur-load.loaded > img {
+		opacity: 1;
+	}
+	.blur-load > img {
+		opacity: 0;
+		transition: opacity 200ms ease-in-out;
+	}
+</style>
+
+<!-- ----------img-load---------- -->
+<script>
+	const blurDivs= document.querySelectorAll(".blur-load")
+	blurDivs.forEach(div => {
+		const img = div.querySelector("img")
+
+		function loaded(){
+			div.classList.add("loaded")
+		}
+		if (img.complete) {
+			loaded()
+		} {
+			img.addEventListener("load", loaded)
+		}
+	})
+</script>
 
 <script>
 	const sections = document.querySelectorAll('section');
@@ -890,8 +926,18 @@ var app = new Vue({
 	  </div>
 	</div>
   </div>
+</div>
 
-
+<script>
+	$('.js-anchor-link').click(function(e){
+  e.preventDefault();
+  var target = $($(this).attr('href'));
+  if(target.length){
+    var scrollTo = target.offset().top;
+    $('body, html').animate({scrollTop: scrollTo+'px'}, 800);
+  }
+});
+</script>
 
 <!--================ contact-us end ================-->
 
