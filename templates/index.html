@@ -5,11 +5,9 @@
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-
 <!-- ---------video------- -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
-
 {% block content %}
 
 <!-- =============== main-slider =============== -->
@@ -153,7 +151,7 @@
 				<div class="subscribe-left">
 					<h3 class="title  letter-space-value text-capitalize small-title ad-title"><span>Let’s Start your <br><b class="mt-2">Discover 100 years of tradition in bicycle manufacturing.</b></span></h3>
 					<p class="text-capitalize">Embark on a journey of craftmanship, luxury and design for a unique bicycle that will satisfy even the most demanding tastes.</p>
-					<button type="submit" class="btn btn-form"><span>Know More</span></button>
+					<a href="/about#about-tradition"><button type="submit" class="btn btn-form"><span>Know More</span></button></a>
 				</div>
 				<img class="wow fadeInRightBlur lazy img-fluid" data-wow-duration=".8s" data-wow-delay=".3s"
 					src="{{ url_for('static', filename='img/home.png') }}"
@@ -177,13 +175,10 @@
 							cat</b>  </h2>
 						<p class="mt-3 text-justify ">It all started several years ago with a trip to Italy, during which time, our founder was gifted a beautifully handcrafted vintage bicycle by a close friend. Taken in by its features, he decided to bring it back to Canada and have a piece of Italy close to home. For years he rode this bicycle on the streets of downtown Toronto receiving compliments from passersby and drivers at stoplights. No one had ever seen such a unique bicycle. He rode his bicycle with his head held high, the wind in his hair and a smile on his face.
 							<br><br> And then, someone stole his bicycle.
-		
-		 
-		
 							He searched far and wide but he noted that there were no retailers in the area that had similar products available, so he returned to Italy. In 2022 he established a partnership with Taurus, a vintage bicycle manufacturer, to bring their product to Canada and Orange Cat was born.
 						</p>
 						<div class=" mb-5 mb-md-0">
-							<button type="submit" class="btn btn-form mt-3"><span>Read More</span></button>
+							<a href="{{ url_for('about') }}"><button type="submit" class="btn btn-form mt-3"><span>Read More</span></button></a>
 						</div>
 					</div>
 					<div class="col-lg-6">
@@ -212,7 +207,6 @@
 		</section>
 	</div>
 </section>
-
 <!--================ gallery end ================-->
 <style>
 	.gallery {
@@ -274,7 +268,6 @@
 
 	.btn-edit {
 		background-color: #d6bf3e;
-		/* Green */
 		border: none;
 		color: white;
 		padding: 5px 18px;
@@ -291,7 +284,6 @@
 
 	.btn-delete {
 		background-color: #d63e3e;
-		/* Green */
 		border: none;
 		color: white;
 		padding: 5px 18px;
@@ -309,7 +301,6 @@
 
 	.btn-add {
 		background-color: #3e9dd6;
-		/* Green */
 		border: none;
 		color: white;
 		padding: 5px 18px;
@@ -505,13 +496,12 @@ var app = new Vue({
 				Toastify({
 					text: message,
 					duration: 3000,
-					gravity: "top", // `top` or `bottom`
-					position: 'right', // `left`, `center` or `right`
+					gravity: "top", 
+					position: 'right', 
 					backgroundColor: type,
-					stopOnFocus: true, // Prevents dismissing of toast on hover
-					onClick: function () { } // Callback after click
+					stopOnFocus: true, 
+					onClick: function () { } 
 				}).showToast();
-
 			},
 			checkIfAdmin() {
 				status = '{{current_user.role}}'
@@ -521,7 +511,6 @@ var app = new Vue({
 					this.isAdmin = false
 				}
 			},
-			
 		},
 		mounted() {
 			this.checkIfAdmin();
@@ -531,9 +520,7 @@ var app = new Vue({
 		beforeDestroy() {
 			document.removeEventListener('keyup', this.closeOnEscape);
 		}
-
 	});
-	
 </script>
 <!--============= s-galleryb  end  =============-->
 
@@ -643,7 +630,6 @@ var app = new Vue({
 	muteAllVideos();
 });
 </script> -->
-
 <!--============= video-gallery end =============-->
 
 <!--============= follow-us start =============-->
@@ -681,9 +667,7 @@ var app = new Vue({
 		</div>
 	</div>
 </section>
-
 <!--============= follow-us end =============-->
-
 
 <!--================== S-FEEDBACK ==================-->
 <section class="s-feedback" style="background: url('../static/img/feedback-vdo-2.mp4');">
@@ -763,9 +747,7 @@ var app = new Vue({
 		</div>
 	</div>
 </section>
-
 <!--================ S-FEEDBACK END ================-->
-
 
 <!--================ contact-us start ================-->
 <section class="contact-orangecat" style="padding: 100px 0;">
@@ -837,7 +819,7 @@ var app = new Vue({
 								placeholder="Type your message" required></textarea>
 						</div>
 						<div class="text-center">
-							<button type="submit" class="btn"><span>Send</span></button>
+							<a href="{{ url_for('about') }}"><button type="submit" class="btn"><span>Send</span></button></a>
 						</div>
 					</form>
 				</div>
@@ -852,10 +834,7 @@ var app = new Vue({
 	.blur-load.loaded > img {
 		opacity: 1;
 	}
-	.blur-load > img {
-		opacity: 0;
-		transition: opacity 200ms ease-in-out;
-	}
+	.blur-load > img { opacity: 0; transition: opacity 200ms ease-in-out; }
 </style>
 
 <!-- ----------img-load---------- -->
@@ -874,7 +853,6 @@ var app = new Vue({
 		}
 	})
 </script>
-
 <script>
 	const sections = document.querySelectorAll('section');
 	document.addEventListener("scroll", function() {
@@ -921,7 +899,6 @@ var app = new Vue({
 	</div>
   </div>
 </div>
-
 <script>
 	$('.js-anchor-link').click(function(e){
   e.preventDefault();
@@ -932,7 +909,6 @@ var app = new Vue({
   }
 });
 </script>
-
 <!--================ contact-us end ================-->
 
 {% endblock %}
