@@ -136,9 +136,9 @@
                         <li><a href="{{ url_for('photo_gallery') }}" {% if request.path == url_for('photo_gallery') %} class="active" {% endif %}>Photo Gallery</a></li>
                         <!-- <li><a href="{{ url_for('video_gallery') }}" {% if request.path == url_for('video_gallery') %} class="active" {% endif %}>Video Gallery</a></li> -->
                         <li><a href="{{ url_for('contacts') }}" {% if request.path == url_for('contacts') %} class="active" {% endif %}>Contacts</a></li>
-                        <li>
+                        <li class="float-up">
                             <div class="dropdown">
-                                <i class="bi bi-person-fill main-color ms-2 ms-md-0" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 25px; padding: 2px;" aria-hidden="true"></i>
+                                <i class="bi bi-person-fill main-color  ms-2 ms-md-0" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 25px; padding: 2px;" aria-hidden="true"></i>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     {% if current_user.role == 'admin' %}
                                         <li><a class="dropdown-item" href="{{ url_for('admin_panel') }}">Admin Panel</a></li>
