@@ -139,7 +139,7 @@
 <section class="background">
 	<div class="content-wrapper">
 		<section class="s-subscribe">
-			<video autoplay muted loop id="bg-video" style="width:100%;">
+			<video autoplay muted loop id="bg-video" >
 				<source src="../static/img/discover-bg.mp4" type="video/mp4">
 				<!-- Add additional source elements for different video formats if needed -->
 				Your browser does not support HTML5 video.
@@ -148,13 +148,17 @@
 			<span class="subscribe-effect wow fadeIn" data-wow-duration="1s"></span>
 			<div class="container">
 				<div class="subscribe-left">
-					<h3 class="title  letter-space-value text-capitalize small-title ad-title"><span>Let’s Start your <br><b class="mt-2">Discover 100 years of tradition in bicycle manufacturing.</b></span></h3>
+					<div class="blockquote-wrapper">
+						<div class="blockquote">
+						  <h1>A bicycle is not just a combination of details. <br> Its details are everything.</h1>
+						</div>
+					</div>
 					<p class="text-capitalize">Embark on a journey of craftmanship, luxury and design for a unique bicycle that will satisfy even the most demanding tastes.</p>
 					<a href="/about#about-tradition"><button type="submit" class="btn btn-form"><span>Know More</span></button></a>
 				</div>
 				<img class="wow fadeInRightBlur lazy img-fluid" data-wow-duration=".8s" data-wow-delay=".3s"
 					src="{{ url_for('static', filename='img/home.png') }}"
-					data-src="{{ url_for('static', filename='img/home.png') }}" alt="img" style="width: 80%;">
+					data-src="{{ url_for('static', filename='img/home.png') }}" alt="img" style="width: 70%;">
 			</div>
 		</section>
 	</div>
