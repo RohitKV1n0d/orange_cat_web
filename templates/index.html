@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 {% block content %}
 
-<!-- =============== main-slider =============== -->
+	<!-- =============== main-slider =============== -->
 <section class="landing-page-section">
 	<header class="video-header">
 		<video 
@@ -82,7 +82,6 @@
 	});
   </script>
 <!-- ============= main-slider end ============= -->
-<div id="scroll-container" class="scroll-container">
 <!--================== S-PRODUCTS ==================-->
 <main class="our-products" id="our-products">
 	<div class="container">
@@ -135,7 +134,7 @@
 </main>
 
 <!--================ S-PRODUCTS END ================-->
-
+<div class="js-scroll"></div>
 <!--================== S-SUBSCRIBE ==================-->
 <section class="background">
 	<div class="content-wrapper">
@@ -898,7 +897,6 @@ var app = new Vue({
 	  </div>
 	</div>
   </div>
-</div>
 <script>
 	$('.js-anchor-link').click(function(e){
   e.preventDefault();
@@ -909,6 +907,7 @@ var app = new Vue({
   }
 });
 </script>
+</div>
 <!--================ contact-us end ================-->
 
 {% endblock %}

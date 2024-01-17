@@ -46,13 +46,7 @@
     <script src="{{ url_for('static', filename='js/vue-magnify.js') }}"></script>
 
     <style>
-        .active {
-        /* font color should be orange */
-        color: rgb(255, 140, 0) !important;
-        /* orange underline */
-        border-bottom: 2px solid rgb(255, 140, 0);
-        
-    }
+        .active { color: rgb(255, 140, 0) !important; }
     </style>
 </head>
 
@@ -98,7 +92,7 @@
             <span></span>
             <span></span>
         </a>
-        <div class="top-panel">
+        <!-- <div class="top-panel">
             <div class="container">
                 <div class="top-panel-cover">
                     <ul class="header-cont">
@@ -114,7 +108,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="header-menu">
             <div class="container">
                 <style>
@@ -135,9 +129,9 @@
                         <li><a href="{{ url_for('view_products') }}" {% if request.path == url_for('view_products') %} class="active" {% endif %}>Models</a></li>
                         <li><a href="{{ url_for('photo_gallery') }}" {% if request.path == url_for('photo_gallery') %} class="active" {% endif %}>Photo Gallery</a></li>
                         <!-- <li><a href="{{ url_for('video_gallery') }}" {% if request.path == url_for('video_gallery') %} class="active" {% endif %}>Video Gallery</a></li> -->
-                        <li><a href="{{ url_for('contacts') }}" {% if request.path == url_for('contacts') %} class="active" {% endif %}>Contacts</a></li>
-                        <li class="float-up">
-                            <div class="dropdown">
+                        <li><a href="{{ url_for('contacts') }}" {% if request.path == url_for('contacts') %} class="active" {% endif %}>Contact Us</a></li>
+                        <li>
+                            <!-- <div class="dropdown">
                                 <i class="bi bi-person-fill main-color  ms-2 ms-md-0" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 25px; padding: 2px;" aria-hidden="true"></i>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     {% if current_user.role == 'admin' %}
@@ -149,13 +143,91 @@
                                         <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
                                     {% endif %}
                                 </ul>
-                              </div>
+                              </div> -->
+                            <div class="dropdown">
+                                <button class="dropbtn btn"  data-bs-toggle="modal" data-bs-target="#ContactModal"><span>Enquire</span></button>
+                                    <div class="dropdown-content">
+                                        <a href="tel:+912345687">+912345687</a>
+                                        <a href="mailto:info@orangecat.com">info@orangecat.com</a>
+                                    </div>
+                            </div>
                         </li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
+    <style>
+      
+        .dropbtn {
+         height: auto!important;padding: 9px 20px!important;
+        }
+        @media (max-width: 991px){
+            .dropbtn { padding: 7px 20px!important; }
+        }
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #ffffff;
+          min-width: 160px;
+          border-radius: 5px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black!important;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          border-radius: 5px;
+        }
+        .dropdown-content a:hover{ color: #f45f30!important;background-color: #fdfbf5;}
+        .dropdown-content a:hover{ color: #f45f30;}
+        .dropdown:hover .dropdown-content {display: block;}
+        .contact-p{font-size: 17px;}
+        .also-contact a{font-size: 15px; color: black;}
+        .also-contact a:hover{color: #f45f30}
+        </style>
+
+<!-- Modal -->
+<div class="modal fade" style="z-index: 999999;" id="ContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-body">
+			<form action="">
+				<h4 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h4>
+				<div class="mb-3">
+					<input type="text" class="form-control" id="name" placeholder="Name" required>
+				  </div>
+				<div class="mb-3">
+					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
+				  </div>
+				  <div class="mb-3">
+					<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
+				  </div>
+				  <div class="mb-4">
+					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." required></textarea>
+				  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
+                      <button type="submit" class="btn ms-2"><span>Send</span></button>
+                </div>
+                <p class="black-color text-center mt-4 contact-p">Also you can contact us here</p>
+                <div class="d-flex also-contact justify-content-center mt-1">
+                    <a href="tel:+912345687" class="black-color"><i class="fa fa-phone main-color me-2"></i>+9123 456 87</a>
+                    <a href="mailto:info@orangecat.com" class="ms-4 black-color"><i class="fa fa-envelope me-2 main-color" aria-hidden="true"></i>info@orangecat.com</a>
+                </div>
+			</form>
+		</div>
+	  </div>
+	</div>
+  </div>
     <!-- =============== HEADER END =============== -->
 
     {% block content %}
