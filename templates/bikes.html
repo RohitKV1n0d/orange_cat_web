@@ -28,7 +28,10 @@
 					</div>
 					<div class="col-lg-8 mt-5 mt-md-0">
 						<div class="product-image">
-							<img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img">
+							<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
+							<img class="  about-img half-image first-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
+    						<img class="  about-img half-image second-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
+							<div class="background-color-product"></div>
 						</div>
 					</div>
 				</div>
@@ -48,8 +51,47 @@
 					</div>
 					<div class="col-lg-8 mt-5 mt-md-0">
 						<div class="product-image">
-							<img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img">
+							<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
+							<img class="  about-img half-image first-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
+    						<img class="  about-img half-image second-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
+							<div class="background-color-product"></div>
 						</div>
+						<style>
+								
+								.background-color-product{
+									position: absolute;
+									background-color: #F1EFEF;
+									max-width: 70%;
+									padding: 100%;
+									z-index: -10;
+									top: -250px;
+								}
+								.half-image {
+									position: absolute;
+									transition: transform 0.5s ease;
+									max-width: 80%;
+									left: 74px;
+									top: -281px;
+									padding: 85px;
+								}
+								
+								.first-image {
+									clip-path: polygon(0 0, 100% 0, 0 100%);
+									filter: grayscale(100%);
+    								filter: contrast(00%);
+								}
+								
+								.second-image {
+									clip-path: polygon(100% 100%, 100% 0, 0 100%);
+								}
+								
+								.half-image:hover {
+									transform: scale(1.2);
+									z-index: 1;
+								}
+								
+							
+							</style>
 					</div>
 				</div>
 			  </div>
