@@ -6,108 +6,135 @@
 <section class="product-details">
 
 	<!--================= our-strategy start =================-->
-<section class="product-landing">
-	<div class="container">
-		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-			<div class="carousel-indicators">
-			  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active button-1" aria-current="true" aria-label="Slide 1"></button>
-			  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" class="button-2"></button>
-			</div>
-			<div class="carousel-inner">
-			  <div class="carousel-item active">
-				<div class="row justify-content-center align-items-center product-info">
-					<div class="col-lg-4">
-						<div class="product-description">
-							<h4 class="text-capitalize black-color text-center text-md-start letter-space-value">Corinto <b class="main-color">Arrow</b></h4>
-							<p class="text-justify mt-3">Corinto Arrow, with its sleek and strong design, combines a timeless feel with modern reliability. The longer and narrower saddle, and the wider distance between the padding and the top tube, ensure a dynamic riding experience for both expert and leisure riders. Its frame, composed of steel assembled and welded by hand, is durable yet finely wrought resulting in a functional accessory that allows its owners to ride with elegance. </p>
-							<div class="d-flex mt-md-3  align-items-center justify-content-center justify-content-md-start">
-								<a href="{{ url_for('view_product', id=1) }}" class="btn mt-4"><span>Know More</span></a>
-								<a href="{{ url_for('view_product', id=1) }}" class=" mt-4 ms-3"  data-bs-toggle="modal" data-bs-target="#productContactModal">Enquire Now</a>
+	<section class="product-landing">
+		<div class="container">
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+						class="active button-1" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+						aria-label="Slide 2" class="button-2"></button>
+				</div>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="row justify-content-center align-items-center product-info">
+							<div class="col-lg-4">
+								<div class="product-description">
+									<h4
+										class="text-capitalize black-color text-center text-md-start letter-space-value">
+										Corinto <b class="main-color">Arrow</b></h4>
+									<p class="text-justify mt-3">Corinto Arrow, with its sleek and strong design,
+										combines a timeless feel with modern reliability. The longer and narrower
+										saddle, and the wider distance between the padding and the top tube, ensure a
+										dynamic riding experience for both expert and leisure riders. Its frame,
+										composed of steel assembled and welded by hand, is durable yet finely wrought
+										resulting in a functional accessory that allows its owners to ride with
+										elegance. </p>
+									<div
+										class="d-flex mt-md-3  align-items-center justify-content-center justify-content-md-start">
+										<a href="{{ url_for('view_product', id=Z1) }}" class="btn mt-4"><span>Know
+												More</span></a>
+										<a href="{{ url_for('view_product', id=1) }}" class=" mt-4 ms-3"
+											data-bs-toggle="modal" data-bs-target="#productContactModal">Enquire Now</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-8 mt-5 mt-md-0">
+								<div class="product-image">
+									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
+									<img class="  about-img half-image first-image"
+										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+									<img class="  about-img half-image second-image"
+										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+									<div class="background-color-product"></div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-8 mt-5 mt-md-0">
-						<div class="product-image">
-							<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
-							<img class="  about-img half-image first-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
-    						<img class="  about-img half-image second-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
-							<div class="background-color-product"></div>
-						</div>
-					</div>
-				</div>
-			  </div>
-			  <div class="carousel-item">
-				<div class="row justify-content-center align-items-center product-info">
-					<div class="col-lg-4">
-						<div class="product-description">
-							<h4 class="text-capitalize black-color text-center text-md-start letter-space-value">Corinto <b class="main-color">Bow</b></h4>
-							<p class="text-justify mt-3">Corinto Bow was designed to reflect a softer style with curves that allow a gentle mount and dismount. The curved top bar renders this product ideal for those that find it difficult to raise their legs or do not want to compromise on their fashion choices but still use an environmentally conscious way of moving around town. With the shorter and larger saddle, and the reduced length from the padding to the top bar, Corinto Bow is a perfect choice for those who seek an elegant and comfortable riding experience.
-							</p>
-							<div class="d-flex mt-md-3 align-items-center  justify-content-center justify-content-md-start">
-								<a href="#" class="btn mt-4"><span>Know More</span></a>
-								<a href="#" class=" mt-4 ms-3"  data-bs-toggle="modal" data-bs-target="#productContactModal">Enquire Now</a>
+					<div class="carousel-item">
+						<div class="row justify-content-center align-items-center product-info">
+							<div class="col-lg-4">
+								<div class="product-description">
+									<h4
+										class="text-capitalize black-color text-center text-md-start letter-space-value">
+										Corinto <b class="main-color">Bow</b></h4>
+									<p class="text-justify mt-3">Corinto Bow was designed to reflect a softer style with
+										curves that allow a gentle mount and dismount. The curved top bar renders this
+										product ideal for those that find it difficult to raise their legs or do not
+										want to compromise on their fashion choices but still use an environmentally
+										conscious way of moving around town. With the shorter and larger saddle, and the
+										reduced length from the padding to the top bar, Corinto Bow is a perfect choice
+										for those who seek an elegant and comfortable riding experience.
+									</p>
+									<div
+										class="d-flex mt-md-3 align-items-center  justify-content-center justify-content-md-start">
+										<a href="#" class="btn mt-4"><span>Know More</span></a>
+										<a href="#" class=" mt-4 ms-3" data-bs-toggle="modal"
+											data-bs-target="#productContactModal">Enquire Now</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-8 mt-5 mt-md-0">
+								<div class="product-image">
+									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
+									<img class="  about-img half-image first-image"
+										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+									<img class="  about-img half-image second-image"
+										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+									<div class="background-color-product"></div>
+								</div>
+								<style>
+									.background-color-product {
+										position: absolute;
+										background-color: #F1EFEF;
+										max-width: 70%;
+										padding: 100%;
+										z-index: -10;
+										top: -250px;
+									}
+
+									.half-image {
+										position: absolute;
+										transition: transform 0.5s ease;
+										max-width: 80%;
+										left: 74px;
+										top: -281px;
+										padding: 85px;
+									}
+
+									.first-image {
+										clip-path: polygon(0 0, 100% 0, 0 100%);
+										filter: grayscale(100%);
+										filter: contrast(00%);
+									}
+
+									.second-image {
+										clip-path: polygon(100% 100%, 100% 0, 0 100%);
+									}
+
+									.half-image:hover {
+										transform: scale(1.2);
+										z-index: 1;
+									}
+								</style>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-8 mt-5 mt-md-0">
-						<div class="product-image">
-							<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
-							<img class="  about-img half-image first-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
-    						<img class="  about-img half-image second-image" src="{{ url_for('static', filename='img/home.png') }}" alt="">
-							<div class="background-color-product"></div>
-						</div>
-						<style>
-								
-								.background-color-product{
-									position: absolute;
-									background-color: #F1EFEF;
-									max-width: 70%;
-									padding: 100%;
-									z-index: -10;
-									top: -250px;
-								}
-								.half-image {
-									position: absolute;
-									transition: transform 0.5s ease;
-									max-width: 80%;
-									left: 74px;
-									top: -281px;
-									padding: 85px;
-								}
-								
-								.first-image {
-									clip-path: polygon(0 0, 100% 0, 0 100%);
-									filter: grayscale(100%);
-    								filter: contrast(00%);
-								}
-								
-								.second-image {
-									clip-path: polygon(100% 100%, 100% 0, 0 100%);
-								}
-								
-								.half-image:hover {
-									transform: scale(1.2);
-									z-index: 1;
-								}
-								
-							
-							</style>
-					</div>
 				</div>
-			  </div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
 			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			  <span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			  <span class="visually-hidden">Next</span>
-			</button>
-		  </div>
-	</div>
-</section>
-<!--================ our-strategy end ================-->
+		</div>
+	</section>
+	<!--================ our-strategy end ================-->
 
 
 
@@ -115,7 +142,7 @@
 
 <script>
 	const sections = document.querySelectorAll('section');
-	document.addEventListener("scroll", function() {
+	document.addEventListener("scroll", function () {
 		sections.forEach(section => {
 			const sectionTop = section.getBoundingClientRect().top;
 			const windowHeight = window.innerHeight;
@@ -130,36 +157,37 @@
 </script>
 
 <!-- Modal -->
-<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
+<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1"
+	aria-labelledby="productContactModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-body">
-			<form action="">
-				<h4 class="text-capitalize black-color">Corinto Deluxe Donna </h4>
-				<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
-				<div class="mb-3">
-					<input type="text" class="form-control" id="name" placeholder="Name" required>
-				  </div>
-				<div class="mb-3">
-					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
-				  </div>
-				  <div class="mb-3">
-					<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
-				  </div>
-				  <div class="mb-4">
-					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." required></textarea>
-				  </div>
-			</form>
+		<div class="modal-content">
+			<div class="modal-body">
+				<form action="">
+					<h4 class="text-capitalize black-color">Corinto Deluxe Donna </h4>
+					<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b
+							class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
+					<div class="mb-3">
+						<input type="text" class="form-control" id="name" placeholder="Name" required>
+					</div>
+					<div class="mb-3">
+						<input type="email" class="form-control" id="exampleFormControlInput1"
+							placeholder="Email address" required>
+					</div>
+					<div class="mb-3">
+						<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
+					</div>
+					<div class="mb-4">
+						<textarea class="form-control" id="type-message" rows="3"
+							placeholder="Type your inquiry here..." required></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
+				<button type="submit" class="btn"><span>Send</span></button>
+			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
-		  	<button type="submit" class="btn"><span>Send</span></button>
-		</div>
-	  </div>
 	</div>
-  </div>
+</div>
 
 {% endblock %}
-	
-
-	
