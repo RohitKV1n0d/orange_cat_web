@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.4.8/plyr.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
@@ -10,45 +9,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 {% block content %}
 
-	<!-- =============== main-slider =============== -->
+<!-- =============== main-slider =============== -->
 <section class="landing-page-section">
 	<header class="video-header">
-		<video 
-		id="banner-backgroud-video"
-			width="320" 
-			height="240" 
-			autoplay 
-			loop 
-			playsinline 
-			muted 
+		<video id="banner-backgroud-video" width="320" height="240" autoplay loop playsinline muted
 			poster="{{ url_for('static', filename='img/banner-placeholder-image.jpg') }}">
 			<source data-src="{{ url_for('static', filename='img/video.mp4') }}" type="video/mp4">
 			Your browser does not support the video tag.
 		</video>
 		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-  var lazyVideo = document.getElementById("banner-backgroud-video");
+			document.addEventListener("DOMContentLoaded", function () {
+				var lazyVideo = document.getElementById("banner-backgroud-video");
 
-  if ("IntersectionObserver" in window && lazyVideo) {
-    var videoObserver = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var videoSource = entry.target.querySelector("source");
-          videoSource.src = videoSource.dataset.src;
-          entry.target.load();
-          entry.target.classList.remove("lazy");
-          videoObserver.unobserve(entry.target);
-        }
-      });
-    });
+				if ("IntersectionObserver" in window && lazyVideo) {
+					var videoObserver = new IntersectionObserver(function (entries, observer) {
+						entries.forEach(function (entry) {
+							if (entry.isIntersecting) {
+								var videoSource = entry.target.querySelector("source");
+								videoSource.src = videoSource.dataset.src;
+								entry.target.load();
+								entry.target.classList.remove("lazy");
+								videoObserver.unobserve(entry.target);
+							}
+						});
+					});
 
-    videoObserver.observe(lazyVideo);
-  } else if (lazyVideo) {
-    var source = lazyVideo.querySelector("source");
-    source.src = source.dataset.src;
-    lazyVideo.load();
-  }
-});
+					videoObserver.observe(lazyVideo);
+				} else if (lazyVideo) {
+					var source = lazyVideo.querySelector("source");
+					source.src = source.dataset.src;
+					lazyVideo.load();
+				}
+			});
 
 
 		</script>
@@ -59,50 +51,65 @@
 			<a href="#"><i class="fa fa-twitter   float-up"></i></a>
 			<a href="#"><i class="fa fa-pinterest  float-up"></i></a>
 			<div class="down-arrow">
-				<a href="#our-products" class="js-anchor-link"><img  loading="lazy" src="{{ url_for('static', filename='img/dw-1.png') }}" alt="" class="img-fluid float-up d-none d-md-block"></a>
+				<a href="#our-products" class="js-anchor-link"><img loading="lazy"
+						src="{{ url_for('static', filename='img/dw-1.png') }}" alt=""
+						class="img-fluid float-up d-none d-md-block"></a>
 			</div>
 		</div>
-		
+
 		<div class="viewport-header">
-		  <h1>
-			Explore
-			<span>Orangecat</span>
-		  </h1>
-		  
+			<h1>
+				Explore
+				<span>Orangecat</span>
+			</h1>
+
 		</div>
-	  </header>
+	</header>
 </section>
-  <script>
+<script>
 	var viewportHeader = document.querySelector(".viewport-header");
-	document.body.addEventListener("scroll", function(event) {
-	var opacity = (document.body.offsetHeight - document.body.scrollTop) / document.body.offsetHeight;
-	var scale = (document.body.offsetHeight - document.body.scrollTop) / document.body.offsetHeight;
-	document.documentElement.style.setProperty('--headerOpacity', opacity);
-	document.documentElement.style.setProperty('--headerScale', scale);
+	document.body.addEventListener("scroll", function (event) {
+		var opacity = (document.body.offsetHeight - document.body.scrollTop) / document.body.offsetHeight;
+		var scale = (document.body.offsetHeight - document.body.scrollTop) / document.body.offsetHeight;
+		document.documentElement.style.setProperty('--headerOpacity', opacity);
+		document.documentElement.style.setProperty('--headerScale', scale);
 	});
-  </script>
+</script>
 <!-- ============= main-slider end ============= -->
 <!--================== S-PRODUCTS ==================-->
 <main class="our-products" id="our-products">
 	<div class="container">
-		<h2 class="title text-capitalize text-left text-md-center letter-space-value">our <b class="main-color">Cycles</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text-left text-md-center letter-space-value">our <b
+				class="main-color">Cycles</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
-		<p class="text-justify mt-3">Orange Cat is a one-product company, renowned for its exceptionally high standards of quality control and outstanding customer support. Our exclusive catalogue features two models of the Corinto Collection, each a masterpiece of Italian luxury and exquisite craftsmanship on wheels. <b style="font-size: 16px;color: black;letter-spacing: 1px;">Crafted in Italy</b>, these bicycles are not just modes of transportation, but symbols of a rich heritage and artistic excellence. The timeless and elegant lines of the Corinto bicycles embody the mission, vision, and values of their manufacturers, offering a ride that feels like gliding through royal courts with the sophistication and style that only Italian design can provide.</p>
+		<p class="text-justify mt-3">Orange Cat is a one-product company, renowned for its exceptionally high standards
+			of quality control and outstanding customer support. Our exclusive catalogue features two models of the
+			Corinto Collection, each a masterpiece of Italian luxury and exquisite craftsmanship on wheels. <b
+				style="font-size: 16px;color: black;letter-spacing: 1px;">Crafted in Italy</b>, these bicycles are not
+			just modes of transportation, but symbols of a rich heritage and artistic excellence. The timeless and
+			elegant lines of the Corinto bicycles embody the mission, vision, and values of their manufacturers,
+			offering a ride that feels like gliding through royal courts with the sophistication and style that only
+			Italian design can provide.</p>
 		<div class="produc-cards">
 			<div class="card card-1 linear-1">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-lg-6 h-100 left-part">
 						<div class="left-part">
-							<img loading="lazy" src="{{ url_for('static', filename='img/home.png') }}" class="img-fluid" alt="" loading="lazy">
+							<img loading="lazy" src="{{ url_for('static', filename='img/home.png') }}" class="img-fluid"
+								alt="" loading="lazy">
 						</div>
 					</div>
 					<div class="col-lg-6 h-100">
 						<div class="right-part">
 							<h5 class="main-color">Corinto Arrow</h5>
 							<p class="mt-2 sub-head">Running collection</p>
-							<p class="text-justify mt-3">Corinto Arrow, with its sleek and strong design, combines a timeless feel with modern reliability. The longer and narrower saddle, and the wider distance between the padding and the top tube, ensure a dynamic riding experience for both expert and leisure riders. </p>
+							<p class="text-justify mt-3">Corinto Arrow, with its sleek and strong design, combines a
+								timeless feel with modern reliability. The longer and narrower saddle, and the wider
+								distance between the padding and the top tube, ensure a dynamic riding experience for
+								both expert and leisure riders. </p>
 							<div class="d-flex align-items-center mt-3">
-								<a href="#" class="btn me-3"  data-bs-toggle="modal" data-bs-target="#productContactModal"><span>Enquire Now</span></a>
+								<a href="#" class="btn me-3" data-bs-toggle="modal"
+									data-bs-target="#productContactModal"><span>Enquire Now</span></a>
 								<a href="{{ url_for('view_products') }}" class="view-more m-0 p-0">View Details</a>
 							</div>
 						</div>
@@ -113,16 +120,22 @@
 				<div class="row justify-content-center align-items-center">
 					<div class="col-lg-6 h-100 left-part">
 						<div class="left-part">
-							<img loading="lazy" src="{{ url_for('static', filename='img/product2.jpg') }}" class="img-fluid" alt="" loading="lazy">
+							<img loading="lazy" src="{{ url_for('static', filename='img/product2.jpg') }}"
+								class="img-fluid" alt="" loading="lazy">
 						</div>
 					</div>
 					<div class="col-lg-6 h-100">
 						<div class="right-part">
 							<h5 class="main-color">Corinto Bow</h5>
 							<p class="mt-2 sub-head">Running collection</p>
-							<p class="text-justify mt-3">Corinto Bow was designed to reflect a softer style with curves that allow a gentle mount and dismount. The curved top bar renders this product ideal for those that find it difficult to raise their legs or do not want to compromise on their fashion choices but still use an environmentally conscious way of moving around town.</p>
+							<p class="text-justify mt-3">Corinto Bow was designed to reflect a softer style with curves
+								that allow a gentle mount and dismount. The curved top bar renders this product ideal
+								for those that find it difficult to raise their legs or do not want to compromise on
+								their fashion choices but still use an environmentally conscious way of moving around
+								town.</p>
 							<div class="d-flex align-items-center mt-3">
-								<a href="#" class="btn me-3"  data-bs-toggle="modal" data-bs-target="#productContactModal"><span>Enquire Now</span></a>
+								<a href="#" class="btn me-3" data-bs-toggle="modal"
+									data-bs-target="#productContactModal"><span>Enquire Now</span></a>
 								<a href="{{ url_for('view_products') }}" class="view-more m-0 p-0">View Details</a>
 							</div>
 						</div>
@@ -139,7 +152,7 @@
 <section class="background">
 	<div class="content-wrapper">
 		<section class="s-subscribe">
-			<video autoplay muted loop id="bg-video" >
+			<video autoplay muted loop id="bg-video">
 				<source src="../static/img/discover-bg.mp4" type="video/mp4">
 				<!-- Add additional source elements for different video formats if needed -->
 				Your browser does not support HTML5 video.
@@ -150,11 +163,13 @@
 				<div class="subscribe-left">
 					<div class="blockquote-wrapper">
 						<div class="blockquote">
-						  <h1>A bicycle is not just a combination of details. <br> Its details are everything.</h1>
+							<h1>A bicycle is not just a combination of details. <br> Its details are everything.</h1>
 						</div>
 					</div>
-					<p class="text-capitalize">Embark on a journey of craftmanship, luxury and design for a unique bicycle that will satisfy even the most demanding tastes.</p>
-					<a href="/about#about-tradition"><button type="submit" class="btn btn-form"><span>Know More</span></button></a>
+					<p class="text-capitalize">Embark on a journey of craftmanship, luxury and design for a unique
+						bicycle that will satisfy even the most demanding tastes.</p>
+					<a href="/about#about-tradition"><button type="submit" class="btn btn-form"><span>Know
+								More</span></button></a>
 				</div>
 				<img class="wow fadeInRightBlur lazy img-fluid" data-wow-duration=".8s" data-wow-delay=".3s"
 					src="{{ url_for('static', filename='img/home.png') }}"
@@ -174,32 +189,52 @@
 			<div class="container">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-lg-6">
-						<h2 class="title text-capitalize small-title letter-space-value">about <br class="d-none "><b class="main-color">orange
-							cat</b>  </h2>
-						<p class="mt-3 text-justify ">It all started several years ago with a trip to Italy, during which time, our founder was gifted a beautifully handcrafted vintage bicycle by a close friend. Taken in by its features, he decided to bring it back to Canada and have a piece of Italy close to home. For years he rode this bicycle on the streets of downtown Toronto receiving compliments from passersby and drivers at stoplights. No one had ever seen such a unique bicycle. He rode his bicycle with his head held high, the wind in his hair and a smile on his face.
+						<h2 class="title text-capitalize small-title letter-space-value">about <br class="d-none "><b
+								class="main-color">orange
+								cat</b> </h2>
+						<p class="mt-3 text-justify ">It all started several years ago with a trip to Italy, during
+							which time, our founder was gifted a beautifully handcrafted vintage bicycle by a close
+							friend. Taken in by its features, he decided to bring it back to Canada and have a piece of
+							Italy close to home. For years he rode this bicycle on the streets of downtown Toronto
+							receiving compliments from passersby and drivers at stoplights. No one had ever seen such a
+							unique bicycle. He rode his bicycle with his head held high, the wind in his hair and a
+							smile on his face.
 							<br><br> And then, someone stole his bicycle.
-							He searched far and wide but he noted that there were no retailers in the area that had similar products available, so he returned to Italy. In 2022 he established a partnership with Taurus, a vintage bicycle manufacturer, to bring their product to Canada and Orange Cat was born.
+							He searched far and wide but he noted that there were no retailers in the area that had
+							similar products available, so he returned to Italy. In 2022 he established a partnership
+							with Taurus, a vintage bicycle manufacturer, to bring their product to Canada and Orange Cat
+							was born.
 						</p>
 						<div class=" mb-5 mb-md-0">
-							<a href="{{ url_for('about') }}"><button type="submit" class="btn btn-form mt-3"><span>Read More</span></button></a>
+							<a href="{{ url_for('about') }}"><button type="submit" class="btn btn-form mt-3"><span>Read
+										More</span></button></a>
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="about-contents">
 							<div class="row justify-content-center align-items-center">
 								<div class="col-lg-12 mb-3">
-									<div class="blur-load" style="background: url(../static/img/about-sec-1-small.jpg);background-repeat: no-repeat;">
-										<img loading="lazy" src="{{ url_for('static', filename='img/about-sec-1.jpg') }}" alt="" class="img-fluid" loading="lazy">
+									<div class="blur-load"
+										style="background: url(../static/img/about-sec-1-small.jpg);background-repeat: no-repeat;">
+										<img loading="lazy"
+											src="{{ url_for('static', filename='img/about-sec-1.jpg') }}" alt=""
+											class="img-fluid" loading="lazy">
 									</div>
 								</div>
 								<div class="col-lg-6 mb-3">
-									<div class="blur-load" style="background: url(../static/img/about-sec-2-small.jpg);background-repeat: no-repeat;">
-										<img loading="lazy" src="{{ url_for('static', filename='img/about-sec-2.jpg') }}" alt="" class="img-fluid" loading="lazy">
+									<div class="blur-load"
+										style="background: url(../static/img/about-sec-2-small.jpg);background-repeat: no-repeat;">
+										<img loading="lazy"
+											src="{{ url_for('static', filename='img/about-sec-2.jpg') }}" alt=""
+											class="img-fluid" loading="lazy">
 									</div>
 								</div>
 								<div class="col-lg-6 mb-3">
-									<div class="blur-load" style="background: url(../static/img/about-sec-3-small.jpg);background-repeat: no-repeat;">
-										<img loading="lazy" src="{{ url_for('static', filename='img/about-sec-3.jpg') }}" alt="" class="img-fluid" loading="lazy">
+									<div class="blur-load"
+										style="background: url(../static/img/about-sec-3-small.jpg);background-repeat: no-repeat;">
+										<img loading="lazy"
+											src="{{ url_for('static', filename='img/about-sec-3.jpg') }}" alt=""
+											class="img-fluid" loading="lazy">
 									</div>
 								</div>
 							</div>
@@ -367,6 +402,7 @@
 			transform: translateX(0);
 		}
 	}
+
 	.imgmodal {
 		display: none;
 		position: fixed;
@@ -380,6 +416,7 @@
 		background-color: rgb(0, 0, 0);
 		background-color: rgba(0, 0, 0, 0.9);
 	}
+
 	.imgmodal-content {
 		margin: auto;
 		display: flex;
@@ -388,6 +425,7 @@
 		width: 80%;
 		max-width: 600px;
 	}
+
 	.close {
 		position: absolute;
 		top: 15px;
@@ -397,12 +435,14 @@
 		font-weight: bold;
 		transition: 0.3s;
 	}
+
 	.close:hover,
 	.close:focus {
 		color: #bbb;
 		text-decoration: none;
 		cursor: pointer;
 	}
+
 	.btn-main-edit {
 		padding: 10px 20px;
 		font-size: 16px;
@@ -417,33 +457,35 @@
 	.btn-main-edit:hover {
 		background-color: #0056b3 !important;
 	}
+
 	.header-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 </style>
 <section class="s-gallery">
 	<div class="container" id="vue-gallery-app">
 		<div class="gallery-header">
-			
+
 			<div class="header-container">
-				<h2 class="title text-capitalize text-center letter-space-value">our <b class="main-color">photo</b> gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
-				<a href="{{ url_for('photo_gallery')}}" v-if="isAdmin" class="btn-main-edit" style="margin-left: 100px;">Edit</a>
+				<h2 class="title text-capitalize text-center letter-space-value">our <b class="main-color">photo</b>
+					gallery&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i></h2>
+				<a href="{{ url_for('photo_gallery')}}" v-if="isAdmin" class="btn-main-edit"
+					style="margin-left: 100px;">Edit</a>
 			</div>
+		</div>
+		<div class="gallery">
+			<div class="gallery__column" v-for="col in galleryCols">
+				<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" @click.stop="openModal(imgUrl)">
+					<figure class="gallery__thumb">
+						<img :src="imgUrl" alt="" class="gallery__image" loading="lazy" />
+						<figcaption class="gallery__caption">
+						</figcaption>
+					</figure>
 				</div>
-				<div class="gallery">
-					<div class="gallery__column" v-for="col in galleryCols">
-						<div class="gallery__link" v-for="imgUrl in galleryImageUrls[col]" 
-															@click.stop="openModal(imgUrl)">
-							<figure class="gallery__thumb">
-								<img :src="imgUrl" alt="" class="gallery__image" loading="lazy" />
-								<figcaption class="gallery__caption">
-								</figcaption>
-							</figure>
-						</div>
-					</div>
-				</div>
+			</div>
+		</div>
 		<div class="text-center">
 			<a href="{{ url_for('photo_gallery')}}" class="btn mt-4"><span>View More</span></a>
 		</div>
@@ -452,12 +494,12 @@
 			<vue-magnifier class="imgmodal-content" :src="modalImage" :src-large="modalImage"></vue-magnifier>
 			<div id="caption"></div>
 		</div>
-		
+
 	</div>
 </section>
 <script>
 
-var app = new Vue({
+	var app = new Vue({
 		el: '#vue-gallery-app',
 		delimiters: ['[[', ']]'],
 		data: {
@@ -499,11 +541,11 @@ var app = new Vue({
 				Toastify({
 					text: message,
 					duration: 3000,
-					gravity: "top", 
-					position: 'right', 
+					gravity: "top",
+					position: 'right',
 					backgroundColor: type,
-					stopOnFocus: true, 
-					onClick: function () { } 
+					stopOnFocus: true,
+					onClick: function () { }
 				}).showToast();
 			},
 			checkIfAdmin() {
@@ -641,22 +683,27 @@ var app = new Vue({
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-4 icon-img">
 				<div class="follow-left-contents">
-					<h2 class="title text-center text-capitalize small-title letter-space-value"><b class="main-color">Follow</b> us on <br> Social media </h2>
+					<h2 class="title text-center text-capitalize small-title letter-space-value"><b
+							class="main-color">Follow</b> us on <br> Social media </h2>
 					<div class="social-media">
 						<div class="d-flex justify-content-center">
 							<a href="#">
-								<img loading="lazy" src="{{ url_for('static', filename='img/icons/facebook.png') }}" alt="" class="img-fluid float-up" >
+								<img loading="lazy" src="{{ url_for('static', filename='img/icons/facebook.png') }}"
+									alt="" class="img-fluid float-up">
 							</a>
 							<a href="#">
-								<img loading="lazy" src="{{ url_for('static', filename='img/icons/instagram.png') }}" alt="" class="img-fluid ms-5 float-up">
+								<img loading="lazy" src="{{ url_for('static', filename='img/icons/instagram.png') }}"
+									alt="" class="img-fluid ms-5 float-up">
 							</a>
 						</div>
 						<div class="d-flex mt-3 mt-md-5 justify-content-center">
 							<a href="#">
-								<img loading="lazy" src="{{ url_for('static', filename='img/icons/pinterest.png') }}" alt="" class="img-fluid float-up">
+								<img loading="lazy" src="{{ url_for('static', filename='img/icons/pinterest.png') }}"
+									alt="" class="img-fluid float-up">
 							</a>
 							<a href="#">
-								<img loading="lazy" src="{{ url_for('static', filename='img/icons/twitter.png') }}" alt="" class="img-fluid ms-5 float-up">
+								<img loading="lazy" src="{{ url_for('static', filename='img/icons/twitter.png') }}"
+									alt="" class="img-fluid ms-5 float-up">
 							</a>
 						</div>
 					</div>
@@ -664,7 +711,9 @@ var app = new Vue({
 			</div>
 			<div class="col-lg-8">
 				<div>
-					<img loading="lazy" src="https://cloud-cube-us2.s3.amazonaws.com/lu3eeh4bls8g/public/follow-us-on.png" alt="" class="img-fluid" loading="lazy">
+					<img loading="lazy"
+						src="https://cloud-cube-us2.s3.amazonaws.com/lu3eeh4bls8g/public/follow-us-on.png" alt=""
+						class="img-fluid" loading="lazy">
 				</div>
 			</div>
 		</div>
@@ -674,11 +723,11 @@ var app = new Vue({
 
 <!--================== S-FEEDBACK ==================-->
 <section class="s-feedback">
-	<video autoplay muted loop id="bg-video"  style="width:100%;">
-        <source src="../static/img/feedback-vdo-2.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
-	<span class="effwct-bg-feedback" ></span>
+	<video autoplay muted loop id="bg-video" style="width:100%;">
+		<source src="../static/img/feedback-vdo-2.mp4" type="video/mp4">
+		Your browser does not support HTML5 video.
+	</video>
+	<span class="effwct-bg-feedback"></span>
 	<span class="mask"></span>
 	<div class="container">
 		<h2 class="title text-center text-md-start letter-space-value">Feedback</h2>
@@ -755,7 +804,8 @@ var app = new Vue({
 <!--================ contact-us start ================-->
 <section class="contact-orangecat" style="padding: 100px 0;">
 	<div class="container">
-		<h2 class="title text-capitalize text-left text-md-left letter-space-value">Get in <b class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
+		<h2 class="title text-capitalize text-left text-md-left letter-space-value">Get in <b
+				class="main-color">touch</b>&nbsp;&nbsp;<i class="bi bi-bicycle cycle-icon "></i>
 		</h2>
 		<p class="mt-4 text-justify text-md-start">We're here to assist you every step of the way. Don't hesitate to get
 			in touch with our dedicated team for any inquiries, questions, or support you may need. We value your input
@@ -767,16 +817,18 @@ var app = new Vue({
 					<h5 class="black-color text-capitalize mb-3"><b class="main-color">Locate</b> us</h5>
 				</div>
 				<div class="col-lg-6">
-					<img loading="lazy" src="{{ url_for('static', filename='img/contact-left-img.jpg') }}" class="img-fluid">
-					<p class="mt-2 mt-md-3 text-start text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham, CR6 9PX
+					<img loading="lazy" src="{{ url_for('static', filename='img/contact-left-img.jpg') }}"
+						class="img-fluid">
+					<p class="mt-2 mt-md-3 text-start text-md-start">Rectory Cottage, Farleigh Court Road, Warlingham,
+						CR6 9PX
 					</p>
 					<h6 class="text-capitalize mt-3">contact us</h6>
 					<div class="d-flex align-items-center reach-out-us mt-3">
 						<div class="call-us">
 							<div class="d-flex justify-content-center align-items-center">
 								<div class="contac-icon">
-									<img loading="lazy" src="{{ url_for('static', filename='img/contact/call.png') }}" alt="call"
-										class="img-fluid">
+									<img loading="lazy" src="{{ url_for('static', filename='img/contact/call.png') }}"
+										alt="call" class="img-fluid">
 								</div>
 								<div class="contact-numbers ms-3">
 									<a href="tel: (+33)7 35 55 31 15">(+33)7 35 55 31 15</a><br>
@@ -787,8 +839,8 @@ var app = new Vue({
 						<div class="mail-us ms-md-4 ms-md-2 ms-3">
 							<div class="d-flex align-items-center">
 								<div class="contact-icon">
-									<img loading="lazy" src="{{ url_for('static', filename='img/contact/mail.png') }}" alt="mail"
-										class="img-fluid">
+									<img loading="lazy" src="{{ url_for('static', filename='img/contact/mail.png') }}"
+										alt="mail" class="img-fluid">
 								</div>
 								<a href="mailto:info@example.com" class="ms-md-3 ms-2 mt-0">info@example.com</a>
 							</div>
@@ -822,7 +874,8 @@ var app = new Vue({
 								placeholder="Type your message" required></textarea>
 						</div>
 						<div class="text-center">
-							<a href="{{ url_for('about') }}"><button type="submit" class="btn"><span>Send</span></button></a>
+							<a href="{{ url_for('about') }}"><button type="submit"
+									class="btn"><span>Send</span></button></a>
 						</div>
 					</form>
 				</div>
@@ -832,21 +885,34 @@ var app = new Vue({
 </section>
 
 <style>
-	img{object-fit: cover;object-position: center;}
-	.blur-load{background-size: cover;background-position: center; border-radius: 5px;  }
-	.blur-load.loaded > img {
+	img {
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.blur-load {
+		background-size: cover;
+		background-position: center;
+		border-radius: 5px;
+	}
+
+	.blur-load.loaded>img {
 		opacity: 1;
 	}
-	.blur-load > img { opacity: 0; transition: opacity 200ms ease-in-out; }
+
+	.blur-load>img {
+		opacity: 0;
+		transition: opacity 200ms ease-in-out;
+	}
 </style>
 
 <!-- ----------img-load---------- -->
 <script>
-	const blurDivs= document.querySelectorAll(".blur-load")
+	const blurDivs = document.querySelectorAll(".blur-load")
 	blurDivs.forEach(div => {
 		const img = div.querySelector("img")
 
-		function loaded(){
+		function loaded() {
 			div.classList.add("loaded")
 		}
 		if (img.complete) {
@@ -858,7 +924,7 @@ var app = new Vue({
 </script>
 <script>
 	const sections = document.querySelectorAll('section');
-	document.addEventListener("scroll", function() {
+	document.addEventListener("scroll", function () {
 		sections.forEach(section => {
 			const sectionTop = section.getBoundingClientRect().top;
 			const windowHeight = window.innerHeight;
@@ -873,43 +939,47 @@ var app = new Vue({
 </script>
 
 <!-- Modal -->
-<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
+<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1"
+	aria-labelledby="productContactModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-body">
-			<form action="">
-				<h4 class="text-capitalize black-color">Corinto Deluxe Donna </h4>
-				<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
-				<div class="mb-3">
-					<input type="text" class="form-control" id="name" placeholder="Name" required>
-				  </div>
-				<div class="mb-3">
-					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
-				  </div>
-				  <div class="mb-3">
-					<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
-				  </div>
-				  <div class="mb-4">
-					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." required></textarea>
-				  </div>
-			</form>
+		<div class="modal-content">
+			<div class="modal-body">
+				<form action="">
+					<h4 class="text-capitalize black-color">Corinto Deluxe Donna </h4>
+					<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b
+							class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
+					<div class="mb-3">
+						<input type="text" class="form-control" id="name" placeholder="Name" required>
+					</div>
+					<div class="mb-3">
+						<input type="email" class="form-control" id="exampleFormControlInput1"
+							placeholder="Email address" required>
+					</div>
+					<div class="mb-3">
+						<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
+					</div>
+					<div class="mb-4">
+						<textarea class="form-control" id="type-message" rows="3"
+							placeholder="Type your inquiry here..." required></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
+				<button type="submit" class="btn"><span>Send</span></button>
+			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
-		  	<button type="submit" class="btn"><span>Send</span></button>
-		</div>
-	  </div>
 	</div>
-  </div>
+</div>
 <script>
-	$('.js-anchor-link').click(function(e){
-  e.preventDefault();
-  var target = $($(this).attr('href'));
-  if(target.length){
-    var scrollTo = target.offset().top;
-    $('body, html').animate({scrollTop: scrollTo+'px'}, 800);
-  }
-});
+	$('.js-anchor-link').click(function (e) {
+		e.preventDefault();
+		var target = $($(this).attr('href'));
+		if (target.length) {
+			var scrollTo = target.offset().top;
+			$('body, html').animate({ scrollTop: scrollTo + 'px' }, 800);
+		}
+	});
 </script>
 </div>
 <!--================ contact-us end ================-->
