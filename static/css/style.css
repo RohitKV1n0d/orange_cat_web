@@ -528,3 +528,10 @@ header{z-index: 998;}
   @media (max-width: 991px){
     .accessories-detail h2{font-size: 19px;}
   }
+  .color-bg{width: 45px;height: 45px;border-radius: 50%;}
+  .arrow-bg-1{background-color: #0A0C10;}
+  .arrow-bg-2{background-color:  #6D8085;}
+  .bow-bg-1{background-color: #191e28;}
+  .bow-bg-2{background-color:  #7AB9B4;}
+  .border-bg{border: 2px solid transparent;width: 56px;height: 56px;border-radius: 50%;padding: 4px;}
+  .border-bg:hover, .border-bg.active{border: 2px solid #f6d1b3;}
