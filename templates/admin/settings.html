@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>Settings</h1>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                  <div class="float-left">
+                    <h4>Delete All S3 Images</h4>
+                  </div>
+                  <div class="float-right">
+                    <a class="btn btn-danger" id="delete-all-images" href="#">Delete</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#delete-all-images').click(function(e) {
+                e.preventDefault(); // Prevent default link behavior
+                
+                var $this = $(this); // Cache the button element
+                $this.text('Deleting...'); // Change button text to indicate loading state
+                $this.prop('disabled', true); // Disable the button to prevent multiple clicks
+        
+                // Make the AJAX request
+                $.ajax({
+                    url: '/admin/settings/delete/all/images', // The endpoint
+                    type: 'POST', // The method specified in your Flask route
+                    success: function(response) {
+                        // Handle success
+                        alert(response.message); // Alert the response message
+                        $this.text('Delete'); // Reset button text
+                        $this.prop('disabled', false); // Re-enable the button
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        alert("Error: " + xhr.responseText); // Alert the error
+                        $this.text('Delete'); // Reset button text to original
+                        $this.prop('disabled', false); // Re-enable the button
+                    }
+                });
+            });
+        });
+        </script>
+        
+
+{% endblock %}
