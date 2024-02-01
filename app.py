@@ -12,7 +12,7 @@ import datetime
 import boto3
 
 
-from AWS_Modules import upload_file_to_s3, delete_file_from_s3
+from AWS_Modules import upload_file_to_s3, delete_file_from_s3, delete_all_files_from_s3
 
 app = Flask(__name__)
 CORS(app)
@@ -208,7 +208,26 @@ def index():
 def admin_socials():
     return render_template('admin/socials.html')
 
+@app.route('/admin/settings')
+@admin_required
+def admin_settings():
+    # Your admin settings panek code here
+    return render_template('admin/settings.html')
 
+@app.route('/admin/settings/delete/all/images', methods=['GET', 'POST'])
+@admin_required
+def delete_all_images():
+    try:
+        bucket = os.environ.get('BUCKET_NAME')
+        num_rows_deleted = db.session.query(ImageGallery).delete()
+        db.session.commit()
+        response = delete_all_files_from_s3(bucket)
+        if response:
+            return jsonify({'message':"All deleted" , "stats":True})
+        return jsonify({'message':"Failed" , "stats":False})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': 'Failed to delete records.', 'error': str(e), 'status': False})
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

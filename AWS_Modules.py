@@ -58,4 +58,52 @@ def delete_file_from_s3(file_name, bucket, public=True):
     print('File deleted successfully')
     return True
 
+def delete_all_files_from_s3(bucket, public=True): 
+    """Delete all files from an S3 bucket
+
+    :param bucket: Bucket from which to delete files
+    :param public: True if public, False if private
+    :return: None
+    """
+    # Define the path based on the visibility of the files
+    s3_path = 'lu3eeh4bls8g/public/' if public else 'lu3eeh4bls8g/'
+    
+    # List all objects in the bucket
+    try:
+        continuation_token = None
+        while True:
+            # Support for pagination
+            list_kwargs = {
+                'Bucket': bucket,
+                'Prefix': s3_path
+            }
+            if continuation_token:
+                list_kwargs['ContinuationToken'] = continuation_token
+
+            response = s3.list_objects_v2(**list_kwargs)
+
+            # Check if the bucket is empty
+            if 'Contents' not in response:
+                print("No files to delete.")
+                return False
+
+            # Prepare a list of objects to delete
+            objects_to_delete = {'Objects': [{'Key': obj['Key']} for obj in response['Contents']]}
+            
+            # Delete the objects
+            s3.delete_objects(Bucket=bucket, Delete=objects_to_delete)
+
+            # Check if there are more objects to list
+            if response.get('IsTruncated'):
+                continuation_token = response.get('NextContinuationToken')
+            else:
+                break
+
+        print("All files deleted successfully.")
+        return True
+    except Exception as e:
+        print(f"Error in delete_all_files_from_s3: {e}")
+        return False
+
+
 
