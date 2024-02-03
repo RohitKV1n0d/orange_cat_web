@@ -266,7 +266,7 @@ def base():
 def about():
     return render_template('about-orangecat.html')
 
-@app.route('/products')
+@app.route('/models')
 def view_products():
     products = Products.query.all()
     return render_template('bikes.html', products=products)
