@@ -1,0 +1,54 @@
+{
+    "products": {
+        "bow": [
+            {
+                "variant_name": "gray",
+                "image_urls": [
+                    "/static/img/product-detail-1.jpg",
+                    "/static/img/product-details-1.jpg",
+                    "/static/img/product-details-2.jpg",
+                    "/static/img/product-details-3.jpg"
+                ],
+                "description1": "A gray bow",
+                "description2": "A gray bow",
+                "color": "gray"
+            },
+            {
+                "variant_name": "tiffany green",
+                "image_urls": [
+                    "https://www.etsy.com/listing/1000000000000/black-bow.jpg",
+                    "https://www.etsy.com/listing/1000000000000/black-bow2.jpg"
+                ],
+                "description1": "A tiffany green bow",
+                "description2": "A tiffany green bow",
+                "color": "tiffany green"
+            }
+        ],
+        "arrow": [
+            {
+                "variant_name": "diplomatic blue",
+                "image_urls": [
+                    "/static/img/product-detail-1.jpg",
+                    "/static/img/product-details-1.jpg",
+                    "/static/img/product-details-2.jpg",
+                    "/static/img/product-details-3.jpg"
+                ],
+                "description1": "A diplomatic blue arrow",
+                "description2": "A diplomatic blue arrow",
+                "color": "diplomatic blue"
+            },
+            {
+                "variant_name": "black",
+                "image_urls":  [
+                    "/static/img/product-detail-1.jpg",
+                    "/static/img/product-details-1.jpg",
+                    "/static/img/product-details-2.jpg",
+                    "/static/img/product-details-3.jpg"
+                ],
+                "description1": "Corinto Arrow, with its sleek and striking design, combines a timeless feel with modern reliability. The longer and narrower saddle, the wider distance between the padding and the top tube, ensures a dynamic riding experience for both expert riders and leisure riders alike.",
+                "description2": "ts frame, composed of steel and welded by hand, is durable yet finely wrought resulting in a beautiful bicycle that provides a sought-after riding experience.",
+                "color": "black"
+            }
+        ]
+    }
+}
