@@ -302,13 +302,17 @@ def read_json_file(file_path):
         print(e)
         return None
 
-@app.route('/model/bow')
-def view_model_bow():
-    return render_template('bow-tiffany_green.html')
+@app.route('/model/bow/<variant>')
+def view_model_bow(variant):
+    return render_template('bow.html', variant=variant)
 
-@app.route('/model/arrow')
-def view_model_arrow():
-    return render_template('arrow-diplomatic_blue.html')
+
+
+
+
+@app.route('/model/arrow/<variant>')
+def view_model_arrow(variant):
+    return render_template('arrow.html', variant=variant)
 
 
 
