@@ -3,6 +3,7 @@
 
 {% block content %}
 	<!-- ================ HEADER-TITLE ================ -->
+	<div id="prodcut-vue-app">
 	<section class="s-header-title">
 		<div class="container">
 			<h4 class="black-color text-capitalize letter-space-value line-gap fw-bold"><b class="main-color">Model</b> Details</b></h4>
@@ -11,72 +12,43 @@
 	<!-- ============== HEADER-TITLE END ============== -->
 
 	<!-- ============== S-SINGLE-PRODUCT ============== -->
-	<section class="s-single-product">
+	<section class="s-single-product" >
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-md-7">
 					<!--===== SLIDER-SINGLE-FOR =====-->
 					<div class="slider-single-for">
-						<div class="slide-single-for">
-							<a href="{{ url_for('static', filename='img/product-detail-1.jpg') }}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{ url_for('static', filename='img/product-detail-1.jpg') }}" alt="img">
-							</a>
-						</div>
-						<div class="slide-single-for">
-							<a href="{{ url_for('static', filename='img/product-details-1.jpg') }}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{ url_for('static', filename='img/product-details-1.jpg') }}" alt="img">
-							</a>
-						</div>
-						<div class="slide-single-for">
-							<a href="{{ url_for('static', filename='img/product-details-2.jpg') }}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{ url_for('static', filename='img/product-details-2.jpg') }}" alt="img">
-							</a>
-						</div>
-						<div class="slide-single-for">
-							<a href="{{ url_for('static', filename='img/product-details-3.jpg') }}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{ url_for('static', filename='img/product-details-3.jpg') }}" alt="img">
+						<div v-for="image in product_data.image_urls"   class="slide-single-for" >
+							<a :href="image" class="single-for-img" data-fancybox="prod1">
+								<img :src="image" alt="img">
 							</a>
 						</div>
 					</div>
 					<!--=== SLIDER-SINGLE-FOR END ===-->
 					<!--===== SLIDER-SINGLE-NAV =====-->
 					<div class="slider-single-nav">
-						<div class="slide-single-nav">
+						<div class="slide-single-nav" v-for="image in product_data.image_urls" :key="image">
 							<div class="single-nav-img">
-								<img src="{{ url_for('static', filename='img/product-detail-1.jpg') }}" alt="img">
-							</div>
-						</div>
-						<div class="slide-single-nav">
-							<div class="single-nav-img">
-								<img src="{{ url_for('static', filename='img/product-details-1.jpg') }}" alt="img">
-							</div>
-						</div>
-						<div class="slide-single-nav">
-							<div class="single-nav-img">
-								<img src="{{ url_for('static', filename='img/product-details-2.jpg') }}" alt="img">
-							</div>
-						</div>
-						<div class="slide-single-nav">
-							<div class="single-nav-img">
-								<img src="{{ url_for('static', filename='img/product-details-3.jpg') }}" alt="img">
+								<img :src="image" alt="img">
 							</div>
 						</div>
 					</div>
 					<!--=== SLIDER-SINGLE-NAV END ===-->
 				</div>
 				<div class="col-12 col-md-5 single-shop-left">
-					<h4 class="title text-capitalize">Corinto Arrow in <b style="color: #0A0C10;">Black</b></h4>
-					<p>Corinto Arrow, with its sleek and striking design, combines a timeless feel with modern reliability. The longer and narrower saddle, the wider distance between the padding and the top tube, ensures a dynamic riding experience for both expert riders and leisure riders alike. </p><br>
-					<p>Its frame, composed of steel and welded by hand, is durable yet finely wrought resulting in a beautiful bicycle that provides a sought-after riding experience.</p>
+					<h4 class="title text-capitalize">Corinto Arrow in <b style="color: #0A0C10;">[[ product_data.color ]]</b></h4>
+					<p>[[ product_data.description1 ]]</p><br>
+					<p>[[ product_data.description2 ]]</p>
 					<h6 class="mt-4">Available in 2 Variants</h6>
 					<div class="d-flex mt-3 align-items-center">
-						<a href="#">
-							<div class="border-bg active  float-up">
+						<a @click="changeProductVarient('black')">
+							<div :class="{'border-bg': true, 'float-up': true, 'active': product_data.color === 'black'}">
 								<div class="color-bg arrow-bg-1"></div>
 							</div>
 						</a>
-						<a href="#">
-							<div class="border-bg  ms-3 float-up">
+						<a @click="changeProductVarient('diplomatic blue')">
+							<!-- <div class="border-bg  ms-3 float-up"> -->
+							<div :class="{'border-bg': true, 'ms-3': true, 'float-up': true, 'active': product_data.color === 'diplomatic blue'}">
 								<div class="color-bg arrow-bg-2"></div>
 							</div>
 						</a>
@@ -243,7 +215,7 @@
 	  <div class="modal-content">
 		<div class="modal-body">
 			<form action="">
-				<h4 class="text-capitalize black-color">Corinto Deluxe Donna </h4>
+				<h4 class="text-capitalize black-color">Corinto Arrow  - [[ product_data.color ]]</h4>
 				<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
 				<div class="mb-3">
 					<input type="text" class="form-control" id="name" placeholder="Name" required>
@@ -267,7 +239,55 @@
 	</div>
   </div>
 
+	</div>
+
 	<!--============= RELATED PRODUCTS END =============-->
+
+	<script>
+	// url /get/products/json/<name>
+	const PRODUCT_NAME = 'arrow';  
+	// set the default product varient from url
+	var current_url = window.location.href;
+	// const DEFAULT_PRODUCT_VARIENT = current_url.split('/').pop();
+	const DEFAULT_PRODUCT_VARIENT = 'black'
+
+
+	var app = new Vue({
+			el: '#prodcut-vue-app',
+			delimiters: ['[[', ']]'],
+			data: {
+				Message: 'Hello Vue!',
+				response_data: [],
+				product_data: {},
+			},
+			methods: {
+				fetchProductData(){
+					axios.get('/get/products/json/'+PRODUCT_NAME)
+					.then(response => {
+						this.response_data = response.data; // [{color: 'black', image_urls: ['img/product-details-1.jpg'], description: "..."}, ...]
+						// find the default product varient
+						let default_product_varient = this.response_data.find(product => product.color === DEFAULT_PRODUCT_VARIENT);
+						this.product_data = default_product_varient;
+						$('.slider-single-for').slick('refresh');
+						$('.slider-single-nav').slick('refresh');
+					})
+					.catch(error => {
+						console.log(error);
+					})
+				},
+				changeProductVarient(varient){
+					this.product_data = this.response_data.find(product => product.color === varient);
+					// refresh the slider
+					$('.slider-single-for').slick('refresh');
+					$('.slider-single-nav').slick('refresh');
+
+				}
+			},
+			mounted() {
+				this.fetchProductData();
+			}
+		})
+	</script>
 
 	{% endblock %}
 	
