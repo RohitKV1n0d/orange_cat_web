@@ -16,8 +16,10 @@
             {
                 "variant_name": "tiffany green",
                 "image_urls": [
-                    "https://www.etsy.com/listing/1000000000000/black-bow.jpg",
-                    "https://www.etsy.com/listing/1000000000000/black-bow2.jpg"
+                    "/static/img/product-detail-1.jpg",
+                    "/static/img/product-details-1.jpg",
+                    "/static/img/product-details-2.jpg",
+                    "/static/img/product-details-3.jpg"
                 ],
                 "description1": "A tiffany green bow",
                 "description2": "A tiffany green bow",
