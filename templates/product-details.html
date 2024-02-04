@@ -280,6 +280,8 @@
 					// refresh the slider
 					$('.slider-single-for').slick('refresh');
 					$('.slider-single-nav').slick('refresh');
+					let new_url = current_url.replace(this.product_data.color, varient);
+					window.history.pushState({}, '', new_url+'qwe');
 
 				}
 			},
