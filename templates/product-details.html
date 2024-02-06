@@ -2,23 +2,24 @@
 
 
 {% block content %}
-	<!-- ================ HEADER-TITLE ================ -->
-	<div id="prodcut-vue-app">
+<!-- ================ HEADER-TITLE ================ -->
+<div id="prodcut-vue-app">
 	<section class="s-header-title">
 		<div class="container">
-			<h4 class="black-color text-capitalize letter-space-value line-gap fw-bold"><b class="main-color">Model</b> Details</b></h4>
+			<h4 class="black-color text-capitalize letter-space-value line-gap fw-bold"><b class="main-color">Model</b>
+				Details</b></h4>
 		</div>
 	</section>
 	<!-- ============== HEADER-TITLE END ============== -->
 
 	<!-- ============== S-SINGLE-PRODUCT ============== -->
-	<section class="s-single-product" >
+	<section class="s-single-product">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-md-7">
 					<!--===== SLIDER-SINGLE-FOR =====-->
 					<div class="slider-single-for">
-						<div v-for="image in product_data.image_urls"   class="slide-single-for" >
+						<div v-for="image in product_data.image_urls" class="slide-single-for">
 							<a :href="image" class="single-for-img" data-fancybox="prod1">
 								<img :src="image" alt="img">
 							</a>
@@ -36,24 +37,28 @@
 					<!--=== SLIDER-SINGLE-NAV END ===-->
 				</div>
 				<div class="col-12 col-md-5 single-shop-left">
-					<h4 class="title text-capitalize">Corinto Arrow in <b style="color: #0A0C10;">[[ product_data.color ]]</b></h4>
+					<h4 class="title text-capitalize">Corinto Arrow in <b style="color: #0A0C10;">[[ product_data.color
+							]]</b></h4>
 					<p>[[ product_data.description1 ]]</p><br>
 					<p>[[ product_data.description2 ]]</p>
 					<h6 class="mt-4">Available in 2 Variants</h6>
 					<div class="d-flex mt-3 align-items-center">
 						<a @click="changeProductVarient('black')">
-							<div :class="{'border-bg': true, 'float-up': true, 'active': product_data.color === 'black'}">
+							<div
+								:class="{'border-bg': true, 'float-up': true, 'active': product_data.color === 'black'}">
 								<div class="color-bg arrow-bg-1"></div>
 							</div>
 						</a>
 						<a @click="changeProductVarient('diplomatic blue')">
 							<!-- <div class="border-bg  ms-3 float-up"> -->
-							<div :class="{'border-bg': true, 'ms-3': true, 'float-up': true, 'active': product_data.color === 'diplomatic blue'}">
+							<div
+								:class="{'border-bg': true, 'ms-3': true, 'float-up': true, 'active': product_data.color === 'diplomatic blue'}">
 								<div class="color-bg arrow-bg-2"></div>
 							</div>
 						</a>
 					</div>
-					<a href="#" class="btn mt-5"  data-bs-toggle="modal" data-bs-target="#productContactModal"><span>Enquire Now</span></a>
+					<a href="#" class="btn mt-5" data-bs-toggle="modal"
+						data-bs-target="#productContactModal"><span>Enquire Now</span></a>
 				</div>
 			</div>
 		</div>
@@ -71,23 +76,27 @@
 				<div class="tabs-content">
 					<div class="tab tab1">
 						<div class="accessories-detail">
-							<h2 class="black-color">Technical <b class="main-color">Insights</b> - Accessories & Descriptions</h2>
+							<h2 class="black-color">Technical <b class="main-color">Insights</b> - Accessories &
+								Descriptions</h2>
 							<div class="row">
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Copertone</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Copertone
+										</p>
 										<h6 class="black-color mt-2">26 x 1 3/8 - 700x35</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Dimensioni ruota</p>
-										<h6 class="black-color mt-2">	Ruote 28" Ruote 26"</h6>
+										<p class="text-color"><i
+												class="bi bi-circle-fill me-2 main-color"></i>Dimensioni ruota</p>
+										<h6 class="black-color mt-2"> Ruote 28" Ruote 26"</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Cerchi</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Cerchi
+										</p>
 										<h6 class="black-color mt-2">R anodizzati lucidi</h6>
 									</div>
 								</div>
@@ -99,7 +108,8 @@
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Forcella</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Forcella
+										</p>
 										<h6 class="black-color mt-2">Acciaio</h6>
 									</div>
 								</div>
@@ -117,7 +127,8 @@
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Manopole</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Manopole
+										</p>
 										<h6 class="black-color mt-2">Gomma</h6>
 									</div>
 								</div>
@@ -129,13 +140,15 @@
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Carter</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Carter
+										</p>
 										<h6 class="black-color mt-2">R intero</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Cavalletto</p>
+										<p class="text-color"><i
+												class="bi bi-circle-fill me-2 main-color"></i>Cavalletto</p>
 										<h6 class="black-color mt-2">Doppio cavalletto</h6>
 									</div>
 								</div>
@@ -147,59 +160,82 @@
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Cerchio in legno + campanello taurus + campanello</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Cerchio
+											in legno + campanello taurus + campanello</p>
 										<h6 class="black-color mt-2">Pedalata assistita</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Pedali</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Pedali
+										</p>
 										<h6 class="black-color mt-2">Pedale taurus + pedale nero + pedale legno</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Colore</p>
-										<h6 class="black-color mt-2">Bianco + nero + blu diplomatico + grigio taurus + verde taurus + panna</h6>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Colore
+										</p>
+										<h6 class="black-color mt-2">Bianco + nero + blu diplomatico + grigio taurus +
+											verde taurus + panna</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Altezza</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Altezza
+										</p>
 										<h6 class="black-color mt-2">26 3/8 H. 54CM / 28"H.56 CM / 28"H.60CM</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Materiale</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Materiale
+										</p>
 										<h6 class="black-color mt-2">Acciaio a congiunzioni</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 mb-3">
 									<div class="card float-up">
-										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Accessori</p>
+										<p class="text-color"><i class="bi bi-circle-fill me-2 main-color"></i>Accessori
+										</p>
 										<h6 class="black-color mt-2">1V + 3V mozzo cambio</h6>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="tab tab3">
 						<div class="faq-item">
 							<h5 class="title"><span>I already own a bike. Why do I need bike share?</span></h5>
-							<p>The power of enabling one-way trips rather than a forced round trip due to having a personal vehicle is transformative. Bike share opens up mobility options that weren’t previously convenient and makes public transit more viable. It also enables greater access to multi-modal trips where you may use bike share for the first part of your trip, but may take the trolley, a car service or even catch a ride with a friend on the way home.</p>
+							<p>The power of enabling one-way trips rather than a forced round trip due to having a
+								personal vehicle is transformative. Bike share opens up mobility options that weren’t
+								previously convenient and makes public transit more viable. It also enables greater
+								access to multi-modal trips where you may use bike share for the first part of your
+								trip, but may take the trolley, a car service or even catch a ride with a friend on the
+								way home.</p>
 						</div>
 						<div class="faq-item">
 							<h5 class="title"><span>Tell me about the bikes.</span></h5>
-							<p>Our smart-bikes from Social Bicycles (SoBi) have brains! This sets them apart from other bike-share systems. On the back of the bike is a GPS-enabled, solar-powered panel with an on-board lock.</p>
-							<p>With this panel, you can check out the bike, unlock and lock it, put it on hold and report a problem. It will even let you know how many miles you rode and how many calories you burned by logging into your Social Bicycles account.</p>
-							<p>One of our favorite features on our bikes is the chainless shaft drive. You won’t have to worry about your pants getting caught or getting greasy! They also have nifty extras like 3 speeds, an adjustable seat post, front and rear lights that illuminate automatically, a large, full-sized basket, puncture resistant tires and a bell (just above the left hand grip – give it a turn!).</p>
+							<p>Our smart-bikes from Social Bicycles (SoBi) have brains! This sets them apart from other
+								bike-share systems. On the back of the bike is a GPS-enabled, solar-powered panel with
+								an on-board lock.</p>
+							<p>With this panel, you can check out the bike, unlock and lock it, put it on hold and
+								report a problem. It will even let you know how many miles you rode and how many
+								calories you burned by logging into your Social Bicycles account.</p>
+							<p>One of our favorite features on our bikes is the chainless shaft drive. You won’t have to
+								worry about your pants getting caught or getting greasy! They also have nifty extras
+								like 3 speeds, an adjustable seat post, front and rear lights that illuminate
+								automatically, a large, full-sized basket, puncture resistant tires and a bell (just
+								above the left hand grip – give it a turn!).</p>
 						</div>
 						<div class="faq-item">
 							<h5 class="title"><span>What are Coast Hub Stations and Park and Go racks?</span></h5>
-							<p>A Coast Hub station is where you go to find, check out and return a bike. It’s equipped with bikes and racks that the bikes are locked to.</p>
-							<p>Locking outside of a station will incur a $3 convenience fee. You’ll also see designated Park and Go racks at businesses around town. This is free Coast parking, so feel free to park here as well!</p>
+							<p>A Coast Hub station is where you go to find, check out and return a bike. It’s equipped
+								with bikes and racks that the bikes are locked to.</p>
+							<p>Locking outside of a station will incur a $3 convenience fee. You’ll also see designated
+								Park and Go racks at businesses around town. This is free Coast parking, so feel free to
+								park here as well!</p>
 						</div>
 					</div>
 				</div>
@@ -208,44 +244,49 @@
 	</section>
 	<!--============= SINGLE-SHOP-TABS END =============-->
 
-	
+
 	<!-- Modal -->
-<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-body">
-			<form action="">
-				<h4 class="text-capitalize black-color">Corinto Arrow  - [[ product_data.color ]]</h4>
-				<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
-				<div class="mb-3">
-					<input type="text" class="form-control" id="name" placeholder="Name" required>
-				  </div>
-				<div class="mb-3">
-					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
-				  </div>
-				  <div class="mb-3">
-					<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
-				  </div>
-				  <div class="mb-4">
-					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." required></textarea>
-				  </div>
-			</form>
+	<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1"
+		aria-labelledby="productContactModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form action="">
+						<h4 class="text-capitalize black-color">Corinto Arrow - [[ product_data.color ]]</h4>
+						<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b
+								class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
+						<div class="mb-3">
+							<input type="text" class="form-control" id="name" placeholder="Name" required>
+						</div>
+						<div class="mb-3">
+							<input type="email" class="form-control" id="exampleFormControlInput1"
+								placeholder="Email address" required>
+						</div>
+						<div class="mb-3">
+							<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
+						</div>
+						<div class="mb-4">
+							<textarea class="form-control" id="type-message" rows="3"
+								placeholder="Type your inquiry here..." required></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn close-modal-btn"
+						data-bs-dismiss="modal"><span>Close</span></button>
+					<button type="submit" class="btn"><span>Send</span></button>
+				</div>
+			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
-		  	<button type="submit" class="btn"><span>Send</span></button>
-		</div>
-	  </div>
-	</div>
-  </div>
-
 	</div>
 
-	<!--============= RELATED PRODUCTS END =============-->
+</div>
 
-	<script>
+<!--============= RELATED PRODUCTS END =============-->
+
+<script>
 	// url /get/products/json/<name>
-	const PRODUCT_NAME = 'arrow';  
+	const PRODUCT_NAME = 'arrow';
 	// set the default product varient from url
 	var current_url = window.location.href;
 	// const DEFAULT_PRODUCT_VARIENT = current_url.split('/').pop();
@@ -253,16 +294,16 @@
 
 
 	var app = new Vue({
-			el: '#prodcut-vue-app',
-			delimiters: ['[[', ']]'],
-			data: {
-				Message: 'Hello Vue!',
-				response_data: [],
-				product_data: {},
-			},
-			methods: {
-				fetchProductData(){
-					axios.get('/get/products/json/'+PRODUCT_NAME)
+		el: '#prodcut-vue-app',
+		delimiters: ['[[', ']]'],
+		data: {
+			Message: 'Hello Vue!',
+			response_data: [],
+			product_data: {},
+		},
+		methods: {
+			fetchProductData() {
+				axios.get('/get/products/json/' + PRODUCT_NAME)
 					.then(response => {
 						this.response_data = response.data; // [{color: 'black', image_urls: ['img/product-details-1.jpg'], description: "..."}, ...]
 						// find the default product varient
@@ -274,22 +315,21 @@
 					.catch(error => {
 						console.log(error);
 					})
-				},
-				changeProductVarient(varient){
-					this.product_data = this.response_data.find(product => product.color === varient);
-					// refresh the slider
-					$('.slider-single-for').slick('refresh');
-					$('.slider-single-nav').slick('refresh');
-					let new_url = current_url.replace(this.product_data.color, varient);
-					window.history.pushState({}, '', new_url+'qwe');
-
-				}
 			},
-			mounted() {
-				this.fetchProductData();
-			}
-		})
-	</script>
+			changeProductVarient(varient) {
+				this.product_data = this.response_data.find(product => product.color === varient);
+				// refresh the slider
+				$('.slider-single-for').slick('refresh');
+				$('.slider-single-nav').slick('refresh');
+				let new_url = current_url.replace(this.product_data.color, varient);
+				window.history.pushState({}, '', new_url + 'qwe');
 
-	{% endblock %}
-	
+			}
+		},
+		mounted() {
+			this.fetchProductData();
+		}
+	})
+</script>
+
+{% endblock %}
