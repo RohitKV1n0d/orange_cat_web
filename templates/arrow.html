@@ -2,6 +2,15 @@
 
 
 {% block content %}
+	<style>
+		.black-color {
+			color: #000;
+		}
+		.diplomatic-blue-color {
+			color: #0a3d7d;
+		}
+
+	</style>
 	<!-- ================ HEADER-TITLE ================ -->
 	<div id="prodcut-vue-app">
 	<section class="s-header-title">
@@ -36,7 +45,8 @@
 					<!--=== SLIDER-SINGLE-NAV END ===-->
 				</div>
 				<div class="col-12 col-md-5 single-shop-left">
-					<h4 class="title text-capitalize">Corinto Arrow in <b style="color: #0A0C10;">[[ product_data.color ]]</b></h4>
+					<h4 class="title text-capitalize">Corinto Arrow in <b :class="{'diplomatic-blue-color': product_data.color === 'diplomatic blue', 'black-color': product_data.color === 'black'}"
+																			>[[ product_data.color ]]</b></h4>
 					<p>[[ product_data.description1 ]]</p><br>
 					<p>[[ product_data.description2 ]]</p>
 					<h6 class="mt-4">Available in 2 Variants</h6>
