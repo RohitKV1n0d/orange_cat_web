@@ -31,14 +31,14 @@
 										resulting in a functional accessory that allows its owners to ride with
 										elegance. </p>
 
-										<div class="d-flex mt-3 align-items-center">
+										<div class="d-flex mt-3 align-items-center" >
 											<a href="{{ url_for('view_model_arrow', variant='black') }}">
-												<div class="border-bg float-up">
+												<div class="border-bg float-up" id="arrow-color-1">
 													<div class="color-bg arrow-bg-1"></div>
 												</div>
 											</a>
 											<a href="{{ url_for('view_model_arrow', variant='diplomatic blue') }}">
-												<div class="border-bg ms-3 float-up">
+												<div class="border-bg ms-3 float-up" id="arrow-color-2">
 													<div class="color-bg arrow-bg-2"></div>
 												</div>
 											</a>
@@ -53,14 +53,34 @@
 								</div>
 							</div>
 							<div class="col-lg-8 mt-5 mt-md-0">
-								<div class="product-image">
+								<div class="product-image" style="margin-top: 137px;">
 									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
-									<img class="  about-img half-image first-image"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
-									<img class="  about-img half-image second-image"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+									<img class="  about-img half-image first-image" id="arrow-image-1" style="cursor: pointer;"
+										src="{{ url_for('static', filename='img/test123.png') }}" alt="">
+									<img class="  about-img half-image second-image" id="arrow-image-2" style="cursor: pointer;"
+										src="{{ url_for('static', filename='img/test123.png') }}" alt="">
 									<div class="background-color-product"></div>
 								</div>
+								<script>
+									// on click go to the product page
+									function addEventListeners(imageId, colorId, variant) {
+										document.getElementById(imageId).addEventListener('click', function () {
+											url = `/model/arrow/${variant}`;
+											window.location.href = url;
+
+										});
+										document.getElementById(imageId).addEventListener('mouseover', function () {
+											document.getElementById(colorId).classList.add('active');
+										});
+										document.getElementById(imageId).addEventListener('mouseleave', function () {
+											document.getElementById(colorId).classList.remove('active');
+										});
+									}
+
+									addEventListeners('arrow-image-1', 'arrow-color-1', 'black');
+									addEventListeners('arrow-image-2', 'arrow-color-2', 'diplomatic blue');
+
+								</script>
 							</div>
 						</div>
 					</div>
