@@ -538,5 +538,6 @@ header{z-index: 998;}
   .border-bg:hover, .border-bg.active{border: 2px solid #f6d1b3;}
   @media (max-width: 991px){
     .product-image{margin-top: 300px;}
+    .s-feedback #bg-video {width: auto!important;}
   }
   
