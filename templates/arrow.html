@@ -265,22 +265,15 @@
 						this.product_data = default_product_varient;
 						$('.slider-single-for').slick('refresh');
 						$('.slider-single-nav').slick('refresh');
+						$('.s-single-product').slick('refresh');
+
 					})
 					.catch(error => {
 						console.log(error);
 					})
 				},
 				changeProductVarient(varient){
-					this.product_data = this.response_data.find(product => product.color === varient);
-					// refresh the slider
-					$('.slider-single-for').slick('refresh');
-					$('.slider-single-nav').slick('refresh');
-					// change url to reflect the new product varient
-					let current_url = window.location.href;
-					let current_varient = current_url.split('/').pop();
-					let new_url = current_url.replace(current_varient, varient);
-					window.history.pushState({}, '', new_url);
-
+					window.location.href = '/model/'+PRODUCT_NAME+'/'+varient;
 				}
 			},
 			mounted() {
@@ -290,7 +283,9 @@
 				setTimeout(() => {
 						$('.slider-single-for').slick('refresh');
 						$('.slider-single-nav').slick('refresh');
-					this.changeProductVarient(DEFAULT_PRODUCT_VARIENT);
+						$('.s-single-product').slick('refresh');
+
+					// this.changeProductVarient(DEFAULT_PRODUCT_VARIENT);
 				}, 1000);
 				
 			}
