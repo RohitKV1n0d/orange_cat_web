@@ -4,10 +4,10 @@
             {
                 "variant_name": "gray",
                 "image_urls": [
-                    "/static/img/product-detail-1.jpg",
-                    "/static/img/product-details-1.jpg",
-                    "/static/img/product-details-2.jpg",
-                    "/static/img/product-details-3.jpg"
+                    "/static/img/models/bow/gray/product-detail-1.jpg",
+                    "/static/img/models/bow/gray/product-details-1.jpg",
+                    "/static/img/models/bow/gray/product-details-2.jpg",
+                    "/static/img/models/bow/gray/product-details-3.jpg"
                 ],
                 "description1": "A gray bow",
                 "description2": "A gray bow",
@@ -16,10 +16,12 @@
             {
                 "variant_name": "tiffany green",
                 "image_urls": [
-                    "/static/img/product-detail-1.jpg",
-                    "/static/img/product-details-1.jpg",
-                    "/static/img/product-details-2.jpg",
-                    "/static/img/product-details-3.jpg"
+                    "/static/img/models/bow/tiffany-green/0.jpg",
+                    "/static/img/models/bow/tiffany-green/1.jpg",
+                    "/static/img/models/bow/tiffany-green/2.jpg",
+                    "/static/img/models/bow/tiffany-green/3.jpg",
+                    "/static/img/models/bow/tiffany-green/4.jpg",
+                    "/static/img/models/bow/tiffany-green/5.jpg"
                 ],
                 "description1": "A tiffany green bow",
                 "description2": "A tiffany green bow",
@@ -30,10 +32,12 @@
             {
                 "variant_name": "diplomatic blue",
                 "image_urls": [
-                    "/static/img/product-detail-1.jpg",
-                    "/static/img/product-details-1.jpg",
-                    "/static/img/product-details-2.jpg",
-                    "/static/img/product-details-3.jpg"
+                   "/static/img/models/arrow/diplomatic-blue/0.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/1.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/2.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/3.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/4.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/5.jpg"
                 ],
                 "description1": "A diplomatic blue arrow",
                 "description2": "A diplomatic blue arrow",
@@ -42,10 +46,12 @@
             {
                 "variant_name": "black",
                 "image_urls":  [
-                    "/static/img/product-detail-1.jpg",
-                    "/static/img/product-details-1.jpg",
-                    "/static/img/product-details-2.jpg",
-                    "/static/img/product-details-3.jpg"
+                   "/static/img/models/arrow/black/0.jpg",
+                   "/static/img/models/arrow/black/1.jpg",
+                   "/static/img/models/arrow/black/2.jpg",
+                   "/static/img/models/arrow/black/3.jpg",
+                   "/static/img/models/arrow/black/4.jpg",
+                   "/static/img/models/arrow/black/5.jpg"
                 ],
                 "description1": "Corinto Arrow, with its sleek and striking design, combines a timeless feel with modern reliability. The longer and narrower saddle, the wider distance between the padding and the top tube, ensures a dynamic riding experience for both expert riders and leisure riders alike.",
                 "description2": "ts frame, composed of steel and welded by hand, is durable yet finely wrought resulting in a beautiful bicycle that provides a sought-after riding experience.",
