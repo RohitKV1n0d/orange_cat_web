@@ -493,6 +493,7 @@ header{z-index: 998;}
   .single-shop-tabs table thead{background-color: #f9e3b6;}
   .down-arrow{margin-top: 20%;}
   .down-arrow img{    width: 44px; height: auto;    position: absolute; left: 30%; margin-top: 25px;}
+  .enquire_btn_modal{z-index: 9999!important;}
     @media (max-width: 991px){
     .active{border-bottom: 0!important;}
     }
@@ -537,5 +538,6 @@ header{z-index: 998;}
   .border-bg:hover, .border-bg.active{border: 2px solid #f6d1b3;}
   @media (max-width: 991px){
     .product-image{margin-top: 300px;}
+    .s-feedback #bg-video {width: auto!important;}
   }
   
