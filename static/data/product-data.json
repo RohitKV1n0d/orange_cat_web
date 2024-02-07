@@ -1,0 +1,62 @@
+{
+    "products": {
+        "bow": [
+            {
+                "variant_name": "gray",
+                "image_urls": [
+                    "/static/img/models/bow/gray/product-detail-1.jpg",
+                    "/static/img/models/bow/gray/product-details-1.jpg",
+                    "/static/img/models/bow/gray/product-details-2.jpg",
+                    "/static/img/models/bow/gray/product-details-3.jpg"
+                ],
+                "description1": "Corinto Bow was designed with curves that allow a gentle mount and dismount. The curved top bar renders this product ideal for those that find it difficult to raise their legs or do not want to compromise their fashion choices but still use an environmentally conscious way of moving around town.",
+                "description2": "With the shorter and wider saddle, the reduced length from the padding to the top bar, Corinto Bow is the perfect choice for those who seeks an elegant  and comfortable riding experience.",
+                "color": "gray"
+            },
+            {
+                "variant_name": "tiffany green",
+                "image_urls": [
+                    "/static/img/models/bow/tiffany-green/0.jpg",
+                    "/static/img/models/bow/tiffany-green/1.jpg",
+                    "/static/img/models/bow/tiffany-green/2.jpg",
+                    "/static/img/models/bow/tiffany-green/3.jpg",
+                    "/static/img/models/bow/tiffany-green/4.jpg",
+                    "/static/img/models/bow/tiffany-green/5.jpg"
+                ],
+                "description1": "Corinto Bow was designed with curves that allow a gentle mount and dismount. The curved top bar renders this product ideal for those that find it difficult to raise their legs or do not want to compromise their fashion choices but still use an environmentally conscious way of moving around town.",
+                "description2": "With the shorter and wider saddle, the reduced length from the padding to the top bar, Corinto Bow is the perfect choice for those who seeks an elegant  and comfortable riding experience.",
+                "color": "tiffany green"
+            }
+        ],
+        "arrow": [
+            {
+                "variant_name": "diplomatic blue",
+                "image_urls": [
+                   "/static/img/models/arrow/diplomatic-blue/0.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/1.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/2.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/3.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/4.jpg",
+                   "/static/img/models/arrow/diplomatic-blue/5.jpg"
+                ],
+                "description1": "Corinto Arrow, with its sleek and striking design, combines a timeless feel with modern reliability. The longer and narrower saddle, the wider distance between the padding and the top tube, ensures a dynamic riding experience for both expert riders and leisure riders alike. ",
+                "description2": "Its frame, composed of steel and welded by hand, is durable yet finely wrought resulting in a beautiful bicycle that provides a sought-after riding experience.",
+                "color": "diplomatic blue"
+            },
+            {
+                "variant_name": "black",
+                "image_urls":  [
+                   "/static/img/models/arrow/black/0.jpg",
+                   "/static/img/models/arrow/black/1.jpg",
+                   "/static/img/models/arrow/black/2.jpg",
+                   "/static/img/models/arrow/black/3.jpg",
+                   "/static/img/models/arrow/black/4.jpg",
+                   "/static/img/models/arrow/black/5.jpg"
+                ],
+                "description1": "Corinto Arrow, with its sleek and striking design, combines a timeless feel with modern reliability. The longer and narrower saddle, the wider distance between the padding and the top tube, ensures a dynamic riding experience for both expert riders and leisure riders alike.",
+                "description2": "ts frame, composed of steel and welded by hand, is durable yet finely wrought resulting in a beautiful bicycle that provides a sought-after riding experience.",
+                "color": "black"
+            }
+        ]
+    }
+}

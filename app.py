@@ -266,7 +266,7 @@ def base():
 def about():
     return render_template('about-orangecat.html')
 
-@app.route('/products')
+@app.route('/models')
 def view_products():
     products = Products.query.all()
     return render_template('bikes.html', products=products)
@@ -275,6 +275,47 @@ def view_products():
 def view_product(id):
     # product = Products.query.get_or_404(id)
     return render_template('product-details.html')
+
+
+@app.route('/get/products/json/<name>')
+def get_products_json(name):
+    data = read_json_file('static/data/product-data.json') # {'bow': [{...}, {...}], 'arrow': [{...}, {...}]}
+    products = data.get('products', {})
+    if not products:
+        return jsonify({'message': 'Error while reading the file'}), 500
+    else: 
+        if name:
+            products = products.get(name, [])
+            return jsonify(products), 200
+        else:
+            return jsonify({'message': 'Name not provided'}), 400
+        
+
+    
+
+def read_json_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        return data
+    except Exception as e:
+        print(e)
+        return None
+
+@app.route('/model/bow/<variant>')
+def view_model_bow(variant):
+    return render_template('bow.html', variant=variant)
+
+
+
+
+
+@app.route('/model/arrow/<variant>')
+def view_model_arrow(variant):
+    return render_template('arrow.html', variant=variant)
+
+
+
 
 @app.route('/api/products', methods=['GET'])
 def get_products():

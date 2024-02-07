@@ -30,24 +30,57 @@
 										composed of steel assembled and welded by hand, is durable yet finely wrought
 										resulting in a functional accessory that allows its owners to ride with
 										elegance. </p>
+
+										<div class="d-flex mt-3 align-items-center" >
+											<a href="{{ url_for('view_model_arrow', variant='black') }}">
+												<div class="border-bg float-up" id="arrow-color-1">
+													<div class="color-bg arrow-bg-1"></div>
+												</div>
+											</a>
+											<a href="{{ url_for('view_model_arrow', variant='diplomatic blue') }}">
+												<div class="border-bg ms-3 float-up" id="arrow-color-2">
+													<div class="color-bg arrow-bg-2"></div>
+												</div>
+											</a>
+										</div>
 									<div
 										class="d-flex mt-md-3  align-items-center justify-content-center justify-content-md-start">
-										<a href="{{ url_for('view_product', id=1) }}" class="btn mt-4"><span>Know
+										<a href="{{ url_for('view_model_arrow', variant='black') }}" class="btn mt-4"><span>Know
 												More</span></a>
-										<a href="{{ url_for('view_product', id=1) }}" class=" mt-4 ms-3 enquire_btn_modal"
+										<a href="#" class=" mt-4 ms-3"
 											data-bs-toggle="modal" data-bs-target="#productContactModal">Enquire Now</a>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-8 mt-5 mt-md-0">
-								<div class="product-image">
+								<div class="product-image" style="margin-top: 137px;">
 									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
-									<img class="  about-img half-image first-image"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
-									<img class="  about-img half-image second-image"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+									<img class="  about-img half-image first-image" id="arrow-image-1" style="cursor: pointer;"
+										src="{{ url_for('static', filename='img/test123.png') }}" alt="">
+									<img class="  about-img half-image second-image" id="arrow-image-2" style="cursor: pointer;"
+										src="{{ url_for('static', filename='img/test123.png') }}" alt="">
 									<div class="background-color-product"></div>
 								</div>
+								<script>
+									// on click go to the product page
+									function addEventListeners(imageId, colorId, variant) {
+										document.getElementById(imageId).addEventListener('click', function () {
+											url = `/model/arrow/${variant}`;
+											window.location.href = url;
+
+										});
+										document.getElementById(imageId).addEventListener('mouseover', function () {
+											document.getElementById(colorId).classList.add('active');
+										});
+										document.getElementById(imageId).addEventListener('mouseleave', function () {
+											document.getElementById(colorId).classList.remove('active');
+										});
+									}
+
+									addEventListeners('arrow-image-1', 'arrow-color-1', 'black');
+									addEventListeners('arrow-image-2', 'arrow-color-2', 'diplomatic blue');
+
+								</script>
 							</div>
 						</div>
 					</div>
@@ -66,10 +99,22 @@
 										reduced length from the padding to the top bar, Corinto Bow is a perfect choice
 										for those who seek an elegant and comfortable riding experience.
 									</p>
+									<div class="d-flex mt-3 align-items-center">
+										<a href="{{ url_for('view_model_bow', variant='gray') }}">
+											<div class="border-bg float-up" id="bow-color-1">
+												<div class="color-bg bow-bg-1"></div>
+											</div>
+										</a>
+										<a href="{{ url_for('view_model_bow', variant='tiffany green') }}">
+											<div class="border-bg ms-3 float-up" id="bow-color-2">
+												<div class="color-bg bow-bg-2"></div>
+											</div>
+										</a>
+									</div>
 									<div
 										class="d-flex mt-md-3 align-items-center  justify-content-center justify-content-md-start">
-										<a href="#" class="btn mt-4"><span>Know More</span></a>
-										<a href="#" class=" mt-4 ms-3 enquire_btn_modal" data-bs-toggle="modal"
+										<a href="{{ url_for('view_model_bow', variant='gray') }}" class="btn mt-4"><span>Know More</span></a>
+										<a href="#" class=" mt-4 ms-3" data-bs-toggle="modal"
 											data-bs-target="#productContactModal">Enquire Now</a>
 									</div>
 								</div>
@@ -77,12 +122,16 @@
 							<div class="col-lg-8 mt-5 mt-md-0">
 								<div class="product-image">
 									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
-									<img class="  about-img half-image first-image"
+									<img class="  about-img half-image first-image" id="bow-image-1" style="cursor: pointer;"
 										src="{{ url_for('static', filename='img/home.png') }}" alt="">
-									<img class="  about-img half-image second-image"
+									<img class="  about-img half-image second-image" id="bow-image-2" style="cursor: pointer;"
 										src="{{ url_for('static', filename='img/home.png') }}" alt="">
 									<div class="background-color-product"></div>
 								</div>
+								<script>
+									addEventListeners('bow-image-1', 'bow-color-1', 'gray');
+									addEventListeners('bow-image-2', 'bow-color-2', 'tiffany green');
+								</script>
 								<style>
 									.background-color-product {
 										position: absolute;
