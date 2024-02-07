@@ -2,6 +2,14 @@
 
 
 {% block content %}
+    <style>
+        .tifanny-green-color {
+            color: #00a99d;
+        }
+        .gray-color {
+            color: #7a7a7a;
+        }
+    </style>
 	<!-- ================ HEADER-TITLE ================ -->
 	<div id="prodcut-vue-app">
 	<section class="s-header-title">
@@ -36,19 +44,20 @@
 					<!--=== SLIDER-SINGLE-NAV END ===-->
 				</div>
 				<div class="col-12 col-md-5 single-shop-left">
-					<h4 class="title text-capitalize">Corinto Bow in <b style="color: #0A0C10;">[[ product_data.color ]]</b></h4>
+					<h4 class="title text-capitalize">Corinto Bow in <b :class="product_data.color === 'gray' ? 'gray-color' : 'tifanny-green-color' "
+                                                                                    >[[ product_data.color ]]</b></h4>
 					<p>[[ product_data.description1 ]]</p><br>
 					<p>[[ product_data.description2 ]]</p>
 					<h6 class="mt-4">Available in 2 Variants</h6>
 					<div class="d-flex mt-3 align-items-center">
 						<a @click="changeProductVarient('gray')">
-							<div :class="{'border-bg': true, 'float-up': true, 'active': product_data.color === 'black'}">
+							<div :class="{'border-bg': true, 'float-up': true, 'active': product_data.color === 'gray'}">
 								<div class="color-bg bow-bg-1"></div>
 							</div>
 						</a>
 						<a @click="changeProductVarient('tiffany green')">
 							<!-- <div class="border-bg  ms-3 float-up"> -->
-							<div :class="{'border-bg': true, 'ms-3': true, 'float-up': true, 'active': product_data.color === 'diplomatic blue'}">
+							<div :class="{'border-bg': true, 'ms-3': true, 'float-up': true, 'active': product_data.color === 'tiffany green'}">
 								<div class="color-bg bow-bg-2"></div>
 							</div>
 						</a>
