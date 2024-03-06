@@ -10,12 +10,22 @@ import json
 import requests
 import datetime
 import boto3
+# from flask_mail import Mail, Message
 
-
-from AWS_Modules import upload_file_to_s3, delete_file_from_s3, delete_all_files_from_s3
+from utils.AWS_Modules import upload_file_to_s3, delete_file_from_s3, delete_all_files_from_s3
+from GoogleCloudAPIs.googleAPIs import append_data_spreadsheet
+from utils.EmailUtils import EmailUtils
 
 app = Flask(__name__)
 CORS(app)
+
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USERNAME'] = 'info@orangecatcycles.com'  # Your Google Workspace email
+# app.config['MAIL_PASSWORD'] = 'kkqz owcg sxgi hdsx'  # Your generated app password
+# mail = Mail(app)
+
 
 UPLOAD_FOLDER = 'static/img/uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -171,6 +181,29 @@ class ImageGallery(db.Model):
     
     
 
+@app.route('/send/mail/')
+def send_mail():
+    subject = 'Test Mail'
+    body = 'This is a test mail'
+    recipient = 'rohitvinod92@gmail.com'
+    email_utils = EmailUtils(app)
+    response = email_utils.sendMail(subject, body, recipient)
+    if response:
+        return jsonify({'message': 'Mail sent successfully'}), 200
+    else:
+        return jsonify({'message': 'Error while sending mail'}), 500
+
+
+@app.route('/test/get/sheet/data')
+def get_sheet_data_api():
+    sheet_name = 'Orange Cat Customer Enquiry'
+    sheet_range = 'Sheet1'
+    data = ['21-02-2023', 'Rohit', 'test@admin.com', '1234567890', 'Model 2', 'New Message', 'Pending']
+    data = append_data_spreadsheet(data, sheet_name, sheet_range)
+    if data:
+        return jsonify(data), 200
+    else:
+        return jsonify({'message': 'Error while fetching data'}), 500 
 
 
 def admin_required(f):
@@ -770,7 +803,28 @@ def contacts():
 @app.route('/example')
 def example():
     return render_template('example.html')
- 
+
+
+
+# api to get enquiry data
+@app.route('/get/enquiry/data', methods=['POST'])
+def get_enquiry_data():
+    try:
+        if request.method == 'POST':
+            sheet_name = 'Orange Cat Customer Enquiry'
+            sheet_range = 'Sheet1'
+            data = request.get_json()
+            datetime_now = datetime.datetime.now().strftime("%d-%m-%Y")
+            data = [datetime_now] + list(data.values()) + ['Pending']
+            data = append_data_spreadsheet(data, sheet_name, sheet_range)
+            if data:
+                return jsonify(data), 200
+            else:
+                return jsonify({'message': 'Error while fetching data'}), 500
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 with app.app_context():
     init_db()
