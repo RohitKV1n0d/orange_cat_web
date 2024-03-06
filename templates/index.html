@@ -109,7 +109,8 @@
 								both expert and leisure riders. </p>
 							<div class="d-flex align-items-center mt-3">
 								<a href="#" class="btn me-3" data-bs-toggle="modal"
-									data-bs-target="#productContactModal"><span>Enquire Now</span></a>
+									data-bs-target="#productContactModal" onclick="productContactModal.setProduct('arrow')"
+									><span>Enquire Now</span></a>
 								<a href="{{ url_for('view_products') }}" class="view-more m-0 p-0">View Details</a>
 							</div>
 						</div>
@@ -135,7 +136,8 @@
 								town.</p>
 							<div class="d-flex align-items-center mt-3">
 								<a href="#" class="btn me-3" data-bs-toggle="modal"
-									data-bs-target="#productContactModal"><span>Enquire Now</span></a>
+									data-bs-target="#productContactModal" onclick="productContactModal.setProduct('bow')"
+									><span>Enquire Now</span></a>
 								<a href="{{ url_for('view_products') }}" class="view-more m-0 p-0">View Details</a>
 							</div>
 						</div>
@@ -992,7 +994,7 @@
 				  </div>
                   <div class="d-flex justify-content-center">
                     <button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
-                      <button  class="btn ms-2" @click.prevent="onSubmitMethod" id="submit-enq-btn"
+                      <button  class="btn ms-2" @click.prevent="onSubmitMethod" id="submit-enq-btn-product"
                         ><span>Send</span></button>
                 </div>
                 <p class="black-color text-center mt-4 contact-p">Also you can contact us here</p>
@@ -1006,7 +1008,7 @@
 	</div>
   </div>
   <script>
-	var app = new Vue({
+	var productContactModal = new Vue({
 	el: '#productContactModal',
 	delimiters: ['[[', ']]'],
 	data: {
@@ -1016,24 +1018,23 @@
 		phone: '',
 		message: '',
 		model: '',
-		modelList: ['Model 1', 'Model 2'],
+		modelList: [],
 		color: '',
 		colorList: [],
-		colorList1: ['1Color 1', '1Color 2'],
-		colorList2: ['2Color 1', '2Color 2'],
-		submitted: false
+		submitted: false,
+		productData: {},
 	},
 	watch: {
 		model: function (val) {
-			if (val == 'Model 1') {
-				this.colorList = this.colorList1;
-			} else if (val == 'Model 2') {
-				this.colorList = this.colorList2;
-			}
+			this.colorList = this.productData[val].map((item) => item.color);
 		}
 	},
 	methods: {
 		// methods here
+		setProduct(product){
+			this.model = product;
+			document.getElementById('model').setAttribute('disabled', 'disabled');
+		},
 		onSubmitMethod(){
 			this.loadingBtn(true);
 			console.log(this.name, this.email, this.phone, this.message, this.model, this.color);
@@ -1090,16 +1091,22 @@
 		},
 		loadingBtn(state){
 			if (state) {
-				document.getElementById('submit-enq-btn').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sening...';
+				document.getElementById('submit-enq-btn-product').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sening...';
 			} else {
-				document.getElementById('submit-enq-btn').innerHTML = '<span>Send</span>';
+				document.getElementById('submit-enq-btn-product').innerHTML = '<span>Send</span>';
 			}
 		}
 
 	},
 	mounted() {
 		// mounted here
-
+		axios.get('/static/data/product-data.json')
+            .then((response) => {
+                console.log(response.data); 
+                // data = {products: {model1:[{color: 'color1', price: 1000}, {color: 'color2', price: 2000}], model2:[{color: 'color1', price: 1000}, {color: 'color2', price: 2000}]}}
+                this.productData = response.data.products;
+                this.modelList = Object.keys(response.data.products);
+            })
 	}
 	});
 </script>
