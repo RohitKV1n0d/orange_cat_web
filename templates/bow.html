@@ -340,34 +340,70 @@
 
 	
 	<!-- Modal -->
-<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-body">
-			<form action="">
-				<h4 class="text-capitalize black-color">Corinto Arrow  - [[ product_data.color ]]</h4>
-				<h5 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need <b class="main-color">Information?</b> We're Here to <b class="main-color">Help!</b></h5>
-				<div class="mb-3">
-					<input type="text" class="form-control" id="name" placeholder="Name" required>
-				  </div>
-				<div class="mb-3">
-					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" required>
-				  </div>
-				  <div class="mb-3">
-					<input type="tel" class="form-control" id="phone" placeholder="Phone number" required>
-				  </div>
-				  <div class="mb-4">
-					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." required></textarea>
-				  </div>
-			</form>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
-		  	<button type="submit" class="btn"><span>Send</span></button>
+	<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-body" v-if="submitted" style="padding: 20px;">
+				<!-- Thank you message  -->
+				<div class="d-flex justify-content-center">
+					<h4 class="fw-lighter text-color mt-2 text-capitalize mb-4">Thank you for reaching out to us!</h4>
+				</div>
+				<div class="d-flex justify-content-center">
+					<p class="black-color text-center mt-4 contact-p">We appreciate your interest and will get back to you as soon as possible.</p>
+				</div>
+				<div class="d-flex justify-content-center mt-4">
+					<button type="button" class="btn close-modal-btn mr-2" data-bs-dismiss="modal"><span>Close</span></button>
+					<button type="button" class="btn new-enquiry-btn"  @click="submitted = false"><span>New Enquiry</span></button>
+				</div>
+			</div>
+			<div class="modal-body" v-else>
+				<form action="">
+					<h4 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need<b class="main-color"> Information?</b> We're Here to <b class="main-color">Help!</b></h4>
+					<div class="mb-3">
+						<input type="text" class="form-control" id="name" placeholder="Name" v-model="name"required>
+					  </div>
+					<div class="mb-3">
+						<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" v-model="email" required>
+					  </div>
+					  <div class="mb-3">
+						<input type="tel" class="form-control" id="phone" placeholder="Phone number" v-model="phone" required>
+					  </div>
+					  <div class="mb-4">
+						<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." v-model="message" required></textarea>
+					  </div>
+					  <div class="mb-3">
+						<select class="form-control select" style="border-color:#f8825ea9;" v-model="model"
+								id="model" required>
+							<option value="" disabled>Select Model</option>
+							<option v-for="model in modelList" :key="model" :value="model">
+								[[ model ]]
+							</option>
+						</select>
+					  </div>
+					  <div class="mb-3">
+						<select class="form-control select" style="border-color:#f8825ea9;" v-model="color" v-if="model"
+								id="color" required>
+							<option value="" disabled>Select Color</option>
+							<option v-for="color in colorList" :key="color" :value="color">
+								[[ color ]]
+							</option>
+						</select>
+					  </div>
+					  <div class="d-flex justify-content-center">
+						<button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
+						  <button  class="btn ms-2" @click.prevent="onSubmitMethod" id="submit-enq-btn-product"
+							><span>Send</span></button>
+					</div>
+					<p class="black-color text-center mt-4 contact-p">Also you can contact us here</p>
+					<div class="d-flex also-contact justify-content-center mt-1">
+						<a href="tel:+912345687" class="black-color"><i class="fa fa-phone main-color me-2"></i>+9123 456 87</a>
+						<a href="mailto:info@orangecat.com" class="ms-4 black-color"><i class="fa fa-envelope me-2 main-color" aria-hidden="true"></i>info@orangecat.com</a>
+					</div>
+				</form>
+			</div>
+		  </div>
 		</div>
 	  </div>
-	</div>
-  </div>
 
 	</div>
 
@@ -384,6 +420,21 @@
 				Message: 'Hello Vue!',
 				response_data: [],
 				product_data: {},
+				name: '',
+				email: '',
+				phone: '',
+				message: '',
+				model: '',
+				modelList: [],
+				color: '',
+				colorList: [],
+				submitted: false,
+				productData: {},
+			},
+			watch: {
+				model: function (val) {
+					this.colorList = this.productData[val].map((item) => item.color);
+				}
 			},
 			methods: {
 				fetchProductData(){
@@ -395,6 +446,8 @@
 						this.product_data = default_product_varient;
 						$('.slider-single-for').slick('refresh');
 						$('.slider-single-nav').slick('refresh');
+						$('.s-single-product').slick('refresh');
+
 					})
 					.catch(error => {
 						console.log(error);
@@ -402,17 +455,98 @@
 				},
 				changeProductVarient(varient){
 					window.location.href = '/model/'+PRODUCT_NAME+'/'+varient;
-
+				},
+				setProduct(product){
+					this.model = product;
+					document.getElementById('model').setAttribute('disabled', 'disabled');
+				},
+				onSubmitMethod(){
+					this.loadingBtn(true);
+					console.log(this.name, this.email, this.phone, this.message, this.model, this.color);
+					if (!this.name || !this.email || !this.phone || !this.message || !this.model || !this.color) {
+						Toastify({
+							text: "All fields are required!",
+							duration: 3000,
+							close: true,
+							gravity: "bottom",
+							position: 'right',
+							backgroundColor: "linear-gradient(to right, #f45f30, #f8825e)"
+						}).showToast();
+						this.loadingBtn(false);
+						return;
+					}
+					axios.post('/get/enquiry/data', {
+						name: this.name,
+						email: this.email,
+						phone: this.phone,
+						model: `${this.model}<${this.color}>`,
+						message: this.message,
+					})
+					.then((response) => {
+						console.log(response);
+						Toastify({
+							text: "Your inquiry has been sent successfully!",
+							duration: 3000,
+							close: true,
+							gravity: "bottom",
+							position: 'right',
+							backgroundColor: "green"
+						}).showToast();
+						this.name = '';
+						this.email = '';
+						this.phone = '';
+						this.message = '';
+						this.model = '';
+						this.color = '';
+						this.submitted = true;
+						this.loadingBtn(false);
+					})
+					.catch((error) => {
+						console.log(error);
+						this.loadingBtn(false);
+						Toastify({
+							text: "Something went wrong!",
+							duration: 3000,
+							close: true,
+							gravity: "bottom",
+							position: 'right',
+							backgroundColor: "linear-gradient(to right, #f45f30, #f8825e)"
+						}).showToast();
+					});
+				},
+				loadingBtn(state){
+					if (state) {
+						document.getElementById('submit-enq-btn-product').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+						document.getElementById('submit-enq-btn-contact').disabled = true;
+					} else {
+						document.getElementById('submit-enq-btn-product').innerHTML = '<span>Send</span>';
+						document.getElementById('submit-enq-btn-contact').disabled = false;
+					}
 				}
 			},
 			mounted() {
 				this.fetchProductData();
+				
 
 				// THIS IS A HACK TO REFRESH THE SLIDER AFTER THE IMAGES ARE LOADED
 				setTimeout(() => {
 						$('.slider-single-for').slick('refresh');
 						$('.slider-single-nav').slick('refresh');
+						$('.s-single-product').slick('refresh');
+
+					// this.changeProductVarient(DEFAULT_PRODUCT_VARIENT);
 				}, 1000);
+				axios.get('/static/data/product-data.json')
+				.then((response) => {
+					console.log(response.data); 
+					// data = {products: {model1:[{color: 'color1', price: 1000}, {color: 'color2', price: 2000}], model2:[{color: 'color1', price: 1000}, {color: 'color2', price: 2000}]}}
+					this.productData = response.data.products;
+					this.modelList = Object.keys(response.data.products);
+					this.setProduct(PRODUCT_NAME);
+					this.colorList = this.productData[PRODUCT_NAME].map((item) => item.color);
+					this.color = DEFAULT_PRODUCT_VARIENT;
+				})
+				
 				
 			}
 		})
