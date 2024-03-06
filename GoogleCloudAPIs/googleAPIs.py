@@ -26,6 +26,8 @@ def get_last_sno(sheet_name: str, worksheet_name: str) -> int:
     df = pd.DataFrame(data)
     
     # Get the last serial number
+    if '#' not in df.columns or df.empty:
+        return 0
     df['#'] = pd.to_numeric(df['#'], errors='coerce')
     df = df.dropna(subset=['#'])
     last_sno = df['#'].max()
@@ -49,7 +51,7 @@ def append_data_spreadsheet(data: list, sheet_name: str, worksheet_name: str) ->
         # Select the worksheet
         worksheet = sheet.worksheet(worksheet_name)
         
-        last_sno: int = get_last_sno(sheet_name, worksheet_name)
+        last_sno: int = int(get_last_sno(sheet_name, worksheet_name))
         # Append the data
         final_data = [last_sno + 1] + data
         worksheet.append_row(final_data)
