@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mythic-delight-416415",
+  "private_key_id": "96828848270c6537398fb6c2ee5f6afefec4d219",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCsyOYFiGxgqoVc\ndWN9BNREXWq8OXsjIu/tkHZL7sJL/bgM5zTRDwC7m39jCFkH+CnsD1FSHkJXoJ3R\nHlRagUHsJ9iZkwXzSZrapey7ltJNpnY3l1+oSl9mEU5/XyN1dkfKAA/oQEwoiXrF\npj+4ZPmSAcAS6nUp0WTcmpes/X/s59XDRg0dY3OJlv4iE9rXIllAmwoY1/k8gaVt\nGAmrFqfcff6bmUr5inkEceZ3g43Kvdc+KzZ50tyx7Xo9WCbRU+k419uiiZwH/duo\nb72g3hGdwDkwPO5fGJwp55Fx1vEZrJQSzWnl5B4gJ/VZDTeCN94p+EQHHm2w2Ogw\n3lPIDL5XAgMBAAECggEAFbcP9Z0OJd34ccTNEp7DQK5O5kYBHErdRYmU3Hku0Rcb\nhP+fyzBsAqgJy/v2GILPXfwU19G2u8WTX/9EUbWR/+iIF9D6+/cBr74PsQnE935W\nuCjdnExwjebZ6zcdQTtyzUfRt/owuB2DIQkCVB3Yocl3hskRnYZT+0ewjUy0waSy\ngYIrgClXncBwXasGrEnzrd0C+lKAc+UDeiTuC9YqQtTjtpdkmSjn4U24ziCpoCxd\nZjrvRgL6ea4x2hryznm/gWNoolIlZYIT8CdwKg9fOC5E/Qyj7EIndbqjIkGyJ+kE\n5seRJbDTq0eunTAyeVSO3OXyOpTy/BSreC1Dv0eONQKBgQDVeqXmQZxbCVO0hXbj\nBihuq48aZLaSw2OWqvXgTadqb/RHKbJvUFdjevccy758RlNLJ1Guhy0g4Mz1P0d4\nMp2Cs3HrZaaX7luiIQBEVbfYKnLWH36f6trcEPUt72gfi56DQcDAkPAjMHAa77B6\nCsIPAwl5jfD6OSK7834SPJD2BQKBgQDPMzx9YM9ay1J3j9uSCABl0yQPbVgAV/hs\nHwm11/MtKytqOXCGsu2F83qRG6HElLfz3cY6wmrJ5EiFG4FWqaLF95PYOHLyNUf7\nc+efqc5Newa79pGsve6oVutuSE0FQU9je7OZxIkEzSUfTpd6fGK0LMwpnKayVA6E\n+zJp5wIVqwKBgE6cRFz+yhnH3Hf8MaQ1z0u5hw+8CHMQ2ipQOAxp6/1IzpYp55gP\n6K4sSLTk3fcbWm6xQuXWxyp1PWQN8j5zvQa1F30MSIVn83xHVLbVLca/EtyAantu\n2zrwT6ijoR8EpdFFtDn05Ui//HgezUiTj5RBlQqa1yL9SSoW5tTGUscVAoGAfdPY\nnS9IXRPyXcdQCSuwyiVh1biKY5MIuuhSZkrhU4HO2LBPJI3ObrVArpSANbg2yfLZ\nKd/dKAPpAmSEtBNKVTyXXQxSycIPl6V4eN6O+UCIA2emaafiIfq++HcRxuo1gu2h\nUPUoXHEUZSG+HdUhv9cgmPiXxt4C/0DpCaUPAAcCgYBD5o2yyQCBDF/Y5shD8/mv\nnuPZXBnZiWgVcd1iRd+CAp8e/zuk+OUE9ZAxE5Ev+2U1E30OsdWILz2fC+HT8HvK\nqvca2iwzcecTMKdYQz3P8FkrzGti4QFSky97m8m+voST1iEvpyJAv0JJ6kQzf0dF\n93v+K2gOvt06GRDziTGDHg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "gsheets-access@mythic-delight-416415.iam.gserviceaccount.com",
+  "client_id": "111686135500663815710",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gsheets-access%40mythic-delight-416415.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
