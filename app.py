@@ -805,6 +805,36 @@ def example():
     return render_template('example.html')
 
 
+def send_thank_you_mail(name, email, message):
+    try:
+        subject = 'Thank you for contacting Orange Cat Cycles'
+        body = f'Hello {name},\n\nThank you for contacting Orange Cat Cycles. We have received your message and will get back to you soon.\n\nRegards,\nOrange Cat Cycles'
+        recipient = email
+        email_utils = EmailUtils(app)
+        response = email_utils.sendMail(subject, body, recipient)
+        if response:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+
+def send_admin_mail(name, email, message, phone, model):
+    try:
+        subject = 'New Customer Enquiry'
+        body = f'Hello Admin,\n\nA new customer enquiry has been received. Details are as follows:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nModel: {model}\nMessage: {message}\n\nRegards,\nOrange Cat Cycles'
+        recipients = ['info@orangecatcycles.com', 'rohitvinod92@gmail.com']
+        email_utils = EmailUtils(app)
+        for recipient in recipients:
+            response = email_utils.sendMail(subject, body, recipient)
+            if not response:
+                return False
+        return True
+    except Exception as e:
+        print(e)
+        return False
+    
 
 # api to get enquiry data
 @app.route('/get/enquiry/data', methods=['POST'])
@@ -816,8 +846,11 @@ def get_enquiry_data():
             data = request.get_json()
             datetime_now = datetime.datetime.now().strftime("%d-%m-%Y")
             data = [datetime_now] + list(data.values()) + ['Pending']
-            data = append_data_spreadsheet(data, sheet_name, sheet_range)
-            if data:
+            res = append_data_spreadsheet(data, sheet_name, sheet_range)
+            if res:
+                # send thank you mail and admin mail
+                send_thank_you_mail(data[1], data[2], data[5])
+                send_admin_mail(data[1], data[2], data[5], data[3], data[4])
                 return jsonify(data), 200
             else:
                 return jsonify({'message': 'Error while fetching data'}), 500
