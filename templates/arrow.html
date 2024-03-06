@@ -51,23 +51,51 @@
 					<p>[[ product_data.description2 ]]</p>
 					<h6 class="mt-4">Available in 2 Variants</h6>
 					<div class="d-flex mt-3 align-items-center">
-						<a @click="changeProductVarient('black')">
+						<a @click="changeProductVarient('black')" class="hover-div" id="hoverDivArrowBlack" >
 							<div :class="{'border-bg': true, 'float-up': true, 'active': product_data.color === 'black'}">
 								<div class="color-bg arrow-bg-1"></div>
 							</div>
 						</a>
-						<a @click="changeProductVarient('diplomatic blue')">
-							<!-- <div class="border-bg  ms-3 float-up"> -->
+						<div id="arrowBlackMessageBox" class="message-box message-box-1"><i class="bi bi-circle-fill me-2" style="color: #0A0C10;"></i>Black Color</div>
+
+						<a @click="changeProductVarient('diplomatic blue')" class="hover-div" id="hoverDivArrowBlue" >
 							<div :class="{'border-bg': true, 'ms-3': true, 'float-up': true, 'active': product_data.color === 'diplomatic blue'}">
 								<div class="color-bg arrow-bg-2"></div>
 							</div>
 						</a>
+						<div id="arrowBlueMessageBox" class="message-box message-box-2"><i class="bi bi-circle-fill me-2" style="color: #6D8085;"></i>Diplomatic Blue</div>
 					</div>
 					<a href="#" class="btn mt-5"  data-bs-toggle="modal" data-bs-target="#productContactModal"><span>Enquire Now</span></a>
 				</div>
 			</div>
 		</div>
 	</section>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		var hoverDivArrowBlack = document.getElementById("hoverDivArrowBlack");
+		var arrowBlackMessageBox = document.getElementById("arrowBlackMessageBox");
+
+		var hoverDivArrowBlue = document.getElementById("hoverDivArrowBlue");
+		var arrowBlueMessageBox = document.getElementById("arrowBlueMessageBox");
+
+		hoverDivArrowBlack.addEventListener("mouseover", function() {
+			arrowBlackMessageBox.style.display = "block";
+		});
+		hoverDivArrowBlack.addEventListener("mouseout", function() {
+			arrowBlackMessageBox.style.display = "none";
+		});
+
+		hoverDivArrowBlue.addEventListener("mouseover", function() {
+			arrowBlueMessageBox.style.display = "block";
+		});
+		hoverDivArrowBlue.addEventListener("mouseout", function() {
+			arrowBlueMessageBox.style.display = "none";
+		});
+
+		});
+	</script>
+
 	<!-- ============ S-SINGLE-PRODUCT END ============ -->
 
 	<!--=============== SINGLE-SHOP-TABS ===============-->
