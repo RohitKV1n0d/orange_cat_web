@@ -30,21 +30,21 @@ import traceback
 
 from flask import current_app
 
-@shared_task(name='app.send_email', bind=True, base=AbortableTask)
-def send_email(self, subject, body, recipient):
-    try:
-        print("Sending mail")
-        with current_app.app_context():
-            email_utils = EmailUtils(current_app._get_current_object())
-            response = email_utils.sendMail(subject, body, recipient)
-            if response:
-                print("Mail sent successfully")
-                return {'message': 'Mail sent successfully'}
-            else:
-                print("Error while sending mail")
-                return {'message': 'Error while sending mail'}
-    except Exception as e:
-        return {'message': str(e)}
+# @shared_task(name='app.send_email', bind=True, base=AbortableTask)
+# def send_email(self, subject, body, recipient):
+#     try:
+#         print("Sending mail")
+#         with current_app.app_context():
+#             email_utils = EmailUtils(current_app._get_current_object())
+#             response = email_utils.sendMail(subject, body, recipient)
+#             if response:
+#                 print("Mail sent successfully")
+#                 return {'message': 'Mail sent successfully'}
+#             else:
+#                 print("Error while sending mail")
+#                 return {'message': 'Error while sending mail'}
+#     except Exception as e:
+#         return {'message': str(e)}
     
 
 UPLOAD_FOLDER = 'static/img/uploads/'
@@ -837,7 +837,8 @@ def send_thank_you_mail(name, email, message):
         # else:
         #     return False
         # use shared task
-        send_email.delay(subject, body, recipient)
+        email_utils = EmailUtils(app)
+        email_utils.sendMail.delay(subject, body, recipient)
         return True
     except Exception as e:
         print(e)
@@ -855,8 +856,9 @@ def send_admin_mail(name, email, message, phone, model):
         #         return False
         # return True
         # use shared task
+        email_utils = EmailUtils(app)
         for recipient in recipients:
-            send_email.delay(subject, body, recipient)
+            email_utils.sendMail.delay(subject, body, recipient)
         return True
     except Exception as e:
         print(e)

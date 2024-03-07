@@ -1,3 +1,5 @@
+from celery import shared_task
+from flask import current_app
 from flask_mail import Mail, Message
 
 class EmailUtils:
@@ -10,15 +12,17 @@ class EmailUtils:
         self.app.config['MAIL_PASSWORD'] = 'kkqz owcg sxgi hdsx'  # Your generated app password
         self.mail = Mail(self.app)
 
+    @shared_task(name='app.send_email', bind=True)
     def sendMail(self, subject, body, recipient):
         try:
-            sender = 'info@orangecatcycles.com'
-            msg = Message(subject,
-                            sender=sender,
-                            recipients=[recipient])
-            msg.body = body
-            self.mail.send(msg)
-            return True
+            with self.app.app_context():
+                sender = 'info@orangecatcycles.com'
+                msg = Message(subject,
+                                sender=sender,
+                                recipients=[recipient])
+                msg.body = body
+                self.mail.send(msg)
+                return True
         except Exception as e:
             print(e)
             return False
