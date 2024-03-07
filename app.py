@@ -28,21 +28,24 @@ from celery.contrib.abortable import AbortableTask
 from celery.result import AsyncResult
 import traceback
 
+from flask import current_app
 
 @shared_task(name='app.send_email', bind=True, base=AbortableTask)
 def send_email(self, subject, body, recipient):
     try:
         print("Sending mail")
-        email_utils = EmailUtils(app)
-        response = email_utils.sendMail(subject, body, recipient)
-        if response:
-            print("Mail sent successfully")
-            return {'message': 'Mail sent successfully'}
-        else:
-            print("Error while sending mail")
-            return {'message': 'Error while sending mail'}
+        with current_app.app_context():
+            email_utils = EmailUtils(current_app._get_current_object())
+            response = email_utils.sendMail(subject, body, recipient)
+            if response:
+                print("Mail sent successfully")
+                return {'message': 'Mail sent successfully'}
+            else:
+                print("Error while sending mail")
+                return {'message': 'Error while sending mail'}
     except Exception as e:
         return {'message': str(e)}
+    
 
 UPLOAD_FOLDER = 'static/img/uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
