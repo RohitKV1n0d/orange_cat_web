@@ -873,8 +873,8 @@ def get_enquiry_data():
             res = append_data_spreadsheet(data, sheet_name, sheet_range)
             if res:
                 # send thank you mail and admin mail
-                # send_thank_you_mail(data[1], data[2], data[5])
-                # send_admin_mail(data[1], data[2], data[5], data[3], data[4])
+                send_thank_you_mail(data[1], data[2], data[5])
+                send_admin_mail(data[1], data[2], data[5], data[3], data[4])
                 return jsonify(data), 200
             else:
                 return jsonify({'message': 'Error while fetching data'}), 500
