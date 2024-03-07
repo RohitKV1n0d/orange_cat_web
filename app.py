@@ -16,16 +16,30 @@ from utils.AWS_Modules import upload_file_to_s3, delete_file_from_s3, delete_all
 from GoogleCloudAPIs.googleAPIs import append_data_spreadsheet
 from utils.EmailUtils import EmailUtils
 
+from make_celery import make_celery
+
 app = Flask(__name__)
 CORS(app)
 
-# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-# app.config['MAIL_PORT'] = 587
-# app.config['MAIL_USE_TLS'] = True
-# app.config['MAIL_USERNAME'] = 'info@orangecatcycles.com'  # Your Google Workspace email
-# app.config['MAIL_PASSWORD'] = 'kkqz owcg sxgi hdsx'  # Your generated app password
-# mail = Mail(app)
+celery = make_celery(app)
+celery.set_default()
+from celery import shared_task, current_task
+from celery.contrib.abortable import AbortableTask
+from celery.result import AsyncResult
+import traceback
 
+
+@shared_task(name='app.send_email', bind=True, base=AbortableTask)
+def send_email(self, subject, body, recipient):
+    try:
+        email_utils = EmailUtils(app)
+        response = email_utils.sendMail(subject, body, recipient)
+        if response:
+            return {'message': 'Mail sent successfully'}
+        else:
+            return {'message': 'Error while sending mail'}
+    except Exception as e:
+        return {'message': str(e)}
 
 UPLOAD_FOLDER = 'static/img/uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -810,12 +824,15 @@ def send_thank_you_mail(name, email, message):
         subject = 'Thank you for contacting Orange Cat Cycles'
         body = f'Hello {name},\n\nThank you for contacting Orange Cat Cycles. We have received your message and will get back to you soon.\n\nRegards,\nOrange Cat Cycles'
         recipient = email
-        email_utils = EmailUtils(app)
-        response = email_utils.sendMail(subject, body, recipient)
-        if response:
-            return True
-        else:
-            return False
+        # email_utils = EmailUtils(app)
+        # response = email_utils.sendMail(subject, body, recipient)
+        # if response:
+        #     return True
+        # else:
+        #     return False
+        # use shared task
+        send_email.delay(subject, body, recipient)
+        return True
     except Exception as e:
         print(e)
         return False
@@ -825,11 +842,15 @@ def send_admin_mail(name, email, message, phone, model):
         subject = 'New Customer Enquiry'
         body = f'Hello Admin,\n\nA new customer enquiry has been received. Details are as follows:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nModel: {model}\nMessage: {message}\n\nRegards,\nOrange Cat Cycles'
         recipients = ['info@orangecatcycles.com', 'rohitvinod92@gmail.com']
-        email_utils = EmailUtils(app)
+        # email_utils = EmailUtils(app)
+        # for recipient in recipients:
+        #     response = email_utils.sendMail(subject, body, recipient)
+        #     if not response:
+        #         return False
+        # return True
+        # use shared task
         for recipient in recipients:
-            response = email_utils.sendMail(subject, body, recipient)
-            if not response:
-                return False
+            send_email.delay(subject, body, recipient)
         return True
     except Exception as e:
         print(e)
