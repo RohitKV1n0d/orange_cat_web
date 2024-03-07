@@ -13,16 +13,17 @@ class EmailUtils:
         self.mail = Mail(self.app)
 
     @shared_task(name='app.send_email', bind=True)
-    def sendMail(self, subject, body, recipient):
-        try:
-            with self.app.app_context():
-                sender = 'info@orangecatcycles.com'
-                msg = Message(subject,
-                                sender=sender,
-                                recipients=[recipient])
-                msg.body = body
-                self.mail.send(msg)
-                return True
-        except Exception as e:
-            print(e)
-            return False
+    def sendMail(subject, body, recipient):
+        # try:
+        #     with current_app.app_context():
+        #         sender = 'info@orangecatcycles.com'
+        #         msg = Message(subject,
+        #                       sender=sender,
+        #                       recipients=[recipient])
+        #         msg.body = body
+        #         current_app.mail.send(msg)
+        #         return True
+        # except Exception as e:
+        #     print(e)
+        #     return False
+        pass
