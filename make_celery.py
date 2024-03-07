@@ -1,6 +1,6 @@
 from celery import Celery
 import os
-CELERY_BROKER_URL = os.environ.get('REDISGREEN_URL', 'redis://localhost:6379')
+CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
 # CELERY_BROKER_TLS_URL = os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379')
 
 def make_celery(app):

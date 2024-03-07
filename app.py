@@ -32,11 +32,14 @@ import traceback
 @shared_task(name='app.send_email', bind=True, base=AbortableTask)
 def send_email(self, subject, body, recipient):
     try:
+        print("Sending mail")
         email_utils = EmailUtils(app)
         response = email_utils.sendMail(subject, body, recipient)
         if response:
+            print("Mail sent successfully")
             return {'message': 'Mail sent successfully'}
         else:
+            print("Error while sending mail")
             return {'message': 'Error while sending mail'}
     except Exception as e:
         return {'message': str(e)}
