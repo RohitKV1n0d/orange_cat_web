@@ -34,14 +34,14 @@ from flask import current_app
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'info@orangecatcycles.com'  # Your Google Workspace email
-app.config['MAIL_PASSWORD'] = 'kkqz owcg sxgi hdsx'  # Your generated app password
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', 'info@orangecatcycles.com')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', '')
 
 @celery.task(name='app.send_email_task')
 def send_email_task(subject, body, recipients):
     try:
         print("Sending mail")
-        sender = 'info@orangecatcycles.com'
+        sender = os.environ.get('MAIL_USERNAME', 'info@orangecatcycles.com')
         msg = Message(subject,
                         sender=sender,
                         recipients=recipients)
@@ -854,7 +854,8 @@ def send_admin_mail(name, email, message, phone, model):
     try:
         subject = 'New Customer Enquiry'
         body = f'Hello Admin,\n\nA new customer enquiry has been received. Details are as follows:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nModel: {model}\nMessage: {message}\n\nRegards,\nOrange Cat Cycles'
-        recipients = ['info@orangecatcycles.com', 'rohitvinod92@gmail.com']
+        adminMailList = os.environ.get('ADMIN_MAILS_LIST', 'info@orangecatcycles.com')
+        recipients = adminMailList.split(',')
         # email_utils = EmailUtils(app)
         # for recipient in recipients:
         #     response = email_utils.sendMail(subject, body, recipient)
