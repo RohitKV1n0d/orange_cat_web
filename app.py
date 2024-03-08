@@ -45,7 +45,7 @@ def send_email_task(subject, body, recipients):
         msg = Message(subject,
                         sender=sender,
                         recipients=recipients)
-        msg.body = body
+        msg.html = body
         mail = Mail(app)
         mail.send(msg)
         return True
@@ -835,7 +835,46 @@ def example():
 def send_thank_you_mail(name, email, message):
     try:
         subject = 'Thank you for contacting Orange Cat Cycles'
-        body = f'Hello {name},\n\nThank you for contacting Orange Cat Cycles. We have received your message and will get back to you soon.\n\nRegards,\nOrange Cat Cycles'
+        body = f""" 
+        <html>
+        <head></head>
+        <body>
+            <p><img src="https://cloud-cube-us2.s3.amazonaws.com/lu3eeh4bls8g/public/logo.png" alt="Company Logo" style="width:200px;height:50px;"></p>
+            <p>Hello {name},</p>
+            <p>Thank you for contacting Orange Cat Cycles. We have received your enquiry and will get back to you shortly.</p>
+            <p>Regards,</p>
+            <p>Orange Cat Cycles</p>
+            <table style="width: 100%; font-family: Arial, sans-serif; color: #333333;">
+                <tr>
+                <td style="padding: 20px 0;">
+                    <table style="border-top: 1px solid #DDDDDD; padding-top: 20px; width: 100%;">
+                    <tr>
+                        <td style="vertical-align: top; width: 200px;">
+                        <img src="https://cloud-cube-us2.s3.amazonaws.com/lu3eeh4bls8g/public/logo.png" alt="Orange Cat Cycles Logo" style="width: 150px;">
+                        </td>
+                        <td style="vertical-align: top; padding-left: 20px; font-size: 14px;">
+                        <p style="margin: 0; font-weight: bold; color: #E67E22;">Orange Cat Cycles</p>
+                        <p style="margin: 5px 0;">+1 647 588 6770</p>
+                        <p style="margin: 5px 0;">info@orangecatcycles.com</p>
+                        <p style="margin: 5px 0;">orangecatcycles.com</p>
+                        <p style="margin: 5px 0;">119 Indian Road, ZIP code: M6R 2V5, Toronto, Canada, Ontario</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding-top: 20px; text-align: center;">
+                        <a href="http://www.facebook.com" style="margin-right: 10px;"><img src="facebook_icon_url" alt="Facebook" style="vertical-align: middle;"></a>
+                        <a href="http://www.linkedin.com" style="margin-right: 10px;"><img src="linkedin_icon_url" alt="LinkedIn" style="vertical-align: middle;"></a>
+                        <a href="http://www.instagram.com"><img src="instagram_icon_url" alt="Instagram" style="vertical-align: middle;"></a>
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+        </body>
+        </html>
+
+        """
         recipient = email
         # email_utils = EmailUtils(app)
         # response = email_utils.sendMail(subject, body, recipient)
@@ -853,7 +892,53 @@ def send_thank_you_mail(name, email, message):
 def send_admin_mail(name, email, message, phone, model):
     try:
         subject = 'New Customer Enquiry'
-        body = f'Hello Admin,\n\nA new customer enquiry has been received. Details are as follows:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nModel: {model}\nMessage: {message}\n\nRegards,\nOrange Cat Cycles'
+        body = f"""
+        <html>
+        <head></head>
+        <body>
+            <p><img src="https://cloud-cube-us2.s3.amazonaws.com/lu3eeh4bls8g/public/logo.png" alt="Company Logo" style="width:200px;height:50px;"></p>
+            <p>Hello Admin,</p>
+            <p>A new customer enquiry has been received. Details are as follows:</p>
+            <ul>
+                <li>Name: {name}</li>
+                <li>Email: {email}</li>
+                <li>Phone: {phone}</li>
+                <li>Model: {model}</li>
+                <li>Message: {message}</li>
+            </ul>
+            <p>This data has been appended to the sheet. You can view it <a href="https://docs.google.com/spreadsheets/d/1pkxv2-yhyuxXI7FW0E2QTBhiOsiqLcqizs0VFzL_l0U/edit?pli=1#gid=0">here</a>.</p>
+            <p>Regards,</p>
+            <p>Orange Cat Cycles</p>
+            <table style="width: 100%; font-family: Arial, sans-serif; color: #333333;">
+                <tr>
+                <td style="padding: 20px 0;">
+                    <table style="border-top: 1px solid #DDDDDD; padding-top: 20px; width: 100%;">
+                    <tr>
+                        <td style="vertical-align: top; width: 200px;">
+                        <img src="https://cloud-cube-us2.s3.amazonaws.com/lu3eeh4bls8g/public/logo.png" alt="Orange Cat Cycles Logo" style="width: 150px;">
+                        </td>
+                        <td style="vertical-align: top; padding-left: 20px; font-size: 14px;">
+                        <p style="margin: 0; font-weight: bold; color: #E67E22;">Orange Cat Cycles</p>
+                        <p style="margin: 5px 0;">+1 647 588 6770</p>
+                        <p style="margin: 5px 0;">info@orangecatcycles.com</p>
+                        <p style="margin: 5px 0;">orangecatcycles.com</p>
+                        <p style="margin: 5px 0;">119 Indian Road, ZIP code: M6R 2V5, Toronto, Canada, Ontario</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding-top: 20px; text-align: center;">
+                        <a href="http://www.facebook.com" style="margin-right: 10px;"><img src="facebook_icon_url" alt="Facebook" style="vertical-align: middle;"></a>
+                        <a href="http://www.linkedin.com" style="margin-right: 10px;"><img src="linkedin_icon_url" alt="LinkedIn" style="vertical-align: middle;"></a>
+                        <a href="http://www.instagram.com"><img src="instagram_icon_url" alt="Instagram" style="vertical-align: middle;"></a>
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+        </body>
+        </html>
+        """
         adminMailList = os.environ.get('ADMIN_MAILS_LIST', 'info@orangecatcycles.com')
         recipients = adminMailList.split(',')
         # email_utils = EmailUtils(app)
