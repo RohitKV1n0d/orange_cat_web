@@ -14,7 +14,7 @@ import boto3
 
 from utils.AWS_Modules import upload_file_to_s3, delete_file_from_s3, delete_all_files_from_s3
 from GoogleCloudAPIs.googleAPIs import append_data_spreadsheet
-from utils.EmailUtils import EmailUtils
+# from utils.EmailUtils import EmailUtils
 
 from make_celery import make_celery
 
@@ -208,17 +208,17 @@ class ImageGallery(db.Model):
     
     
 
-@app.route('/send/mail/')
-def send_mail():
-    subject = 'Test Mail'
-    body = 'This is a test mail'
-    recipient = 'rohitvinod92@gmail.com'
-    email_utils = EmailUtils(app)
-    response = email_utils.sendMail(subject, body, recipient)
-    if response:
-        return jsonify({'message': 'Mail sent successfully'}), 200
-    else:
-        return jsonify({'message': 'Error while sending mail'}), 500
+# @app.route('/send/mail/')
+# def send_mail():
+#     subject = 'Test Mail'
+#     body = 'This is a test mail'
+#     recipient = 'rohitvinod92@gmail.com'
+#     email_utils = EmailUtils(app)
+#     response = email_utils.sendMail(subject, body, recipient)
+#     if response:
+#         return jsonify({'message': 'Mail sent successfully'}), 200
+#     else:
+#         return jsonify({'message': 'Error while sending mail'}), 500
 
 
 @app.route('/test/get/sheet/data')
