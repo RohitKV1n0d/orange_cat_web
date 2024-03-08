@@ -37,18 +37,18 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'info@orangecatcycles.com'  # Your Google Workspace email
 app.config['MAIL_PASSWORD'] = 'kkqz owcg sxgi hdsx'  # Your generated app password
 
-@shared_task(name='app.send_email', bind=True, base=AbortableTask)
-def send_email(self, subject, body, recipients):
+@celery.task(name='app.send_email_task')
+def send_email_task(subject, body, recipients):
     try:
         print("Sending mail")
-        with current_app.app_context():
-            sender = 'info@orangecatcycles.com'
-            msg = Message(subject,
-                          sender=sender,
-                          recipients=recipients)
-            msg.body = body
-            current_app.mail.send(msg)
-            return True
+        sender = 'info@orangecatcycles.com'
+        msg = Message(subject,
+                        sender=sender,
+                        recipients=recipients)
+        msg.body = body
+        mail = Mail(app)
+        mail.send(msg)
+        return True
     except Exception as e:
         print(e)
         return False
@@ -844,7 +844,7 @@ def send_thank_you_mail(name, email, message):
         # else:
         #     return False
         # use shared task
-        send_email.delay(subject, body, [recipient])
+        send_email_task.delay(subject, body, [recipient])
         return True
     except Exception as e:
         print(e)
@@ -862,7 +862,7 @@ def send_admin_mail(name, email, message, phone, model):
         #         return False
         # return True
         # use shared task
-        send_email.delay(subject, body, recipients)
+        send_email_task.delay(subject, body, recipients)
         return True
     except Exception as e:
         print(e)
