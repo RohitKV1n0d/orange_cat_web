@@ -273,7 +273,7 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
+                            <a href="#" class=" mt-4 ms-3" data-bs-toggle="modal" data-bs-target="#productContactModal" style="z-index: 10000;"   onclick="productContactModal.setProduct('arrow')">Enquire</a>
                             </div>
                         </div>
                     </div>
@@ -291,7 +291,7 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
+                            <a href="#" class=" mt-4 ms-3" data-bs-toggle="modal" data-bs-target="#productContactModal" style="z-index: 10000;"   onclick="productContactModal.setProduct('arrow')">Enquire</a>
                             </div>
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
+                            	<a href="#" class=" mt-4 ms-3"  data-bs-toggle="modal" data-bs-target="#productContactModal" style="z-index: 10000;"   onclick="productContactModal.setProduct('arrow')">Enquire</a>
                             </div>
                         </div>
                     </div>  
@@ -327,7 +327,7 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
+                            <a href="#" class=" mt-4 ms-3"  data-bs-toggle="modal" data-bs-target="#productContactModal" style="z-index: 10000;"   onclick="productContactModal.setProduct('arrow')">Enquire</a>
                             </div>
                         </div>
                     </div>
@@ -371,8 +371,8 @@
 					  <div class="mb-4">
 						<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." v-model="message" required></textarea>
 					  </div>
-					  <div class="mb-3">
-						<select class="form-control select" style="border-color:#f8825ea9;" v-model="model"
+					  <div class="mb-2">
+						<select class="form-control select" style="border-color:#f8825ea9;padding: 10px;" v-model="model"
 								id="model" required>
 							<option value="" disabled>Select Model</option>
 							<option v-for="model in modelList" :key="model" :value="model">
@@ -381,7 +381,7 @@
 						</select>
 					  </div>
 					  <div class="mb-3">
-						<select class="form-control select" style="border-color:#f8825ea9;" v-model="color" v-if="model"
+						<select class="form-control select" style="border-color:#f8825ea9;padding: 10px" v-model="color" v-if="model"
 								id="color" required>
 							<option value="" disabled>Select Color</option>
 							<option v-for="color in colorList" :key="color" :value="color">
@@ -554,3 +554,69 @@
 
 	{% endblock %}
 	
+
+	<!-- Modal -->
+<div class="modal fade" style="z-index: 999999;" id="productContactModal" tabindex="-1" aria-labelledby="productContactModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+        <div class="modal-body" v-if="submitted" style="padding: 20px;">
+            <!-- Thank you message  -->
+            <div class="d-flex justify-content-center">
+                <h4 class="fw-lighter text-color mt-2 text-capitalize mb-4">Thank you for reaching out to us!</h4>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p class="black-color text-center mt-4 contact-p">We appreciate your interest and will get back to you as soon as possible.</p>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button type="button" class="btn close-modal-btn mr-2" data-bs-dismiss="modal"><span>Close</span></button>
+                <button type="button" class="btn new-enquiry-btn"  @click="submitted = false"><span>New Enquiry</span></button>
+            </div>
+        </div>
+		<div class="modal-body" v-else>
+			<form action="">
+				<h4 class=" fw-lighter text-color mt-2 text-capitalize mb-4">Need<b class="main-color"> Information?</b> We're Here to <b class="main-color">Help!</b></h4>
+				<div class="mb-3">
+					<input type="text" class="form-control" id="name" placeholder="Name" v-model="name"required>
+				  </div>
+				<div class="mb-3">
+					<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address" v-model="email" required>
+				  </div>
+				  <div class="mb-3">
+					<input type="tel" class="form-control" id="phone" placeholder="Phone number" v-model="phone" required>
+				  </div>
+				  <div class="mb-4">
+					<textarea class="form-control" id="type-message" rows="3" placeholder="Type your inquiry here..." v-model="message" required></textarea>
+				  </div>
+                  <div class="mb-3">
+                    <select class="form-control select" style="border-color:#f8825ea9;" v-model="model"
+                            id="model" required>
+                        <option value="" disabled>Select Model</option>
+                        <option v-for="model in modelList" :key="model" :value="model">
+                            [[ model ]]
+                        </option>
+                    </select>
+				  </div>
+                  <div class="mb-3">
+                    <select class="form-control select" style="border-color:#f8825ea9;" v-model="color" v-if="model"
+                            id="color" required>
+                        <option value="" disabled>Select Color</option>
+                        <option v-for="color in colorList" :key="color" :value="color">
+                            [[ color ]]
+                        </option>
+                    </select>
+				  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn close-modal-btn" data-bs-dismiss="modal"><span>Close</span></button>
+                      <button  class="btn ms-2" @click.prevent="onSubmitMethod" id="submit-enq-btn-product"
+                        ><span>Send</span></button>
+                </div>
+                <p class="black-color text-center mt-4 contact-p">Also you can contact us here</p>
+                <div class="d-flex also-contact justify-content-center mt-1">
+                    <a href="tel:+912345687" class="black-color"><i class="fa fa-phone main-color me-2"></i>+9123 456 87</a>
+                    <a href="mailto:info@orangecat.com" class="ms-4 black-color"><i class="fa fa-envelope me-2 main-color" aria-hidden="true"></i>info@orangecat.com</a>
+                </div>
+			</form>
+		</div>
+	  </div>
+	</div>
+  </div>

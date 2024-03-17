@@ -582,3 +582,9 @@ header{z-index: 998;}
 .message-box-2{left: 26%;}
 .message-box-B-1{top: 46%;left: 13%;}
 .message-box-B-2{top: 46%; left: 29%;}
+input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.active {
+  box-shadow: 0px 0px 14px rgba(0,0,0,0.1);
+}.modal select:hover, select.active, select:focus, select::after{box-shadow: none;}
+.shop-item-content .btn{padding: 7px;}
+.shop-item-content h6{margin-top: 10px;margin-bottom: 5px;}
+.shop-item-hover i:hover{color: #f45f30;}
