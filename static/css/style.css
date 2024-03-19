@@ -586,5 +586,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
   box-shadow: 0px 0px 14px rgba(0,0,0,0.1);
 }.modal select:hover, select.active, select:focus, select::after{box-shadow: none;}
 .shop-item-content .btn{padding: 7px;}
-.shop-item-content h6{margin-top: 10px;margin-bottom: 5px;}
+.shop-item-content{    margin-top: 12px; border-radius: 5px; padding: 15px; box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;}
+.shop-item-content h6{margin-bottom: 5px;}
+.shop-item-content p{text-align: justify;}
 .shop-item-hover i:hover{color: #f45f30;}
