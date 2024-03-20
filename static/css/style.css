@@ -582,3 +582,7 @@ header{z-index: 998;}
 .message-box-2{left: 26%;}
 .message-box-B-1{top: 46%;left: 13%;}
 .message-box-B-2{top: 46%; left: 29%;}
+.shop-item-content{padding: 20px;margin-top: 10px; border-radius: 5px;box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;}
+.single-shop-item i{transition: 0.3s ease;}
+.single-shop-item i:hover{color: #f45f30;}
+.shop-item-content .btn{padding: 5px;margin-top: 10px;}
