@@ -4,10 +4,10 @@
 {% block content %}
     <style>
         .tifanny-green-color {
-            color: #00a99d;
+            color: #7AB9B4;
         }
         .gray-color {
-            color: #7a7a7a;
+            color: 	#E9E5CE;
         }
     </style>
 	<!-- ================ HEADER-TITLE ================ -->
@@ -55,7 +55,7 @@
 								<div class="color-bg bow-bg-1"></div>
 							</div>
 						</a>
-						<div id="BowGrayMessageBox" class="message-box message-box-B-1"><i class="bi bi-circle-fill me-2" style="color: #191e28;"></i>Black Color</div>
+						<div id="BowGrayMessageBox" class="message-box message-box-B-1"><i class="bi bi-circle-fill me-2" style="color: 	#E9E5CE;"></i>Grey Color</div>
 						
 						<a @click="changeProductVarient('tiffany green')" class="hover-div" id="hoverDivBowGreen" >
 							<div :class="{'border-bg': true, 'ms-3': true, 'float-up': true, 'active': product_data.color === 'tiffany green'}">
@@ -262,9 +262,9 @@
                 <div class="col-12 col-md-3" v-if="product_data.color != 'gray'">
                     <div class="single-shop-item">
                         <div class="shop-item-img">
-                            <img src="/static/img/models/bow/gray/product-detail-1.jpg" alt="img" style="height: 200px;">
+                            <img src="{{ url_for('static', filename='img/models/bow/gray/product-detail-0.jpg') }}" alt="img" style="height: 200px;">
                             <div class="shop-item-hover">
-                                <a href="/static/img/models/bow/gray/product-detail-1.jpg" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
+                                <a href="{{ url_for('static', filename='img/models/bow/gray/product-detail-0.jpg') }}" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
                             </div>
                         </div>
                         <div class="shop-item-content">
@@ -272,7 +272,6 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
                             </div>
                         </div>
                     </div>  
@@ -280,9 +279,9 @@
                 <div class="col-12 col-md-3" v-if="product_data.color != 'tiffany green'">
                     <div class="single-shop-item">
                         <div class="shop-item-img">
-                            <img src="/static/img/models/bow/tiffany-green/0.jpg" alt="img" style="height: 200px;">
+                            <img src="{{ url_for('static', filename='img/models/bow/tiffany-green/0.jpg') }}" alt="img" style="height: 200px;">
                             <div class="shop-item-hover">
-                                <a href="/static/img/models/bow/tiffany-green/0.jpg" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
+                                <a href="{{ url_for('static', filename='img/models/bow/tiffany-green/0.jpg') }}" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
                             </div>
                         </div>
                         <div class="shop-item-content">
@@ -290,7 +289,6 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
                             </div>
                         </div>
                     </div>
@@ -298,9 +296,9 @@
                 <div class="col-12 col-md-3" v-if="product_data.color != 'black'">
                     <div class="single-shop-item">
                         <div class="shop-item-img">
-                            <img src="/static/img/models/arrow/black/0.jpg" alt="img" style="height: 200px;">
+                            <img src="{{ url_for('static', filename='img/models/arrow/black/0.jpg') }}" alt="img" style="height: 200px;">
                             <div class="shop-item-hover">
-                                <a href="/static/img/models/arrow/black/0.jpg" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
+                                <a href="{{ url_for('static', filename='img/models/arrow/black/0.jpg') }}" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
                             </div>
                         </div>
                         <div class="shop-item-content">
@@ -308,7 +306,6 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
                             </div>
                         </div>
                     </div>
@@ -316,9 +313,9 @@
                 <div class="col-12 col-md-3" v-if="product_data.color != 'diplomatic blue'">
                     <div class="single-shop-item">
                         <div class="shop-item-img">
-                            <img src="/static/img/models/arrow/diplomatic-blue/0.jpg" alt="img" style="height: 200px;">
+                            <img src="{{ url_for('static', filename='img/models/arrow/diplomatic-blue/0.jpg') }}" alt="img" style="height: 200px;">
                             <div class="shop-item-hover">
-                                <a href="/static/img/models/arrow/diplomatic-blue/0.jpg" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
+                                <a href="{{ url_for('static', filename='img/models/arrow/diplomatic-blue/0.jpg') }}" class="item-popup" data-fancybox="prod1"><i class="bi bi-search"></i></a>
                             </div>
                         </div>
                         <div class="shop-item-content">
@@ -326,7 +323,6 @@
                             <p class="black-color">The Corinto Arrow is a classic city bike with a modern twist. The Arrow is a comfortable and stylish bike that is perfect for city riding.</p>
                             <div class="action-btn" style=" margin-top: 10px;">
                                 <a href="#" class="btn"><span>Know More</span></a>
-                            <a href="#" class=" mt-4 ms-3">Enquire</a>
                             </div>
                         </div>
                     </div>
