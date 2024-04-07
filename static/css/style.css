@@ -202,6 +202,7 @@
   button, button.btn{min-width: 110px;}
   #bg-video{width: auto;}
   .nav-menu{background-color: #ffffffdb;}
+  .product-landing .product-image{margin-top: 245px;}
 }
 
 
@@ -499,7 +500,7 @@ header{z-index: 998;}
   .down-arrow img{    width: 44px; height: auto;    position: absolute; left: 30%; margin-top: 25px;}
   .enquire_btn_modal{z-index: 9999!important;}
     @media (max-width: 991px){
-    .active{border-bottom: 0!important;}
+    .active{border-bottom: 0}
     }
     .header-container{background-color:transparent!important;}
     #productContactModal textarea{height: auto;}
