@@ -594,4 +594,4 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .shop-item-content h6{margin-bottom: 5px;}
 .shop-item-content p{text-align: justify;}
 .shop-item-hover i:hover{color: #f45f30;}
-
+.footer-links .d-flex img:hover{filter: grayscale(.8);}
