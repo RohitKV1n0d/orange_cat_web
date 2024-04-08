@@ -2,6 +2,9 @@
 
 
 {% block content %}
+<style>
+	button.active{border-bottom: 1px;}
+</style>
 <!-- Your code here -->
 <section class="product-details">
 
@@ -60,12 +63,19 @@
 								</div>
 							</div>
 							<div class="col-lg-8 mt-5 mt-md-0">
-								<div class="product-image" style="margin-top: 137px;">
-									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
+								<!-- <div class="product-image" >
 									<img class="  about-img half-image first-image" id="arrow-image-1" style="cursor: pointer;"
 										src="{{ url_for('static', filename='img/test123.png') }}" alt="">
 									<img class="  about-img half-image second-image" id="arrow-image-2" style="cursor: pointer;"
 										src="{{ url_for('static', filename='img/test123.png') }}" alt="">
+									<div class="background-color-product"></div>
+								</div> -->
+								<div class="product-image">
+									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
+									<img class="  about-img half-image first-image" id="arrow-image-1" style="cursor: pointer;"
+										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+									<img class="  about-img half-image second-image" id="arrow-image-2" style="cursor: pointer;"
+										src="{{ url_for('static', filename='img/home.png') }}" alt="">
 									<div class="background-color-product"></div>
 								</div>
 								<script>
@@ -132,7 +142,7 @@
 												<div class="color-bg color-bg-3 bow-bg-1" id="hoverDiv"></div>
 											</div>
 											<div class="color-name-box-3">
-												<p><i class="bi bi-circle-fill me-2" style="color: #191e28;"></i>Gray Color</p>
+												<p><i class="bi bi-circle-fill me-2" style="color: #E9E5CE;"></i>Gray Color</p>
 											</div>
 										</a>
 										<a href="{{ url_for('view_model_bow', variant='tiffany green') }}">
