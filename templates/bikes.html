@@ -70,12 +70,12 @@
 										src="{{ url_for('static', filename='img/test123.png') }}" alt="">
 									<div class="background-color-product"></div>
 								</div> -->
-								<div class="product-image">
+								<div class="product-image arrow-product-image">
 									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
 									<img class="  about-img half-image first-image" id="arrow-image-1" style="cursor: pointer;"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+										src="{{ url_for('static', filename='img/models/arrow/black/model-arrow-black.jpg') }}" alt="">
 									<img class="  about-img half-image second-image" id="arrow-image-2" style="cursor: pointer;"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+										src="{{ url_for('static', filename='img/models/arrow/diplomatic-blue/model-arrow-diplomatic-blue.jpg') }}" alt="">
 									<div class="background-color-product"></div>
 								</div>
 								<script>
@@ -188,9 +188,9 @@
 								<div class="product-image">
 									<!-- <img src="{{ url_for('static', filename='img/home.png') }}" alt="about image" class="img-fluid about-img"> -->
 									<img class="  about-img half-image first-image" id="bow-image-1" style="cursor: pointer;"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+										src="{{ url_for('static', filename='img/models/bow/gray/model-bow-grey.jpg') }}" alt="">
 									<img class="  about-img half-image second-image" id="bow-image-2" style="cursor: pointer;"
-										src="{{ url_for('static', filename='img/home.png') }}" alt="">
+										src="{{ url_for('static', filename='img/models/bow/tiffany-green/model-bow-tiffany-green.jpg') }}" alt="">
 									<div class="background-color-product"></div>
 								</div>
 								<script>
@@ -209,28 +209,35 @@
 								</script>
 
 								<style>
-									.background-color-product {
+									.arrow-product-image .first-image{clip-path: polygon(0 0, 122% 0, 0 100%);}
+									/* .background-color-product {
 										position: absolute;
 										background-color: #F1EFEF;
 										max-width: 70%;
 										padding: 100%;
 										z-index: -10;
 										top: -250px;
-									}
+									} */
 
 									.half-image {
 										position: absolute;
 										transition: transform 0.5s ease;
 										max-width: 80%;
 										left: 74px;
+										top: -268px;
+										padding: 45px;
+										/* position: absolute;
+										transition: transform 0.5s ease;
+										max-width: 80%;
+										left: 74px;
 										top: -281px;
-										padding: 85px;
+										padding: 85px; */
 									}
 
 									.first-image {
 										clip-path: polygon(0 0, 100% 0, 0 100%);
-										filter: grayscale(100%);
-										filter: contrast(00%);
+										/* filter: grayscale(100%);
+										filter: contrast(00%); */
 									}
 
 									.second-image {
