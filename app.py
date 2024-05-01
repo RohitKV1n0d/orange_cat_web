@@ -854,7 +854,7 @@ def send_thank_you_mail(name, email, message):
                         </td>
                         <td style="vertical-align: top; padding-left: 20px; font-size: 14px;">
                         <p style="margin: 0; font-weight: bold; color: #E67E22;">Orange Cat Cycles</p>
-                        <p style="margin: 5px 0;">+1 647 588 6770</p>
+                        <p style="margin: 5px 0;">+1 647 569 2081</p>
                         <p style="margin: 5px 0;">info@orangecatcycles.com</p>
                         <p style="margin: 5px 0;">orangecatcycles.com</p>
                         <p style="margin: 5px 0;">119 Indian Road, ZIP code: M6R 2V5, Toronto, Canada, Ontario</p>
@@ -919,7 +919,7 @@ def send_admin_mail(name, email, message, phone, model):
                         </td>
                         <td style="vertical-align: top; padding-left: 20px; font-size: 14px;">
                         <p style="margin: 0; font-weight: bold; color: #E67E22;">Orange Cat Cycles</p>
-                        <p style="margin: 5px 0;">+1 647 588 6770</p>
+                        <p style="margin: 5px 0;">+1 647 569 2081</p>
                         <p style="margin: 5px 0;">info@orangecatcycles.com</p>
                         <p style="margin: 5px 0;">orangecatcycles.com</p>
                         <p style="margin: 5px 0;">119 Indian Road, ZIP code: M6R 2V5, Toronto, Canada, Ontario</p>
