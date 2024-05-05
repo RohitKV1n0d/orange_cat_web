@@ -140,6 +140,9 @@ class Users(UserMixin,db.Model):
     role = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    ship_address = db.relationship('UserAddress', backref='user_shipping', lazy=True)
+    billing_address = db.relationship('UserAddress', backref='user_billing', lazy=True)
+
     def __repr__(self):
         return '<User %r>' % self.id
     
@@ -160,12 +163,87 @@ class Users(UserMixin,db.Model):
             "created_at": self.created_at
         }
 
+class UserAddress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    address = db.Column(db.Text, nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    postal_code = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    def __repr__(self):
+        return '<UserAddress %r>' % self.id
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "country": self.country,
+            "postal_code": self.postal_code
+        }
+    
+    def serialize2(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "country": self.country,
+            "postal_code": self.postal_code,
+            "created_at": self.created_at
+        }
+
+
+class Orders(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    total_price = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(100), nullable=False)
+    stripe_payment_id = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def __repr__(self):
+        return '<Order %r>' % self.id
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "product_id": self.product_id,
+            "quantity": self.quantity,
+            "total_price": self.total_price,
+            "status": self.status
+        }
+    
+    def serialize2(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "product_id": self.product_id,
+            "quantity": self.quantity,
+            "total_price": self.total_price,
+            "status": self.status,
+            "created_at": self.created_at
+        }
 
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    description1 = db.Column(db.Text, nullable=True)
+    description2 = db.Column(db.Text, nullable=True)
+    image_urls = db.Column(db.Text, nullable=True)
+    variant = db.Column(db.String(100), nullable=True)
+    color = db.Column(db.String(100), nullable=True)
+    stripe_product_id = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
