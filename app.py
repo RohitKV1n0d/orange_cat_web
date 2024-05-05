@@ -385,25 +385,25 @@ def login():
     return render_template('admin/login.html')
 
 @app.route('/user/login', methods=['GET', 'POST'])
-def login_user():
+def user_login():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
 
         # Check if the user exists and the password is correct
-        user = Users.query.filter_by(username=username).first()
+        user = Users.query.filter_by(email=email).first()
         if user and user.password == password:
             login_user(user)
             flash('Login successful!', 'success')
             return redirect(url_for('index'))
         else:
-            flash('Invalid username or password', 'error')
+            flash('Invalid email or password', 'error')
 
     return render_template('login.html')
 
 # signup
 @app.route('/user/signup', methods=['GET', 'POST'])
-def signup_user():
+def user_signup():
     if request.method == 'POST':
         first_name = request.form['first_name']
         last_name = request.form['last_name']
