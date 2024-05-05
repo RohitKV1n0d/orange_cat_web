@@ -82,11 +82,11 @@ html {
 /*------------------ DEFAULT STYLES ------------------*/
 *::-moz-selection {
   background: rgba(255, 217, 16, 0.6);
-  color: #192330;
+  color: #544949;
 }
 *::selection {
   background: rgba(255, 217, 16, 0.6);
-  color: #192330;
+  color: #544949;
 }
 
 html {
@@ -126,14 +126,14 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Teko", sans-serif;
-  color: #192330;
+  color: #544949;
   font-weight: 600;
   line-height: 0.85em;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: #192330;
+  color: #544949;
 }
 
 .home-dark h1, .home-dark h2, .home-dark h3, .home-dark h4, .home-dark h5, .home-dark h6 {
@@ -519,7 +519,7 @@ header {
   }
 }
 .nav-btn span {
-  background-color: #192330;
+  background-color: #544949;
   height: 2px;
   width: 100%;
   display: block;
@@ -709,7 +709,7 @@ body.no-scroll {
   padding-left: 1px;
   font-weight: 400;
   text-shadow: 0px 0px 24px rgba(0, 0, 0, 0.15);
-  color: #192330;
+  color: #544949;
   border-radius: 50%;
   background-color: #ffd910;
 }
@@ -726,7 +726,7 @@ body.no-scroll {
   margin-right: 0;
 }
 .header-cont li a {
-  color: #192330;
+  color: #544949;
 }
 .header-cont li a i {
   color: #ffd910;
@@ -758,7 +758,7 @@ body.no-scroll {
 
 /*----------------- S-HEADER-TITLE -----------------*/
 .s-header-title {
-  background-color: #192330;
+  background-color: #544949;
   min-height: 200px;
   padding: 30px 0 45px;
   display: flex;
@@ -1165,7 +1165,7 @@ button.btn {
   top: 0;
   left: 0;
   text-align: center;
-  color: #192330;
+  color: #544949;
   border-radius: 0;
 }
 
@@ -1189,7 +1189,7 @@ button.btn {
 }
 
 #success_page {
-  color: #192330;
+  color: #544949;
 }
 
 #success_page h3 {
@@ -1478,7 +1478,7 @@ footer .social-list {
   padding: 12px 32px 10px;
   font-weight: 700;
   transition: 0.35s ease;
-  color: #192330;
+  color: #544949;
   min-width: 140px;
   border: 2px solid #ffd910;
   box-sizing: border-box;
@@ -1508,7 +1508,7 @@ footer .social-list {
   width: 150%;
 }
 .btn.btn-yellow {
-  color: #192330;
+  color: #544949;
 }
 .btn.btn-yellow:before {
   width: 150%;
@@ -1518,11 +1518,11 @@ footer .social-list {
 }
 
 .btn:hover {
-  color: #192330;
+  color: #544949;
 }
 
 .mask {
-  background-color: #192330;
+  background-color: #544949;
   position: absolute;
   top: 0;
   left: 0;
@@ -1595,10 +1595,10 @@ footer .social-list {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #192330;
+  background-color: #544949;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 25px;
-  border: 1px solid #192330;
+  border: 1px solid #544949;
 }
 .to-top:hover {
   border-color: #ffd910;
@@ -1606,7 +1606,7 @@ footer .social-list {
   background-color: #ffd910;
 }
 .to-top:hover i {
-  color: #192330;
+  color: #544949;
 }
 .to-top i {
   transition: 0.3s ease-in-out;
@@ -1789,7 +1789,7 @@ footer .social-list {
   font-weight: 700;
   font-size: 18px;
   text-transform: uppercase;
-  color: #192330;
+  color: #544949;
 }
 .main-slider .main-slide .slide-img-cover .lable-bike .lable-bike-item .price {
   font-family: "Teko", sans-serif;
@@ -1828,7 +1828,7 @@ footer .social-list {
   margin-left: 5px;
 }
 .main-slide-navigation .slick-dots li.slick-active button {
-  color: #192330;
+  color: #544949;
   transform: scale(1.7);
   font-weight: 700;
 }
@@ -1847,7 +1847,7 @@ footer .social-list {
   font-family: "Roboto Condensed", sans-serif;
 }
 .main-slide-navigation .slick-dots li button:hover {
-  color: #192330;
+  color: #544949;
 }
 .main-slide-navigation .slick-dots li button:before {
   content: "0";
@@ -2100,14 +2100,14 @@ footer .social-list {
   z-index: 5;
 }
 .slick-arrow:hover {
-  background-color: #192330;
-  border-color: #192330;
+  background-color: #544949;
+  border-color: #544949;
 }
 .slick-arrow:hover i {
   color: #fff;
 }
 .slick-arrow i {
-  color: #192330;
+  color: #544949;
 }
 .slick-arrow.slick-arrow-prev {
   padding-right: 1px;
@@ -2171,7 +2171,7 @@ footer .social-list {
   margin-top: 150px;
 }
 .our-advantages-wrap.advantages-wrap-about .our-advantages-item h5 {
-  color: #192330;
+  color: #544949;
 }
 
 .our-advantages-item {
@@ -2220,7 +2220,7 @@ footer .social-list {
   margin-left: 0;
 }
 .product-tabs li:hover, .product-tabs li.active {
-  color: #192330;
+  color: #544949;
 }
 .product-tabs li:hover span:before, .product-tabs li.active span:before {
   width: 100%;
@@ -2293,7 +2293,7 @@ footer .social-list {
   text-transform: uppercase;
   text-align: center;
   background-color: #ffd910;
-  color: #192330;
+  color: #544949;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2390,7 +2390,7 @@ footer .social-list {
   text-align: left;
 }
 .prod-info .prod-list li span {
-  color: #192330;
+  color: #544949;
 }
 
 .product-item-cover {
@@ -2765,7 +2765,7 @@ footer .social-list {
 .news-item .btn-news {
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
-  color: #192330;
+  color: #544949;
   font-size: 16px;
   letter-spacing: 0.1em;
   font-weight: 700;
@@ -3243,13 +3243,13 @@ blockquote p {
   line-height: 1.6em;
   position: relative;
   z-index: 1;
-  color: #192330;
+  color: #544949;
 }
 
 blockquote cite {
   margin-top: 24px;
   display: block;
-  color: #192330;
+  color: #544949;
 }
 
 blockquote cite:before {
@@ -3266,7 +3266,7 @@ blockquote:before {
   font-family: "FontAwesome";
   font-size: 50px;
   line-height: 50px;
-  color: #192330;
+  color: #544949;
   font-weight: 900;
 }
 
@@ -3317,13 +3317,13 @@ blockquote:before {
   box-sizing: border-box;
   border-radius: 0;
   font-size: 14px;
-  color: #192330;
+  color: #544949;
   padding: 8px 12px 6px;
   display: block;
 }
 .widget-tags ul li a:hover {
-  background-color: #192330;
-  border-color: #192330;
+  background-color: #544949;
+  border-color: #544949;
   color: #fff;
 }
 
@@ -3412,7 +3412,7 @@ blockquote:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #192330;
+  background: #544949;
   z-index: 1;
   transition: 0.3s ease;
   opacity: 0;
@@ -3510,7 +3510,7 @@ blockquote:before {
 .autor-cover .name {
   font-weight: 700;
   font-size: 20px;
-  color: #192330;
+  color: #544949;
   margin-bottom: 6px;
 }
 
@@ -3538,7 +3538,7 @@ blockquote:before {
   font-size: 14px;
   font-weight: 600;
   text-transform: capitalize;
-  color: #192330;
+  color: #544949;
   transition: 0.3s ease;
 }
 
@@ -3547,11 +3547,11 @@ blockquote:before {
   font-weight: 700;
   font-size: 20px;
   line-height: 29px;
-  color: #192330;
+  color: #544949;
   transition: 0.3s ease;
 }
 .navigation-item .title:before {
-  color: #192330;
+  color: #544949;
   font-family: "FontAwesome";
   position: absolute;
   top: 1px;
@@ -3627,7 +3627,7 @@ blockquote:before {
 
 .review-content .name {
   font-size: 18px;
-  color: #192330;
+  color: #544949;
   font-weight: 600;
   text-transform: capitalize;
 }
@@ -3657,10 +3657,10 @@ blockquote:before {
   color: #ffd910;
 }
 .review-btn:hover {
-  color: #192330;
+  color: #544949;
 }
 .review-btn:hover i {
-  color: #192330;
+  color: #544949;
 }
 
 /*------------------- CONTACTS US -------------------*/
@@ -3783,7 +3783,7 @@ blockquote:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #192330;
+  background-color: #544949;
   opacity: 0;
   transition: 0.4s ease;
   border-radius: 0;
@@ -4197,7 +4197,7 @@ blockquote:before {
   height: 100%;
   z-index: 2;
   opacity: 0;
-  background: #192330;
+  background: #544949;
   transition: 0.3s ease-in-out;
 }
 .single-for-img img {
@@ -4237,7 +4237,7 @@ blockquote:before {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: #192330;
+  background-color: #544949;
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
@@ -4317,7 +4317,7 @@ blockquote:before {
 .single-shop-left .frame-size ul li:hover,
 .single-shop-left .frame-size ul li.active {
   border-color: #ffd910;
-  color: #192330;
+  color: #544949;
   background-color: #ffd910;
   box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.05);
 }
@@ -4394,7 +4394,7 @@ blockquote:before {
   color: #535b65;
 }
 .single-shop-left .single-btn-cover .btn-wishlist:hover {
-  color: #192330;
+  color: #544949;
 }
 
 /*----------------- SINGLE-SHOP-TABS -----------------*/
@@ -4423,7 +4423,7 @@ blockquote:before {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: #192330;
+  background-color: #544949;
   opacity: 0.8;
 }
 .single-video a i {
@@ -4448,7 +4448,7 @@ blockquote:before {
 .single-video a:hover i {
   border-color: #fff;
   background-color: #fff;
-  color: #192330;
+  color: #544949;
 }
 
 .description-toggle {
@@ -4478,7 +4478,7 @@ blockquote:before {
   width: 100% !important;
 }
 .description-toggle-info li span {
-  color: #192330;
+  color: #544949;
 }
 
 .faq-item {
@@ -4523,7 +4523,7 @@ blockquote:before {
   height: 100%;
   z-index: -1;
   transition: opacity 0.4s;
-  background-color: #192330;
+  background-color: #544949;
 }
 
 .popup {
@@ -4740,7 +4740,7 @@ body.modal {
   height: 14px;
   font-family: "FontAwesome";
   border: 1px solid #ebedec;
-  color: #192330;
+  color: #544949;
 }
 .wigets-shop .wiget-brand li p input:checked + span,
 .wigets-shop .wiget-gender li p input:checked + span,
@@ -5309,7 +5309,7 @@ body.modal {
   pointer-events: none;
 }
 .dark-advantage-item:hover {
-  background-color: #192330;
+  background-color: #544949;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 .dark-advantage-item:hover .mask {
@@ -5421,7 +5421,7 @@ body.modal {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #192330;
+  background-color: #544949;
   opacity: 0.8;
 }
 .page-error .container {
