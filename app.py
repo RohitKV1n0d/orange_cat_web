@@ -289,7 +289,7 @@ def delete_all_images():
         db.session.rollback()
         return jsonify({'message': 'Failed to delete records.', 'error': str(e), 'status': False})
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/admin/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -306,6 +306,52 @@ def login():
 
     return render_template('admin/login.html')
 
+@app.route('/user/login', methods=['GET', 'POST'])
+def login_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Check if the user exists and the password is correct
+        user = Users.query.filter_by(username=username).first()
+        if user and user.password == password:
+            login_user(user)
+            flash('Login successful!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password', 'error')
+
+    return render_template('login.html')
+
+# signup
+@app.route('/user/signup', methods=['GET', 'POST'])
+def signup_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        # Check if the user exists
+        user = Users.query.filter_by(username=username).first()
+        if user:
+            flash('Username already exists', 'error')
+        else:
+            # Create the new user
+            new_user = Users(username=username, email=email, password=password, role='user')
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash('Account created successfully', 'success')
+            return redirect(url_for('login'))
+
+    return render_template('signup.html')
+
+@app.route('/admin/logout')
+@admin_required
+def logout_admin():
+    logout_user()
+    flash('You have been logged out', 'success')
+    return redirect(url_for('login'))
 
 
 @app.route('/logout')
@@ -977,6 +1023,23 @@ def get_enquiry_data():
             return jsonify({'message': 'Method not allowed'}), 405
     except Exception as e:
         return jsonify({'message': str(e)}), 500
+    
+
+# checkout page
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+# user profile 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+# user/orders
+@app.route('/orders')
+def orders():
+    return render_template('orders.html')
+
 
 with app.app_context():
     init_db()

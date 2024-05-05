@@ -144,13 +144,19 @@
                                     {% endif %}
                                 </ul>
                               </div> -->
-                            <div class="dropdown">
-                                <button class="dropbtn btn ms-2 ms-md-0"  data-bs-toggle="modal" data-bs-target="#ContactModal"><span>Enquire</span></button>
-                                    <div class="dropdown-content">
-                                        <a href="tel:+1 647 569 2081">+1 647 569 2081</a>
-                                        <a href="mailto:info@orangecatcycles.com">info@orangecatcycles.com</a>
-                                    </div>
-                            </div>
+                              <button id="signupBtn" class="btn nav-sign-up-btn ms-2 ms-md-0"><span>Signup</span></button>
+
+                              <div id="userDropdown" class="dropdown user-dropdown">
+                                  <button class="dropbtn ms-2 ms-md-0"><span><i class="bi bi-person"></i></span></button>
+                                  <div class="dropdown-content">
+                                      <a href="#" class="user-link"><i class="bi bi-person me-2"></i>My Profile</a>
+                                      <hr>
+                                      <a href="#" class="user-link"><i class="bi bi-cart2 me-2"></i>My Orders</a>
+                                      <hr>
+                                      <a href="#" class="sign-out-link"><i class="bi bi-box-arrow-left me-2"></i>Sign Out</a>
+                                  </div>
+                              </div>
+
                         </li>
                     </ul>
                 </nav>
@@ -158,30 +164,15 @@
         </div>
     </header>
     <style>
-      
-        .dropbtn {
-         height: auto!important;padding: 9px 20px!important;
-        }
-        @media (max-width: 991px){
+        .dropbtn {background: transparent;border: 0;}
+        /* @media (max-width: 991px){
             .dropbtn { padding: 7px 20px!important; }
-        }
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
-        
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #ffffff;
-          min-width: 160px;
-          border-radius: 5px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
+        } */
+        .dropdown { position: relative; display: inline-block;}
+        .dropdown-content {display: none;position: absolute;background-color: #ffffff;min-width: 133px;border-radius: 5px;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);z-index: 1;}
         
         .dropdown-content a {
-          color: black!important;
+          color: #2c2c2c!important;
           padding: 12px 16px;
           text-decoration: none;
           display: block;
@@ -191,7 +182,7 @@
         .dropdown-content a:hover{ color: #f45f30;}
         .dropdown:hover .dropdown-content {display: block;}
         .contact-p{font-size: 17px;}
-        .also-contact a{font-size: 15px; color: black;}
+        .also-contact a{font-size: 15px; color: #2c2c2c;}
         .also-contact a:hover{color: #f45f30}
         </style>
 
