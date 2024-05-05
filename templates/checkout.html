@@ -1,6 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-    
+
+<section class="checkout">
+	<div class="container">
+		<h4 class="black-color text-capitalize text-left letter-space-value line-gap fw-bold">Checkout Page</h4>
+        <div class="notification-message">
+            <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</h6>
+        </div>
+        <div class="product-info-table">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                        <img src="{{ url_for('static', filename='img/models/bow/tiffany-green/0.jpg') }}" alt="image" class="img-fluid">
+                    </td>
+                    <td>Corinto bow</td>
+                    <td>Tiffany Green</td>
+                    <td>CAD 5,250</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+	</div>
+</section>
+
 
 {% endblock %}
