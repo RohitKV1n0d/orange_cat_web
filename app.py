@@ -368,7 +368,7 @@ def delete_all_images():
         return jsonify({'message': 'Failed to delete records.', 'error': str(e), 'status': False})
 
 @app.route('/admin/login', methods=['GET', 'POST'])
-def login():
+def admin_login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
