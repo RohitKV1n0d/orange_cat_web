@@ -2,5 +2,40 @@
 
 {% block content %}
     
+<section class="profile">
+    <div class="container">
+        <h4>My Profile</h4>
+        <div class="profile-details">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='img/testimonial-sample.jpg')}}" alt="image" class="img-fluid"> 
+                        <h5 class="text-center black-color mt-3 profile-name">Esther Howard</h5> 
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="card">
+                        <h5>Change Password</h5>
+                        <p class="mt-2">To change your password please confirm here</p>
+                        <form>
+                            <div class="mb-3">
+                                <label for="currentpassword" class="form-label">Current Password</label>
+                                <input type="password" class="form-control" placeholder="Enter current password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="newpassword" class="form-label">New Password</label>
+                                <input type="password" class="form-control" placeholder="Enter New password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmpassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Enter current password">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
