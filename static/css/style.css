@@ -633,7 +633,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 }
 
 .price-value{margin-top: 20px;font-size: 18px;font-weight: normal;}
-#userDropdown { display: none; }
+.colorBlackIcon{color: black;}
 #userDropdown hr{margin: 0;}
 #userDropdown .user-link i{color: #544949;}
 #userDropdown .user-link:hover i{color: #F45F30;}
