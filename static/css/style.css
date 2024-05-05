@@ -640,13 +640,27 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 #userDropdown .sign-out-link, #userDropdown .sign-out-link i{color: #FE6F6F!important;}
 .dropbtn .bi-person{color: white;}
 .dropbtn{margin: 0px 50px;padding: 0;}
-.checkout{padding: 30px 0 45px;}
+.checkout{padding: 20px 0;}
 .checkout h4{font-size: 30px;letter-spacing: 2px;}
-.notification-message{background: transparent;border: 1px solid #f5ecc8;padding: 20px 30px;margin-top: 30px;border-radius: 5px;}
-.notification-message h6{line-height: 1.3em;font-weight: normal;}
-.product-info-table{margin-top: 30px;}
-.product-info-table table tr td, .product-info-table table th{padding: 20px;}
-.product-info-table table th{background-color: #fef0c7;}
-.product-info-table table{box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);}
-.product-info-table table img{width: 150px;height: auto;border: 0.5px solid #E8DED5;}
-.product-info-table table td{font-weight: 600;}
+.checkout .notification-message{background: #F9F4E1;padding: 16px 20px;margin-top: 30px;border-radius: 5px;}
+.checkout .notification-message h6{line-height: 1.3em;font-weight: normal;}
+.checkout .product-info-table{margin-top: 30px;}
+.checkout .product-info-table table tr td, .product-info-table table th{padding: 20px;}
+.checkout .product-info-table table th{background-color: #fef0c7;}
+.checkout .product-info-table table{box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);}
+.checkout .product-info-table table img{width: 150px;height: auto;border: 0.5px solid #E8DED5;}
+.checkout .product-info-table table td{font-weight: 600;}
+.checkout .billing-address{margin-top: 50px;}
+.checkout .billing-address .add-address-btn{letter-spacing: 0px;padding: 10px 22px;height: auto;}
+.checkout .billing-address .card{padding: 20px;border: 0;box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);border-radius: 5px;height: 100%;}
+.checkout .billing-address .default-address{background: #FFE6C8;padding: 5px 15px;width: fit-content; text-align: center;border-radius: 50px;align-self: end;font-size: 13px;margin-bottom: -3%;}
+.checkout .billing-address .card h5{font-size: 18px;}
+.checkout .billing-address .card span{font-size: 15px;color: #B6B4B4;font-weight: normal;}
+.checkout .billing-address .card .deliver-address-btn button.btn{padding: 8px 14px;background: transparent;color: #F45F30;border: 1px solid #F45F30;border-radius: 50px;height: auto;letter-spacing: 0;}
+.checkout .billing-address .card .deliver-address-btn button.btn:hover{color: #F45F30!important;background-color: transparent;color: #F45F30;background-color: #FFE6C8;}
+.checkout .billing-address .billing-address-title{margin-bottom: 30px;}
+.checkout .billing-address .card .deliver-address-btn  span{color: #F45F30;}
+.checkout .billing-address .card .deliver-address-btn button.btn:hover span{color: #F45F30!important;}
+.checkout .billing-address .card .deliver-address-btn button.btn:before{color: blue;}
+.checkout .billing-address .card .action-btns i{color: #F45F30;transition: 0.3s ease;}
+.checkout .billing-address .card .action-btns i:hover{color: #6D6D6D;}
