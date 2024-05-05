@@ -140,6 +140,9 @@ class Users(UserMixin,db.Model):
     role = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    ship_address = db.relationship('UserAddress', backref='user_shipping', lazy=True)
+    billing_address = db.relationship('UserAddress', backref='user_billing', lazy=True)
+
     def __repr__(self):
         return '<User %r>' % self.id
     
@@ -160,12 +163,87 @@ class Users(UserMixin,db.Model):
             "created_at": self.created_at
         }
 
+class UserAddress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    address = db.Column(db.Text, nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    postal_code = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    def __repr__(self):
+        return '<UserAddress %r>' % self.id
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "country": self.country,
+            "postal_code": self.postal_code
+        }
+    
+    def serialize2(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "country": self.country,
+            "postal_code": self.postal_code,
+            "created_at": self.created_at
+        }
+
+
+class Orders(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    total_price = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(100), nullable=False)
+    stripe_payment_id = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def __repr__(self):
+        return '<Order %r>' % self.id
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "product_id": self.product_id,
+            "quantity": self.quantity,
+            "total_price": self.total_price,
+            "status": self.status
+        }
+    
+    def serialize2(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "product_id": self.product_id,
+            "quantity": self.quantity,
+            "total_price": self.total_price,
+            "status": self.status,
+            "created_at": self.created_at
+        }
 
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    description1 = db.Column(db.Text, nullable=True)
+    description2 = db.Column(db.Text, nullable=True)
+    image_urls = db.Column(db.Text, nullable=True)
+    variant = db.Column(db.String(100), nullable=True)
+    color = db.Column(db.String(100), nullable=True)
+    stripe_product_id = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
@@ -307,42 +385,50 @@ def login():
     return render_template('admin/login.html')
 
 @app.route('/user/login', methods=['GET', 'POST'])
-def login_user():
+def user_login():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
 
         # Check if the user exists and the password is correct
-        user = Users.query.filter_by(username=username).first()
+        user = Users.query.filter_by(email=email).first()
         if user and user.password == password:
             login_user(user)
             flash('Login successful!', 'success')
             return redirect(url_for('index'))
         else:
-            flash('Invalid username or password', 'error')
+            flash('Invalid email or password', 'error')
 
     return render_template('login.html')
 
 # signup
 @app.route('/user/signup', methods=['GET', 'POST'])
-def signup_user():
+def user_signup():
     if request.method == 'POST':
-        username = request.form['username']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        username = first_name + ' ' + last_name
         email = request.form['email']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
 
+
+        # check if the password and confirm password match
+        if password != confirm_password:
+            flash('Passwords do not match', 'error')
+            return redirect(url_for('signup_user'))
+    
         # Check if the user exists
         user = Users.query.filter_by(username=username).first()
         if user:
-            flash('Username already exists', 'error')
+            flash('User already exists', 'error')
+            return redirect(url_for('signup_user'))
         else:
-            # Create the new user
             new_user = Users(username=username, email=email, password=password, role='user')
             db.session.add(new_user)
             db.session.commit()
-
-            flash('Account created successfully', 'success')
-            return redirect(url_for('login'))
+            flash('User created successfully', 'success')
+            return redirect(url_for('login_user'))
 
     return render_template('signup.html')
 
