@@ -891,9 +891,3 @@ const body = document.body,
     smoothScroll();
 
 // ----------dropdown-----------
-$(document).ready(function() {
-	$('#signupBtn').click(function() {
-		$('#signupBtn').hide(); 
-		$('#userDropdown').show();
-	});
-});
