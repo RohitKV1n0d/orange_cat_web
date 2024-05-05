@@ -405,22 +405,30 @@ def login_user():
 @app.route('/user/signup', methods=['GET', 'POST'])
 def signup_user():
     if request.method == 'POST':
-        username = request.form['username']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        username = first_name + ' ' + last_name
         email = request.form['email']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
 
+
+        # check if the password and confirm password match
+        if password != confirm_password:
+            flash('Passwords do not match', 'error')
+            return redirect(url_for('signup_user'))
+    
         # Check if the user exists
         user = Users.query.filter_by(username=username).first()
         if user:
-            flash('Username already exists', 'error')
+            flash('User already exists', 'error')
+            return redirect(url_for('signup_user'))
         else:
-            # Create the new user
             new_user = Users(username=username, email=email, password=password, role='user')
             db.session.add(new_user)
             db.session.commit()
-
-            flash('Account created successfully', 'success')
-            return redirect(url_for('login'))
+            flash('User created successfully', 'success')
+            return redirect(url_for('login_user'))
 
     return render_template('signup.html')
 
