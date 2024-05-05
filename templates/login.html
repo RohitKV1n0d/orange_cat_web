@@ -80,8 +80,8 @@ of Simple CSS Waves-->
                                         
                                         <button type="submit"  class="btn btn-primary btn-user btn-block">Login</button>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        <a href="" class="btn">
+                                            <img src="{{ url_for('static', filename='img/icons/google.png') }}" style="max-width: 15px;" alt="">  Login with Google 
                                         </a>
                                     </form>
                                     
@@ -90,7 +90,7 @@ of Simple CSS Waves-->
                                         <a class="small" href="#">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="">Create an Account!</a>
+                                        <a class="small" href="{{ url_for('signup_user') }}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
