@@ -640,6 +640,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 #userDropdown .sign-out-link, #userDropdown .sign-out-link i{color: #FE6F6F!important;}
 .dropbtn .bi-person{color: white;}
 .dropbtn{margin: 0px 50px;padding: 0;}
+
 .profile{padding: 20px 0;margin-bottom: 30px;}
 .profile h4{font-size: 30px;letter-spacing: 2px;}
 .profile-details{margin-top: 30px;}
@@ -664,3 +665,19 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
   .profile .personal-details .col-md-4{margin-bottom: 15px;}
   .profile .card h5 {font-size: 20px;}
 }
+
+.my-orders{padding: 20px 0;margin-bottom: 30px;}
+.my-orders h4{font-size: 30px;letter-spacing: 2px;}
+.my-orders .order-info-table{margin-top: 30px;}
+.my-orders .order-info-table table tr td, .order-info-table table th{padding: 20px;}
+.my-orders .order-info-table table{box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 14px;}
+.my-orders .order-info-table table thead th{font-weight: 600;}
+.my-orders .order-info-table table tbody tr{border-top: 1px solid #fbc2b0;}
+.my-orders .order-info-table table img{width: 35px;height: auto;}
+.table-container {overflow-x: auto;-webkit-overflow-scrolling: touch;-ms-overflow-style: -ms-autohiding-scrollbar;padding: 10px;}
+@media (max-width: 767px) {
+  .table thead th,
+  .table tbody td {white-space: nowrap;width: auto !important;}
+  .table td img {max-width: 100px;height: auto;}
+}
+
