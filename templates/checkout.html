@@ -1,6 +1,197 @@
 {% extends "base.html" %}
 
 {% block content %}
-    
+
+<section class="checkout">
+	<div class="container">
+		<h4 class="black-color text-capitalize text-left letter-space-value line-gap fw-bold">Checkout Page</h4>
+        <div class="notification-message">
+            <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</h6>
+        </div>
+        <div class="product-info-table">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                            <img src="{{ url_for('static', filename='img/models/bow/tiffany-green/0.jpg') }}" alt="image" class="img-fluid">
+                        </td>
+                        <td>Corinto bow</td>
+                        <td>Tiffany Green</td>
+                        <td>CAD 5,250</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="billing-address">
+            <div class="row address-cards">
+                <div class="col-md-12">
+                    <div class="d-flex billing-address-title justify-content-between align-items-center">
+                        <h5>Billing Address</h5>
+                        <button class="btn ms-2 ms-md-0 add-address-btn"><span><i class="bi bi-plus-lg me-2"></i>Add Adress</span></button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <p class="default-address black-color">Default</p>
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order-summary">
+            <div class="row order-summary-details">
+                <div class="col-lg-8 order-info-card">
+                    <h5>Order Summary</h5>
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-title">Sub Total</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-info">CAD 5,250</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-title">Discount 5%</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-info">- CAD 5</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-title">Shipping Charges</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-info">-</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-title">Total</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="details">
+                                    <p class="order-info">CAD 5,245</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 shipping-address-card">
+                    <h5>Shipping Address</h5>
+                    <div class="card">
+                        <p class="default-address black-color">Default</p>
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="checkout-buttons">
+            <div class="d-flex align-items-center">
+                <button class="btn cancel-btn"><span>Cancel</span></button>
+                <button class="btn ms-3"  data-bs-toggle="modal" data-bs-target="#exampleModal"><span>Place an Order</span></button>
+            </div>
+        </div>
+	</div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal order-confirm-modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4 class="text-center">Thank you for order!</h4>
+          <h6 class="text-center mt-3">Your order ID is <b class="main-color">dff796c4-1a08-5768-97e3-bd65d98b1559</b></h6>
+          <p class="text-center mt-3">We have sent the details of your order to your email. We will send you a process notification before your order is delivered. Please check your email for further communications as we continue to fulfill your order.</p>
+          <img src="{{ url_for('static', filename='img/order-confirm-img.jpg')}}" alt="image" class="img-fluid">
+          <p class="text-center">If you have any query or questions regarding purchase items, then fell to get in contact us</p>
+          <a href="tel:+1 647 569 2081" class="call-link">+1 647 569 2081</a>
+          <div class="d-flex modal-buttons mt-3 justify-content-center align-items-center">
+            <button class="btn shopping-button"><span>Continue Shopping</span></button>
+            <button class="btn ms-2 invoice-button"><span>Download Invoice</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
