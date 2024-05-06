@@ -2,5 +2,56 @@
 
 {% block content %}
     
+<section class="my-orders">
+    <div class="container">
+        <h4 class="black-color text-capitalize text-left letter-space-value line-gap fw-bold">My Orders</h4>
+        <div class="order-info-table">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Item Invoice ID</th>
+                        <th scope="col">Total Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>10 Jan 2024</td>
+                        <td>dff796c4-1a08-5768-97e3-bd65d98b1559</td>
+                        <td>CAD 5,250</td>
+                        <td colspan="2">
+                            <a href="#"><img src="{{ url_for('static', filename='img/download-icon.png')}}" alt="image" class="img-fluid"></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10 Jan 2024</td>
+                        <td>dff796c4-1a08-5768-97e3-bd65d98b1559</td>
+                        <td>CAD 5,250</td>
+                        <td colspan="2">
+                            <a href="#"><img src="{{ url_for('static', filename='img/download-icon.png')}}" alt="image" class="img-fluid"></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10 Jan 2024</td>
+                        <td>dff796c4-1a08-5768-97e3-bd65d98b1559</td>
+                        <td>CAD 5,250</td>
+                        <td colspan="2">
+                            <a href="#"><img src="{{ url_for('static', filename='img/download-icon.png')}}" alt="image" class="img-fluid"></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10 Jan 2024</td>
+                        <td>dff796c4-1a08-5768-97e3-bd65d98b1559</td>
+                        <td>CAD 5,250</td>
+                        <td colspan="2">
+                            <a href="#"><img src="{{ url_for('static', filename='img/download-icon.png')}}" alt="image" class="img-fluid"></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
 
+    </div>
+</section>
 {% endblock %}

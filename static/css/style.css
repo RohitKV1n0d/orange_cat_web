@@ -633,13 +633,14 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 }
 
 .price-value{margin-top: 20px;font-size: 18px;font-weight: normal;}
-#userDropdown { display: none; }
+.colorBlackIcon{color: black;}
 #userDropdown hr{margin: 0;}
 #userDropdown .user-link i{color: #544949;}
 #userDropdown .user-link:hover i{color: #F45F30;}
 #userDropdown .sign-out-link, #userDropdown .sign-out-link i{color: #FE6F6F!important;}
 .dropbtn .bi-person{color: white;}
 .dropbtn{margin: 0px 50px;padding: 0;}
+
 .checkout{padding: 20px 0;margin-bottom: 30px;}
 .checkout h4{font-size: 30px;letter-spacing: 2px;}
 .checkout .notification-message{background: #fffcf2;padding: 20px;margin-top: 30px;border-radius: 5px;border: 1px solid #fbbf80;}
@@ -695,10 +696,48 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .order-confirm-modal h4{font-size: 30px;}
 .order-confirm-modal h6{font-weight: normal;}
 .table-container {overflow-x: auto;-webkit-overflow-scrolling: touch;-ms-overflow-style: -ms-autohiding-scrollbar;}
+=======
+
+.profile{padding: 20px 0;margin-bottom: 30px;}
+.profile h4{font-size: 30px;letter-spacing: 2px;}
+.profile-details{margin-top: 30px;}
+.profile .card {padding: 30px;border: 0;box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);border-radius: 5px;height: 100%;justify-content: center;}
+.profile .card  img{width: 200px;margin: 0 auto;display: block;}
+.profile .card h5{font-size: 22px;}
+.profile form{margin-top: 25px;}
+.profile form input{border: 1px solid #f8dabf;padding: 10px;color: #544949;border-radius: 3px;}
+.profile form input:focus{box-shadow: none;border: 1px solid #F45F30;}
+.profile form input::placeholder{color: #c0c0c0;font-weight: normal;}
+.profile .personal-details{margin-top: 30px;}
+.profile .personal-details .info-card{padding: 20px;border: 0;border: 1px solid #f8dabf;border-radius: 5px;height: 100%;}
+.profile .personal-details .default-address{background: #FFE6C8;padding: 5px 15px;width: fit-content; text-align: center;border-radius: 50px;align-self: end;font-size: 13px;margin-bottom: -3%;}
+.profile .personal-details .info-card h5{font-size: 18px;}
+.profile .personal-details .info-card span{font-size: 15px;color: #B6B4B4;font-weight: normal;}
+.profile .personal-details .info-card .action-btns i{color: #F45F30;transition: 0.3s ease;}
+.profile .personal-details .info-card .action-btns i:hover{color: #6D6D6D;}
+.profile .personal-details .info-card .default-address{background: #FFE6C8;padding: 5px 15px;width: fit-content; text-align: center;border-radius: 50px;align-self: end;font-size: 13px;margin-bottom: -3%;}
+@media (max-width: 767px){
+  .profile h4 { font-size: 25px;}
+  .profile .profile-details .col-md-5{margin-bottom: 15px;}
+  .profile .personal-details .col-md-4{margin-bottom: 15px;}
+  .profile .card h5 {font-size: 20px;}
+}
+
+.my-orders{padding: 20px 0;margin-bottom: 30px;}
+.my-orders h4{font-size: 30px;letter-spacing: 2px;}
+.my-orders .order-info-table{margin-top: 30px;}
+.my-orders .order-info-table table tr td, .order-info-table table th{padding: 20px;}
+.my-orders .order-info-table table{box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 14px;}
+.my-orders .order-info-table table thead th{font-weight: 600;}
+.my-orders .order-info-table table tbody tr{border-top: 1px solid #fbc2b0;}
+.my-orders .order-info-table table img{width: 35px;height: auto;}
+.table-container {overflow-x: auto;-webkit-overflow-scrolling: touch;-ms-overflow-style: -ms-autohiding-scrollbar;padding: 10px;}
+
 @media (max-width: 767px) {
   .table thead th,
   .table tbody td {white-space: nowrap;width: auto !important;}
   .table td img {max-width: 100px;height: auto;}
+
   .billing-address .col-md-4{margin-bottom: 20px;}
   .checkout .order-summary {margin-top: 30px;}
   .checkout .shipping-address-card{margin-top: 50px;}
@@ -707,3 +746,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
   .order-confirm-modal .modal-header .btn-close {margin: -.5rem -2.5rem -.5rem auto;}
 
 }
+
+}
+
+
