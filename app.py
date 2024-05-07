@@ -291,11 +291,11 @@ class Orders(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "product_id": self.product_id,
-            "quantity": self.quantity,
-            "total_price": self.total_price,
-            "status": self.status
+            "invoice_number": self.invoice_number,
+            "total_price": f'CAD {self.total_price/100:,.2f}',
+            "invoice_url": self.invoice_url,
+            "status": self.status,
+            "created_at": self.created_at
         }
     
     def serialize2(self):
@@ -1291,6 +1291,20 @@ def profile():
 def orders():
     return render_template('orders.html')
 
+# /api/fetch/user/orders
+@app.route('/api/fetch/user/orders', methods=['POST'])
+@login_required
+def fetch_user_orders():
+    try:
+        if request.method == 'POST':
+            user_id = current_user.id
+            orders = Orders.query.filter_by(user_id=user_id).all()
+            orders = list(map(lambda order: order.serialize(), orders))
+            return jsonify(orders), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 
 with app.app_context():
