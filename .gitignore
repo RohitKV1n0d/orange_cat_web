@@ -14,3 +14,4 @@ templates/test.html
 
 instance/
 __pycache__/
+dump.rdb
