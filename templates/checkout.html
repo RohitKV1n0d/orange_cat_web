@@ -1,8 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script src="https://js.stripe.com/v3/"></script>
 
-<section class="checkout">
+<section class="checkout" id="vue-checkout">
+
+  
+
+
+
+
+
+
+
 	<div class="container">
 		<h4 class="black-color text-capitalize text-left letter-space-value line-gap fw-bold">Checkout Page</h4>
         <div class="notification-message">
@@ -32,7 +42,13 @@
                 </table>
             </div>
         </div>
-        <div class="billing-address">
+        <form id="address-form">
+            <h3>Address</h3>
+            <div id="address-element">
+              <!-- Elements will create form elements here -->
+            </div>
+          </form>
+        <!-- <div class="billing-address">
             <div class="row address-cards">
                 <div class="col-md-12">
                     <div class="d-flex billing-address-title justify-content-between align-items-center">
@@ -84,7 +100,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="order-summary">
             <div class="row order-summary-details">
                 <div class="col-lg-8 order-info-card">
@@ -164,19 +180,36 @@
         <div class="checkout-buttons">
             <div class="d-flex align-items-center">
                 <button class="btn cancel-btn"><span>Cancel</span></button>
-                <button class="btn ms-3"  data-bs-toggle="modal" data-bs-target="#exampleModal"><span>Place an Order</span></button>
+                <button class="btn ms-3" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#CheckOutModal" 
+                        id="init-checkout-session" 
+                        @click="initialize_stripe_payment"
+                ><span>Place an Order</span></button>
             </div>
         </div>
 	</div>
-</section>
-
-
-<!-- Modal -->
-<div class="modal order-confirm-modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <!--  Modal -->
+<div class="modal order-confirm-modal fade" id="CheckOutModal" tabindex="-1" aria-labelledby="CheckOutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl checkout-dialog" id="checkout-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-checkout-modal-btn"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-center" style="margin-bottom: 20px;">Make a Secure Payment</h4>
+                <div id="checkout">
+                    <!-- Checkout will insert the payment form here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-dialog modal-lg thank-you-modal" id="thank-you-modal-dialog" style="display: none;">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                    aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <h4 class="text-center">Thank you for order!</h4>
@@ -192,6 +225,81 @@
         </div>
       </div>
     </div>
+    <div class="modal-dialog modal-lg failed-payment-modal" id="failed-payment-modal-dialog" style="display: none;">
+        Payment Failed
+    </div>
   </div>
+
+</section>
+<script>
+    // This is your test publishable API key.
+    const stripe = Stripe("pk_test_51PCOIy07chPjetrCtzA2AEg9Ymt29B36LTU8Rlx0aWaz2KTsMdMFfZSsx9fMLz1pHu5LODS4ecX5aiaYMl6CLlnE00k5at7cKv");
+    // Create a Checkout Session
+    let checkout;
+    let sessionIDData;
+    async function initialize() {
+        const fetchClientSecret = async () => {
+            const response = await fetch("/create-checkout-session", {
+            method: "POST",
+            });
+            const { clientSecret , sessionId } = await response.json();
+            sessionIDData = sessionId;
+            return clientSecret;
+        };
+
+        // Example `onComplete` callback
+        const handleComplete = async function() {
+            // save order data to db session-status?session_id=${sessionId}
+            const response = await fetch(`/save-order-data?session_id=${sessionIDData}`, {
+                method: "GET",
+            });
+            
+            const { status } = await response.json();
+            if (status === 'paid') {
+                console.log('Payment is successful')
+            } else {
+                console.log('Payment is failed')
+            }
+        }
+        const handleModalClose = async function() {
+            // Destroy Checkout instance
+            isclose = confirm('Are you sure you want to cancel the order?')
+            if (isclose) {
+                checkout.destroy()
+            }
+            
+        }
+
+        const checkout = await stripe.initEmbeddedCheckout({
+            fetchClientSecret,
+            onComplete: handleComplete,
+        });
+
+        checkout.mount('#checkout');
+        // onclick checkout.destroy() to #close-modal-btn 
+        document.getElementById('close-checkout-modal-btn').addEventListener('click', handleModalClose);
+    }
+    
+    
+    // function showThankYouMessage() {
+    //         $('#checkout-dialog').hide();
+    //         $('#thank-you-modal-dialog').show();
+    //     }
+   
+
+     var app = new Vue({
+			el: '#vue-checkout',
+			delimiters: ['[[', ']]'],
+			data: {
+                message: 'Hello Vue!',
+            },
+            methods: {
+                initialize_stripe_payment() {
+                    initialize();
+                }
+            }
+        });
+</script>
+
 
 {% endblock %}
