@@ -1207,7 +1207,7 @@ def create_checkout_session():
                 'allowed_countries': ['CA'],
             },
             invoice_creation={'enabled': True},
-            customer_email='rohitvinod@nexeor.com',
+            customer_email=current_user.email,
             automatic_tax={'enabled': True},
             phone_number_collection={'enabled': True},
         )
