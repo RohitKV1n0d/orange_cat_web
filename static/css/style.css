@@ -643,8 +643,9 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 
 .checkout{padding: 20px 0;margin-bottom: 30px;}
 .checkout h4{font-size: 30px;letter-spacing: 2px;}
-.checkout .notification-message{background: #fffcf2;padding: 20px;margin-top: 30px;border-radius: 5px;border: 1px solid #fbbf80;}
-.checkout .notification-message h6{line-height: 1.3em;font-weight: normal;}
+.checkout .notification-message{background: #fffcf2;padding: 20px;border-radius: 5px;border: 1px solid #fbbf80;}
+
+.checkout .notification-message h6{line-height: 1.3em;font-weight: normal;font-size: 16px;}
 .checkout .product-info-table{margin-top: 30px;}
 .checkout .product-info-table table tr td, .product-info-table table th{padding: 20px;}
 .checkout .product-info-table table th{background-color: #fef0c7;}
@@ -654,6 +655,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .checkout .billing-address{margin-top: 50px;}
 .checkout .billing-address .add-address-btn{letter-spacing: 0px;padding: 10px 22px;height: auto;}
 .checkout .billing-address .card{padding: 20px;border: 0;box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);border-radius: 5px;height: 100%;}
+
 .checkout .billing-address .default-address{background: #FFE6C8;padding: 5px 15px;width: fit-content; text-align: center;border-radius: 50px;align-self: end;font-size: 13px;margin-bottom: -3%;}
 .checkout .billing-address .card h5{font-size: 18px;}
 .checkout .billing-address .card span{font-size: 15px;color: #B6B4B4;font-weight: normal;}
@@ -665,11 +667,14 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .checkout .billing-address .card .deliver-address-btn button.btn:before{color: blue;}
 .checkout .billing-address .card .action-btns i{color: #F45F30;transition: 0.3s ease;}
 .checkout .billing-address .card .action-btns i:hover{color: #6D6D6D;}
-.checkout .order-summary{margin-top: 50px;}
-.checkout .order-summary-details{margin-top: 50px;margin-bottom: 50px;}
 .checkout .order-summary-details .card{border: 0;box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);border-radius: 5px;}
-.checkout .order-summary-details .order-info-card .card .details{padding: 20px;}
-.checkout .order-summary-details .order-info-card .card hr{opacity: 1;margin: 0;height: 0.5px;background-color: #DBC0A9;}
+.checkout .order-summary-details .card .order-title{color: #544949;}
+.checkout .order-summary-details .card .tax-span{color: #696969;}
+.checkout .order-summary-details .card span.total-span{color: #696969;font-size: 15px;font-weight: normal;}
+.order-summary-details button{width: 100%;margin-bottom: 15px;}
+.order-summary-contents{margin-top: 50px;}
+.checkout .order-summary-details .order-info-card .card .details{padding: 15px 25px;}
+.checkout .order-summary-details .order-info-card .card hr{opacity: 1;height: 0.5px;background-color: #DBC0A9;}
 .checkout .order-summary-details .order-info-card .card .order-info{font-weight: 600;text-align: right;}
 .checkout .shipping-address-card .card{padding: 20px;border: 0;box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);border-radius: 5px;}
 .checkout .shipping-address-card .default-address{background: #FFE6C8;padding: 5px 15px;width: fit-content; text-align: center;border-radius: 50px;align-self: end;font-size: 13px;margin-bottom: -3%;}
@@ -684,8 +689,13 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .checkout .shipping-address-card .card .action-btns i{color: #F45F30;transition: 0.3s ease;}
 .checkout .shipping-address-card .card .action-btns i:hover{color: #6D6D6D;}
 .order-summary h5{margin-bottom: 20px;}
+.checkout-buttons{margin-top: 50px;}
+.checkout button{letter-spacing: 0;}
+
 .checkout .checkout-buttons .cancel-btn{background: transparent;border: 1px solid #F45F30;color: #F45F30;}
-.checkout h5{font-weight: normal;}
+.checkout .order-card h5.cycle-color{font-weight: normal;color: #696969;}
+.checkout .order-card .card{border: 0;box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);border-radius: 5px;margin-top: 30px;padding: 50px 20px;}
+.checkout .order-card .card span{color: #696969;font-size: 15px;font-weight: normal;}
 .order-confirm-modal .modal-body {padding-top: 0;}
 .order-confirm-modal img{margin:  0 auto;display: block;}
 .order-confirm-modal .call-link{color: #F45F30;margin: 0 auto;display: block;text-align: center;}
@@ -696,7 +706,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .order-confirm-modal h4{font-size: 30px;}
 .order-confirm-modal h6{font-weight: normal;}
 .table-container {overflow-x: auto;-webkit-overflow-scrolling: touch;-ms-overflow-style: -ms-autohiding-scrollbar;}
-=======
+
 
 .profile{padding: 20px 0;margin-bottom: 30px;}
 .profile h4{font-size: 30px;letter-spacing: 2px;}
@@ -741,12 +751,10 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
   .billing-address .col-md-4{margin-bottom: 20px;}
   .checkout .order-summary {margin-top: 30px;}
   .checkout .shipping-address-card{margin-top: 50px;}
-  .checkout .order-summary-details {margin-top: 15px;}
   .order-confirm-modal .modal-buttons button{line-height: 17px;padding: 10px;height: auto;}
   .order-confirm-modal .modal-header .btn-close {margin: -.5rem -2.5rem -.5rem auto;}
-
 }
 
-}
+
 
 
