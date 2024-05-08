@@ -56,6 +56,7 @@ app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'user_login'
 
 @celery.task(name='app.send_email_task')
 def send_email_task(subject, body, recipients):
@@ -202,10 +203,11 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 class Users(UserMixin,db.Model):
-    table_name = 'users'
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.Text, nullable=True)
+    phone = db.Column(db.String(100), nullable=True)
     password = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
@@ -491,19 +493,19 @@ def user_signup():
         # check if the password and confirm password match
         if password != confirm_password:
             flash('Passwords do not match', 'error')
-            return redirect(url_for('signup_user'))
+            return redirect(url_for('user_signup'))
     
         # Check if the user exists
         user = Users.query.filter_by(username=username).first()
         if user:
             flash('User already exists', 'error')
-            return redirect(url_for('signup_user'))
+            return redirect(url_for('user_signup'))
         else:
             new_user = Users(username=username, email=email, password=password, role='user')
             db.session.add(new_user)
             db.session.commit()
             flash('User created successfully', 'success')
-            return redirect(url_for('login_user'))
+            return redirect(url_for('user_login'))
 
     return render_template('signup.html')
 
@@ -1283,7 +1285,74 @@ def checkout():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    return render_template('profile.html', user=current_user)
+
+# /api/fetch/user/profile
+@app.route('/api/fetch/user/profile', methods=['POST'])
+@login_required
+def fetch_user_profile():
+    try:
+        if request.method == 'POST':
+            user = current_user
+            if not user:
+                return jsonify({'message': 'User not found'}), 404
+            username_split = user.username.split(' ')
+            first_name = username_split[0]
+            last_name = username_split[1] if len(username_split) > 1 else ''
+            context = { 
+                "first_name" : first_name,
+                "last_name" : last_name,
+                "email" : user.email,
+                "phone" : user.phone,
+            }
+            return jsonify(context), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+# save user data
+@app.route('/api/update/user/profile', methods=['POST'])
+@login_required
+def save_user_data():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            user = current_user
+            user.username = request_data.get('first_name', '') + ' ' + request_data.get('last_name', '')
+            user.email = request_data.get('email', '')
+            user.phone = request_data.get('phone', '')
+            db.session.commit()
+            return jsonify({'message': 'User data saved successfully'}), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
+@app.route('/api/reset/user/password', methods=['POST'])
+@login_required
+def update_user_password():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            user = current_user
+            old_password = request_data.get('current_password', '')
+            new_password = request_data.get('new_password', '')
+            confirm_password = request_data.get('confirm_password', '')
+            if not old_password or not new_password or not confirm_password:
+                return jsonify({'message': 'All fields are required'}), 400
+            if old_password != user.password:
+                return jsonify({'message': 'Old password is incorrect'}), 400
+            if new_password != confirm_password:
+                return jsonify({'message': 'Passwords do not match'}), 400
+            user.password = new_password
+            db.session.commit()
+            return jsonify({'message': 'Password updated successfully'}), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
 
 # user/orders
 @app.route('/orders')
