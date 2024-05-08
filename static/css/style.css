@@ -124,7 +124,7 @@
    .s-subscribe{background: url("../img/discover-bg.mp4")!important;background-position: center; background-repeat: no-repeat;background-size: cover;}
    @media (max-width: 991px){
     .submit-btn{min-width: auto;padding: 10px!important;}
-    .footer-links{padding: 0px 0px 21px 0px;}
+    .footer-links{padding: 20px 0px 21px 0px;}
    }
    .letter-spacing{letter-spacing: 1px;}
 .text-content-box{background-color: #F45F30;border-radius: 3px;padding: 50px;    margin-left: -50px;box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;}
@@ -428,9 +428,9 @@ main::before {
   .header-icons {
     left: 36%;
 }
-main {
-  margin-top: 55vh;
-}
+/* main {
+  margin-top: 80%;
+} */
 }
 .swiper-wrapper video {
 	width: 100%;
@@ -640,3 +640,43 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 #userDropdown .sign-out-link, #userDropdown .sign-out-link i{color: #FE6F6F!important;}
 .dropbtn .bi-person{color: white;}
 .dropbtn{margin: 0px 50px;padding: 0;}
+
+@media only screen 
+  and (device-width: 414px) 
+  and (device-height: 896px) 
+  and (-webkit-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+  main {margin-top: 105%;}
+  .call-us,
+  .mail-us {display: block;width: 100%;}
+  .contact-orangecat .d-flex.justify-content-center {justify-content: flex-start !important;}
+}
+@media only screen 
+  and (device-width: 430px) 
+  and (device-height: 932px) 
+  and (-webkit-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+  main {margin-top: 105%;}
+  .call-us,
+  .mail-us {display: block;width: 100%;}
+  .contact-orangecat .d-flex.justify-content-center {justify-content: flex-start !important;}
+}
+@media only screen 
+  and (device-width: 412px) 
+  and (device-height: 915px) 
+  and (-webkit-device-pixel-ratio: 2.625)
+  and (orientation: portrait) {
+    main {margin-top: 105%;}
+    .call-us,
+    .mail-us {display: block;width: 100%;}
+    .contact-orangecat .d-flex.justify-content-center {justify-content: flex-start !important;}
+}
+@media only screen 
+  and (device-width: 768px) 
+  and (device-height: 1024px) 
+  and (-webkit-device-pixel-ratio: 1)
+  and (orientation: portrait) {
+    main {
+      margin-top: 65%!important;
+  }
+}
