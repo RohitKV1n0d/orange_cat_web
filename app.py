@@ -505,6 +505,46 @@ def add_product():
             return jsonify({'message': 'Method not allowed'}), 405
     except Exception as e:
         return jsonify({'message': str(e)}), 500
+    
+# /admin/api/edit/product
+@app.route('/admin/api/edit/product', methods=['POST'])
+@admin_required
+def edit_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            product_id = request_data.get('id', None)
+            name = request_data.get('name', None)
+            price = request_data.get('price', None)
+            description1 = request_data.get('description1', None)
+            description2 = request_data.get('description2', None)
+            image_urls = request_data.get('image_urls', None)
+            variant = request_data.get('variant', None)
+            color = request_data.get('color', None)
+            stripe_test_product_id = request_data.get('stripe_test_product_id', None)
+            stripe_live_product_id = request_data.get('stripe_live_product_id', None)
+            if product_id:
+                product = Products.query.get(product_id)
+                if product:
+                    product.name = name
+                    product.price = price
+                    product.description1 = description1
+                    product.description2 = description2
+                    product.image_urls = image_urls
+                    product.variant = variant
+                    product.color = color
+                    product.stripe_test_product_id = stripe_test_product_id
+                    product.stripe_live_product_id = stripe_live_product_id
+                    db.session.commit()
+                    return jsonify({'message': 'Product updated successfully'}), 200
+                else:
+                    return jsonify({'message': 'Product not found'}), 400
+            else:
+                return jsonify({'message': 'Product ID not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 @app.route('/admin/settings/delete/all/images', methods=['GET', 'POST'])
 @admin_required
