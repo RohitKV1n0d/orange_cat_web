@@ -51,7 +51,7 @@ of Simple CSS Waves-->
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 fw-bold mb-4 welcome-head">Welcome Back!</h1>
                                     </div>
                                     {% with messages = get_flashed_messages() %}
                                     {% if messages %}
@@ -79,14 +79,15 @@ of Simple CSS Waves-->
                                             </div>
                                         </div>
                                         
-                                        <button type="submit"  class="btn btn-primary btn-user btn-block">Login</button>
-                                        <hr>
-                                        <a href="" class="btn">
+                                        <button type="submit"  class="btn btn-user btn-block">Login</button>
+                                        <div class="d-flex">
+                                          <hr><p>Or, Login with</p><hr>
+                                        </div>
+                                        <a href="" class="btn login-google">
                                             <img src="{{ url_for('static', filename='img/icons/google.png') }}" style="max-width: 15px;" alt="">  Login with Google 
                                         </a>
                                     </form>
                                     
-                                    <hr>
                                     <div class="text-center">
                                         <a class="small" href="#">Forgot Password?</a>
                                     </div>
@@ -156,9 +157,12 @@ p {
 .header {
   position:relative;
   text-align:center;
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  /* background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%); */
+  background: linear-gradient(60deg, rgba(244,95,48) 0%, rgba(255,130,91) 100%);
   color:white;
 }
+.login-google{width: 100%;border-radius: 10rem;background: #feebe5;padding: 10px;transition: 0.3s ease;margin-bottom: 20px;}
+.login-google:hover{background: #f8e3dc;}
 .logo {
   width:50px;
   fill:white;
@@ -166,7 +170,7 @@ p {
   display:inline-block;
   vertical-align: middle;
 }
-
+.d-flex p{margin-top: 2%;font-size: 15px;}
 .inner-header {
   height:65vh;
   width:100%;
@@ -178,18 +182,21 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: center;padding-top: 16%;
 }
-
+form {z-index: 9999;position: relative;}
 .waves {
-  position:relative;
   width: 100%;
   height:15vh;
   margin-bottom:-7px; /*Fix for safari gap*/
   min-height:100px;
   max-height:150px;
 }
-
+hr{background: #fb7c56;height: 0.1px;width: 25%;}
+.btn-user{background-color:#F45F30;color: white;transition: 0.3s ease;border: 1px solid #F45F30;margin-bottom: 30px;}
+.btn-user:hover{background-color: transparent;color: #F45F30;font-size: 15px;}
+.custom-control-input:checked~.custom-control-label::before {color: #fff;border-color: #F45F30;background-color: #F45F30;}
+.custom-control-input:checked~.custom-control-label:focus{box-shadow: none;}
 .content {
   position:relative;
   height:20vh;
@@ -198,7 +205,8 @@ p {
 }
 
 /* Animation */
-
+a{transition: 0.3s ease;color: #525252;}
+a:hover{text-decoration: none;color: #F45F30;}
 .parallax > use {
   animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
 }
@@ -206,10 +214,13 @@ p {
   animation-delay: -2s;
   animation-duration: 7s;
 }
+.welcome-head{font-size: 25px;font-weight: 600!important;color: #544949;}
 .parallax > use:nth-child(2) {
   animation-delay: -3s;
   animation-duration: 10s;
 }
+form.user .form-control-user{border: 1px solid rgb(251, 164, 117);background-color: white;}
+form.user .form-control-user:focus{box-shadow: none;border: 1px solid #F45F30;}
 .parallax > use:nth-child(3) {
   animation-delay: -4s;
   animation-duration: 13s;
@@ -239,6 +250,21 @@ p {
     font-size:24px;
   }
 }
+@media only screen and (max-device-width: 375px) and (max-device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+  .flex{padding-top: 51%;}
+}
+@media only screen and (max-device-width: 360px) and (max-device-height: 740px) and (-webkit-device-pixel-ratio: 4) {
+  .flex{padding-top: 44%;}
+}
+@media only screen and (max-device-width: 540px) and (max-device-height: 720px) {
+  .flex{padding-top: 43%;}
+}
+@media only screen and (device-width: 1024px) and (device-height: 600px) {
+  .flex {padding-top: 20%;}
+}
+
+
+
 
     </style>
     
