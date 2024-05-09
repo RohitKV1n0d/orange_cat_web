@@ -49,6 +49,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 ENV = os.environ.get('ENV', 'prod')
 LIVE_DB = os.environ.get('LIVE_DB', 'True')
+STRIPE_MODE = ''
+TEST_USER_ROLES = os.environ.get('TEST_USER_ROLES', 'admin,super_admin,test').split(',')
 
 # Add a secret key for the Flask-Login
 app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')
@@ -118,12 +120,18 @@ def download_file(url):
     else:
         raise Exception(f"Failed to download file: Status code {response.status_code}")
 
+def get_stripe_mode():
+    if current_user.role in TEST_USER_ROLES:
+        return 'test'
+    else:
+        return 'live'
 
 # Database initialization function
 def init_db():
     db.create_all()
     admin_username = 'admin'
     admin_password = 'admin'
+    admin_email = 'admin@admin.com'
     test_username = 'test'
     test_email = 'test@test.com'
     test_password = 'test123'
@@ -140,7 +148,7 @@ def init_db():
     admin_user = Users.query.filter_by(username=admin_username).first()
     if not admin_user:
         # Create the default admin user
-        admin_user = Users(username=admin_username, password=admin_password, role='admin')
+        admin_user = Users(username=admin_username, password=admin_password, role='admin', email=admin_email)
         db.session.add(admin_user)
         db.session.commit()
 
@@ -193,8 +201,10 @@ def load_user(user_id):
     if user:
         if user.role == 'test':
             stripe.api_key = os.environ.get('STRIPE_TEST_SECRET_KEY')
+            STRIPE_MODE = 'test'
         else:
             stripe.api_key = os.environ.get('STRIPE_LIVE_SECRET_KEY')
+            STRIPE_MODE = 'live'
         return user
     else:
         return None
@@ -320,7 +330,8 @@ class Products(db.Model):
     image_urls = db.Column(db.Text, nullable=True)
     variant = db.Column(db.String(100), nullable=True)
     color = db.Column(db.String(100), nullable=True)
-    stripe_product_id = db.Column(db.String(100), nullable=True)
+    stripe_test_product_id = db.Column(db.String(100), nullable=True)
+    stripe_live_product_id = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
@@ -330,7 +341,15 @@ class Products(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "price": self.price
+            "price": self.price,
+            "description1": self.description1,
+            "description2": self.description2,
+            "image_urls": self.image_urls,
+            "variant": self.variant,    
+            "color": self.color,
+            "created_at": self.created_at,
+            "stripe_test_product_id": self.stripe_test_product_id,
+            "stripe_live_product_id": self.stripe_live_product_id
         }
     
     def serialize2(self):
@@ -393,7 +412,7 @@ def admin_required(f):
     def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated or current_user.role != 'admin':
             flash('You need to be an admin to access this page', 'error')
-            return redirect(url_for('login'))
+            return redirect(url_for('user_login'))
         return f(*args, **kwargs)
     return decorated_function
 
@@ -428,6 +447,110 @@ def admin_socials():
 def admin_settings():
     # Your admin settings panek code here
     return render_template('admin/settings.html')
+
+
+
+@app.route('/admin/products')
+@admin_required
+def admin_products():
+    return render_template('admin/products-list.html')
+
+@app.route('/admin/api/fetch/products', methods=['GET'])
+@admin_required
+def fetch_products():
+    try:
+        products = Products.query.all()
+        products = list(map(lambda product: product.serialize(), products))
+        return jsonify({'products': products}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
+@app.route('/admin/api/delete/product', methods=['POST'])
+@admin_required
+def delete_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            product_id = request_data.get('id', None)
+            if product_id:
+                product = Products.query.get(product_id)
+                db.session.delete(product)
+                db.session.commit()
+                return jsonify({'message': 'Product deleted successfully'}), 200
+            else:
+                return jsonify({'message': 'Product ID not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+
+@app.route('/admin/api/add/product', methods=['POST'])
+@admin_required
+def add_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            name = request_data.get('name', None)
+            price = request_data.get('price', None)
+            description1 = request_data.get('description1', None)
+            description2 = request_data.get('description2', None)
+            image_urls = request_data.get('image_urls', None)
+            variant = request_data.get('variant', None)
+            color = request_data.get('color', None)
+            stripe_test_product_id = request_data.get('stripe_test_product_id', None)
+            stripe_live_product_id = request_data.get('stripe_live_product_id', None)
+            if name and price:
+                new_product = Products(name=name, price=price, description1=description1, description2=description2, image_urls=image_urls, variant=variant, color=color, stripe_test_product_id=stripe_test_product_id, stripe_live_product_id=stripe_live_product_id)
+                db.session.add(new_product)
+                db.session.commit()
+                return jsonify({'message': 'Product added successfully'}), 200
+            else:
+                return jsonify({'message': 'Name or Price not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
+# /admin/api/edit/product
+@app.route('/admin/api/edit/product', methods=['POST'])
+@admin_required
+def edit_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            product_id = request_data.get('id', None)
+            name = request_data.get('name', None)
+            price = request_data.get('price', None)
+            description1 = request_data.get('description1', None)
+            description2 = request_data.get('description2', None)
+            image_urls = request_data.get('image_urls', None)
+            variant = request_data.get('variant', None)
+            color = request_data.get('color', None)
+            stripe_test_product_id = request_data.get('stripe_test_product_id', None)
+            stripe_live_product_id = request_data.get('stripe_live_product_id', None)
+            if product_id:
+                product = Products.query.get(product_id)
+                if product:
+                    product.name = name
+                    product.price = price
+                    product.description1 = description1
+                    product.description2 = description2
+                    product.image_urls = image_urls
+                    product.variant = variant
+                    product.color = color
+                    product.stripe_test_product_id = stripe_test_product_id
+                    product.stripe_live_product_id = stripe_live_product_id
+                    db.session.commit()
+                    return jsonify({'message': 'Product updated successfully'}), 200
+                else:
+                    return jsonify({'message': 'Product not found'}), 400
+            else:
+                return jsonify({'message': 'Product ID not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 @app.route('/admin/settings/delete/all/images', methods=['GET', 'POST'])
 @admin_required
@@ -472,6 +595,8 @@ def user_login():
         if user and user.password == password:
             login_user(user)
             flash('Login successful!', 'success')
+            if user.role == 'admin':
+                return redirect(url_for('admin_panel')) 
             return redirect(url_for('index'))
         else:
             flash('Invalid email or password', 'error')
@@ -509,12 +634,6 @@ def user_signup():
 
     return render_template('signup.html')
 
-@app.route('/admin/logout')
-@admin_required
-def logout_admin():
-    logout_user()
-    flash('You have been logged out', 'success')
-    return redirect(url_for('login'))
 
 
 @app.route('/logout')
@@ -1191,28 +1310,30 @@ def get_enquiry_data():
 @login_required
 def create_checkout_session():
     try:
-        session = stripe.checkout.Session.create(
-            ui_mode = 'embedded',
-            line_items=[
-                {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    'price': 'price_1PCoP307chPjetrCJylQ8qsE',
-                    'quantity': 1,
+        if request.method == 'POST':
+            product_payment_id = request.json.get('product_payment_id')
+            session = stripe.checkout.Session.create(
+                ui_mode = 'embedded',
+                line_items=[
+                    {
+                        # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                        'price': product_payment_id,
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                redirect_on_completion='never',
+                # collect shipping address and billing address
+                # shipping_address_collection to all countries
+                billing_address_collection='required',
+                shipping_address_collection={ 
+                    'allowed_countries': ['CA'],
                 },
-            ],
-            mode='payment',
-            redirect_on_completion='never',
-            # collect shipping address and billing address
-            # shipping_address_collection to all countries
-            billing_address_collection='required',
-            shipping_address_collection={ 
-                'allowed_countries': ['CA'],
-            },
-            invoice_creation={'enabled': True},
-            customer_email=current_user.email,
-            automatic_tax={'enabled': True},
-            phone_number_collection={'enabled': True},
-        )
+                invoice_creation={'enabled': True},
+                customer_email=current_user.email,
+                automatic_tax={'enabled': True},
+                phone_number_collection={'enabled': True},
+            )
     except Exception as e:
         return str(e)
 
@@ -1276,10 +1397,42 @@ def cancel():
     return render_template('cancel.html')
 
 # checkout page
-@app.route('/checkout')
+@app.route('/checkout/<product_id>', methods=['GET'])
 @login_required
-def checkout():
-    return render_template('checkout.html')
+def checkout(product_id):
+    STRIPE_MODE=get_stripe_mode()
+    STRIPE_PK = os.environ.get('STRIPE_PK_TEST_KEY') if STRIPE_MODE == 'test' else os.environ.get('STRIPE_PK_LIVE_KEY')
+    return render_template('checkout.html', stripe_pk=STRIPE_PK, stripe_mode=STRIPE_MODE, product_id=product_id)
+
+# /api/fetch/product
+@app.route('/api/fetch/product', methods=['POST'])
+@login_required
+def fetch_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            product_id = request_data.get('product_id', None)
+            if product_id:
+                product = Products.query.filter_by(id=product_id).first()
+                if product:
+                    STRIPE_MODE=get_stripe_mode()
+                    STRIPE_PAYMENT_ID = product.stripe_test_product_id if STRIPE_MODE == 'test' else product.stripe_live_product_id
+                    product = {
+                        'name': product.name,
+                        'image_urls': product.image_urls,
+                        'description1': product.description1,
+                        'color': product.color,
+                        'stripe_product_id': STRIPE_PAYMENT_ID,
+                    }
+                    return jsonify({'product': product}), 200
+                else:
+                    return jsonify({'message': 'Product not found'}), 404
+            else:
+                return jsonify({'message': 'Product ID not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 # user profile 
 @app.route('/profile')

@@ -1,0 +1,236 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <div class="container" id="vue-products">
+        <div class="float-left">
+            <h1>Products List</h1>
+        </div>
+        <div class="float-right">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productAdd" 
+                @click="addProductMode"
+                >Add Product</button>
+            
+        </div>
+        <div class="clearfix"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Stripe_ID</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="product in products" :key="product.id">
+                    <td>[[ product.name ]]</td>
+                    <td>[[ product.price ]]</td>
+                    <td>
+                        <img :src="product.image_urls" alt="image" class="img-fluid" style="width: 50px;">
+                    </td>
+                    <td>[[ product.color ]]</td>
+                    <td>[[ product.created_at ]]</td>
+                    <td>
+                        <span v-if="product.stripe_test_product_id" class="badge bg-success" style="color: aliceblue;" >Test</span>
+                        <span v-if="product.stripe_live_product_id" class="badge bg-primary" style="color: aliceblue;">Live</span>
+                    </td>
+                    <td>
+                        <button 
+                            @click="editMode(product)"
+                            data-bs-toggle="modal" data-bs-target="#productAdd"
+                            class="btn btn-primary"
+                            >Edit</button>
+                        <button 
+                            class="btn btn-danger"
+                            @click="deleteProduct(product.id)"
+                            >Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <!-- Product ADD Modal -->
+        <div class="modal fade" id="productAdd" tabindex="-1" aria-labelledby="productAddLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="productAddLabel" v-if="!edit" >Add Product</h5>
+                <h5 class="modal-title" id="productAddLabel" v-else>Edit Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" v-model="newProduct.name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="price" v-model="newProduct.price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description1" class="form-label">Description 1</label>
+                            <textarea class="form-control" id="description1" v-model="newProduct.description1"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description2" class="form-label">Description 2</label>
+                            <textarea class="form-control" id="description2" v-model="newProduct.description2"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image_urls" class="form-label">Image URLs <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="image_urls" v-model="newProduct.image_urls" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="variant" class="form-label">Variant</label>
+                            <input type="text" class="form-control" id="variant" v-model="newProduct.variant">
+                        </div>
+                        <div class="mb-3">
+                            <label for="color" class="form-label">Color <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="color" v-model="newProduct.color" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stripe_test_product_id" class="form-label">Stripe Test Product ID <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="stripe_test_product_id" required v-model="newProduct.stripe_test_product_id" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="stripe_live_product_id" class="form-label">Stripe Live Product ID <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="stripe_live_product_id" required v-model="newProduct.stripe_live_product_id" >
+                        </div>
+                    </form> 
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button"  v-if="edit"
+                    @click="editProduct"
+                    class="btn btn-primary"
+                    >Save Changes</button>
+                <button type="button" 
+                    @click="addProduct"
+                    class="btn btn-primary"
+                    v-else>Add Product</button>
+                </div>
+                
+                
+            </div>
+            </div>
+        </div>
+        
+       
+        
+        
+    </div>
+
+    <script>
+        NEW_PRODUCT = {
+            name : '',
+            price : 0,
+            description1 : '',
+            description2 : '',
+            image_urls : '',
+            variant : '',
+            color : '',
+            stripe_test_product_id : '',
+            stripe_live_product_id : ''
+        };
+        var app = new Vue({
+                 el: '#vue-products',
+                 delimiters: ['[[', ']]'],
+                 data: {
+                    products: [],
+                    newProduct: NEW_PRODUCT,
+                    edit: false
+                 },
+                 methods: {
+                     fetchProducts() {
+                         fetch('/admin/api/fetch/products')
+                             .then(response => response.json())
+                             .then(data => {
+                                 this.products = data.products;
+                             });
+                     },
+                        addProduct() {
+                            // required fields
+                            if (!this.newProduct.name || !this.newProduct.price || !this.newProduct.image_urls || !this.newProduct.color) {
+                                alert('Please fill all required fields');
+                                return;
+                            }
+                            fetch('/admin/api/add/product', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(this.newProduct)
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.fetchProducts();
+                                    this.newProduct = NEW_PRODUCT;
+                                    this.sendNotification('Product Added', 'green');
+                                });
+                        },
+                        deleteProduct(id){
+                            fetch('/admin/api/delete/product', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({id: id})
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.fetchProducts();
+                                    this.sendNotification('Product Deleted', 'red');
+                                });
+                        },
+                        addProductMode(){
+                            this.newProduct = NEW_PRODUCT;
+                            this.edit = false;
+                        },
+                        editMode(product){
+                            this.newProduct = product;
+                            this.edit = true;
+                        },
+                        editProduct(){
+                            fetch('/admin/api/edit/product', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(this.newProduct)
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.fetchProducts();
+                                    // close modal
+                                    var myModal = new bootstrap.Modal(document.getElementById('productAdd'));
+                                    myModal.hide();
+                                    this.sendNotification('Product Updated', 'green');
+                                });
+                        },
+                        sendNotification(message, type) {
+                            Toastify({
+                                text: message,
+                                duration: 3000,
+                                gravity: "top", // `top` or `bottom`
+                                position: 'right', // `left`, `center` or `right`
+                                backgroundColor: type,
+                                stopOnFocus: true, // Prevents dismissing of toast on hover
+                                onClick: function () { } // Callback after click
+                            }).showToast();
+
+                        },  
+                 },
+
+                 mounted() {
+                        this.fetchProducts();
+                 }
+             });
+     </script>
+
+{% endblock %}

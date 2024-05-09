@@ -65,7 +65,7 @@
 						</a>
 						<div id="BowGreenMessageBox" class="message-box message-box-B-2"><i class="bi bi-circle-fill me-2" style="color: #7AB9B4;"></i>Tiffany Green</div>
 					</div>
-					<a href="#" class="btn mt-5"><span>Buy Now</span></a>
+					<button class="btn mt-5" @click="checkout(product_data.id)"><span>Buy Now</span></button>
 				</div>
 			</div>
 		</div>
@@ -460,6 +460,9 @@
 				setProduct(product){
 					this.model = product;
 					document.getElementById('model').setAttribute('disabled', 'disabled');
+				},
+				checkout(product_id){
+					window.location.href = '/checkout/'+product_id;
 				},
 				onSubmitMethod(){
 					this.loadingBtn(true);
