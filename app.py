@@ -321,6 +321,8 @@ class Products(db.Model):
     image_urls = db.Column(db.Text, nullable=True)
     variant = db.Column(db.String(100), nullable=True)
     color = db.Column(db.String(100), nullable=True)
+    stripe_test_product_id = db.Column(db.String(100), nullable=True)
+    stripe_live_product_id = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
@@ -330,7 +332,15 @@ class Products(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "price": self.price
+            "price": self.price,
+            "description1": self.description1,
+            "description2": self.description2,
+            "image_urls": self.image_urls,
+            "variant": self.variant,    
+            "color": self.color,
+            "created_at": self.created_at,
+            "stripe_test_product_id": self.stripe_test_product_id,
+            "stripe_live_product_id": self.stripe_live_product_id
         }
     
     def serialize2(self):
@@ -430,6 +440,68 @@ def admin_settings():
     return render_template('admin/settings.html')
 
 
+
+@app.route('/admin/products')
+@admin_required
+def admin_products():
+    return render_template('admin/products-list.html')
+
+@app.route('/admin/api/fetch/products', methods=['GET'])
+@admin_required
+def fetch_products():
+    try:
+        products = Products.query.all()
+        products = list(map(lambda product: product.serialize(), products))
+        return jsonify({'products': products}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
+@app.route('/admin/api/delete/product', methods=['POST'])
+@admin_required
+def delete_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            product_id = request_data.get('id', None)
+            if product_id:
+                product = Products.query.get(product_id)
+                db.session.delete(product)
+                db.session.commit()
+                return jsonify({'message': 'Product deleted successfully'}), 200
+            else:
+                return jsonify({'message': 'Product ID not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+
+@app.route('/admin/api/add/product', methods=['POST'])
+@admin_required
+def add_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            name = request_data.get('name', None)
+            price = request_data.get('price', None)
+            description1 = request_data.get('description1', None)
+            description2 = request_data.get('description2', None)
+            image_urls = request_data.get('image_urls', None)
+            variant = request_data.get('variant', None)
+            color = request_data.get('color', None)
+            stripe_test_product_id = request_data.get('stripe_test_product_id', None)
+            stripe_live_product_id = request_data.get('stripe_live_product_id', None)
+            if name and price:
+                new_product = Products(name=name, price=price, description1=description1, description2=description2, image_urls=image_urls, variant=variant, color=color, stripe_test_product_id=stripe_test_product_id, stripe_live_product_id=stripe_live_product_id)
+                db.session.add(new_product)
+                db.session.commit()
+                return jsonify({'message': 'Product added successfully'}), 200
+            else:
+                return jsonify({'message': 'Name or Price not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 @app.route('/admin/settings/delete/all/images', methods=['GET', 'POST'])
 @admin_required
