@@ -49,6 +49,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 ENV = os.environ.get('ENV', 'prod')
 LIVE_DB = os.environ.get('LIVE_DB', 'True')
+STRIPE_MODE = ''
 
 # Add a secret key for the Flask-Login
 app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')
@@ -194,8 +195,10 @@ def load_user(user_id):
     if user:
         if user.role == 'test':
             stripe.api_key = os.environ.get('STRIPE_TEST_SECRET_KEY')
+            STRIPE_MODE = 'test'
         else:
             stripe.api_key = os.environ.get('STRIPE_LIVE_SECRET_KEY')
+            STRIPE_MODE = 'live'
         return user
     else:
         return None
@@ -1261,28 +1264,30 @@ def get_enquiry_data():
 @login_required
 def create_checkout_session():
     try:
-        session = stripe.checkout.Session.create(
-            ui_mode = 'embedded',
-            line_items=[
-                {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    'price': 'price_1PCoP307chPjetrCJylQ8qsE',
-                    'quantity': 1,
+        if request.method == 'POST':
+            product_payment_id = request.json.get('product_payment_id')
+            session = stripe.checkout.Session.create(
+                ui_mode = 'embedded',
+                line_items=[
+                    {
+                        # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                        'price': product_payment_id,
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                redirect_on_completion='never',
+                # collect shipping address and billing address
+                # shipping_address_collection to all countries
+                billing_address_collection='required',
+                shipping_address_collection={ 
+                    'allowed_countries': ['CA'],
                 },
-            ],
-            mode='payment',
-            redirect_on_completion='never',
-            # collect shipping address and billing address
-            # shipping_address_collection to all countries
-            billing_address_collection='required',
-            shipping_address_collection={ 
-                'allowed_countries': ['CA'],
-            },
-            invoice_creation={'enabled': True},
-            customer_email=current_user.email,
-            automatic_tax={'enabled': True},
-            phone_number_collection={'enabled': True},
-        )
+                invoice_creation={'enabled': True},
+                customer_email=current_user.email,
+                automatic_tax={'enabled': True},
+                phone_number_collection={'enabled': True},
+            )
     except Exception as e:
         return str(e)
 
@@ -1346,10 +1351,39 @@ def cancel():
     return render_template('cancel.html')
 
 # checkout page
-@app.route('/checkout')
+@app.route('/checkout/<product_id>', methods=['GET'])
 @login_required
-def checkout():
-    return render_template('checkout.html')
+def checkout(product_id):
+    STRIPE_PK = os.environ.get('STRIPE_PK_TEST_KEY') if STRIPE_MODE == 'test' else os.environ.get('STRIPE_PK_LIVE_KEY')
+    return render_template('checkout.html', stripe_pk=STRIPE_PK, stripe_mode=STRIPE_MODE, product_id=product_id)
+
+# /api/fetch/product
+@app.route('/api/fetch/product', methods=['POST'])
+def fetch_product():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            product_id = request_data.get('product_id', None)
+            if product_id:
+                product = Products.query.filter_by(id=product_id).first()
+                if product:
+                    STRIPE_PAYMENT_ID = product.stripe_test_product_id if STRIPE_MODE == 'test' else product.stripe_live_product_id
+                    product = {
+                        'name': product.name,
+                        'image_urls': product.image_urls,
+                        'description1': product.description1,
+                        'color': product.color,
+                        'stripe_product_id': STRIPE_PAYMENT_ID,
+                    }
+                    return jsonify({'product': product}), 200
+                else:
+                    return jsonify({'message': 'Product not found'}), 404
+            else:
+                return jsonify({'message': 'Product ID not provided'}), 400
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 # user profile 
 @app.route('/profile')
