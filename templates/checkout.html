@@ -16,39 +16,110 @@
 
 	<div class="container">
 		<h4 class="black-color text-capitalize text-left letter-space-value line-gap fw-bold">Checkout Page</h4>
-        <div class="notification-message">
-            <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</h6>
-        </div>
-        <div class="product-info-table">
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Product</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                            <img src="{{ url_for('static', filename='img/models/bow/tiffany-green/0.jpg') }}" alt="image" class="img-fluid">
-                        </td>
-                        <td>Corinto bow</td>
-                        <td>Tiffany Green</td>
-                        <td>CAD 5,250</td>
-                      </tr>
-                    </tbody>
-                </table>
+        <div class="row order-summary-contents">
+            <div class="col-md-7">
+                <div class="notification-message">
+                    <h6><i class="bi bi-info-circle me-2"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</h6>
+                </div>
+                <div class="order-card">
+                    <div class="card">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <img src="{{ url_for('static', filename='img/models/bow/tiffany-green/0.jpg') }}" alt="image" class="img-fluid">
+                            </div>
+                            <div class="col-md-5">
+                                <h4 class="black-color">Corinto Arrow</h4>
+                                <h5 class="mt-2 cycle-color">Black</h5>
+                                <p class="mt-3 mb-4">Experience the fusion of classic elegance and modern performance with the Corinto Arrow, featuring a hand-welded steel frame and a uniquely designed saddle for dynamic riding</p>
+                                <h5>CA$ 5,250 <span>+HST</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="order-summary">
+                    <div class="order-summary-details">
+                        <div class="order-info-card">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="details">
+                                            <h5 class="black-color">Order Summary</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Sub Total</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">CA$ 5,250.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Discount</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">CA$ 0.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Shipping  & Handling</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">CA$ 0.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Tax <span class="tax-span">(Calculated at checkout)</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">-</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <h6 class="order-title">Total</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <h6 class="order-info">CA$ 5,250.00<span class="total-span">+HST</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                       <div class="details">
+                                            <button class="btn"><span>Proceed to Payment</span></button>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <form id="address-form">
+        
+        
+        <!-- <form id="address-form">
             <h3>Address</h3>
             <div id="address-element">
-              <!-- Elements will create form elements here -->
             </div>
-          </form>
+          </form> -->
         <!-- <div class="billing-address">
             <div class="row address-cards">
                 <div class="col-md-12">
@@ -102,65 +173,8 @@
                 </div>
             </div>
         </div> -->
-        <div class="order-summary">
-            <div class="row order-summary-details">
-                <div class="col-lg-8 order-info-card">
-                    <h5>Order Summary</h5>
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-title">Sub Total</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-info">CAD 5,250</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <hr>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-title">Discount 5%</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-info">- CAD 5</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <hr>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-title">Shipping Charges</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-info">-</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <hr>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-title">Total</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-6">
-                                <div class="details">
-                                    <p class="order-info">CAD 5,245</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 shipping-address-card">
+        
+                        <!-- <div class="col-lg-4 shipping-address-card">
                     <h5>Shipping Address</h5>
                     <div class="card">
                         <p class="default-address black-color">Default</p>
@@ -175,9 +189,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> -->
+
         <div class="checkout-buttons">
             <div class="d-flex align-items-center">
                 <button class="btn cancel-btn"><span>Cancel</span></button>
