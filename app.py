@@ -10,6 +10,12 @@ import json
 import requests
 import datetime
 import boto3
+import stripe
+import uuid
+
+import time
+import io
+
 # from flask_mail import Mail, Message
 
 from utils.AWS_Modules import upload_file_to_s3, delete_file_from_s3, delete_all_files_from_s3
@@ -37,6 +43,21 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', 'info@orangecatcycles.com')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', '')
 
+
+UPLOAD_FOLDER = 'static/img/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+ENV = os.environ.get('ENV', 'prod')
+LIVE_DB = os.environ.get('LIVE_DB', 'True')
+
+# Add a secret key for the Flask-Login
+app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')
+
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'user_login'
+
 @celery.task(name='app.send_email_task')
 def send_email_task(subject, body, recipients):
     try:
@@ -52,33 +73,68 @@ def send_email_task(subject, body, recipients):
     except Exception as e:
         print(e)
         return False
-    
 
-UPLOAD_FOLDER = 'static/img/uploads/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+@celery.task(name='app.save_invoice_pdf_to_db')
+def save_invoice_pdf_to_db(url, order_id):
+    try:
+        bucket = os.environ.get('BUCKET_NAME')
+        print("Downloading PDF file")
+        # download the file to uploads folder
+        response = requests.get(url).content
+        if response:
+            print("Saving PDF file to uploads folder")
+            file_data = io.BytesIO(response)
 
-ENV = os.environ.get('ENV', 'prod')
-LIVE_DB = os.environ.get('LIVE_DB', 'True')
+            url = upload_file_to_s3(
+                                    file=file_data,  
+                                    object_name=uuid.uuid4().hex+'invoice.pdf',
+                                    bucket=bucket, public=True)
+            print("URL: ", url)
+            if url:
+                print("Saving PDF file to DB")
+                order = Orders.query.get(order_id)
+                order.invoice_url = url
+                db.session.commit()
+                print("PDF file saved to DB")
+                return True
+            else:
+                print("Error while saving PDF file to DB")
+                return False
+            
+        
+    except Exception as e:
+        print(e)
+        return False
+       
+def download_file(url):
+    """ Download file from a given URL """
+    response = requests.get(url)
+    if response.status_code == 200:
+        # Assuming the URL ends with the filename
+        local_filename = 'test_invoice.pdf'
+        with open(local_filename, 'wb') as f:
+            f.write(response.content)
+        return local_filename
+    else:
+        raise Exception(f"Failed to download file: Status code {response.status_code}")
 
-# Add a secret key for the Flask-Login
-app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')
-
-# Initialize Flask-Login
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-# Load the user from the database for Flask-Login
-@login_manager.user_loader
-def load_user(user_id):
-    return Users.query.get(int(user_id))
-
-# Your existing models and database setup...
 
 # Database initialization function
 def init_db():
     db.create_all()
     admin_username = 'admin'
     admin_password = 'admin'
+    test_username = 'test'
+    test_email = 'test@test.com'
+    test_password = 'test123'
+ 
+    # Check if the default test user exists
+    test_user = Users.query.filter_by(username=test_username).first()   
+    if not test_user:
+        # Create the default test user
+        test_user = Users(username=test_username, email=test_email, password=test_password, role='test')
+        db.session.add(test_user)
+        db.session.commit()
 
     # Check if the default admin user exists
     admin_user = Users.query.filter_by(username=admin_username).first()
@@ -128,17 +184,36 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
 
 
+YOUR_DOMAIN = os.environ.get('HOST_URL', 'http://localhost:5000/')
+
+# Load the user from the database for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    user = Users.query.get(int(user_id))
+    if user:
+        if user.role == 'test':
+            stripe.api_key = os.environ.get('STRIPE_TEST_SECRET_KEY')
+        else:
+            stripe.api_key = os.environ.get('STRIPE_LIVE_SECRET_KEY')
+        return user
+    else:
+        return None
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 class Users(UserMixin,db.Model):
-    table_name = 'users'
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.Text, nullable=True)
+    phone = db.Column(db.String(100), nullable=True)
     password = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    ship_address = db.relationship('UserAddress', backref='user_shipping', lazy=True)
+    billing_address = db.relationship('UserAddress', backref='user_billing', lazy=True)
 
     def __repr__(self):
         return '<User %r>' % self.id
@@ -160,12 +235,92 @@ class Users(UserMixin,db.Model):
             "created_at": self.created_at
         }
 
+class UserAddress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    address = db.Column(db.Text, nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    postal_code = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    def __repr__(self):
+        return '<UserAddress %r>' % self.id
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "country": self.country,
+            "postal_code": self.postal_code
+        }
+    
+    def serialize2(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "country": self.country,
+            "postal_code": self.postal_code,
+            "created_at": self.created_at
+        }
+
+
+class Orders(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    customer_id = db.Column(db.String(100), nullable=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    total_price = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(100), nullable=False)
+    invoice_id = db.Column(db.String(100), nullable=True)
+    invoice_number = db.Column(db.Text, nullable=True)
+    invoice_url = db.Column(db.Text, nullable=True)
+    stripe_payment_id = db.Column(db.String(100), nullable=True)
+    stripe_session_id = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def __repr__(self):
+        return '<Order %r>' % self.id
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "invoice_number": self.invoice_number,
+            "total_price": f'CAD {self.total_price/100:,.2f}',
+            "invoice_url": self.invoice_url,
+            "status": self.status,
+            "created_at": self.created_at
+        }
+    
+    def serialize2(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "product_id": self.product_id,
+            "quantity": self.quantity,
+            "total_price": self.total_price,
+            "status": self.status,
+            "created_at": self.created_at
+        }
 
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    description1 = db.Column(db.Text, nullable=True)
+    description2 = db.Column(db.Text, nullable=True)
+    image_urls = db.Column(db.Text, nullable=True)
+    variant = db.Column(db.String(100), nullable=True)
+    color = db.Column(db.String(100), nullable=True)
+    stripe_product_id = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
@@ -290,7 +445,7 @@ def delete_all_images():
         return jsonify({'message': 'Failed to delete records.', 'error': str(e), 'status': False})
 
 @app.route('/admin/login', methods=['GET', 'POST'])
-def login():
+def admin_login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -307,42 +462,50 @@ def login():
     return render_template('admin/login.html')
 
 @app.route('/user/login', methods=['GET', 'POST'])
-def login_user():
+def user_login():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
 
         # Check if the user exists and the password is correct
-        user = Users.query.filter_by(username=username).first()
+        user = Users.query.filter_by(email=email).first()
         if user and user.password == password:
             login_user(user)
             flash('Login successful!', 'success')
             return redirect(url_for('index'))
         else:
-            flash('Invalid username or password', 'error')
+            flash('Invalid email or password', 'error')
 
     return render_template('login.html')
 
 # signup
 @app.route('/user/signup', methods=['GET', 'POST'])
-def signup_user():
+def user_signup():
     if request.method == 'POST':
-        username = request.form['username']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        username = first_name + ' ' + last_name
         email = request.form['email']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
 
+
+        # check if the password and confirm password match
+        if password != confirm_password:
+            flash('Passwords do not match', 'error')
+            return redirect(url_for('user_signup'))
+    
         # Check if the user exists
         user = Users.query.filter_by(username=username).first()
         if user:
-            flash('Username already exists', 'error')
+            flash('User already exists', 'error')
+            return redirect(url_for('user_signup'))
         else:
-            # Create the new user
             new_user = Users(username=username, email=email, password=password, role='user')
             db.session.add(new_user)
             db.session.commit()
-
-            flash('Account created successfully', 'success')
-            return redirect(url_for('login'))
+            flash('User created successfully', 'success')
+            return redirect(url_for('user_login'))
 
     return render_template('signup.html')
 
@@ -1023,22 +1186,194 @@ def get_enquiry_data():
             return jsonify({'message': 'Method not allowed'}), 405
     except Exception as e:
         return jsonify({'message': str(e)}), 500
-    
+
+@app.route('/create-checkout-session', methods=['POST'])
+@login_required
+def create_checkout_session():
+    try:
+        session = stripe.checkout.Session.create(
+            ui_mode = 'embedded',
+            line_items=[
+                {
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': 'price_1PCoP307chPjetrCJylQ8qsE',
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            redirect_on_completion='never',
+            # collect shipping address and billing address
+            # shipping_address_collection to all countries
+            billing_address_collection='required',
+            shipping_address_collection={ 
+                'allowed_countries': ['CA'],
+            },
+            invoice_creation={'enabled': True},
+            customer_email=current_user.email,
+            automatic_tax={'enabled': True},
+            phone_number_collection={'enabled': True},
+        )
+    except Exception as e:
+        return str(e)
+
+    return jsonify(clientSecret=session.client_secret , sessionId=session.id)
+
+
+
+@app.route('/save-order-data', methods=['GET'])
+@login_required
+def save_order_data():
+    try:
+        session_id = request.args.get('session_id')
+        session = stripe.checkout.Session.retrieve(session_id)
+        retry_count = 0
+        while session.invoice is None and retry_count < 15:  # retries up to 5 times
+            time.sleep(1)  # waits 1 second before the next try
+            session = stripe.checkout.Session.retrieve(session_id)
+            retry_count += 1
+
+        if session.status != 'complete':
+            return jsonify({'message': 'Payment not completed'}), 400
+
+        invoice_data = stripe.Invoice.retrieve(session.invoice)
+        invoice_id = invoice_data.id
+        customer_id = invoice_data.customer
+        invoice_number = invoice_data.number
+        user_id = current_user.id
+        product_id = 1
+        quantity = 1
+        total_price = invoice_data.amount_paid
+        status = 'complete'
+        stripe_payment_id = session.payment_intent
+        stripe_session_id = session.id
+        invoice_url = invoice_data.invoice_pdf if hasattr(invoice_data, 'invoice_pdf') else ''
+
+        new_order = Orders(
+                            user_id=user_id,
+                            product_id=product_id, 
+                            quantity=quantity, 
+                            total_price=total_price, 
+                            status=status, 
+                            invoice_url=invoice_url,
+                            invoice_id=invoice_id,
+                            invoice_number=invoice_number,
+                            customer_id=customer_id,
+                            stripe_session_id=stripe_session_id,
+                            stripe_payment_id=stripe_payment_id)
+        db.session.add(new_order)
+        db.session.commit()
+        if invoice_url:
+            save_invoice_pdf_to_db.delay(invoice_url, new_order.id)
+        return jsonify({'message': 'Order saved successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+ # https://pay.stripe.com/invoice/acct_1PCOIy07chPjetrC/test_YWNjdF8xUENPSXkwN2NoUGpldHJDLF9RNDM0dzFFTVlkMGlqYUJ5ZEt6WXFkRDkzSTR3M0I3LDEwNTY1NTg2Nw0200565wJrn0/pdf?s=ap
+ 
+@app.route('/cancel.html')
+def cancel():
+    return render_template('cancel.html')
 
 # checkout page
 @app.route('/checkout')
+@login_required
 def checkout():
     return render_template('checkout.html')
 
 # user profile 
 @app.route('/profile')
+@login_required
 def profile():
-    return render_template('profile.html')
+    return render_template('profile.html', user=current_user)
+
+# /api/fetch/user/profile
+@app.route('/api/fetch/user/profile', methods=['POST'])
+@login_required
+def fetch_user_profile():
+    try:
+        if request.method == 'POST':
+            user = current_user
+            if not user:
+                return jsonify({'message': 'User not found'}), 404
+            username_split = user.username.split(' ')
+            first_name = username_split[0]
+            last_name = username_split[1] if len(username_split) > 1 else ''
+            context = { 
+                "first_name" : first_name,
+                "last_name" : last_name,
+                "email" : user.email,
+                "phone" : user.phone,
+            }
+            return jsonify(context), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+# save user data
+@app.route('/api/update/user/profile', methods=['POST'])
+@login_required
+def save_user_data():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            user = current_user
+            user.username = request_data.get('first_name', '') + ' ' + request_data.get('last_name', '')
+            user.email = request_data.get('email', '')
+            user.phone = request_data.get('phone', '')
+            db.session.commit()
+            return jsonify({'message': 'User data saved successfully'}), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
+@app.route('/api/reset/user/password', methods=['POST'])
+@login_required
+def update_user_password():
+    try:
+        if request.method == 'POST':
+            request_data = request.get_json()
+            user = current_user
+            old_password = request_data.get('current_password', '')
+            new_password = request_data.get('new_password', '')
+            confirm_password = request_data.get('confirm_password', '')
+            if not old_password or not new_password or not confirm_password:
+                return jsonify({'message': 'All fields are required'}), 400
+            if old_password != user.password:
+                return jsonify({'message': 'Old password is incorrect'}), 400
+            if new_password != confirm_password:
+                return jsonify({'message': 'Passwords do not match'}), 400
+            user.password = new_password
+            db.session.commit()
+            return jsonify({'message': 'Password updated successfully'}), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+    
 
 # user/orders
 @app.route('/orders')
+@login_required
 def orders():
     return render_template('orders.html')
+
+# /api/fetch/user/orders
+@app.route('/api/fetch/user/orders', methods=['POST'])
+@login_required
+def fetch_user_orders():
+    try:
+        if request.method == 'POST':
+            user_id = current_user.id
+            orders = Orders.query.filter_by(user_id=user_id).all()
+            orders = list(map(lambda order: order.serialize(), orders))
+            return jsonify(orders), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
 
 
 with app.app_context():

@@ -1,6 +1,320 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- dont change ID -->
+<section class="checkout" id="vue-checkout"> 
+
+  
+
+
+
+
+
+
+
+	<div class="container">
+		<h4 class="black-color text-capitalize text-left letter-space-value line-gap fw-bold">Checkout Page</h4>
+        <div class="row order-summary-contents">
+            <div class="col-md-7">
+                <div class="notification-message">
+                    <h6><i class="bi bi-info-circle me-2"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</h6>
+                </div>
+                <div class="order-card">
+                    <div class="card">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <img src="{{ url_for('static', filename='img/models/bow/tiffany-green/0.jpg') }}" alt="image" class="img-fluid">
+                            </div>
+                            <div class="col-md-5">
+                                <h4 class="black-color">Corinto Arrow</h4>
+                                <h5 class="mt-2 cycle-color">Black</h5>
+                                <p class="mt-3 mb-4">Experience the fusion of classic elegance and modern performance with the Corinto Arrow, featuring a hand-welded steel frame and a uniquely designed saddle for dynamic riding</p>
+                                <h5>CA$ 5,250 <span>+HST</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="order-summary">
+                    <div class="order-summary-details">
+                        <div class="order-info-card">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="details">
+                                            <h5 class="black-color">Order Summary</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Sub Total</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">CA$ 5,250.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Discount</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">CA$ 0.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Shipping  & Handling</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">CA$ 0.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-title">Tax <span class="tax-span">(Calculated at checkout)</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <p class="order-info">-</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <h6 class="order-title">Total</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="details">
+                                            <h6 class="order-info">CA$ 5,250.00<span class="total-span">+HST</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                       <div class="details">
+                                            <button class="btn"><span>Proceed to Payment</span></button>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- <form id="address-form">
+            <h3>Address</h3>
+            <div id="address-element">
+            </div>
+          </form> -->
+        <!-- <div class="billing-address">
+            <div class="row address-cards">
+                <div class="col-md-12">
+                    <div class="d-flex billing-address-title justify-content-between align-items-center">
+                        <h5>Billing Address</h5>
+                        <button class="btn ms-2 ms-md-0 add-address-btn"><span><i class="bi bi-plus-lg me-2"></i>Add Adress</span></button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <p class="default-address black-color">Default</p>
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+                        <!-- <div class="col-lg-4 shipping-address-card">
+                    <h5>Shipping Address</h5>
+                    <div class="card">
+                        <p class="default-address black-color">Default</p>
+                        <h5>John Doe <span>(Home)</span></h5>
+                        <p class="user-address mt-3">2972 Westheimer Rd. Santa Ana, Illinois 85486 </p>
+                        <p class="mt-3"><i class="bi bi-telephone me-2"></i>(657) 883-6574</p>
+                        <div class="deliver-address-btn mt-4 d-flex justify-content-between align-items-center">
+                            <button class="btn"><span>Deliver to this Address</span></button>
+                            <div class="action-btns">
+                                <a href="#"><i class="bi bi-pen"></i></a>
+                                <a href="#"><i class="bi bi-trash3 ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+        <div class="checkout-buttons">
+            <div class="d-flex align-items-center">
+                <button class="btn cancel-btn"><span>Cancel</span></button>
+                <!-- Dont change attr -->
+                <button class="btn ms-3" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#CheckOutModal" 
+                        id="init-checkout-session" 
+                        @click="initialize_stripe_payment"
+                ><span>Place an Order</span></button>
+            </div>
+        </div>
+	</div>
+    <!--  Modal -->
+<div class="modal order-confirm-modal fade" id="CheckOutModal" tabindex="-1" aria-labelledby="CheckOutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl checkout-dialog" id="checkout-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-checkout-modal-btn"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-center" style="margin-bottom: 20px;">Make a Secure Payment</h4>
+                <div id="checkout">
+                    <!-- Checkout will insert the payment form here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-dialog modal-lg thank-you-modal" id="thank-you-modal-dialog" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                    aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4 class="text-center">Thank you for order!</h4>
+          <h6 class="text-center mt-3">Your order ID is <b class="main-color">dff796c4-1a08-5768-97e3-bd65d98b1559</b></h6>
+          <p class="text-center mt-3">We have sent the details of your order to your email. We will send you a process notification before your order is delivered. Please check your email for further communications as we continue to fulfill your order.</p>
+          <img src="{{ url_for('static', filename='img/order-confirm-img.jpg')}}" alt="image" class="img-fluid">
+          <p class="text-center">If you have any query or questions regarding purchase items, then fell to get in contact us</p>
+          <a href="tel:+1 647 569 2081" class="call-link">+1 647 569 2081</a>
+          <div class="d-flex modal-buttons mt-3 justify-content-center align-items-center">
+            <button class="btn shopping-button"><span>Continue Shopping</span></button>
+            <button class="btn ms-2 invoice-button"><span>Download Invoice</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-dialog modal-lg failed-payment-modal" id="failed-payment-modal-dialog" style="display: none;">
+        Payment Failed
+    </div>
+  </div>
+
+</section>
+<script>
+    // This is your test publishable API key.
+    const stripe = Stripe("pk_test_51PCOIy07chPjetrCtzA2AEg9Ymt29B36LTU8Rlx0aWaz2KTsMdMFfZSsx9fMLz1pHu5LODS4ecX5aiaYMl6CLlnE00k5at7cKv");
+    // Create a Checkout Session
+    let checkout;
+    let sessionIDData;
+    async function initialize() {
+        const fetchClientSecret = async () => {
+            const response = await fetch("/create-checkout-session", {
+            method: "POST",
+            });
+            const { clientSecret , sessionId } = await response.json();
+            sessionIDData = sessionId;
+            return clientSecret;
+        };
+
+        // Example `onComplete` callback
+        const handleComplete = async function() {
+            // save order data to db session-status?session_id=${sessionId}
+            const response = await fetch(`/save-order-data?session_id=${sessionIDData}`, {
+                method: "GET",
+            });
+            
+            const { status } = await response.json();
+            if (status === 'paid') {
+                console.log('Payment is successful')
+            } else {
+                console.log('Payment is failed')
+            }
+        }
+        const handleModalClose = async function() {
+            // Destroy Checkout instance
+            isclose = confirm('Are you sure you want to cancel the order?')
+            if (isclose) {
+                checkout.destroy()
+            }
+            
+        }
+
+        const checkout = await stripe.initEmbeddedCheckout({
+            fetchClientSecret,
+            onComplete: handleComplete,
+        });
+
+        checkout.mount('#checkout');
+        // onclick checkout.destroy() to #close-modal-btn 
+        document.getElementById('close-checkout-modal-btn').addEventListener('click', handleModalClose);
+    }
     
+    
+    // function showThankYouMessage() {
+    //         $('#checkout-dialog').hide();
+    //         $('#thank-you-modal-dialog').show();
+    //     }
+   
+
+     var app = new Vue({
+			el: '#vue-checkout',
+			delimiters: ['[[', ']]'],
+			data: {
+                message: 'Hello Vue!',
+            },
+            methods: {
+                initialize_stripe_payment() {
+                    initialize();
+                }
+            }
+        });
+</script>
+
 
 {% endblock %}

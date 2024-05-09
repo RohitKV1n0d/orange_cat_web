@@ -140,22 +140,28 @@
                                     {% if current_user.is_authenticated %}
                                         <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
                                     {% else %}
-                                        <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
+                                        <li><a class="dropdown-item" href="{{ url_for('admin_login') }}">Login</a></li>
                                     {% endif %}
                                 </ul>
                               </div> -->
-                              <button id="signupBtn" class="btn nav-sign-up-btn ms-2 ms-md-0"><span>Signup</span></button>
+                               
+                                {% if current_user.is_authenticated %}
+                                <div id="userDropdown" class="dropdown user-dropdown">
+                                    <button class="dropbtn ms-2 ms-md-0"><span><i class="bi bi-person"  {% if request.path != url_for('index') %} style="color: #2c2c2c; font-size: 20px;" {% endif %}></i></span></button>
+                                    <div class="dropdown-content">
+                                        <a href="{{ url_for('profile') }}" class="user-link"><i class="bi bi-person me-2"></i>My Profile</a>
+                                        <hr>
+                                        <a href="{{ url_for('orders') }}" class="user-link"><i class="bi bi-cart2 me-2"></i>My Orders</a>
+                                        <hr>
+                                        <a href="{{ url_for('logout') }}" class="sign-out-link"><i class="bi bi-box-arrow-left me-2"></i>Sign Out</a>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <button id="loginBtn" class="btn nav-login-btn ms-2 ms-md-0" onclick="loginMethod()"> 
+                                    <span>Login</span>
+                                </button>
+                                {% endif %}
 
-                              <div id="userDropdown" class="dropdown user-dropdown">
-                                  <button class="dropbtn ms-2 ms-md-0"><span><i class="bi bi-person"></i></span></button>
-                                  <div class="dropdown-content">
-                                      <a href="#" class="user-link"><i class="bi bi-person me-2"></i>My Profile</a>
-                                      <hr>
-                                      <a href="#" class="user-link"><i class="bi bi-cart2 me-2"></i>My Orders</a>
-                                      <hr>
-                                      <a href="#" class="sign-out-link"><i class="bi bi-box-arrow-left me-2"></i>Sign Out</a>
-                                  </div>
-                              </div>
 
                         </li>
                     </ul>
@@ -254,6 +260,9 @@
   </div>
     <!-- =============== HEADER END =============== -->
     <script>
+        loginMethod = () => {
+            window.location.href = "{{ url_for('user_login') }}";
+        }
         var app = new Vue({
 		el: '#ContactModal',
 		delimiters: ['[[', ']]'],
