@@ -50,6 +50,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ENV = os.environ.get('ENV', 'prod')
 LIVE_DB = os.environ.get('LIVE_DB', 'True')
 STRIPE_MODE = ''
+TEST_USER_ROLES = os.environ.get('TEST_USER_ROLES', 'admin,super_admin,test').split(',')
 
 # Add a secret key for the Flask-Login
 app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')
@@ -119,6 +120,11 @@ def download_file(url):
     else:
         raise Exception(f"Failed to download file: Status code {response.status_code}")
 
+def get_stripe_mode():
+    if current_user.role in TEST_USER_ROLES:
+        return 'test'
+    else:
+        return 'live'
 
 # Database initialization function
 def init_db():
@@ -1394,11 +1400,13 @@ def cancel():
 @app.route('/checkout/<product_id>', methods=['GET'])
 @login_required
 def checkout(product_id):
+    STRIPE_MODE=get_stripe_mode()
     STRIPE_PK = os.environ.get('STRIPE_PK_TEST_KEY') if STRIPE_MODE == 'test' else os.environ.get('STRIPE_PK_LIVE_KEY')
     return render_template('checkout.html', stripe_pk=STRIPE_PK, stripe_mode=STRIPE_MODE, product_id=product_id)
 
 # /api/fetch/product
 @app.route('/api/fetch/product', methods=['POST'])
+@login_required
 def fetch_product():
     try:
         if request.method == 'POST':
@@ -1407,6 +1415,7 @@ def fetch_product():
             if product_id:
                 product = Products.query.filter_by(id=product_id).first()
                 if product:
+                    STRIPE_MODE=get_stripe_mode()
                     STRIPE_PAYMENT_ID = product.stripe_test_product_id if STRIPE_MODE == 'test' else product.stripe_live_product_id
                     product = {
                         'name': product.name,
