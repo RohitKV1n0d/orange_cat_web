@@ -8,7 +8,9 @@
             <h1>Products List</h1>
         </div>
         <div class="float-right">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productAdd">Add Product</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productAdd" 
+                @click="addProductMode"
+                >Add Product</button>
             
         </div>
         <div class="clearfix"></div>
@@ -38,7 +40,11 @@
                         <span v-if="product.stripe_live_product_id" class="badge bg-primary" style="color: aliceblue;">Live</span>
                     </td>
                     <td>
-                        <button class="btn btn-primary">Edit</button>
+                        <button 
+                            @click="editMode(product)"
+                            data-bs-toggle="modal" data-bs-target="#productAdd"
+                            class="btn btn-primary"
+                            >Edit</button>
                         <button 
                             class="btn btn-danger"
                             @click="deleteProduct(product.id)"
@@ -54,7 +60,8 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="productAddLabel">Add Product</h5>
+                <h5 class="modal-title" id="productAddLabel" v-if="!edit" >Add Product</h5>
+                <h5 class="modal-title" id="productAddLabel" v-else>Edit Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -99,11 +106,17 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button"  v-if="edit"
+                    @click="editProduct"
+                    class="btn btn-primary"
+                    >Save Changes</button>
                 <button type="button" 
                     @click="addProduct"
                     class="btn btn-primary"
-                    >Add Product</button>
+                    v-else>Add Product</button>
                 </div>
+                
+                
             </div>
             </div>
         </div>
@@ -130,7 +143,8 @@
                  delimiters: ['[[', ']]'],
                  data: {
                     products: [],
-                    newProduct: NEW_PRODUCT
+                    newProduct: NEW_PRODUCT,
+                    edit: false
                  },
                  methods: {
                      fetchProducts() {
@@ -157,6 +171,7 @@
                                 .then(data => {
                                     this.fetchProducts();
                                     this.newProduct = NEW_PRODUCT;
+                                    this.sendNotification('Product Added', 'green');
                                 });
                         },
                         deleteProduct(id){
@@ -170,9 +185,48 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     this.fetchProducts();
+                                    this.sendNotification('Product Deleted', 'red');
                                 });
                         },
+                        addProductMode(){
+                            this.newProduct = NEW_PRODUCT;
+                            this.edit = false;
+                        },
+                        editMode(product){
+                            this.newProduct = product;
+                            this.edit = true;
+                        },
+                        editProduct(){
+                            fetch('/admin/api/edit/product', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(this.newProduct)
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.fetchProducts();
+                                    // close modal
+                                    var myModal = new bootstrap.Modal(document.getElementById('productAdd'));
+                                    myModal.hide();
+                                    this.sendNotification('Product Updated', 'green');
+                                });
+                        },
+                        sendNotification(message, type) {
+                            Toastify({
+                                text: message,
+                                duration: 3000,
+                                gravity: "top", // `top` or `bottom`
+                                position: 'right', // `left`, `center` or `right`
+                                backgroundColor: type,
+                                stopOnFocus: true, // Prevents dismissing of toast on hover
+                                onClick: function () { } // Callback after click
+                            }).showToast();
+
+                        },  
                  },
+
                  mounted() {
                         this.fetchProducts();
                  }
