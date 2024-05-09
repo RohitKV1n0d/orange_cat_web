@@ -124,6 +124,7 @@ def init_db():
     db.create_all()
     admin_username = 'admin'
     admin_password = 'admin'
+    admin_email = 'admin@admin.com'
     test_username = 'test'
     test_email = 'test@test.com'
     test_password = 'test123'
@@ -140,7 +141,7 @@ def init_db():
     admin_user = Users.query.filter_by(username=admin_username).first()
     if not admin_user:
         # Create the default admin user
-        admin_user = Users(username=admin_username, password=admin_password, role='admin')
+        admin_user = Users(username=admin_username, password=admin_password, role='admin', email=admin_email)
         db.session.add(admin_user)
         db.session.commit()
 
@@ -320,7 +321,6 @@ class Products(db.Model):
     image_urls = db.Column(db.Text, nullable=True)
     variant = db.Column(db.String(100), nullable=True)
     color = db.Column(db.String(100), nullable=True)
-    stripe_product_id = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
@@ -393,7 +393,7 @@ def admin_required(f):
     def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated or current_user.role != 'admin':
             flash('You need to be an admin to access this page', 'error')
-            return redirect(url_for('login'))
+            return redirect(url_for('user_login'))
         return f(*args, **kwargs)
     return decorated_function
 
@@ -428,6 +428,8 @@ def admin_socials():
 def admin_settings():
     # Your admin settings panek code here
     return render_template('admin/settings.html')
+
+
 
 @app.route('/admin/settings/delete/all/images', methods=['GET', 'POST'])
 @admin_required
@@ -472,6 +474,8 @@ def user_login():
         if user and user.password == password:
             login_user(user)
             flash('Login successful!', 'success')
+            if user.role == 'admin':
+                return redirect(url_for('admin_panel')) 
             return redirect(url_for('index'))
         else:
             flash('Invalid email or password', 'error')
@@ -509,12 +513,6 @@ def user_signup():
 
     return render_template('signup.html')
 
-@app.route('/admin/logout')
-@admin_required
-def logout_admin():
-    logout_user()
-    flash('You have been logged out', 'success')
-    return redirect(url_for('login'))
 
 
 @app.route('/logout')
