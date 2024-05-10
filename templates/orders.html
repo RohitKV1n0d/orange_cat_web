@@ -6,7 +6,7 @@
     <div class="container">
         <h4 class="black-color text-capitalize text-left letter-space-value line-gap fw-bold">My Orders</h4>
         <div class="order-info-table">
-            <div class="table-container">
+            <div class="table-container" v-if="orders.length > 0">
                 <table class="table">
                     <thead>
                       <tr>
@@ -37,7 +37,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="no-order-found">
+            <div class="no-order-found" v-else>
               <div class="no-order-text">
                 <h4 class="text-center no-order-head black-color">No Orders Yet!</h4>
                 <p class="text-center">Looks like you haven't made your order yet...</p>
