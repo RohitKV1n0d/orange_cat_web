@@ -591,6 +591,10 @@ def user_login():
         email = request.form['email']
         password = request.form['password']
 
+        if not email or not password:
+            flash('Email or password not provided', 'error')
+            return redirect(url_for('user_login'))
+
         # Check if the user exists and the password is correct
         user = Users.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
@@ -615,6 +619,9 @@ def user_signup():
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
+        if not email or not password or not confirm_password:
+            flash('Please fill all the forms', 'error')
+            return redirect(url_for('user_signup'))
 
         # check if the password and confirm password match
         if password != confirm_password:
