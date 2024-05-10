@@ -813,3 +813,6 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .price-value span{font-size: 15px;font-weight: normal;color: #777575;}
 .price-value{font-weight: 600;}
 .s-single-product h4.text-capitalize{margin-bottom: 50px;}
+@media (max-width: 991px){
+  .shop-item-content{margin-bottom: 15px;}
+}
