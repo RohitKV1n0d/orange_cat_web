@@ -37,7 +37,13 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="no-order-found">
+              <div class="no-order-text">
+                <h4 class="text-center no-order-head black-color">No Orders Yet!</h4>
+                <p class="text-center">Looks like you haven't made your order yet...</p>
+              </div>
+              <img src="{{ url_for('static', filename='img/No-data.gif') }}" class="no-data-gif img-fluid" alt="image">
+            </div>
     </div>
 </section>
 <style>
