@@ -40,8 +40,13 @@
             <div class="col-md-5">
                 <div class="order-summary">
                     <div class="order-summary-details">
-                        <div class="order-info-card">
-                            <div class="card">
+                        <div class="order-info-card loading" v-if="loading">
+                            <div class="card d-flex justify-content-center align-items-center" style="padding: 10em 0 10em 0;">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="width: 10rem; height: 10rem; color: #f45e30; border-width: .5em;"></span> 
+                            </div>
+                        </div>
+                        <div class="order-info-card" v-else>
+                            <div class="card" v-if="!orderComplete">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="details">
@@ -113,7 +118,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card thank-you-dialog" style="padding: 20px;" v-else>
+                                <h4 class="text-center">Thank you for order!</h4>
+                                <h6 class="text-center mt-3">Your Invoice ID is <b class="main-color"><a href="{{ url_for('orders') }}">[[ invoice_number ]]</a></b></h6>
+                                <p class="text-center mt-3">We have sent the details of your order to your email. We will send you a process notification before your order is delivered. Please check your email for further communications as we continue to fulfill your order.</p>
+                                <img src="{{ url_for('static', filename='img/order-confirm-img.jpg')}}" alt="image" class="img-fluid">
+                                <p class="text-center">If you have any query or questions regarding purchase items, then fell to get in contact us</p>
+                                <a href="tel:+1 647 569 2081" class="call-link">+1 647 569 2081</a>
+                                <div class="d-flex modal-buttons mt-3 justify-content-center align-items-center">
+                                <a class="btn shopping-button" href="{{ url_for('view_products') }}"><span>Continue Shopping</span></a>
+                                <a class="btn ms-2 invoice-button" href="{{ url_for('orders') }}"><span>View Order</span></a>
+                                </div>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -121,7 +139,7 @@
         
 	</div>
     <!--  Modal -->
-<div class="modal order-confirm-modal fade" id="CheckOutModal" tabindex="-1" aria-labelledby="CheckOutModalLabel" aria-hidden="true">
+<div class="modal order-confirm-modal fade" id="CheckOutModal" tabindex="-1" aria-labelledby="CheckOutModalLabel" data-bs-backdrop='static' aria-hidden="true">
     <div class="modal-dialog modal-xl checkout-dialog" id="checkout-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -172,6 +190,7 @@
     let sessionIDData;
     async function initialize(product_payment_id) {
         const fetchClientSecret = async () => {
+            app.setLoading(true);
             const response = await fetch("/create-checkout-session", {
             method: "POST",
             headers: {
@@ -188,22 +207,41 @@
 
         // Example `onComplete` callback
         const handleComplete = async function() {
-            const response = await fetch(`/save-order-data?session_id=${sessionIDData}`, {
-                method: "GET",
-            });
+            document.getElementById('close-checkout-modal-btn').removeEventListener('click', handleModalClose);
+            app.setLoading(true);
+            axios.post(`/save-order-data`, {
+                session_id: sessionIDData,
+                }, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                    .then(response => {
+                        console.log('Payment data saved successfully');
+                        // Handle the response here
+                        status = response.status;
+                        if (status === "200") {
+                            console.log('Payment is successful')
+                            // remove event listener close modal
+                            const invoice_number = response.data.invoice_number;
+                            app.setLoading(false);
+                            app.setOrderSummaryComplete(invoice_number);
+                        } else {
+                            console.log('Payment is failed')
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error saving payment data:', error);
+                        // Handle the error here
+                    });
             
-            const { status } = await response.json();
-            if (status === 'paid') {
-                console.log('Payment is successful')
-            } else {
-                console.log('Payment is failed')
-            }
         }
         const handleModalClose = async function() {
             // Destroy Checkout instance
             isclose = confirm('Are you sure you want to cancel the order?')
             if (isclose) {
                 checkout.destroy()
+                app.setLoading(false);
             }
             
         }
@@ -236,7 +274,10 @@
                     description1: '',
                     color: '',
                     stripe_product_id: '',
-                }
+                },
+                orderComplete: false,
+                loading: false,
+                invoice_number: ''
             },
             methods: {
                 initialize_stripe_payment() {
@@ -263,6 +304,14 @@
                         this.product_data = data.product;
                     })
                 },
+                setOrderSummaryComplete(invoice_number){
+                    this.orderComplete = true;
+                    this.invoice_number = invoice_number;
+
+                },
+                setLoading(state){
+                    this.loading = state;
+                }
 
             },
             mounted() {
