@@ -1341,51 +1341,60 @@ def create_checkout_session():
 
 
 
-@app.route('/save-order-data', methods=['GET'])
+@app.route('/save-order-data', methods=['POST'])
 @login_required
 def save_order_data():
     try:
-        session_id = request.args.get('session_id')
-        session = stripe.checkout.Session.retrieve(session_id)
-        retry_count = 0
-        while session.invoice is None and retry_count < 15:  # retries up to 5 times
-            time.sleep(1)  # waits 1 second before the next try
+        if request.method == 'POST':
+            session_id = request.json.get('session_id')
             session = stripe.checkout.Session.retrieve(session_id)
-            retry_count += 1
+            retry_count = 0
+            while session.invoice is None and retry_count < 15:  # retries up to 5 times
+                time.sleep(1)  # waits 1 second before the next try
+                session = stripe.checkout.Session.retrieve(session_id)
+                retry_count += 1
 
-        if session.status != 'complete':
-            return jsonify({'message': 'Payment not completed'}), 400
+            if session.status != 'complete':
+                return jsonify({'message': 'Payment not completed'}), 400
 
-        invoice_data = stripe.Invoice.retrieve(session.invoice)
-        invoice_id = invoice_data.id
-        customer_id = invoice_data.customer
-        invoice_number = invoice_data.number
-        user_id = current_user.id
-        product_id = 1
-        quantity = 1
-        total_price = invoice_data.amount_paid
-        status = 'complete'
-        stripe_payment_id = session.payment_intent
-        stripe_session_id = session.id
-        invoice_url = invoice_data.invoice_pdf if hasattr(invoice_data, 'invoice_pdf') else ''
+            invoice_data = stripe.Invoice.retrieve(session.invoice)
+            invoice_id = invoice_data.id
+            customer_id = invoice_data.customer
+            invoice_number = invoice_data.number
+            user_id = current_user.id
+            product_id = 1
+            quantity = 1
+            total_price = invoice_data.amount_paid
+            status = 'complete'
+            stripe_payment_id = session.payment_intent
+            stripe_session_id = session.id
+            invoice_url = invoice_data.invoice_pdf if hasattr(invoice_data, 'invoice_pdf') else ''
 
-        new_order = Orders(
-                            user_id=user_id,
-                            product_id=product_id, 
-                            quantity=quantity, 
-                            total_price=total_price, 
-                            status=status, 
-                            invoice_url=invoice_url,
-                            invoice_id=invoice_id,
-                            invoice_number=invoice_number,
-                            customer_id=customer_id,
-                            stripe_session_id=stripe_session_id,
-                            stripe_payment_id=stripe_payment_id)
-        db.session.add(new_order)
-        db.session.commit()
-        if invoice_url:
-            save_invoice_pdf_to_db.delay(invoice_url, new_order.id)
-        return jsonify({'message': 'Order saved successfully'}), 200
+            new_order = Orders(
+                                user_id=user_id,
+                                product_id=product_id, 
+                                quantity=quantity, 
+                                total_price=total_price, 
+                                status=status, 
+                                invoice_url=invoice_url,
+                                invoice_id=invoice_id,
+                                invoice_number=invoice_number,
+                                customer_id=customer_id,
+                                stripe_session_id=stripe_session_id,
+                                stripe_payment_id=stripe_payment_id)
+            db.session.add(new_order)
+            db.session.commit()
+            if invoice_url:
+                save_invoice_pdf_to_db.delay(invoice_url, new_order.id)
+
+            context = {
+                'invoice_number': invoice_number,
+                'status': status,
+                'message': 'Order saved successfully'
+            }
+            return jsonify(context), 200
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
