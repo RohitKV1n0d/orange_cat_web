@@ -219,7 +219,7 @@ class Users(UserMixin,db.Model):
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.Text, nullable=True)
     phone = db.Column(db.String(100), nullable=True)
-    password = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.Text, nullable=False)
     role = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
