@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import os
 import json
@@ -130,11 +131,11 @@ def get_stripe_mode():
 def init_db():
     db.create_all()
     admin_username = 'admin'
-    admin_password = 'admin'
+    admin_password = generate_password_hash('admin')
     admin_email = 'admin@admin.com'
     test_username = 'test'
     test_email = 'test@test.com'
-    test_password = 'test123'
+    test_password = generate_password_hash('test123')
  
     # Check if the default test user exists
     test_user = Users.query.filter_by(username=test_username).first()   
@@ -592,7 +593,7 @@ def user_login():
 
         # Check if the user exists and the password is correct
         user = Users.query.filter_by(email=email).first()
-        if user and user.password == password:
+        if user and check_password_hash(user.password, password):
             login_user(user)
             flash('Login successful!', 'success')
             if user.role == 'admin':
@@ -621,12 +622,12 @@ def user_signup():
             return redirect(url_for('user_signup'))
     
         # Check if the user exists
-        user = Users.query.filter_by(username=username).first()
+        user = Users.query.filter_by(email=email).first()
         if user:
             flash('User already exists', 'error')
-            return redirect(url_for('user_signup'))
+            return redirect(url_for('user_login'))
         else:
-            new_user = Users(username=username, email=email, password=password, role='user')
+            new_user = Users(username=username, email=email, password=generate_password_hash(request.form['password']), role='user')
             db.session.add(new_user)
             db.session.commit()
             flash('User created successfully', 'success')
