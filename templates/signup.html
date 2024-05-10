@@ -51,7 +51,7 @@ of Simple CSS Waves-->
                             <div class="col-lg-7">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4 register-head">Create an Account!</h1>
                                     </div>
                                     <form class="user" method="post">
                                         <div class="form-group row">
@@ -79,12 +79,13 @@ of Simple CSS Waves-->
                                             </div>
                                         </div>
                                         <button type="submit"  class="btn btn-primary btn-user btn-block">Register Account</button>
-                                        <hr>
                                         <a href="#" class="btn login-google disabled" title="Coming Soon">
                                           <img src="{{ url_for('static', filename='img/icons/google.png') }}" style="max-width: 15px;" alt="">  Coming soon
                                         </a>  
                                     </form>
-                                    <hr>
+                                    <div class="d-flex">
+                                      <hr><p>Or, Register with</p><hr>
+                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="">Forgot Password?</a>
                                     </div>
@@ -150,11 +151,22 @@ p {
   font-size:14px;
   color: #333333;
 }
+.d-flex p{margin-top: 1%;font-size: 15px;}
+.login-google{width: 100%;border-radius: 10rem;background: #feebe5;padding: 10px;transition: 0.3s ease;margin-bottom: 20px;}
+.login-google:hover{background: #f8e3dc;}
+
+hr{background: #fb7c56;height: 0.1px;width: 25%;}
+.btn-user{background-color:#F45F30;color: white;transition: 0.3s ease;border: 1px solid #F45F30;margin-bottom: 30px;}
+.btn-user:hover{background-color: transparent;color: #F45F30;font-size: 15px;}
+.custom-control-input:checked~.custom-control-label::before {color: #fff;border-color: #F45F30;background-color: #F45F30;}
+.custom-control-input:checked~.custom-control-label:focus{box-shadow: none;}
+a{transition: 0.3s ease;color: #525252;}
+a:hover{text-decoration: none;color: #F45F30;}
 
 .header {
   position:relative;
   text-align:center;
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  background: linear-gradient(60deg, rgba(244,95,48) 0%, rgba(255,130,91) 100%);
   color:white;
 }
 .logo {
@@ -164,6 +176,8 @@ p {
   display:inline-block;
   vertical-align: middle;
 }
+form.user .form-control-user{border: 1px solid rgb(251, 164, 117);background-color: white;}
+form.user .form-control-user:focus{box-shadow: none;border: 1px solid #F45F30;}
 
 .inner-header {
   height:65vh;
@@ -171,23 +185,24 @@ p {
   margin: 0;
   padding: 0;
 }
-
-.flex { /*Flexbox for containers*/
+form.user .btn-user:hover{border: 1px solid #F45F30!important;}
+.flex {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: center;padding-top: 16%;
 }
+form {z-index: 9999;position: relative;}
 
 .waves {
-  position:relative;
   width: 100%;
   height:15vh;
   margin-bottom:-7px; /*Fix for safari gap*/
   min-height:100px;
   max-height:150px;
 }
-
+.register-head{font-size: 25px;font-weight: 600!important;color: #544949;}
+input:-internal-autofill-selected{background-color: white!important;}
 .content {
   position:relative;
   height:20vh;
@@ -236,6 +251,18 @@ p {
   h1 {
     font-size:24px;
   }
+}
+@media only screen and (max-device-width: 375px) and (max-device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+  .flex{padding-top: 51%;}
+}
+@media only screen and (max-device-width: 360px) and (max-device-height: 740px) and (-webkit-device-pixel-ratio: 4) {
+  .flex{padding-top: 44%;}
+}
+@media only screen and (max-device-width: 540px) and (max-device-height: 720px) {
+  .flex{padding-top: 43%;}
+}
+@media only screen and (device-width: 1024px) and (device-height: 600px) {
+  .flex {padding-top: 20%;}
 }
 
     </style>
