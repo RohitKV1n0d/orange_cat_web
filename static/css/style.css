@@ -601,6 +601,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 
 @media (max-width: 991px){
   .follow-us .icon-img img {width: 35px;}
+  .follow-us .icon-img img.twitter-new-icon {width: 32px !important;}
   .slick-arrow{height: 35px; width: 35px;}
   .mail-us{margin-top: 15px;}
   .text-content-box{margin-top: 20px;}
@@ -799,3 +800,4 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
       margin-top: 65%!important;
   }
 }
+.follow-us .icon-img img.twitter-new-icon{width: 44px!important;}
