@@ -422,9 +422,9 @@ main::before {
   top: -100vh;
 }
 @media (max-width: 991px){
-  .video-header, .video-header video, .video-header .viewport-header {
+  /* .video-header, .video-header video, .video-header .viewport-header {
     height: 55vh;
-  }
+  } */
   .header-icons {
     left: 36%;
 }
@@ -815,4 +815,7 @@ input:focus, input:hover, textarea:focus, textarea:hover, select:hover, select.a
 .s-single-product h4.text-capitalize{margin-bottom: 50px;}
 @media (max-width: 991px){
   .shop-item-content{margin-bottom: 15px;}
+}
+@media only screen and (max-width: 375px) and (max-height: 667px) {
+  .video-header, .video-header video, .video-header .viewport-header{height: 100vh;}
 }
