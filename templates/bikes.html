@@ -186,6 +186,19 @@
 									<div class="background-color-product"></div>
 								</div>
 								<script>
+									function addEventListeners(imageId, colorId, variant) {
+										document.getElementById(imageId).addEventListener('click', function () {
+											url = `/model/bow/${variant}`;
+											window.location.href = url;
+
+										});
+										document.getElementById(imageId).addEventListener('mouseover', function () {
+											document.getElementById(colorId).classList.add('active');
+										});
+										document.getElementById(imageId).addEventListener('mouseleave', function () {
+											document.getElementById(colorId).classList.remove('active');
+										});
+									}
 									addEventListeners('bow-image-1', 'bow-color-1', 'gray');
 									addEventListeners('bow-image-2', 'bow-color-2', 'tiffany green');
 								</script>
