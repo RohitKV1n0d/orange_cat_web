@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_talisman import Talisman
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -29,6 +30,8 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
 CORS(app)
+talisman = Talisman(app)
+talisman.force_https = True
 
 celery = make_celery(app)
 celery.set_default()
