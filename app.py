@@ -30,6 +30,9 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
 CORS(app)
+talisman = Talisman(app, content_security_policy={})
+talisman.force_https = True
+
 
 celery = make_celery(app)
 celery.set_default()
