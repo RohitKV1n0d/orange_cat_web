@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  flask-app:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    environment:
+      ENV: 'dev'
+      HOST_URL: 'http://127.0.0.1:5000/'
+      LIVE_DB: 'False'
+      TZ: 'Asia/Kolkata'
+      TEST_USER_ROLES: 'admin,super_admin,test'
